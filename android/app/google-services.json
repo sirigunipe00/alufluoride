@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "97864712774",
+    "project_id": "alufluoride-8f2e1",
+    "storage_bucket": "alufluoride-8f2e1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97864712774:android:c24a178e59b0b36e724047",
+        "android_client_info": {
+          "package_name": "com.example.alufluoride"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhqzFyZB0y4WTbRQK1BmyHmq-Eqdu6qp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
