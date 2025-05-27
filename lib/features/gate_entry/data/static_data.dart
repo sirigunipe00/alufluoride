@@ -1,16 +1,16 @@
 abstract class AppStaticData {
   static const List<String> gateEntryType = [
-    'Invoice',
-    'Job Work Invoice',
-    'Delivery Challan',
-    'STO-Delivery Challan'
+    'JCB Excavator Rental',
+    'Purchase',
+    'Hydra',
+    'EX-200',
+    'EX-70',
   ];
 
   static const List<String> materialType = [
     'Purchase Local',
     'Purchase Import',
     'Sales Return'
-    
   ];
 
   static const List<String> receiverDept = [
@@ -33,16 +33,8 @@ abstract class AppStaticData {
     'Other'
   ];
 
-
-    static const List<String> typeOfIncident = [
+  static const List<String> typeOfIncident = [
     'Fire',
     'RoadTraffic Accident',
   ];
-
-
-
-
-
-
-
 }

@@ -125,75 +125,75 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i519.Client>(),
           gh<_i402.InternetConnectionChecker>(),
         ));
-    gh.lazySingleton<_i362.EmptyVehicleRepo>(
-        () => _i144.EmptyVehicleRepoImpl(gh<_i351.ApiClient>()));
     gh.lazySingleton<_i346.AppVersion>(
         () => _i346.AppVersion(gh<_i655.PackageInfo>()));
-    gh.lazySingleton<_i320.InwardRepo>(
-        () => _i109.InwardRepoImpl(gh<_i351.ApiClient>()));
-    gh.lazySingleton<_i820.GateEntryRepo>(
-        () => _i174.GateEntryRepoImpl(gh<_i351.ApiClient>()));
     gh.lazySingleton<_i148.CreateVisitRepo>(
         () => _i219.CreateVisitRepoImpl(gh<_i351.ApiClient>()));
     gh.lazySingleton<_i870.InviteVisitorRepo>(
         () => _i872.InviteVisitorRepoImpl(gh<_i351.ApiClient>()));
+    gh.lazySingleton<_i310.IncidentRegistersRepo>(
+        () => _i49.IncidentRegistersRepoImpl(gh<_i351.ApiClient>()));
+    gh.lazySingleton<_i999.VisitorInOutRepo>(
+        () => _i103.VisitorInOutRepoImpl(gh<_i351.ApiClient>()));
+    gh.lazySingleton<_i362.EmptyVehicleRepo>(
+        () => _i144.EmptyVehicleRepoImpl(gh<_i351.ApiClient>()));
+    gh.lazySingleton<_i320.InwardRepo>(
+        () => _i109.InwardRepoImpl(gh<_i351.ApiClient>()));
+    gh.lazySingleton<_i295.OutwardRepo>(
+        () => _i803.OutwardRepoImpl(gh<_i351.ApiClient>()));
     gh.lazySingleton<_i1038.CreateVisitBlocProvider>(
         () => _i1038.CreateVisitBlocProvider(gh<_i148.CreateVisitRepo>()));
     gh.factory<_i881.CreateVisitCubit>(
         () => _i881.CreateVisitCubit(gh<_i148.CreateVisitRepo>()));
+    gh.lazySingleton<_i840.IncidentRegisterBlocProvider>(() =>
+        _i840.IncidentRegisterBlocProvider(gh<_i310.IncidentRegistersRepo>()));
+    gh.factory<_i816.CreateIncidentRegisterCubit>(() =>
+        _i816.CreateIncidentRegisterCubit(gh<_i310.IncidentRegistersRepo>()));
     gh.lazySingleton<_i495.GateExitRepo>(
         () => _i100.GateExitRepoImpl(gh<_i351.ApiClient>()));
-    gh.lazySingleton<_i310.IncidentRegistersRepo>(
-        () => _i49.IncidentRegistersRepoImpl(gh<_i351.ApiClient>()));
-    gh.lazySingleton<_i210.GateEntryBlocProvider>(
-        () => _i210.GateEntryBlocProvider(gh<_i820.GateEntryRepo>()));
-    gh.factory<_i224.CreateGateEntryCubit>(
-        () => _i224.CreateGateEntryCubit(gh<_i820.GateEntryRepo>()));
-    gh.factory<_i770.CreateInwardCubit>(
-        () => _i770.CreateInwardCubit(gh<_i320.InwardRepo>()));
-    gh.lazySingleton<_i663.InwardBlocProvider>(
-        () => _i663.InwardBlocProvider(gh<_i320.InwardRepo>()));
-    gh.lazySingleton<_i295.OutwardRepo>(
-        () => _i803.OutwardRepoImpl(gh<_i351.ApiClient>()));
-    gh.lazySingleton<_i999.VisitorInOutRepo>(
-        () => _i103.VisitorInOutRepoImpl(gh<_i351.ApiClient>()));
-    gh.lazySingleton<_i585.AuthRepo>(() => _i328.AuthRepoImpl(
-          gh<_i351.ApiClient>(),
-          gh<_i351.KeyValueStorage>(),
-        ));
-    gh.lazySingleton<_i691.AppRepository>(() => _i691.AppRepository(
-          gh<_i351.ApiClient>(),
-          gh<_i346.AppVersion>(),
-        ));
+    gh.lazySingleton<_i820.GateEntryRepo>(
+        () => _i174.GateEntryRepoImpl(gh<_i351.ApiClient>()));
+    gh.lazySingleton<_i565.GateExitBlocProvider>(
+        () => _i565.GateExitBlocProvider(gh<_i495.GateExitRepo>()));
+    gh.factory<_i1020.CreateGateExitCubit>(
+        () => _i1020.CreateGateExitCubit(gh<_i495.GateExitRepo>()));
     gh.factory<_i597.CreateInviteVisitorCubit>(
         () => _i597.CreateInviteVisitorCubit(gh<_i870.InviteVisitorRepo>()));
     gh.lazySingleton<_i881.InviteVisitorBlocProvider>(
         () => _i881.InviteVisitorBlocProvider(gh<_i870.InviteVisitorRepo>()));
-    gh.lazySingleton<_i239.EmptyVehicleBlocProvider>(
-        () => _i239.EmptyVehicleBlocProvider(gh<_i362.EmptyVehicleRepo>()));
-    gh.factory<_i403.CreateEmptyVehicleCubit>(
-        () => _i403.CreateEmptyVehicleCubit(gh<_i362.EmptyVehicleRepo>()));
-    gh.factory<_i816.CreateIncidentRegisterCubit>(() =>
-        _i816.CreateIncidentRegisterCubit(gh<_i310.IncidentRegistersRepo>()));
-    gh.lazySingleton<_i840.IncidentRegisterBlocProvider>(() =>
-        _i840.IncidentRegisterBlocProvider(gh<_i310.IncidentRegistersRepo>()));
     gh.factory<_i526.CreateOutwardCubit>(
         () => _i526.CreateOutwardCubit(gh<_i295.OutwardRepo>()));
     gh.lazySingleton<_i653.OutwardBlocProvider>(
         () => _i653.OutwardBlocProvider(gh<_i295.OutwardRepo>()));
-    gh.factory<_i1020.CreateGateExitCubit>(
-        () => _i1020.CreateGateExitCubit(gh<_i495.GateExitRepo>()));
-    gh.lazySingleton<_i565.GateExitBlocProvider>(
-        () => _i565.GateExitBlocProvider(gh<_i495.GateExitRepo>()));
+    gh.lazySingleton<_i691.AppRepository>(() => _i691.AppRepository(
+          gh<_i351.ApiClient>(),
+          gh<_i346.AppVersion>(),
+        ));
     gh.factory<_i784.CreateVisitorInOutCubit>(
         () => _i784.CreateVisitorInOutCubit(gh<_i999.VisitorInOutRepo>()));
     gh.lazySingleton<_i743.VisitorInOutBlocProvider>(
         () => _i743.VisitorInOutBlocProvider(gh<_i999.VisitorInOutRepo>()));
-    gh.lazySingleton<_i266.AppUpdateBlocprovider>(
-        () => _i266.AppUpdateBlocprovider(gh<_i691.AppRepository>()));
+    gh.lazySingleton<_i585.AuthRepo>(() => _i328.AuthRepoImpl(
+          gh<_i351.ApiClient>(),
+          gh<_i351.KeyValueStorage>(),
+        ));
+    gh.lazySingleton<_i239.EmptyVehicleBlocProvider>(
+        () => _i239.EmptyVehicleBlocProvider(gh<_i362.EmptyVehicleRepo>()));
+    gh.factory<_i403.CreateEmptyVehicleCubit>(
+        () => _i403.CreateEmptyVehicleCubit(gh<_i362.EmptyVehicleRepo>()));
+    gh.lazySingleton<_i663.InwardBlocProvider>(
+        () => _i663.InwardBlocProvider(gh<_i320.InwardRepo>()));
+    gh.factory<_i770.CreateInwardCubit>(
+        () => _i770.CreateInwardCubit(gh<_i320.InwardRepo>()));
+    gh.factory<_i224.CreateGateEntryCubit>(
+        () => _i224.CreateGateEntryCubit(gh<_i820.GateEntryRepo>()));
+    gh.lazySingleton<_i210.GateEntryBlocProvider>(
+        () => _i210.GateEntryBlocProvider(gh<_i820.GateEntryRepo>()));
     gh.factory<_i140.SignInCubit>(
         () => _i140.SignInCubit(gh<_i585.AuthRepo>()));
     gh.factory<_i190.AuthCubit>(() => _i190.AuthCubit(gh<_i585.AuthRepo>()));
+    gh.lazySingleton<_i266.AppUpdateBlocprovider>(
+        () => _i266.AppUpdateBlocprovider(gh<_i691.AppRepository>()));
     return this;
   }
 }

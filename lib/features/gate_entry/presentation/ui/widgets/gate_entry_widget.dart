@@ -33,12 +33,13 @@ class GateEntryWidget extends StatelessWidget {
             margin: const EdgeInsets.all(12),
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(gateEntry.name!,
                       style: AppTextStyles.titleLarge(context)
                           .copyWith(color: AppColors.black)),
-                  Text(DFU.ddMMyyyyFromStr(gateEntry.creationDate!),
+                  Text(DFU.ddMMyyyyFromStr(gateEntry.gateEntryDate!),
                       style: AppTextStyles.titleLarge(context)
                           .copyWith(color: AppColors.black)),
                 ],
@@ -49,7 +50,7 @@ class GateEntryWidget extends StatelessWidget {
                 children: [
                   ViewBtn(onPressed: onTap),
                   DocStatusWidget(
-                      status: StringUtils.docStatus(gateEntry.docStatus!))
+                      status: StringUtils.docStatus(gateEntry.docstatus!))
                 ],
               ),
             ],

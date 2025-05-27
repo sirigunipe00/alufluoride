@@ -24,7 +24,7 @@ class _NewGateEntryState extends State<NewGateEntry> {
   Widget build(BuildContext context) {
     final gateEntryState = context.read<CreateGateEntryCubit>().state;
     final newform = gateEntryState.form;
-    final status = newform.docStatus;
+    final status = newform.docstatus;
     final name = newform.name;
 
     final isNew = gateEntryState.view == GateEntryView.create;
@@ -48,15 +48,15 @@ class _NewGateEntryState extends State<NewGateEntry> {
               onTapDismiss: context.exit,
             ).then(
               (_) {
-                 final docName = state.form.name;
+                final docName = state.form.name;
                 if (!context.mounted) return;
                 context.cubit<CreateGateEntryCubit>().errorHandled();
-                context.cubit<GateEntryLinesCubit>().request(docName);
-                  final gateEntryFilters =
-                context.read<GateEntryFilterCubit>().state;
-                context
-                    .cubit<GateEntriesCubit>()
-                    .fetchInitial(Pair(StringUtils.docStatusInt(gateEntryFilters.status), gateEntryFilters.query));
+                // context.cubit<GateEntryLinesCubit>().request(docName);
+                final gateEntryFilters =
+                    context.read<GateEntryFilterCubit>().state;
+                context.cubit<GateEntriesCubit>().fetchInitial(Pair(
+                    StringUtils.docStatusInt(gateEntryFilters.status),
+                    gateEntryFilters.query));
                 setState(() {});
               },
             );
@@ -68,11 +68,22 @@ class _NewGateEntryState extends State<NewGateEntry> {
               content: state.error!.error,
               onTapDismiss: context.exit,
             );
-            if(!context.mounted) return;
+            if (!context.mounted) return;
             context.cubit<CreateGateEntryCubit>().errorHandled();
           }
         },
-        child: GateEntryFormWidget(key: ValueKey(status)),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) =>
+                  GateEntryBlocProvider.get().vehicleRequestCubit()..request(),
+            ),
+            BlocProvider(
+              create: (context) => GateEntryBlocProvider.get().vehicleListCubit()..request(),
+            ),
+          ],
+          child: GateEntryFormWidget(key: ValueKey(status)),
+        ),
       ),
     );
   }

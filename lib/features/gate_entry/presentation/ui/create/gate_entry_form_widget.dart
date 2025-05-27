@@ -1,25 +1,24 @@
-import 'package:alufluoride/app/widgets/section_head.dart';
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/features/gate_entry/data/static_data.dart';
-import 'package:alufluoride/features/gate_entry/model/customer_name_form.dart';
+import 'package:alufluoride/features/gate_entry/model/vehicle_form.dart';
+import 'package:alufluoride/features/gate_entry/model/vehicle_request_form.dart';
 import 'package:alufluoride/features/gate_entry/presentation/bloc/bloc_provider.dart';
 import 'package:alufluoride/features/gate_entry/presentation/bloc/create_gate_entry/gate_entry_cubit.dart';
-import 'package:alufluoride/features/gate_entry/presentation/ui/widgets/entry_lines_widget.dart';
-import 'package:alufluoride/features/gate_exit/model/receiver_address_form.dart';
-import 'package:alufluoride/features/gate_exit/model/receiver_name_form.dart';
-import 'package:alufluoride/features/gate_exit/presentation/bloc/bloc_provider.dart';
-import 'package:alufluoride/features/incident_register/presentation/bloc/bloc_provider.dart';
 import 'package:alufluoride/styles/app_colors.dart';
+import 'package:alufluoride/widgets/app_spacer.dart';
+import 'package:alufluoride/widgets/buttons/app_btn.dart';
+import 'package:alufluoride/widgets/inputs/app_dropdown_widget.dart';
 import 'package:alufluoride/widgets/inputs/compact_listtile.dart';
+import 'package:alufluoride/widgets/inputs/input_filed.dart';
 import 'package:alufluoride/widgets/inputs/photo_selection_widget.dart';
 import 'package:alufluoride/widgets/inputs/search_dropdown_list.dart';
 import 'package:alufluoride/widgets/inputs/time_selection_field.dart';
-
-import 'package:alufluoride/widgets/widgets.dart';
+import 'package:alufluoride/widgets/spaced_column.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 class GateEntryFormWidget extends StatefulWidget {
   const GateEntryFormWidget({super.key});
@@ -30,28 +29,25 @@ class GateEntryFormWidget extends StatefulWidget {
 
 class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
   final ScrollController _scrollController = ScrollController();
+  bool isChecked = false;
+  bool isBeforeWork = false;
+  String? entryType;
+  String? inTime;
+  String? outTime;
+  String? payType;
 
-  final focusNodes = List.generate(40, (index) => FocusNode());
+  final focusNodes = List.generate(60, (index) => FocusNode());
+
   @override
   Widget build(BuildContext context) {
     final formState = context.read<CreateGateEntryCubit>().state;
     final isCreating = formState.view == GateEntryView.create;
     final isCompleted = formState.view == GateEntryView.completed;
     final newform = formState.form;
+    log('---newform---:$newform');
 
     return MultiBlocListener(
       listeners: [
-        BlocListener<AttachmentsList,AttachmentsListState>(
-          listener:(_, state) {
-            state.maybeWhen(
-              orElse: (){},
-              success: (data) {
-                context.cubit<CreateGateEntryCubit>().addInvUrls(data);
-                setState(() {});
-              },
-            );
-          },
-        ),
         BlocListener<CreateGateEntryCubit, CreateGateEntryState>(
           listenWhen: (previous, current) {
             final prevStatus = previous.error?.status;
@@ -71,14 +67,6 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
             }
           },
         ),
-        BlocListener<GateEntryLinesCubit, GateEntryLinesCubitState>(
-          listener: (_, state) {
-            state.maybeWhen(
-              orElse: () {},
-              success: context.cubit<CreateGateEntryCubit>().addAllLines,
-            );
-          },
-        ),
       ],
       child: SingleChildScrollView(
         controller: _scrollController,
@@ -87,732 +75,276 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
           margin: const EdgeInsets.all(12.0),
           defaultHeight: 8,
           children: [
-            const SectoinHead(title: 'Header Details'),
-            BlocBuilder<CompanyNameList, NetworkRequestState<List<String>>>(
+            BlocBuilder<VehicleRequestList, VehicleRequestListState>(
               builder: (_, state) {
-                final names = state.maybeWhen(
-                  orElse: () => <String>[],
+                final address = state.maybeWhen(
+                  orElse: () => <VehcileRequestForm>[],
                   success: (data) => data,
                 );
                 return SearchDropDownList(
                   color: AppColors.marigoldDDust,
-                  isMandatory: true,
-                  items: names,
+                  items: address,
                   key: UniqueKey(),
-                  defaultSelection:
-                      names.where((e) => e == newform.plantName).firstOrNull,
-                  title: 'Plant Name',
-                  hint: 'Select Plant Name',
+                  defaultSelection: address
+                      .where((e) => e.name == newform.vehicleRequest)
+                      .firstOrNull,
+                  title: 'Vehicle Request',
+                  hint: 'Vehicle Request',
                   readOnly: isCompleted,
                   isloading: state.isLoading,
                   futureRequest: (p0) async {
-                    final where = names.where((e) => e.containsIgnoreCase(p0));
+                    final where = address.where((e) {
+                      final strList = [
+                        e.name,
+                      ].nonNulls.toList();
+                      return strList
+                          .caseInsensitiveSearch(p0, (str) => str)
+                          .isNotEmpty;
+                    });
                     return where.toList();
                   },
-                  headerBuilder: (_, item, __) => Text(item),
-                  listItemBuilder: (_, item, __, ___) => CompactListTile(
-                    title: item,
+                  headerBuilder: (_, item, __) => Text('${item.name}'),
+                  listItemBuilder: (_, e, __, ___) => CompactListTile(
+                    title: '${e.name}',
+                    subtitle: [
+                      e.vehicleType,
+                    ].nonNulls.join(', '),
                   ),
-                  onSelected: (names) {
-                    context
-                        .cubit<CreateGateEntryCubit>()
-                        .onValueChanged(plantName: names);
+                  onSelected: (address) {
+                    print('address--:$address');
+                    setState(() {
+                      entryType = address.vehicleType;
+                      inTime = address.inTime;
+                      outTime = address.outTime;
+                    });
+                    print('entryentryType---:$entryType');
+                    print('inTime---:$inTime');
+                    print('outTime---:$outTime');
+                    context.cubit<CreateGateEntryCubit>().onValueChanged(
+                        vehicleRequest: '${address.name}',
+                        gateEntryType: entryType,
+                        inTime: inTime,
+                        outTime: outTime);
                   },
-                  focusNode: focusNodes.elementAt(0),
+                  focusNode: focusNodes.elementAt(5),
                 );
+              },
+            ),
+            AppDropDownWidget(
+              hint: 'Gate Entry Type',
+              readOnly: isCompleted,
+              color: AppColors.marigoldDDust,
+              title: 'Gate Entry Type',
+              isMandatory: true,
+              defaultSelection: newform.entryType,
+              key: ValueKey(entryType),
+              items: AppStaticData.gateEntryType,
+              onSelected: (entrytype) {
+                setState(() {
+                  entryType = entrytype;
+                });
+                context
+                    .cubit<CreateGateEntryCubit>()
+                    .onValueChanged(gateEntryType: entryType);
+                setState(() {});
               },
             ),
             InputField(
               title: 'Gate Entry Date',
               isRequired: true,
-              readOnly: true,
-              initialValue: newform.creationDate,
+              readOnly: isCompleted,
+              initialValue: newform.gateEntryDate,
               borderColor: AppColors.marigoldDDust,
               focusNode: focusNodes.elementAt(2),
               inputType: const TextInputType.numberWithOptions(decimal: true),
             ),
-            TimeSelectionField(
-              borderColor: AppColors.marigoldDDust,
-              readOnly: isCompleted,
-              initialValue: newform.entryTime?.split('.').firstOrNull,
-              title: 'Gate Enty Time',
-              onTimeSelect: (time) {},
+            Row(
+              children: [
+                Checkbox(
+                  value: isChecked,
+                  onChanged: (bool? value) {
+                    // setState(() {
+                    //   isChecked = value ?? false;
+                    // });
+                  },
+                ),
+                const Text('Is Purchase Receipt Created'),
+              ],
             ),
-            AppDropDownWidget(
-                hint: 'Select Gate Entry Type',
-                readOnly: isCompleted,
-                color: AppColors.marigoldDDust,
-                title: 'Gate Entry Type',
-                isMandatory: true,
-                defaultSelection: newform.entryType,
-                items: AppStaticData.gateEntryType,
-                focusNode: focusNodes.elementAt(1),
-                onSelected: (entryType) {
-                  context
-                      .cubit<CreateGateEntryCubit>()
-                      .onValueChanged(gateEntryType: entryType);
-                  setState(() {});
-                }),
-            if (newform.entryType == 'Gatepass Returnable') ...[
-              DateSelectionField(
-                firstDate: DFU.now(),
-                lastDate: DFU.now().add(const Duration(days: 60)),
-                onDateSelect: (date) {
-                  final dateString = DateFormat('yyyy-MM-dd').format(date);
-                  context
-                      .cubit<CreateGateEntryCubit>()
-                      .onValueChanged(expectedReturnDate: dateString);
-                },
-                initialValue: newform.expectedReturnDate,
-                suffixIcon: const Icon(Icons.calendar_month_outlined),
-                title: 'Expected Return Date',
-                isRequired:
-                    newform.entryType == 'Gatepass Returnable' ? true : false,
-                readOnly: isCompleted,
-                borderColor: AppColors.marigoldDDust,
-                focusNode: focusNodes.elementAt(31),
-              ),
-            ],
-            const Divider(height: 1),
-            const SectoinHead(title: 'Sender Details'),
-            AppDropDownWidget(
-                color: AppColors.marigoldDDust,
-                hint: 'Select Material Type',
-                defaultSelection: newform.materialType,
-                title: 'Material Type',
-                isMandatory: true,
-                readOnly: isCompleted,
-                focusNode: focusNodes.elementAt(3),
-                items: AppStaticData.materialType,
-                onSelected: (materialType) {
-                  context
-                      .cubit<CreateGateEntryCubit>()
-                      .onValueChanged(materialType: materialType);
-                  setState(() {});
-                }),
-            if (newform.materialType != null) ...[
-              if (newform.materialType == 'Sales Return') ...[
-                BlocBuilder<ReceiverNameList, ReceiverNameListState>(
-                  builder: (_, state) {
-                    final names = state.maybeWhen(
-                      orElse: () => <ReceiverNameForm>[],
-                      success: (data) => data,
-                    );
-                    return SearchDropDownList(
-                      color: AppColors.marigoldDDust,
-                      items: names,
-                      key: UniqueKey(),
-                      defaultSelection: names
-                          .where((e) => e.name == newform.customerName)
-                          .firstOrNull,
-                      title: 'Customer Name',
-                      hint: 'Select Customer Name',
-                      readOnly: isCompleted,
-                      isloading: state.isLoading,
-                      futureRequest: (p0) async {
-                        final where = names
-                            .where((e) => e.custName.containsIgnoreCase(p0));
-                        return where.toList();
-                      },
-                      headerBuilder: (_, item, __) => Text(item.custName),
-                      listItemBuilder: (_, item, __, ___) => CompactListTile(
-                        title: item.custName,
-                      ),
-                      onSelected: (names) {
-                        context.cubit<CreateGateEntryCubit>().onValueChanged(
-                              customerName: names.name,
-                            );
-                        context
-                            .cubit<ReceiverAddressList>()
-                            .request(names.name);
-                        setState(() {});
-                      },
-                      focusNode: focusNodes.elementAt(32),
-                    );
-                  },
-                ),
-                BlocConsumer<ReceiverAddressList, ReceiverAddressListState>(
-                  listener: (_, state) {
-                    final address = state.maybeWhen(
-                      orElse: () => <ReceiverAddressForm>[],
-                      success: (data) => data,
-                    );
-                    context.cubit<CreateGateEntryCubit>().onValueChanged(
-                          customerAddress: '${address.firstOrNull?.parent}',
-                        );
-                    setState(() {});
-                  },
-                  builder: (_, state) {
-                    final address = state.maybeWhen(
-                      orElse: () => <ReceiverAddressForm>[],
-                      success: (data) => data,
-                    );
-                    return SearchDropDownList(
-                      color: AppColors.marigoldDDust,
-                      items: address,
-                      key: UniqueKey(),
-                      defaultSelection: address
-                          .where((e) => e.parent == newform.customerAddress)
-                          .firstOrNull,
-                      title: 'Customer Address',
-                      hint: 'Select Customer Address',
-                      readOnly: isCompleted,
-                      isloading: state.isLoading,
-                      futureRequest: (p0) async {
-                        final where = address.where((e) {
-                          final strList = [e.line1, e.line2, e.pincode, e.city]
-                              .nonNulls
-                              .toList();
-                          return strList
-                              .caseInsensitiveSearch(p0, (str) => str)
-                              .isNotEmpty;
-                        });
-                        return where.toList();
-                      },
-                      headerBuilder: (_, item, __) => Text('${item.parent}'),
-                      listItemBuilder: (_, e, __, ___) => CompactListTile(
-                        title: '${e.parent}',
-                        subtitle: [e.line1, e.line2, e.pincode, e.city]
-                            .nonNulls
-                            .join(', '),
-                      ),
-                      onSelected: (address) {
-                        context.cubit<CreateGateEntryCubit>().onValueChanged(
-                            customerAddress: '${address.parent}');
-                      },
-                      focusNode: focusNodes.elementAt(33),
-                    );
-                  },
-                ),
-              ] else ...[
-                BlocBuilder<SupplierNameList, SupplierNameListState>(
-                  builder: (_, state) {
-                    final names = state.maybeWhen(
-                      orElse: () => <SupplierNameForm>[],
-                      success: (data) => data,
-                    );
-                    return SearchDropDownList(
-                      color: AppColors.marigoldDDust,
-                      items: names,
-                      key: UniqueKey(),
-                      defaultSelection: names
-                          .where((e) => e.name == newform.supplierName)
-                          .firstOrNull,
-                      title: 'Supplier Name',
-                      hint: 'Select Supplier Name',
-                      readOnly: isCompleted,
-                      isloading: state.isLoading,
-                      futureRequest: (p0) async {
-                        final where = names.where((e) =>
-                            e.name.containsIgnoreCase(p0) ||
-                            e.supName.containsIgnoreCase(p0));
-                        return where.toList();
-                      },
-                      headerBuilder: (_, item, __) => Text(item.supName),
-                      listItemBuilder: (_, item, __, ___) => CompactListTile(
-                        title: item.supName,
-                      ),
-                      onSelected: (names) {
-                        context
-                            .cubit<CreateGateEntryCubit>()
-                            .onValueChanged(supplierName: names.name);
-
-                        context
-                            .cubit<ReceiverAddressList>()
-                            .request(names.name);
-                      },
-                      focusNode: focusNodes.elementAt(4),
-                    );
-                  },
-                ),
-                BlocConsumer<ReceiverAddressList, ReceiverAddressListState>(
-                  listener: (_, state) {
-                    final address = state.maybeWhen(
-                      orElse: () => <ReceiverAddressForm>[],
-                      success: (data) => data,
-                    );
-                    context.cubit<CreateGateEntryCubit>().onValueChanged(
-                          supplierAddress: address.firstOrNull?.parent,
-                        );
-                    setState(() {});
-                  },
-                  builder: (_, state) {
-                    final address = state.maybeWhen(
-                      orElse: () => <ReceiverAddressForm>[],
-                      success: (data) => data,
-                    );
-                    return SearchDropDownList(
-                      color: AppColors.marigoldDDust,
-                      items: address,
-                      key: UniqueKey(),
-                      defaultSelection: address
-                          .where((e) => e.parent == newform.supplierAddress)
-                          .firstOrNull,
-                      title: 'Supplier Address',
-                      hint: 'Select Supplier Address',
-                      readOnly: isCompleted,
-                      isloading: state.isLoading,
-                      futureRequest: (p0) async {
-                        final where = address.where((e) {
-                          final strList = [e.line1, e.line2, e.pincode, e.city]
-                              .nonNulls
-                              .toList();
-                          return strList
-                              .caseInsensitiveSearch(p0, (str) => str)
-                              .isNotEmpty;
-                        });
-                        return where.toList();
-                      },
-                      headerBuilder: (_, item, __) => Text('${item.parent}'),
-                      listItemBuilder: (_, e, __, ___) => CompactListTile(
-                        title: '${e.parent}',
-                        subtitle: [e.line1, e.line2, e.pincode, e.city]
-                            .nonNulls
-                            .join(', '),
-                      ),
-                      onSelected: (address) {
-                        context.cubit<CreateGateEntryCubit>().onValueChanged(
-                            supplierAddress: '${address.parent}');
-                      },
-                      focusNode: focusNodes.elementAt(5),
-                    );
-                  },
-                ),
-              ],
-            ],
             InputField(
+              title: 'Driver Name',
+              isRequired: true,
               readOnly: isCompleted,
-              initialValue: newform.senderName,
-              title: 'Sender Name',
-              isRequired: false,
+              initialValue: newform.driverName,
               borderColor: AppColors.marigoldDDust,
-              inputFormatters: [
-                UpperCaseTextFormatter(),
-              ],
-              onChanged: (p0) {
+              focusNode: focusNodes.elementAt(2),
+              inputType: const TextInputType.numberWithOptions(decimal: true),
+              onChanged: (name) {
                 context
                     .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(senderName: p0);
+                    .onValueChanged(driverName: name);
               },
-              focusNode: focusNodes.elementAt(6),
             ),
             InputField(
+              title: 'Driver Mobile',
+              isRequired: true,
               readOnly: isCompleted,
-              initialValue: newform.senderMobileNo,
-              title: 'Sender Mobile No',
-              borderColor: AppColors.marigoldDDust,
               maxLength: 10,
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp("[0-9]")),
-              ],
-              inputType: TextInputType.number,
-              onChanged: (p0) {
+              initialValue: newform.drivermobileNo,
+              borderColor: AppColors.marigoldDDust,
+              focusNode: focusNodes.elementAt(4),
+              inputType: TextInputType.phone,
+              onChanged: (number) {
                 context
                     .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(senderMobileNo: p0);
+                    .onValueChanged(driverMobileNo: number);
               },
-              focusNode: focusNodes.elementAt(7),
             ),
             const Divider(height: 1),
-            const SectoinHead(title: 'Receiver Details'),
-            InputField(
-              readOnly: isCompleted,
-              initialValue: newform.receiverName,
-              onChanged: (p0) {
-                context
-                    .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(receiverName: p0);
-              },
-              title: 'Receiver Name',
-              borderColor: AppColors.marigoldDDust,
-              focusNode: focusNodes.elementAt(8),
-            ),
-            AppDropDownWidget(
-              hint: 'Select Receiver Department',
-              readOnly: isCompleted,
-              defaultSelection: newform.receiverDept,
-              title: 'Receiver Department',
-              items: AppStaticData.receiverDept,
-              onSelected: (p0) {
-                context
-                    .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(receiverDept: p0);
-              },
-              color: AppColors.marigoldDDust,
-              focusNode: focusNodes.elementAt(9),
-            ),
-            InputField(
-              readOnly: isCompleted,
-              initialValue: newform.receiverMobile,
-              title: 'Receiver Mobile Number',
-              borderColor: AppColors.marigoldDDust,
-              maxLength: 10,
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp("[0-9]")),
-              ],
-              inputType: TextInputType.number,
-              onChanged: (p0) {
-                context
-                    .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(receiverMobile: p0);
-              },
-              focusNode: focusNodes.elementAt(10),
-            ),
-            InputField(
-              readOnly: isCompleted,
-              initialValue: newform.receiverEmail,
-              title: 'Receiver Email',
-              borderColor: AppColors.marigoldDDust,
-              onChanged: (p0) {
-                context
-                    .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(receiverEmail: p0);
-              },
-              focusNode: focusNodes.elementAt(11),
-            ),
-            const Divider(height: 1),
-            const SectoinHead(title: 'Shipment Details'),
-            InputField(
-              readOnly: isCompleted,
-              initialValue: newform.poNumber,
-              title: 'PO Number',
-              isRequired: false,
-              borderColor: AppColors.marigoldDDust,
-              onChanged: (p0) {
-                context
-                    .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(poNumber: p0);
-              },
-              focusNode: focusNodes.elementAt(12),
-            ),
-            BlocBuilder<CreateGateEntryCubit, CreateGateEntryState>(
-              builder: (context, state) {
-                return CheckboxListTile(
-                  value: state.form.isewayBill == 1,
-                  onChanged: isCompleted
-                      ? null
-                      : (value) {
-                          context.cubit<CreateGateEntryCubit>().onValueChanged(
-                              isewaiBill: value == true ? 1 : 0);
-                          setState(() {});
-                        },
-                  activeColor: Colors.black,
-                  checkboxShape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0)),
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  isThreeLine: false,
-                  dense: true,
-                  contentPadding: EdgeInsets.zero,
-                  title: const CaptionText(
-                      title: 'Is-Eway Bill', isRequired: false),
-                  controlAffinity: ListTileControlAffinity.leading,
+            BlocBuilder<VehicleList, VehicleListState>(
+              builder: (_, state) {
+                final address = state.maybeWhen(
+                  orElse: () => <VehcileForm>[],
+                  success: (data) => data,
+                );
+                return SearchDropDownList(
+                  key: UniqueKey(),
+                  color: AppColors.marigoldDDust,
+                  items: address,
+                  defaultSelection: address
+                      .where((e) => e.name == newform.vehicle)
+                      .firstOrNull,
+                  title: 'Vehicle',
+                  hint: 'Vehicle',
+                  readOnly: isCompleted,
+                  isloading: state.isLoading,
+                  futureRequest: (p0) async {
+                    final where = address.where((e) {
+                      final strList = [
+                        e.name,
+                      ].nonNulls.toList();
+                      return strList
+                          .caseInsensitiveSearch(p0, (str) => str)
+                          .isNotEmpty;
+                    });
+                    return where.toList();
+                  },
+                  headerBuilder: (_, item, __) => Text('${item.name}'),
+                  listItemBuilder: (_, e, __, ___) => CompactListTile(
+                    title: '${e.name}',
+                    subtitle: [
+                      e.model,
+                    ].nonNulls.join(', '),
+                  ),
+                  onSelected: (address) {
+                    context
+                        .cubit<CreateGateEntryCubit>()
+                        .onValueChanged(vehicle: address.name);
+                  },
+                  focusNode: focusNodes.elementAt(5),
                 );
               },
             ),
-            InputField(
-              readOnly: isCompleted,
-              initialValue: newform.ewayBill,
-              title: 'Eway Bill',
-              isRequired: newform.isewayBill == 1 ? true : false,
+            PhotoSelectionWidget(
+              isReadOnly: isCompleted,
+              fileName: 'Vehicle Photo',
               borderColor: AppColors.marigoldDDust,
-              onChanged: (p0) {
+              title: 'Vehicle Photo',
+              isRequired: true,
+              defaultValue: newform.vehiclePhoto,
+              // isReadOnly: isSubmitted,
+              // imageUrl: newform.vehiclePhoto!.path,
+              onFileCapture: (file) {
                 context
                     .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(ewayBill: p0);
+                    .onValueChanged(vehiclephoto: file);
               },
-              focusNode: focusNodes.elementAt(13),
             ),
             AppDropDownWidget(
-              hint: 'Select Vehicle Type',
+              // key: UniqueKey(),
+              defaultSelection: newform.payType,
               readOnly: isCompleted,
-              defaultSelection: newform.vehicleType,
-              title: 'Vehicle Type',
-              isMandatory: true,
-              items: AppStaticData.vehicleType,
-              onSelected: (p0) {
-                context
-                    .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(vehicleType: p0);
-                setState(() {});
-              },
+              title: 'Pay Type',
+              hint: 'Select Pay Type',
               color: AppColors.marigoldDDust,
-              focusNode: focusNodes.elementAt(14),
-            ),
-            InputField(
-              readOnly: isCompleted,
-              initialValue: newform.challanNumber,
-              title: 'Challan Number',
-              borderColor: AppColors.marigoldDDust,
-              onChanged: (p0) {
+              items: const ['Hourly', 'Qty'],
+              focusNode: focusNodes.elementAt(7),
+              onSelected: (value) {
                 context
                     .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(challanNo: p0);
+                    .onValueChanged(payType: value);
               },
-              focusNode: focusNodes.elementAt(15),
             ),
-            InputField(
-              readOnly: isCompleted,
-              initialValue: NumUtils.toDoubleStr(newform.peopleCount),
-              title: 'People Count',
-              inputType: TextInputType.number,
+            PhotoSelectionWidget(
+              isReadOnly: isCompleted,
+              fileName: 'Before Work',
               borderColor: AppColors.marigoldDDust,
-              onChanged: (p0) {
+              title: 'Before Work',
+              isRequired: true,
+              defaultValue: newform.beforeWork,
+              // isReadOnly: isSubmitted,
+              // imageUrl: newform.beforeWork,
+              onFileCapture: (file) {
                 context
                     .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(peapleCount: int.tryParse(p0));
+                    .onValueChanged(beforeWork: file);
               },
-              focusNode: focusNodes.elementAt(16),
-            ),
-            InputField(
-              readOnly: isCompleted,
-              initialValue: newform.vehicleNumber,
-              title: 'Vehicle Number',
-              isRequired: newform.vehicleType == 'By Hand' ? false : true,
-              borderColor: AppColors.marigoldDDust,
-              maxLength: 10,
-              inputFormatters: [
-                UpperCaseTextFormatter(),
-              ],
-              suffixIcon: const Icon(Icons.pin_outlined),
-              onChanged: (vehicleNo) {
-                context
-                    .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(vehicleNo: vehicleNo);
-              },
-              focusNode: focusNodes.elementAt(17),
-            ),
-            InputField(
-              readOnly: isCompleted,
-              initialValue: newform.driverName,
-              title: 'Driver Name',
-              isRequired: newform.vehicleType == 'By Hand' ? false : true,
-              borderColor: AppColors.marigoldDDust,
-              inputFormatters: [
-                UpperCaseTextFormatter(),
-              ],
-              onChanged: (p0) {
-                context
-                    .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(driverName: p0);
-              },
-              focusNode: focusNodes.elementAt(18),
-            ),
-            InputField(
-              readOnly: isCompleted,
-              initialValue: newform.drivermobileNo,
-              title: 'Driver Mobile Number',
-              isRequired: newform.vehicleType == 'By Hand' ? false : true,
-              borderColor: AppColors.marigoldDDust,
-              maxLength: 10,
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp("[0-9]")),
-              ],
-              inputType: TextInputType.number,
-              onChanged: (p0) {
-                context
-                    .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(driverMobileNo: p0);
-              },
-              focusNode: focusNodes.elementAt(19),
-            ),
-            const Divider(height: 1),
-            const SectoinHead(title: 'Weighment Details'),
-            InputField(
-              readOnly: isCompleted,
-              initialValue: newform.weightSlipNo,
-              title: 'Weighment SLIP Token No',
-              isRequired: false,
-              borderColor: AppColors.marigoldDDust,
-              onChanged: (p0) {
-                context
-                    .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(weightSlipToken: p0);
-                setState(() {});
-              },
-              focusNode: focusNodes.elementAt(20),
-            ),
-            InputField(
-              readOnly: isCompleted,
-              initialValue: NumUtils.toDoubleStr(newform.weight),
-              inputType: TextInputType.number,
-              title: 'Weight ( in Kgs )',
-              isRequired: false,
-              borderColor: AppColors.marigoldDDust,
-              onChanged: (p0) {
-                context
-                    .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(weight: double.tryParse(p0));
-              },
-              focusNode: focusNodes.elementAt(21),
-            ),
-            DateSelectionField(
-              readOnly: isCompleted,
-              initialValue: newform.weighmentDate,
-              title: 'Weighment Date',
-              isRequired: false,
-              firstDate: DFU.now().subtract(const Duration(days: 60)),
-              lastDate: DFU.now(),
-              borderColor: AppColors.marigoldDDust,
-              suffixIcon: const Icon(Icons.calendar_month_outlined,
-                  color: AppColors.chimneySweep),
-              onDateSelect: (DateTime date) {},
-              focusNode: focusNodes.elementAt(22),
             ),
             TimeSelectionField(
-              borderColor: AppColors.marigoldDDust,
               readOnly: isCompleted,
-              initialValue: newform.weighmentTime?.split('.').firstOrNull,
-              title: 'Weighment Time',
-              onTimeSelect: (time) {},
-              focusNode: focusNodes.elementAt(23),
-            ),
-            const Divider(height: 1),
-            const SectoinHead(title: 'Photo Attachment'),
-          MultiFileSelectionWidget(
-              title: 'Invoice/DC Image (OCR Scanning)',
-              initialFiles: newform.invoiceImg,
-              initialValue: newform.addInvs,
-              removeFile: context.cubit<CreateGateEntryCubit>().removeFile,
+              key: UniqueKey(),
+              // key: ValueKey(inTime),
+              initialValue: newform.intime,
               borderColor: AppColors.marigoldDDust,
-              
+              title: 'In Time',
+              onTimeSelect: (time) {
+                context
+                    .cubit<CreateGateEntryCubit>()
+                    .onValueChanged(inTime: time.format(context));
+              },
+            ),
+            TimeSelectionField(
               readOnly: isCompleted,
-              focusNode: focusNodes.elementAt(24),
-              onImage: (file) {
-                context
-                    .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(invoice: file);
-              },
-            ),
-            //   PhotoSelectionWidget(
-            //   borderColor: AppColors.marigoldDDust,
-            //   title: 'Invoice/DC Image(OCR Scanning)',
-            //   fileName: 'Inv_DC_Image',
-            //   imageUrl: newform.ocrScanning,
-            //   isRequired: false,
-            //   defaultValue: newform.invoiceImg.firstOrNull,
-            //   onFileCapture: (file) {
-            //     context
-            //         .cubit<CreateGateEntryCubit>()
-            //         .onValueChanged(invoice: file);
-            //   },
-            //   focusNode: focusNodes.elementAt(26),
-            // ),
-            PhotoSelectionWidget(
+              // key: ValueKey(outTime),
+              key: UniqueKey(),
+              initialValue: newform.outTime,
               borderColor: AppColors.marigoldDDust,
-              fileName: 'Driver_License_Photo',
-              defaultValue: newform.licensePhotoImg,
-              isReadOnly: isCompleted,
-              imageUrl: newform.driversLicensePhoto,
-              title: "Driver's License Photo",
-              onFileCapture: (file) {
+              title: 'Out Time',
+              onTimeSelect: (time) {
                 context
                     .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(licensePhoto: file);
+                    .onValueChanged(outTime: time.format(context));
               },
-              focusNode: focusNodes.elementAt(24),
             ),
-            PhotoSelectionWidget(
-              borderColor: AppColors.marigoldDDust,
-              defaultValue: newform.vehiclePhotoImg,
-              fileName: 'Vehicle_Image',
-              imageUrl: newform.vehicleImg,
-              isReadOnly: isCompleted,
-              title: 'Vehicle Image',
-              onFileCapture: (file) {
-                context
-                    .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(vehiclePhoto: file);
-              },
-              focusNode: focusNodes.elementAt(25),
-            ),
-            PhotoSelectionWidget(
-              borderColor: AppColors.marigoldDDust,
-              defaultValue: newform.sealPhotoImg,
-              fileName: 'Seal_Photo',
-              imageUrl: newform.sealPhoto,
-              title: 'Seal Photo',
-              isReadOnly: isCompleted,
-              onFileCapture: (file) {
-                context
-                    .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(sealPhoto: file);
-              },
-              focusNode: focusNodes.elementAt(27),
-            ),
-            PhotoSelectionWidget(
-              borderColor: AppColors.marigoldDDust,
-              defaultValue: newform.breathAnalyserImg,
-              imageUrl: newform.breathAnalyser,
-              isReadOnly: isCompleted,
-              fileName: 'Breath_Analyser',
-              title: 'Breath Analyser',
-              onFileCapture: (file) {
-                context
-                    .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(breathAnalyser: file);
-              },
-              focusNode: focusNodes.elementAt(28),
-            ),
-            const Divider(height: 1),
-            const SectoinHead(title: 'Remarks'),
             InputField(
-              borderColor: AppColors.marigoldDDust,
               readOnly: isCompleted,
+              title: 'Per Hour Amount',
+              borderColor: AppColors.marigoldDDust,
+              inputType: TextInputType.number,
+              initialValue: newform.perHrAmt,
+              focusNode: focusNodes.elementAt(8),
+              onChanged: (p0) {
+                context
+                    .cubit<CreateGateEntryCubit>()
+                    .onValueChanged(perHrAmt: p0);
+              },
+            ),
+            InputField(
+              readOnly: isCompleted,
+              title: 'Remarks',
+              borderColor: AppColors.marigoldDDust,
+              inputType: TextInputType.multiline,
+              maxLines: 3,
               initialValue: newform.remarks,
+              focusNode: focusNodes.elementAt(11),
               onChanged: (p0) {
                 context
                     .cubit<CreateGateEntryCubit>()
                     .onValueChanged(remarks: p0);
               },
-              title: 'Comment/Remark',
-              focusNode: focusNodes.elementAt(29),
             ),
-            const Divider(height: 1),
-            const SectoinHead(title: 'Items'),
-            const GateEntryLinesWidget(),
-            const SizedBox(
-              height: 10,
-            ),
-            // BlocBuilder<CreateGateEntryCubit, CreateGateEntryState>(
-            //   builder: (_, state) {
-            //     return InputField(
-            //       readOnly: isCompleted,
-            //       isRequired: true,
-            //       initialValue: NumUtils.inRupeesFormat(state.form.totalAmount),
-            //       title: 'Total Amount',
-            //       borderColor: AppColors.marigoldDDust,
-            //       inputType: TextInputType.number,
-            //       // inputFormatters: [
-            //       //   FilteringTextInputFormatter.digitsOnly
-            //       // ],
-            //       onChanged: (p0) {
-            //         context
-            //             .cubit<CreateGateEntryCubit>()
-            //             .onValueChanged(totalAmount: double.tryParse(p0));
-            //       },
-            //       focusNode: focusNodes.elementAt(30),
-            //     );
-            //   },
-            // ),
-            InputField(
-                  readOnly: isCompleted,
-                  initialValue: NumUtils.inRupeesFormat(newform.totalAmount),
-                  title: 'Total Amount',
-                  borderColor: AppColors.marigoldDDust,
-                  inputType: TextInputType.number,
-                  isRequired: true,
-                  // inputFormatters: [
-                  //   FilteringTextInputFormatter.digitsOnly
-                  // ],
-                  onChanged: (p0) {
-                    context
-                        .cubit<CreateGateEntryCubit>()
-                        .onValueChanged(totalAmount: double.tryParse(p0));
-                  },
-                  focusNode: focusNodes.elementAt(30),
-                ),
             AppSpacer.p32(),
-            if (!isCompleted) ...[
+            if (!isCompleted)
               BlocBuilder<CreateGateEntryCubit, CreateGateEntryState>(
                 builder: (_, state) => AppButton(
                   label: isCreating ? 'Create' : 'Submit',
@@ -821,7 +353,6 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                   onPressed: context.cubit<CreateGateEntryCubit>().save,
                 ),
               ),
-            ],
           ],
         ),
       ),
