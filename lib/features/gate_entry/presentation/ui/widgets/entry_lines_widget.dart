@@ -25,7 +25,7 @@ class _GateEntryLinesWidgetState extends State<GateEntryLinesWidget> {
     final screenWidth = MediaQuery.of(context).size.width;
     return BlocBuilder<CreateGateEntryCubit, CreateGateEntryState>(
       builder: (_, state) {
-        final isDraft= state.form.docStatus == null || state.form.docStatus == 0;
+        final isDraft= state.form.docstatus == null || state.form.docstatus == 0;
         final itemLines = state.lines;
 
         return Column(
@@ -147,7 +147,7 @@ class _GateEntryLinesWidgetState extends State<GateEntryLinesWidget> {
                 },
                 child: const Text('Delete'),
               ),
-            if (state.form.docStatus != 1) ...[
+            if (state.form.docstatus != 1) ...[
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   visualDensity: const VisualDensity(vertical: -2),

@@ -21,116 +21,49 @@ GateEntryForm _$GateEntryFormFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$GateEntryForm {
   String? get status => throw _privateConstructorUsedError;
+  int? get docstatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'creation', defaultValue: '')
-  String? get creationDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'plant_name')
-  String? get plantName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'gate_entry_type')
-  String? get entryType => throw _privateConstructorUsedError;
-  @JsonKey(name: 'material_type')
-  String? get materialType => throw _privateConstructorUsedError;
-  @JsonKey(name: 'supplier_name')
-  String? get supplierName => throw _privateConstructorUsedError;
   @JsonKey(name: 'gate_entry_time')
   String? get entryTime => throw _privateConstructorUsedError;
-  @JsonKey(name: 'customer_name')
-  String? get customerName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'sender_address')
-  String? get supplierAddress => throw _privateConstructorUsedError;
-  @JsonKey(name: 'sender_address_copy')
-  String? get customerAddress => throw _privateConstructorUsedError;
-  @JsonKey(name: 'expected_return_date')
-  String? get expectedReturnDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'sender_mobile_no')
-  String? get senderMobileNo => throw _privateConstructorUsedError;
-  @JsonKey(name: 'receiver_name')
-  String? get receiverName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'receiver_department')
-  String? get receiverDept => throw _privateConstructorUsedError;
-  @JsonKey(name: 'receiver_email')
-  String? get receiverEmail => throw _privateConstructorUsedError;
-  @JsonKey(name: 'receiver_mobile_number')
-  String? get receiverMobile => throw _privateConstructorUsedError;
-  @JsonKey(name: 'po_number')
-  String? get poNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'is_eway_bill', defaultValue: 0)
-  int? get isewayBill => throw _privateConstructorUsedError;
-  @JsonKey(name: 'eway_bill')
-  String? get ewayBill => throw _privateConstructorUsedError;
-  @JsonKey(name: 'challan_number')
-  String? get challanNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'people_count')
-  int? get peopleCount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'vehicle_type')
-  String? get vehicleType => throw _privateConstructorUsedError;
-  @JsonKey(name: 'vehicle_number')
-  String? get vehicleNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'gate_entry_type')
+  String? get entryType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'vehicle_request')
+  String? get vehicleRequest => throw _privateConstructorUsedError;
+  @JsonKey(name: 'vehicle')
+  String? get vehicle => throw _privateConstructorUsedError;
+  @JsonKey(name: 'pay_type')
+  String? get payType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'vendor_invoice_date')
+  String? get vendorInvoiceDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'vendor_invoice_quantity')
+  double? get invoiceQnty => throw _privateConstructorUsedError;
+  @JsonKey(name: 'invoice_amount')
+  double? get invoiceAmt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'gate_entry_date')
+  String? get gateEntryDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_time', defaultValue: '')
+  String? get createdTime => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  File? get beforeWork => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  File? get vehiclePhoto => throw _privateConstructorUsedError;
+  @JsonKey(name: 'after_work')
+  String? get afterWork => throw _privateConstructorUsedError;
+  @JsonKey(name: 'in_time')
+  String? get intime => throw _privateConstructorUsedError;
+  @JsonKey(name: 'out_time')
+  String? get outTime => throw _privateConstructorUsedError;
+  @JsonKey(name: 'per_hour_amount')
+  String? get perHrAmt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'amount')
+  double? get amount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'driver_mobile')
+  String? get drivermobileNo => throw _privateConstructorUsedError;
   @JsonKey(name: 'driver_name')
   String? get driverName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'driver_mobile_number')
-  String? get drivermobileNo => throw _privateConstructorUsedError;
-  @JsonKey(name: 'weighment_slip_token_no')
-  String? get weightSlipNo => throw _privateConstructorUsedError;
-  @JsonKey(name: 'weight__in_kgs_')
-  double? get weight => throw _privateConstructorUsedError;
-  @JsonKey(name: 'weighment_date')
-  String? get weighmentDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'weighment_time')
-  String? get weighmentTime => throw _privateConstructorUsedError;
-  @JsonKey(name: 'commentremark')
+  @JsonKey(name: 'remarks')
   String? get remarks => throw _privateConstructorUsedError;
-  @JsonKey(name: 'docstatus')
-  int? get docStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'sender_name')
-  String? get senderName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'drivers_license_photo')
-  String? get driversLicensePhoto => throw _privateConstructorUsedError;
-  @JsonKey(name: 'vehicle_image')
-  String? get vehicleImg => throw _privateConstructorUsedError;
-  @JsonKey(name: 'seal_photo')
-  String? get sealPhoto => throw _privateConstructorUsedError;
-  @JsonKey(name: 'breath_analyser')
-  String? get breathAnalyser => throw _privateConstructorUsedError;
-  @JsonKey(name: 'invoicedc_image_ocr_scanning')
-  String? get ocrScanning => throw _privateConstructorUsedError;
-  @JsonKey(name: 'total_amount')
-  double? get totalAmount => throw _privateConstructorUsedError;
-  @JsonKey(
-      includeFromJson: true,
-      includeToJson: false,
-      toJson: toNull,
-      fromJson: toNull)
-  File? get licensePhotoImg => throw _privateConstructorUsedError;
-  @JsonKey(
-      includeFromJson: true,
-      includeToJson: false,
-      toJson: toNull,
-      fromJson: toNull)
-  File? get vehiclePhotoImg => throw _privateConstructorUsedError;
-  @JsonKey(
-      includeFromJson: true,
-      includeToJson: false,
-      toJson: toNull,
-      fromJson: toNull)
-  File? get sealPhotoImg => throw _privateConstructorUsedError;
-  @JsonKey(
-      includeFromJson: true,
-      includeToJson: false,
-      toJson: toNull,
-      fromJson: toNull)
-  File? get breathAnalyserImg => throw _privateConstructorUsedError;
-  @JsonKey(
-      includeFromJson: true,
-      includeToJson: false,
-      toJson: toNull,
-      fromJson: toNull)
-  List<File> get invoiceImg => throw _privateConstructorUsedError;
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  List<String> get addInvs => throw _privateConstructorUsedError;
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  List<String> get deletedLines => throw _privateConstructorUsedError;
 
   /// Serializes this GateEntryForm to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -150,78 +83,28 @@ abstract class $GateEntryFormCopyWith<$Res> {
   @useResult
   $Res call(
       {String? status,
+      int? docstatus,
       @JsonKey(name: 'name') String? name,
-      @JsonKey(name: 'creation', defaultValue: '') String? creationDate,
-      @JsonKey(name: 'plant_name') String? plantName,
-      @JsonKey(name: 'gate_entry_type') String? entryType,
-      @JsonKey(name: 'material_type') String? materialType,
-      @JsonKey(name: 'supplier_name') String? supplierName,
       @JsonKey(name: 'gate_entry_time') String? entryTime,
-      @JsonKey(name: 'customer_name') String? customerName,
-      @JsonKey(name: 'sender_address') String? supplierAddress,
-      @JsonKey(name: 'sender_address_copy') String? customerAddress,
-      @JsonKey(name: 'expected_return_date') String? expectedReturnDate,
-      @JsonKey(name: 'sender_mobile_no') String? senderMobileNo,
-      @JsonKey(name: 'receiver_name') String? receiverName,
-      @JsonKey(name: 'receiver_department') String? receiverDept,
-      @JsonKey(name: 'receiver_email') String? receiverEmail,
-      @JsonKey(name: 'receiver_mobile_number') String? receiverMobile,
-      @JsonKey(name: 'po_number') String? poNumber,
-      @JsonKey(name: 'is_eway_bill', defaultValue: 0) int? isewayBill,
-      @JsonKey(name: 'eway_bill') String? ewayBill,
-      @JsonKey(name: 'challan_number') String? challanNumber,
-      @JsonKey(name: 'people_count') int? peopleCount,
-      @JsonKey(name: 'vehicle_type') String? vehicleType,
-      @JsonKey(name: 'vehicle_number') String? vehicleNumber,
+      @JsonKey(name: 'gate_entry_type') String? entryType,
+      @JsonKey(name: 'vehicle_request') String? vehicleRequest,
+      @JsonKey(name: 'vehicle') String? vehicle,
+      @JsonKey(name: 'pay_type') String? payType,
+      @JsonKey(name: 'vendor_invoice_date') String? vendorInvoiceDate,
+      @JsonKey(name: 'vendor_invoice_quantity') double? invoiceQnty,
+      @JsonKey(name: 'invoice_amount') double? invoiceAmt,
+      @JsonKey(name: 'gate_entry_date') String? gateEntryDate,
+      @JsonKey(name: 'created_time', defaultValue: '') String? createdTime,
+      @JsonKey(includeToJson: false, includeFromJson: false) File? beforeWork,
+      @JsonKey(includeToJson: false, includeFromJson: false) File? vehiclePhoto,
+      @JsonKey(name: 'after_work') String? afterWork,
+      @JsonKey(name: 'in_time') String? intime,
+      @JsonKey(name: 'out_time') String? outTime,
+      @JsonKey(name: 'per_hour_amount') String? perHrAmt,
+      @JsonKey(name: 'amount') double? amount,
+      @JsonKey(name: 'driver_mobile') String? drivermobileNo,
       @JsonKey(name: 'driver_name') String? driverName,
-      @JsonKey(name: 'driver_mobile_number') String? drivermobileNo,
-      @JsonKey(name: 'weighment_slip_token_no') String? weightSlipNo,
-      @JsonKey(name: 'weight__in_kgs_') double? weight,
-      @JsonKey(name: 'weighment_date') String? weighmentDate,
-      @JsonKey(name: 'weighment_time') String? weighmentTime,
-      @JsonKey(name: 'commentremark') String? remarks,
-      @JsonKey(name: 'docstatus') int? docStatus,
-      @JsonKey(name: 'sender_name') String? senderName,
-      @JsonKey(name: 'drivers_license_photo') String? driversLicensePhoto,
-      @JsonKey(name: 'vehicle_image') String? vehicleImg,
-      @JsonKey(name: 'seal_photo') String? sealPhoto,
-      @JsonKey(name: 'breath_analyser') String? breathAnalyser,
-      @JsonKey(name: 'invoicedc_image_ocr_scanning') String? ocrScanning,
-      @JsonKey(name: 'total_amount') double? totalAmount,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      File? licensePhotoImg,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      File? vehiclePhotoImg,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      File? sealPhotoImg,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      File? breathAnalyserImg,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      List<File> invoiceImg,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      List<String> addInvs,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      List<String> deletedLines});
+      @JsonKey(name: 'remarks') String? remarks});
 }
 
 /// @nodoc
@@ -240,237 +123,122 @@ class _$GateEntryFormCopyWithImpl<$Res, $Val extends GateEntryForm>
   @override
   $Res call({
     Object? status = freezed,
+    Object? docstatus = freezed,
     Object? name = freezed,
-    Object? creationDate = freezed,
-    Object? plantName = freezed,
-    Object? entryType = freezed,
-    Object? materialType = freezed,
-    Object? supplierName = freezed,
     Object? entryTime = freezed,
-    Object? customerName = freezed,
-    Object? supplierAddress = freezed,
-    Object? customerAddress = freezed,
-    Object? expectedReturnDate = freezed,
-    Object? senderMobileNo = freezed,
-    Object? receiverName = freezed,
-    Object? receiverDept = freezed,
-    Object? receiverEmail = freezed,
-    Object? receiverMobile = freezed,
-    Object? poNumber = freezed,
-    Object? isewayBill = freezed,
-    Object? ewayBill = freezed,
-    Object? challanNumber = freezed,
-    Object? peopleCount = freezed,
-    Object? vehicleType = freezed,
-    Object? vehicleNumber = freezed,
-    Object? driverName = freezed,
+    Object? entryType = freezed,
+    Object? vehicleRequest = freezed,
+    Object? vehicle = freezed,
+    Object? payType = freezed,
+    Object? vendorInvoiceDate = freezed,
+    Object? invoiceQnty = freezed,
+    Object? invoiceAmt = freezed,
+    Object? gateEntryDate = freezed,
+    Object? createdTime = freezed,
+    Object? beforeWork = freezed,
+    Object? vehiclePhoto = freezed,
+    Object? afterWork = freezed,
+    Object? intime = freezed,
+    Object? outTime = freezed,
+    Object? perHrAmt = freezed,
+    Object? amount = freezed,
     Object? drivermobileNo = freezed,
-    Object? weightSlipNo = freezed,
-    Object? weight = freezed,
-    Object? weighmentDate = freezed,
-    Object? weighmentTime = freezed,
+    Object? driverName = freezed,
     Object? remarks = freezed,
-    Object? docStatus = freezed,
-    Object? senderName = freezed,
-    Object? driversLicensePhoto = freezed,
-    Object? vehicleImg = freezed,
-    Object? sealPhoto = freezed,
-    Object? breathAnalyser = freezed,
-    Object? ocrScanning = freezed,
-    Object? totalAmount = freezed,
-    Object? licensePhotoImg = freezed,
-    Object? vehiclePhotoImg = freezed,
-    Object? sealPhotoImg = freezed,
-    Object? breathAnalyserImg = freezed,
-    Object? invoiceImg = null,
-    Object? addInvs = null,
-    Object? deletedLines = null,
   }) {
     return _then(_value.copyWith(
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
+      docstatus: freezed == docstatus
+          ? _value.docstatus
+          : docstatus // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      creationDate: freezed == creationDate
-          ? _value.creationDate
-          : creationDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      plantName: freezed == plantName
-          ? _value.plantName
-          : plantName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      entryType: freezed == entryType
-          ? _value.entryType
-          : entryType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      materialType: freezed == materialType
-          ? _value.materialType
-          : materialType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      supplierName: freezed == supplierName
-          ? _value.supplierName
-          : supplierName // ignore: cast_nullable_to_non_nullable
               as String?,
       entryTime: freezed == entryTime
           ? _value.entryTime
           : entryTime // ignore: cast_nullable_to_non_nullable
               as String?,
-      customerName: freezed == customerName
-          ? _value.customerName
-          : customerName // ignore: cast_nullable_to_non_nullable
+      entryType: freezed == entryType
+          ? _value.entryType
+          : entryType // ignore: cast_nullable_to_non_nullable
               as String?,
-      supplierAddress: freezed == supplierAddress
-          ? _value.supplierAddress
-          : supplierAddress // ignore: cast_nullable_to_non_nullable
+      vehicleRequest: freezed == vehicleRequest
+          ? _value.vehicleRequest
+          : vehicleRequest // ignore: cast_nullable_to_non_nullable
               as String?,
-      customerAddress: freezed == customerAddress
-          ? _value.customerAddress
-          : customerAddress // ignore: cast_nullable_to_non_nullable
+      vehicle: freezed == vehicle
+          ? _value.vehicle
+          : vehicle // ignore: cast_nullable_to_non_nullable
               as String?,
-      expectedReturnDate: freezed == expectedReturnDate
-          ? _value.expectedReturnDate
-          : expectedReturnDate // ignore: cast_nullable_to_non_nullable
+      payType: freezed == payType
+          ? _value.payType
+          : payType // ignore: cast_nullable_to_non_nullable
               as String?,
-      senderMobileNo: freezed == senderMobileNo
-          ? _value.senderMobileNo
-          : senderMobileNo // ignore: cast_nullable_to_non_nullable
+      vendorInvoiceDate: freezed == vendorInvoiceDate
+          ? _value.vendorInvoiceDate
+          : vendorInvoiceDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      receiverName: freezed == receiverName
-          ? _value.receiverName
-          : receiverName // ignore: cast_nullable_to_non_nullable
+      invoiceQnty: freezed == invoiceQnty
+          ? _value.invoiceQnty
+          : invoiceQnty // ignore: cast_nullable_to_non_nullable
+              as double?,
+      invoiceAmt: freezed == invoiceAmt
+          ? _value.invoiceAmt
+          : invoiceAmt // ignore: cast_nullable_to_non_nullable
+              as double?,
+      gateEntryDate: freezed == gateEntryDate
+          ? _value.gateEntryDate
+          : gateEntryDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      receiverDept: freezed == receiverDept
-          ? _value.receiverDept
-          : receiverDept // ignore: cast_nullable_to_non_nullable
+      createdTime: freezed == createdTime
+          ? _value.createdTime
+          : createdTime // ignore: cast_nullable_to_non_nullable
               as String?,
-      receiverEmail: freezed == receiverEmail
-          ? _value.receiverEmail
-          : receiverEmail // ignore: cast_nullable_to_non_nullable
+      beforeWork: freezed == beforeWork
+          ? _value.beforeWork
+          : beforeWork // ignore: cast_nullable_to_non_nullable
+              as File?,
+      vehiclePhoto: freezed == vehiclePhoto
+          ? _value.vehiclePhoto
+          : vehiclePhoto // ignore: cast_nullable_to_non_nullable
+              as File?,
+      afterWork: freezed == afterWork
+          ? _value.afterWork
+          : afterWork // ignore: cast_nullable_to_non_nullable
               as String?,
-      receiverMobile: freezed == receiverMobile
-          ? _value.receiverMobile
-          : receiverMobile // ignore: cast_nullable_to_non_nullable
+      intime: freezed == intime
+          ? _value.intime
+          : intime // ignore: cast_nullable_to_non_nullable
               as String?,
-      poNumber: freezed == poNumber
-          ? _value.poNumber
-          : poNumber // ignore: cast_nullable_to_non_nullable
+      outTime: freezed == outTime
+          ? _value.outTime
+          : outTime // ignore: cast_nullable_to_non_nullable
               as String?,
-      isewayBill: freezed == isewayBill
-          ? _value.isewayBill
-          : isewayBill // ignore: cast_nullable_to_non_nullable
-              as int?,
-      ewayBill: freezed == ewayBill
-          ? _value.ewayBill
-          : ewayBill // ignore: cast_nullable_to_non_nullable
+      perHrAmt: freezed == perHrAmt
+          ? _value.perHrAmt
+          : perHrAmt // ignore: cast_nullable_to_non_nullable
               as String?,
-      challanNumber: freezed == challanNumber
-          ? _value.challanNumber
-          : challanNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      peopleCount: freezed == peopleCount
-          ? _value.peopleCount
-          : peopleCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      vehicleType: freezed == vehicleType
-          ? _value.vehicleType
-          : vehicleType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      vehicleNumber: freezed == vehicleNumber
-          ? _value.vehicleNumber
-          : vehicleNumber // ignore: cast_nullable_to_non_nullable
+      amount: freezed == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double?,
+      drivermobileNo: freezed == drivermobileNo
+          ? _value.drivermobileNo
+          : drivermobileNo // ignore: cast_nullable_to_non_nullable
               as String?,
       driverName: freezed == driverName
           ? _value.driverName
           : driverName // ignore: cast_nullable_to_non_nullable
               as String?,
-      drivermobileNo: freezed == drivermobileNo
-          ? _value.drivermobileNo
-          : drivermobileNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      weightSlipNo: freezed == weightSlipNo
-          ? _value.weightSlipNo
-          : weightSlipNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      weight: freezed == weight
-          ? _value.weight
-          : weight // ignore: cast_nullable_to_non_nullable
-              as double?,
-      weighmentDate: freezed == weighmentDate
-          ? _value.weighmentDate
-          : weighmentDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      weighmentTime: freezed == weighmentTime
-          ? _value.weighmentTime
-          : weighmentTime // ignore: cast_nullable_to_non_nullable
-              as String?,
       remarks: freezed == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
               as String?,
-      docStatus: freezed == docStatus
-          ? _value.docStatus
-          : docStatus // ignore: cast_nullable_to_non_nullable
-              as int?,
-      senderName: freezed == senderName
-          ? _value.senderName
-          : senderName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      driversLicensePhoto: freezed == driversLicensePhoto
-          ? _value.driversLicensePhoto
-          : driversLicensePhoto // ignore: cast_nullable_to_non_nullable
-              as String?,
-      vehicleImg: freezed == vehicleImg
-          ? _value.vehicleImg
-          : vehicleImg // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sealPhoto: freezed == sealPhoto
-          ? _value.sealPhoto
-          : sealPhoto // ignore: cast_nullable_to_non_nullable
-              as String?,
-      breathAnalyser: freezed == breathAnalyser
-          ? _value.breathAnalyser
-          : breathAnalyser // ignore: cast_nullable_to_non_nullable
-              as String?,
-      ocrScanning: freezed == ocrScanning
-          ? _value.ocrScanning
-          : ocrScanning // ignore: cast_nullable_to_non_nullable
-              as String?,
-      totalAmount: freezed == totalAmount
-          ? _value.totalAmount
-          : totalAmount // ignore: cast_nullable_to_non_nullable
-              as double?,
-      licensePhotoImg: freezed == licensePhotoImg
-          ? _value.licensePhotoImg
-          : licensePhotoImg // ignore: cast_nullable_to_non_nullable
-              as File?,
-      vehiclePhotoImg: freezed == vehiclePhotoImg
-          ? _value.vehiclePhotoImg
-          : vehiclePhotoImg // ignore: cast_nullable_to_non_nullable
-              as File?,
-      sealPhotoImg: freezed == sealPhotoImg
-          ? _value.sealPhotoImg
-          : sealPhotoImg // ignore: cast_nullable_to_non_nullable
-              as File?,
-      breathAnalyserImg: freezed == breathAnalyserImg
-          ? _value.breathAnalyserImg
-          : breathAnalyserImg // ignore: cast_nullable_to_non_nullable
-              as File?,
-      invoiceImg: null == invoiceImg
-          ? _value.invoiceImg
-          : invoiceImg // ignore: cast_nullable_to_non_nullable
-              as List<File>,
-      addInvs: null == addInvs
-          ? _value.addInvs
-          : addInvs // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      deletedLines: null == deletedLines
-          ? _value.deletedLines
-          : deletedLines // ignore: cast_nullable_to_non_nullable
-              as List<String>,
     ) as $Val);
   }
 }
@@ -485,78 +253,28 @@ abstract class _$$GateEntryFormImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? status,
+      int? docstatus,
       @JsonKey(name: 'name') String? name,
-      @JsonKey(name: 'creation', defaultValue: '') String? creationDate,
-      @JsonKey(name: 'plant_name') String? plantName,
-      @JsonKey(name: 'gate_entry_type') String? entryType,
-      @JsonKey(name: 'material_type') String? materialType,
-      @JsonKey(name: 'supplier_name') String? supplierName,
       @JsonKey(name: 'gate_entry_time') String? entryTime,
-      @JsonKey(name: 'customer_name') String? customerName,
-      @JsonKey(name: 'sender_address') String? supplierAddress,
-      @JsonKey(name: 'sender_address_copy') String? customerAddress,
-      @JsonKey(name: 'expected_return_date') String? expectedReturnDate,
-      @JsonKey(name: 'sender_mobile_no') String? senderMobileNo,
-      @JsonKey(name: 'receiver_name') String? receiverName,
-      @JsonKey(name: 'receiver_department') String? receiverDept,
-      @JsonKey(name: 'receiver_email') String? receiverEmail,
-      @JsonKey(name: 'receiver_mobile_number') String? receiverMobile,
-      @JsonKey(name: 'po_number') String? poNumber,
-      @JsonKey(name: 'is_eway_bill', defaultValue: 0) int? isewayBill,
-      @JsonKey(name: 'eway_bill') String? ewayBill,
-      @JsonKey(name: 'challan_number') String? challanNumber,
-      @JsonKey(name: 'people_count') int? peopleCount,
-      @JsonKey(name: 'vehicle_type') String? vehicleType,
-      @JsonKey(name: 'vehicle_number') String? vehicleNumber,
+      @JsonKey(name: 'gate_entry_type') String? entryType,
+      @JsonKey(name: 'vehicle_request') String? vehicleRequest,
+      @JsonKey(name: 'vehicle') String? vehicle,
+      @JsonKey(name: 'pay_type') String? payType,
+      @JsonKey(name: 'vendor_invoice_date') String? vendorInvoiceDate,
+      @JsonKey(name: 'vendor_invoice_quantity') double? invoiceQnty,
+      @JsonKey(name: 'invoice_amount') double? invoiceAmt,
+      @JsonKey(name: 'gate_entry_date') String? gateEntryDate,
+      @JsonKey(name: 'created_time', defaultValue: '') String? createdTime,
+      @JsonKey(includeToJson: false, includeFromJson: false) File? beforeWork,
+      @JsonKey(includeToJson: false, includeFromJson: false) File? vehiclePhoto,
+      @JsonKey(name: 'after_work') String? afterWork,
+      @JsonKey(name: 'in_time') String? intime,
+      @JsonKey(name: 'out_time') String? outTime,
+      @JsonKey(name: 'per_hour_amount') String? perHrAmt,
+      @JsonKey(name: 'amount') double? amount,
+      @JsonKey(name: 'driver_mobile') String? drivermobileNo,
       @JsonKey(name: 'driver_name') String? driverName,
-      @JsonKey(name: 'driver_mobile_number') String? drivermobileNo,
-      @JsonKey(name: 'weighment_slip_token_no') String? weightSlipNo,
-      @JsonKey(name: 'weight__in_kgs_') double? weight,
-      @JsonKey(name: 'weighment_date') String? weighmentDate,
-      @JsonKey(name: 'weighment_time') String? weighmentTime,
-      @JsonKey(name: 'commentremark') String? remarks,
-      @JsonKey(name: 'docstatus') int? docStatus,
-      @JsonKey(name: 'sender_name') String? senderName,
-      @JsonKey(name: 'drivers_license_photo') String? driversLicensePhoto,
-      @JsonKey(name: 'vehicle_image') String? vehicleImg,
-      @JsonKey(name: 'seal_photo') String? sealPhoto,
-      @JsonKey(name: 'breath_analyser') String? breathAnalyser,
-      @JsonKey(name: 'invoicedc_image_ocr_scanning') String? ocrScanning,
-      @JsonKey(name: 'total_amount') double? totalAmount,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      File? licensePhotoImg,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      File? vehiclePhotoImg,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      File? sealPhotoImg,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      File? breathAnalyserImg,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      List<File> invoiceImg,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      List<String> addInvs,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      List<String> deletedLines});
+      @JsonKey(name: 'remarks') String? remarks});
 }
 
 /// @nodoc
@@ -573,237 +291,122 @@ class __$$GateEntryFormImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = freezed,
+    Object? docstatus = freezed,
     Object? name = freezed,
-    Object? creationDate = freezed,
-    Object? plantName = freezed,
-    Object? entryType = freezed,
-    Object? materialType = freezed,
-    Object? supplierName = freezed,
     Object? entryTime = freezed,
-    Object? customerName = freezed,
-    Object? supplierAddress = freezed,
-    Object? customerAddress = freezed,
-    Object? expectedReturnDate = freezed,
-    Object? senderMobileNo = freezed,
-    Object? receiverName = freezed,
-    Object? receiverDept = freezed,
-    Object? receiverEmail = freezed,
-    Object? receiverMobile = freezed,
-    Object? poNumber = freezed,
-    Object? isewayBill = freezed,
-    Object? ewayBill = freezed,
-    Object? challanNumber = freezed,
-    Object? peopleCount = freezed,
-    Object? vehicleType = freezed,
-    Object? vehicleNumber = freezed,
-    Object? driverName = freezed,
+    Object? entryType = freezed,
+    Object? vehicleRequest = freezed,
+    Object? vehicle = freezed,
+    Object? payType = freezed,
+    Object? vendorInvoiceDate = freezed,
+    Object? invoiceQnty = freezed,
+    Object? invoiceAmt = freezed,
+    Object? gateEntryDate = freezed,
+    Object? createdTime = freezed,
+    Object? beforeWork = freezed,
+    Object? vehiclePhoto = freezed,
+    Object? afterWork = freezed,
+    Object? intime = freezed,
+    Object? outTime = freezed,
+    Object? perHrAmt = freezed,
+    Object? amount = freezed,
     Object? drivermobileNo = freezed,
-    Object? weightSlipNo = freezed,
-    Object? weight = freezed,
-    Object? weighmentDate = freezed,
-    Object? weighmentTime = freezed,
+    Object? driverName = freezed,
     Object? remarks = freezed,
-    Object? docStatus = freezed,
-    Object? senderName = freezed,
-    Object? driversLicensePhoto = freezed,
-    Object? vehicleImg = freezed,
-    Object? sealPhoto = freezed,
-    Object? breathAnalyser = freezed,
-    Object? ocrScanning = freezed,
-    Object? totalAmount = freezed,
-    Object? licensePhotoImg = freezed,
-    Object? vehiclePhotoImg = freezed,
-    Object? sealPhotoImg = freezed,
-    Object? breathAnalyserImg = freezed,
-    Object? invoiceImg = null,
-    Object? addInvs = null,
-    Object? deletedLines = null,
   }) {
     return _then(_$GateEntryFormImpl(
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
+      docstatus: freezed == docstatus
+          ? _value.docstatus
+          : docstatus // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      creationDate: freezed == creationDate
-          ? _value.creationDate
-          : creationDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      plantName: freezed == plantName
-          ? _value.plantName
-          : plantName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      entryType: freezed == entryType
-          ? _value.entryType
-          : entryType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      materialType: freezed == materialType
-          ? _value.materialType
-          : materialType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      supplierName: freezed == supplierName
-          ? _value.supplierName
-          : supplierName // ignore: cast_nullable_to_non_nullable
               as String?,
       entryTime: freezed == entryTime
           ? _value.entryTime
           : entryTime // ignore: cast_nullable_to_non_nullable
               as String?,
-      customerName: freezed == customerName
-          ? _value.customerName
-          : customerName // ignore: cast_nullable_to_non_nullable
+      entryType: freezed == entryType
+          ? _value.entryType
+          : entryType // ignore: cast_nullable_to_non_nullable
               as String?,
-      supplierAddress: freezed == supplierAddress
-          ? _value.supplierAddress
-          : supplierAddress // ignore: cast_nullable_to_non_nullable
+      vehicleRequest: freezed == vehicleRequest
+          ? _value.vehicleRequest
+          : vehicleRequest // ignore: cast_nullable_to_non_nullable
               as String?,
-      customerAddress: freezed == customerAddress
-          ? _value.customerAddress
-          : customerAddress // ignore: cast_nullable_to_non_nullable
+      vehicle: freezed == vehicle
+          ? _value.vehicle
+          : vehicle // ignore: cast_nullable_to_non_nullable
               as String?,
-      expectedReturnDate: freezed == expectedReturnDate
-          ? _value.expectedReturnDate
-          : expectedReturnDate // ignore: cast_nullable_to_non_nullable
+      payType: freezed == payType
+          ? _value.payType
+          : payType // ignore: cast_nullable_to_non_nullable
               as String?,
-      senderMobileNo: freezed == senderMobileNo
-          ? _value.senderMobileNo
-          : senderMobileNo // ignore: cast_nullable_to_non_nullable
+      vendorInvoiceDate: freezed == vendorInvoiceDate
+          ? _value.vendorInvoiceDate
+          : vendorInvoiceDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      receiverName: freezed == receiverName
-          ? _value.receiverName
-          : receiverName // ignore: cast_nullable_to_non_nullable
+      invoiceQnty: freezed == invoiceQnty
+          ? _value.invoiceQnty
+          : invoiceQnty // ignore: cast_nullable_to_non_nullable
+              as double?,
+      invoiceAmt: freezed == invoiceAmt
+          ? _value.invoiceAmt
+          : invoiceAmt // ignore: cast_nullable_to_non_nullable
+              as double?,
+      gateEntryDate: freezed == gateEntryDate
+          ? _value.gateEntryDate
+          : gateEntryDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      receiverDept: freezed == receiverDept
-          ? _value.receiverDept
-          : receiverDept // ignore: cast_nullable_to_non_nullable
+      createdTime: freezed == createdTime
+          ? _value.createdTime
+          : createdTime // ignore: cast_nullable_to_non_nullable
               as String?,
-      receiverEmail: freezed == receiverEmail
-          ? _value.receiverEmail
-          : receiverEmail // ignore: cast_nullable_to_non_nullable
+      beforeWork: freezed == beforeWork
+          ? _value.beforeWork
+          : beforeWork // ignore: cast_nullable_to_non_nullable
+              as File?,
+      vehiclePhoto: freezed == vehiclePhoto
+          ? _value.vehiclePhoto
+          : vehiclePhoto // ignore: cast_nullable_to_non_nullable
+              as File?,
+      afterWork: freezed == afterWork
+          ? _value.afterWork
+          : afterWork // ignore: cast_nullable_to_non_nullable
               as String?,
-      receiverMobile: freezed == receiverMobile
-          ? _value.receiverMobile
-          : receiverMobile // ignore: cast_nullable_to_non_nullable
+      intime: freezed == intime
+          ? _value.intime
+          : intime // ignore: cast_nullable_to_non_nullable
               as String?,
-      poNumber: freezed == poNumber
-          ? _value.poNumber
-          : poNumber // ignore: cast_nullable_to_non_nullable
+      outTime: freezed == outTime
+          ? _value.outTime
+          : outTime // ignore: cast_nullable_to_non_nullable
               as String?,
-      isewayBill: freezed == isewayBill
-          ? _value.isewayBill
-          : isewayBill // ignore: cast_nullable_to_non_nullable
-              as int?,
-      ewayBill: freezed == ewayBill
-          ? _value.ewayBill
-          : ewayBill // ignore: cast_nullable_to_non_nullable
+      perHrAmt: freezed == perHrAmt
+          ? _value.perHrAmt
+          : perHrAmt // ignore: cast_nullable_to_non_nullable
               as String?,
-      challanNumber: freezed == challanNumber
-          ? _value.challanNumber
-          : challanNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      peopleCount: freezed == peopleCount
-          ? _value.peopleCount
-          : peopleCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      vehicleType: freezed == vehicleType
-          ? _value.vehicleType
-          : vehicleType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      vehicleNumber: freezed == vehicleNumber
-          ? _value.vehicleNumber
-          : vehicleNumber // ignore: cast_nullable_to_non_nullable
+      amount: freezed == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double?,
+      drivermobileNo: freezed == drivermobileNo
+          ? _value.drivermobileNo
+          : drivermobileNo // ignore: cast_nullable_to_non_nullable
               as String?,
       driverName: freezed == driverName
           ? _value.driverName
           : driverName // ignore: cast_nullable_to_non_nullable
               as String?,
-      drivermobileNo: freezed == drivermobileNo
-          ? _value.drivermobileNo
-          : drivermobileNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      weightSlipNo: freezed == weightSlipNo
-          ? _value.weightSlipNo
-          : weightSlipNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      weight: freezed == weight
-          ? _value.weight
-          : weight // ignore: cast_nullable_to_non_nullable
-              as double?,
-      weighmentDate: freezed == weighmentDate
-          ? _value.weighmentDate
-          : weighmentDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      weighmentTime: freezed == weighmentTime
-          ? _value.weighmentTime
-          : weighmentTime // ignore: cast_nullable_to_non_nullable
-              as String?,
       remarks: freezed == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
               as String?,
-      docStatus: freezed == docStatus
-          ? _value.docStatus
-          : docStatus // ignore: cast_nullable_to_non_nullable
-              as int?,
-      senderName: freezed == senderName
-          ? _value.senderName
-          : senderName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      driversLicensePhoto: freezed == driversLicensePhoto
-          ? _value.driversLicensePhoto
-          : driversLicensePhoto // ignore: cast_nullable_to_non_nullable
-              as String?,
-      vehicleImg: freezed == vehicleImg
-          ? _value.vehicleImg
-          : vehicleImg // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sealPhoto: freezed == sealPhoto
-          ? _value.sealPhoto
-          : sealPhoto // ignore: cast_nullable_to_non_nullable
-              as String?,
-      breathAnalyser: freezed == breathAnalyser
-          ? _value.breathAnalyser
-          : breathAnalyser // ignore: cast_nullable_to_non_nullable
-              as String?,
-      ocrScanning: freezed == ocrScanning
-          ? _value.ocrScanning
-          : ocrScanning // ignore: cast_nullable_to_non_nullable
-              as String?,
-      totalAmount: freezed == totalAmount
-          ? _value.totalAmount
-          : totalAmount // ignore: cast_nullable_to_non_nullable
-              as double?,
-      licensePhotoImg: freezed == licensePhotoImg
-          ? _value.licensePhotoImg
-          : licensePhotoImg // ignore: cast_nullable_to_non_nullable
-              as File?,
-      vehiclePhotoImg: freezed == vehiclePhotoImg
-          ? _value.vehiclePhotoImg
-          : vehiclePhotoImg // ignore: cast_nullable_to_non_nullable
-              as File?,
-      sealPhotoImg: freezed == sealPhotoImg
-          ? _value.sealPhotoImg
-          : sealPhotoImg // ignore: cast_nullable_to_non_nullable
-              as File?,
-      breathAnalyserImg: freezed == breathAnalyserImg
-          ? _value.breathAnalyserImg
-          : breathAnalyserImg // ignore: cast_nullable_to_non_nullable
-              as File?,
-      invoiceImg: null == invoiceImg
-          ? _value._invoiceImg
-          : invoiceImg // ignore: cast_nullable_to_non_nullable
-              as List<File>,
-      addInvs: null == addInvs
-          ? _value._addInvs
-          : addInvs // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      deletedLines: null == deletedLines
-          ? _value._deletedLines
-          : deletedLines // ignore: cast_nullable_to_non_nullable
-              as List<String>,
     ));
   }
 }
@@ -813,81 +416,28 @@ class __$$GateEntryFormImplCopyWithImpl<$Res>
 class _$GateEntryFormImpl implements _GateEntryForm {
   const _$GateEntryFormImpl(
       {this.status,
+      this.docstatus,
       @JsonKey(name: 'name') this.name,
-      @JsonKey(name: 'creation', defaultValue: '') this.creationDate,
-      @JsonKey(name: 'plant_name') this.plantName,
-      @JsonKey(name: 'gate_entry_type') this.entryType,
-      @JsonKey(name: 'material_type') this.materialType,
-      @JsonKey(name: 'supplier_name') this.supplierName,
       @JsonKey(name: 'gate_entry_time') this.entryTime,
-      @JsonKey(name: 'customer_name') this.customerName,
-      @JsonKey(name: 'sender_address') this.supplierAddress,
-      @JsonKey(name: 'sender_address_copy') this.customerAddress,
-      @JsonKey(name: 'expected_return_date') this.expectedReturnDate,
-      @JsonKey(name: 'sender_mobile_no') this.senderMobileNo,
-      @JsonKey(name: 'receiver_name') this.receiverName,
-      @JsonKey(name: 'receiver_department') this.receiverDept,
-      @JsonKey(name: 'receiver_email') this.receiverEmail,
-      @JsonKey(name: 'receiver_mobile_number') this.receiverMobile,
-      @JsonKey(name: 'po_number') this.poNumber,
-      @JsonKey(name: 'is_eway_bill', defaultValue: 0) this.isewayBill,
-      @JsonKey(name: 'eway_bill') this.ewayBill,
-      @JsonKey(name: 'challan_number') this.challanNumber,
-      @JsonKey(name: 'people_count') this.peopleCount,
-      @JsonKey(name: 'vehicle_type') this.vehicleType,
-      @JsonKey(name: 'vehicle_number') this.vehicleNumber,
+      @JsonKey(name: 'gate_entry_type') this.entryType,
+      @JsonKey(name: 'vehicle_request') this.vehicleRequest,
+      @JsonKey(name: 'vehicle') this.vehicle,
+      @JsonKey(name: 'pay_type') this.payType,
+      @JsonKey(name: 'vendor_invoice_date') this.vendorInvoiceDate,
+      @JsonKey(name: 'vendor_invoice_quantity') this.invoiceQnty,
+      @JsonKey(name: 'invoice_amount') this.invoiceAmt,
+      @JsonKey(name: 'gate_entry_date') this.gateEntryDate,
+      @JsonKey(name: 'created_time', defaultValue: '') this.createdTime,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.beforeWork,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.vehiclePhoto,
+      @JsonKey(name: 'after_work') this.afterWork,
+      @JsonKey(name: 'in_time') this.intime,
+      @JsonKey(name: 'out_time') this.outTime,
+      @JsonKey(name: 'per_hour_amount') this.perHrAmt,
+      @JsonKey(name: 'amount') this.amount,
+      @JsonKey(name: 'driver_mobile') this.drivermobileNo,
       @JsonKey(name: 'driver_name') this.driverName,
-      @JsonKey(name: 'driver_mobile_number') this.drivermobileNo,
-      @JsonKey(name: 'weighment_slip_token_no') this.weightSlipNo,
-      @JsonKey(name: 'weight__in_kgs_') this.weight,
-      @JsonKey(name: 'weighment_date') this.weighmentDate,
-      @JsonKey(name: 'weighment_time') this.weighmentTime,
-      @JsonKey(name: 'commentremark') this.remarks,
-      @JsonKey(name: 'docstatus') this.docStatus,
-      @JsonKey(name: 'sender_name') this.senderName,
-      @JsonKey(name: 'drivers_license_photo') this.driversLicensePhoto,
-      @JsonKey(name: 'vehicle_image') this.vehicleImg,
-      @JsonKey(name: 'seal_photo') this.sealPhoto,
-      @JsonKey(name: 'breath_analyser') this.breathAnalyser,
-      @JsonKey(name: 'invoicedc_image_ocr_scanning') this.ocrScanning,
-      @JsonKey(name: 'total_amount') this.totalAmount,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      this.licensePhotoImg,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      this.vehiclePhotoImg,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      this.sealPhotoImg,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      this.breathAnalyserImg,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      final List<File> invoiceImg = const [],
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      final List<String> addInvs = const <String>[],
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      final List<String> deletedLines = const <String>[]})
-      : _invoiceImg = invoiceImg,
-        _addInvs = addInvs,
-        _deletedLines = deletedLines;
+      @JsonKey(name: 'remarks') this.remarks});
 
   factory _$GateEntryFormImpl.fromJson(Map<String, dynamic> json) =>
       _$$GateEntryFormImplFromJson(json);
@@ -895,181 +445,74 @@ class _$GateEntryFormImpl implements _GateEntryForm {
   @override
   final String? status;
   @override
+  final int? docstatus;
+  @override
   @JsonKey(name: 'name')
   final String? name;
-  @override
-  @JsonKey(name: 'creation', defaultValue: '')
-  final String? creationDate;
-  @override
-  @JsonKey(name: 'plant_name')
-  final String? plantName;
-  @override
-  @JsonKey(name: 'gate_entry_type')
-  final String? entryType;
-  @override
-  @JsonKey(name: 'material_type')
-  final String? materialType;
-  @override
-  @JsonKey(name: 'supplier_name')
-  final String? supplierName;
   @override
   @JsonKey(name: 'gate_entry_time')
   final String? entryTime;
   @override
-  @JsonKey(name: 'customer_name')
-  final String? customerName;
+  @JsonKey(name: 'gate_entry_type')
+  final String? entryType;
   @override
-  @JsonKey(name: 'sender_address')
-  final String? supplierAddress;
+  @JsonKey(name: 'vehicle_request')
+  final String? vehicleRequest;
   @override
-  @JsonKey(name: 'sender_address_copy')
-  final String? customerAddress;
+  @JsonKey(name: 'vehicle')
+  final String? vehicle;
   @override
-  @JsonKey(name: 'expected_return_date')
-  final String? expectedReturnDate;
+  @JsonKey(name: 'pay_type')
+  final String? payType;
   @override
-  @JsonKey(name: 'sender_mobile_no')
-  final String? senderMobileNo;
+  @JsonKey(name: 'vendor_invoice_date')
+  final String? vendorInvoiceDate;
   @override
-  @JsonKey(name: 'receiver_name')
-  final String? receiverName;
+  @JsonKey(name: 'vendor_invoice_quantity')
+  final double? invoiceQnty;
   @override
-  @JsonKey(name: 'receiver_department')
-  final String? receiverDept;
+  @JsonKey(name: 'invoice_amount')
+  final double? invoiceAmt;
   @override
-  @JsonKey(name: 'receiver_email')
-  final String? receiverEmail;
+  @JsonKey(name: 'gate_entry_date')
+  final String? gateEntryDate;
   @override
-  @JsonKey(name: 'receiver_mobile_number')
-  final String? receiverMobile;
+  @JsonKey(name: 'created_time', defaultValue: '')
+  final String? createdTime;
   @override
-  @JsonKey(name: 'po_number')
-  final String? poNumber;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final File? beforeWork;
   @override
-  @JsonKey(name: 'is_eway_bill', defaultValue: 0)
-  final int? isewayBill;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final File? vehiclePhoto;
   @override
-  @JsonKey(name: 'eway_bill')
-  final String? ewayBill;
+  @JsonKey(name: 'after_work')
+  final String? afterWork;
   @override
-  @JsonKey(name: 'challan_number')
-  final String? challanNumber;
+  @JsonKey(name: 'in_time')
+  final String? intime;
   @override
-  @JsonKey(name: 'people_count')
-  final int? peopleCount;
+  @JsonKey(name: 'out_time')
+  final String? outTime;
   @override
-  @JsonKey(name: 'vehicle_type')
-  final String? vehicleType;
+  @JsonKey(name: 'per_hour_amount')
+  final String? perHrAmt;
   @override
-  @JsonKey(name: 'vehicle_number')
-  final String? vehicleNumber;
+  @JsonKey(name: 'amount')
+  final double? amount;
+  @override
+  @JsonKey(name: 'driver_mobile')
+  final String? drivermobileNo;
   @override
   @JsonKey(name: 'driver_name')
   final String? driverName;
   @override
-  @JsonKey(name: 'driver_mobile_number')
-  final String? drivermobileNo;
-  @override
-  @JsonKey(name: 'weighment_slip_token_no')
-  final String? weightSlipNo;
-  @override
-  @JsonKey(name: 'weight__in_kgs_')
-  final double? weight;
-  @override
-  @JsonKey(name: 'weighment_date')
-  final String? weighmentDate;
-  @override
-  @JsonKey(name: 'weighment_time')
-  final String? weighmentTime;
-  @override
-  @JsonKey(name: 'commentremark')
+  @JsonKey(name: 'remarks')
   final String? remarks;
-  @override
-  @JsonKey(name: 'docstatus')
-  final int? docStatus;
-  @override
-  @JsonKey(name: 'sender_name')
-  final String? senderName;
-  @override
-  @JsonKey(name: 'drivers_license_photo')
-  final String? driversLicensePhoto;
-  @override
-  @JsonKey(name: 'vehicle_image')
-  final String? vehicleImg;
-  @override
-  @JsonKey(name: 'seal_photo')
-  final String? sealPhoto;
-  @override
-  @JsonKey(name: 'breath_analyser')
-  final String? breathAnalyser;
-  @override
-  @JsonKey(name: 'invoicedc_image_ocr_scanning')
-  final String? ocrScanning;
-  @override
-  @JsonKey(name: 'total_amount')
-  final double? totalAmount;
-  @override
-  @JsonKey(
-      includeFromJson: true,
-      includeToJson: false,
-      toJson: toNull,
-      fromJson: toNull)
-  final File? licensePhotoImg;
-  @override
-  @JsonKey(
-      includeFromJson: true,
-      includeToJson: false,
-      toJson: toNull,
-      fromJson: toNull)
-  final File? vehiclePhotoImg;
-  @override
-  @JsonKey(
-      includeFromJson: true,
-      includeToJson: false,
-      toJson: toNull,
-      fromJson: toNull)
-  final File? sealPhotoImg;
-  @override
-  @JsonKey(
-      includeFromJson: true,
-      includeToJson: false,
-      toJson: toNull,
-      fromJson: toNull)
-  final File? breathAnalyserImg;
-  final List<File> _invoiceImg;
-  @override
-  @JsonKey(
-      includeFromJson: true,
-      includeToJson: false,
-      toJson: toNull,
-      fromJson: toNull)
-  List<File> get invoiceImg {
-    if (_invoiceImg is EqualUnmodifiableListView) return _invoiceImg;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_invoiceImg);
-  }
-
-  final List<String> _addInvs;
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  List<String> get addInvs {
-    if (_addInvs is EqualUnmodifiableListView) return _addInvs;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_addInvs);
-  }
-
-  final List<String> _deletedLines;
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  List<String> get deletedLines {
-    if (_deletedLines is EqualUnmodifiableListView) return _deletedLines;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_deletedLines);
-  }
 
   @override
   String toString() {
-    return 'GateEntryForm(status: $status, name: $name, creationDate: $creationDate, plantName: $plantName, entryType: $entryType, materialType: $materialType, supplierName: $supplierName, entryTime: $entryTime, customerName: $customerName, supplierAddress: $supplierAddress, customerAddress: $customerAddress, expectedReturnDate: $expectedReturnDate, senderMobileNo: $senderMobileNo, receiverName: $receiverName, receiverDept: $receiverDept, receiverEmail: $receiverEmail, receiverMobile: $receiverMobile, poNumber: $poNumber, isewayBill: $isewayBill, ewayBill: $ewayBill, challanNumber: $challanNumber, peopleCount: $peopleCount, vehicleType: $vehicleType, vehicleNumber: $vehicleNumber, driverName: $driverName, drivermobileNo: $drivermobileNo, weightSlipNo: $weightSlipNo, weight: $weight, weighmentDate: $weighmentDate, weighmentTime: $weighmentTime, remarks: $remarks, docStatus: $docStatus, senderName: $senderName, driversLicensePhoto: $driversLicensePhoto, vehicleImg: $vehicleImg, sealPhoto: $sealPhoto, breathAnalyser: $breathAnalyser, ocrScanning: $ocrScanning, totalAmount: $totalAmount, licensePhotoImg: $licensePhotoImg, vehiclePhotoImg: $vehiclePhotoImg, sealPhotoImg: $sealPhotoImg, breathAnalyserImg: $breathAnalyserImg, invoiceImg: $invoiceImg, addInvs: $addInvs, deletedLines: $deletedLines)';
+    return 'GateEntryForm(status: $status, docstatus: $docstatus, name: $name, entryTime: $entryTime, entryType: $entryType, vehicleRequest: $vehicleRequest, vehicle: $vehicle, payType: $payType, vendorInvoiceDate: $vendorInvoiceDate, invoiceQnty: $invoiceQnty, invoiceAmt: $invoiceAmt, gateEntryDate: $gateEntryDate, createdTime: $createdTime, beforeWork: $beforeWork, vehiclePhoto: $vehiclePhoto, afterWork: $afterWork, intime: $intime, outTime: $outTime, perHrAmt: $perHrAmt, amount: $amount, drivermobileNo: $drivermobileNo, driverName: $driverName, remarks: $remarks)';
   }
 
   @override
@@ -1078,92 +521,43 @@ class _$GateEntryFormImpl implements _GateEntryForm {
         (other.runtimeType == runtimeType &&
             other is _$GateEntryFormImpl &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.docstatus, docstatus) ||
+                other.docstatus == docstatus) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.creationDate, creationDate) ||
-                other.creationDate == creationDate) &&
-            (identical(other.plantName, plantName) ||
-                other.plantName == plantName) &&
-            (identical(other.entryType, entryType) ||
-                other.entryType == entryType) &&
-            (identical(other.materialType, materialType) ||
-                other.materialType == materialType) &&
-            (identical(other.supplierName, supplierName) ||
-                other.supplierName == supplierName) &&
             (identical(other.entryTime, entryTime) ||
                 other.entryTime == entryTime) &&
-            (identical(other.customerName, customerName) ||
-                other.customerName == customerName) &&
-            (identical(other.supplierAddress, supplierAddress) ||
-                other.supplierAddress == supplierAddress) &&
-            (identical(other.customerAddress, customerAddress) ||
-                other.customerAddress == customerAddress) &&
-            (identical(other.expectedReturnDate, expectedReturnDate) ||
-                other.expectedReturnDate == expectedReturnDate) &&
-            (identical(other.senderMobileNo, senderMobileNo) ||
-                other.senderMobileNo == senderMobileNo) &&
-            (identical(other.receiverName, receiverName) ||
-                other.receiverName == receiverName) &&
-            (identical(other.receiverDept, receiverDept) ||
-                other.receiverDept == receiverDept) &&
-            (identical(other.receiverEmail, receiverEmail) ||
-                other.receiverEmail == receiverEmail) &&
-            (identical(other.receiverMobile, receiverMobile) ||
-                other.receiverMobile == receiverMobile) &&
-            (identical(other.poNumber, poNumber) ||
-                other.poNumber == poNumber) &&
-            (identical(other.isewayBill, isewayBill) ||
-                other.isewayBill == isewayBill) &&
-            (identical(other.ewayBill, ewayBill) ||
-                other.ewayBill == ewayBill) &&
-            (identical(other.challanNumber, challanNumber) ||
-                other.challanNumber == challanNumber) &&
-            (identical(other.peopleCount, peopleCount) ||
-                other.peopleCount == peopleCount) &&
-            (identical(other.vehicleType, vehicleType) ||
-                other.vehicleType == vehicleType) &&
-            (identical(other.vehicleNumber, vehicleNumber) ||
-                other.vehicleNumber == vehicleNumber) &&
-            (identical(other.driverName, driverName) ||
-                other.driverName == driverName) &&
+            (identical(other.entryType, entryType) ||
+                other.entryType == entryType) &&
+            (identical(other.vehicleRequest, vehicleRequest) ||
+                other.vehicleRequest == vehicleRequest) &&
+            (identical(other.vehicle, vehicle) || other.vehicle == vehicle) &&
+            (identical(other.payType, payType) || other.payType == payType) &&
+            (identical(other.vendorInvoiceDate, vendorInvoiceDate) ||
+                other.vendorInvoiceDate == vendorInvoiceDate) &&
+            (identical(other.invoiceQnty, invoiceQnty) ||
+                other.invoiceQnty == invoiceQnty) &&
+            (identical(other.invoiceAmt, invoiceAmt) ||
+                other.invoiceAmt == invoiceAmt) &&
+            (identical(other.gateEntryDate, gateEntryDate) ||
+                other.gateEntryDate == gateEntryDate) &&
+            (identical(other.createdTime, createdTime) ||
+                other.createdTime == createdTime) &&
+            (identical(other.beforeWork, beforeWork) ||
+                other.beforeWork == beforeWork) &&
+            (identical(other.vehiclePhoto, vehiclePhoto) ||
+                other.vehiclePhoto == vehiclePhoto) &&
+            (identical(other.afterWork, afterWork) ||
+                other.afterWork == afterWork) &&
+            (identical(other.intime, intime) || other.intime == intime) &&
+            (identical(other.outTime, outTime) || other.outTime == outTime) &&
+            (identical(other.perHrAmt, perHrAmt) ||
+                other.perHrAmt == perHrAmt) &&
+            (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.drivermobileNo, drivermobileNo) ||
                 other.drivermobileNo == drivermobileNo) &&
-            (identical(other.weightSlipNo, weightSlipNo) ||
-                other.weightSlipNo == weightSlipNo) &&
-            (identical(other.weight, weight) || other.weight == weight) &&
-            (identical(other.weighmentDate, weighmentDate) ||
-                other.weighmentDate == weighmentDate) &&
-            (identical(other.weighmentTime, weighmentTime) ||
-                other.weighmentTime == weighmentTime) &&
-            (identical(other.remarks, remarks) || other.remarks == remarks) &&
-            (identical(other.docStatus, docStatus) ||
-                other.docStatus == docStatus) &&
-            (identical(other.senderName, senderName) ||
-                other.senderName == senderName) &&
-            (identical(other.driversLicensePhoto, driversLicensePhoto) ||
-                other.driversLicensePhoto == driversLicensePhoto) &&
-            (identical(other.vehicleImg, vehicleImg) ||
-                other.vehicleImg == vehicleImg) &&
-            (identical(other.sealPhoto, sealPhoto) ||
-                other.sealPhoto == sealPhoto) &&
-            (identical(other.breathAnalyser, breathAnalyser) ||
-                other.breathAnalyser == breathAnalyser) &&
-            (identical(other.ocrScanning, ocrScanning) ||
-                other.ocrScanning == ocrScanning) &&
-            (identical(other.totalAmount, totalAmount) ||
-                other.totalAmount == totalAmount) &&
-            (identical(other.licensePhotoImg, licensePhotoImg) ||
-                other.licensePhotoImg == licensePhotoImg) &&
-            (identical(other.vehiclePhotoImg, vehiclePhotoImg) ||
-                other.vehiclePhotoImg == vehiclePhotoImg) &&
-            (identical(other.sealPhotoImg, sealPhotoImg) ||
-                other.sealPhotoImg == sealPhotoImg) &&
-            (identical(other.breathAnalyserImg, breathAnalyserImg) ||
-                other.breathAnalyserImg == breathAnalyserImg) &&
-            const DeepCollectionEquality()
-                .equals(other._invoiceImg, _invoiceImg) &&
-            const DeepCollectionEquality().equals(other._addInvs, _addInvs) &&
-            const DeepCollectionEquality()
-                .equals(other._deletedLines, _deletedLines));
+            (identical(other.driverName, driverName) ||
+                other.driverName == driverName) &&
+            (identical(other.remarks, remarks) || other.remarks == remarks));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1171,51 +565,28 @@ class _$GateEntryFormImpl implements _GateEntryForm {
   int get hashCode => Object.hashAll([
         runtimeType,
         status,
+        docstatus,
         name,
-        creationDate,
-        plantName,
-        entryType,
-        materialType,
-        supplierName,
         entryTime,
-        customerName,
-        supplierAddress,
-        customerAddress,
-        expectedReturnDate,
-        senderMobileNo,
-        receiverName,
-        receiverDept,
-        receiverEmail,
-        receiverMobile,
-        poNumber,
-        isewayBill,
-        ewayBill,
-        challanNumber,
-        peopleCount,
-        vehicleType,
-        vehicleNumber,
-        driverName,
+        entryType,
+        vehicleRequest,
+        vehicle,
+        payType,
+        vendorInvoiceDate,
+        invoiceQnty,
+        invoiceAmt,
+        gateEntryDate,
+        createdTime,
+        beforeWork,
+        vehiclePhoto,
+        afterWork,
+        intime,
+        outTime,
+        perHrAmt,
+        amount,
         drivermobileNo,
-        weightSlipNo,
-        weight,
-        weighmentDate,
-        weighmentTime,
-        remarks,
-        docStatus,
-        senderName,
-        driversLicensePhoto,
-        vehicleImg,
-        sealPhoto,
-        breathAnalyser,
-        ocrScanning,
-        totalAmount,
-        licensePhotoImg,
-        vehiclePhotoImg,
-        sealPhotoImg,
-        breathAnalyserImg,
-        const DeepCollectionEquality().hash(_invoiceImg),
-        const DeepCollectionEquality().hash(_addInvs),
-        const DeepCollectionEquality().hash(_deletedLines)
+        driverName,
+        remarks
       ]);
 
   /// Create a copy of GateEntryForm
@@ -1237,78 +608,31 @@ class _$GateEntryFormImpl implements _GateEntryForm {
 abstract class _GateEntryForm implements GateEntryForm {
   const factory _GateEntryForm(
       {final String? status,
+      final int? docstatus,
       @JsonKey(name: 'name') final String? name,
-      @JsonKey(name: 'creation', defaultValue: '') final String? creationDate,
-      @JsonKey(name: 'plant_name') final String? plantName,
-      @JsonKey(name: 'gate_entry_type') final String? entryType,
-      @JsonKey(name: 'material_type') final String? materialType,
-      @JsonKey(name: 'supplier_name') final String? supplierName,
       @JsonKey(name: 'gate_entry_time') final String? entryTime,
-      @JsonKey(name: 'customer_name') final String? customerName,
-      @JsonKey(name: 'sender_address') final String? supplierAddress,
-      @JsonKey(name: 'sender_address_copy') final String? customerAddress,
-      @JsonKey(name: 'expected_return_date') final String? expectedReturnDate,
-      @JsonKey(name: 'sender_mobile_no') final String? senderMobileNo,
-      @JsonKey(name: 'receiver_name') final String? receiverName,
-      @JsonKey(name: 'receiver_department') final String? receiverDept,
-      @JsonKey(name: 'receiver_email') final String? receiverEmail,
-      @JsonKey(name: 'receiver_mobile_number') final String? receiverMobile,
-      @JsonKey(name: 'po_number') final String? poNumber,
-      @JsonKey(name: 'is_eway_bill', defaultValue: 0) final int? isewayBill,
-      @JsonKey(name: 'eway_bill') final String? ewayBill,
-      @JsonKey(name: 'challan_number') final String? challanNumber,
-      @JsonKey(name: 'people_count') final int? peopleCount,
-      @JsonKey(name: 'vehicle_type') final String? vehicleType,
-      @JsonKey(name: 'vehicle_number') final String? vehicleNumber,
+      @JsonKey(name: 'gate_entry_type') final String? entryType,
+      @JsonKey(name: 'vehicle_request') final String? vehicleRequest,
+      @JsonKey(name: 'vehicle') final String? vehicle,
+      @JsonKey(name: 'pay_type') final String? payType,
+      @JsonKey(name: 'vendor_invoice_date') final String? vendorInvoiceDate,
+      @JsonKey(name: 'vendor_invoice_quantity') final double? invoiceQnty,
+      @JsonKey(name: 'invoice_amount') final double? invoiceAmt,
+      @JsonKey(name: 'gate_entry_date') final String? gateEntryDate,
+      @JsonKey(name: 'created_time', defaultValue: '')
+      final String? createdTime,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final File? beforeWork,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final File? vehiclePhoto,
+      @JsonKey(name: 'after_work') final String? afterWork,
+      @JsonKey(name: 'in_time') final String? intime,
+      @JsonKey(name: 'out_time') final String? outTime,
+      @JsonKey(name: 'per_hour_amount') final String? perHrAmt,
+      @JsonKey(name: 'amount') final double? amount,
+      @JsonKey(name: 'driver_mobile') final String? drivermobileNo,
       @JsonKey(name: 'driver_name') final String? driverName,
-      @JsonKey(name: 'driver_mobile_number') final String? drivermobileNo,
-      @JsonKey(name: 'weighment_slip_token_no') final String? weightSlipNo,
-      @JsonKey(name: 'weight__in_kgs_') final double? weight,
-      @JsonKey(name: 'weighment_date') final String? weighmentDate,
-      @JsonKey(name: 'weighment_time') final String? weighmentTime,
-      @JsonKey(name: 'commentremark') final String? remarks,
-      @JsonKey(name: 'docstatus') final int? docStatus,
-      @JsonKey(name: 'sender_name') final String? senderName,
-      @JsonKey(name: 'drivers_license_photo') final String? driversLicensePhoto,
-      @JsonKey(name: 'vehicle_image') final String? vehicleImg,
-      @JsonKey(name: 'seal_photo') final String? sealPhoto,
-      @JsonKey(name: 'breath_analyser') final String? breathAnalyser,
-      @JsonKey(name: 'invoicedc_image_ocr_scanning') final String? ocrScanning,
-      @JsonKey(name: 'total_amount') final double? totalAmount,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      final File? licensePhotoImg,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      final File? vehiclePhotoImg,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      final File? sealPhotoImg,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      final File? breathAnalyserImg,
-      @JsonKey(
-          includeFromJson: true,
-          includeToJson: false,
-          toJson: toNull,
-          fromJson: toNull)
-      final List<File> invoiceImg,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      final List<String> addInvs,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      final List<String> deletedLines}) = _$GateEntryFormImpl;
+      @JsonKey(name: 'remarks') final String? remarks}) = _$GateEntryFormImpl;
 
   factory _GateEntryForm.fromJson(Map<String, dynamic> json) =
       _$GateEntryFormImpl.fromJson;
@@ -1316,160 +640,70 @@ abstract class _GateEntryForm implements GateEntryForm {
   @override
   String? get status;
   @override
+  int? get docstatus;
+  @override
   @JsonKey(name: 'name')
   String? get name;
-  @override
-  @JsonKey(name: 'creation', defaultValue: '')
-  String? get creationDate;
-  @override
-  @JsonKey(name: 'plant_name')
-  String? get plantName;
-  @override
-  @JsonKey(name: 'gate_entry_type')
-  String? get entryType;
-  @override
-  @JsonKey(name: 'material_type')
-  String? get materialType;
-  @override
-  @JsonKey(name: 'supplier_name')
-  String? get supplierName;
   @override
   @JsonKey(name: 'gate_entry_time')
   String? get entryTime;
   @override
-  @JsonKey(name: 'customer_name')
-  String? get customerName;
+  @JsonKey(name: 'gate_entry_type')
+  String? get entryType;
   @override
-  @JsonKey(name: 'sender_address')
-  String? get supplierAddress;
+  @JsonKey(name: 'vehicle_request')
+  String? get vehicleRequest;
   @override
-  @JsonKey(name: 'sender_address_copy')
-  String? get customerAddress;
+  @JsonKey(name: 'vehicle')
+  String? get vehicle;
   @override
-  @JsonKey(name: 'expected_return_date')
-  String? get expectedReturnDate;
+  @JsonKey(name: 'pay_type')
+  String? get payType;
   @override
-  @JsonKey(name: 'sender_mobile_no')
-  String? get senderMobileNo;
+  @JsonKey(name: 'vendor_invoice_date')
+  String? get vendorInvoiceDate;
   @override
-  @JsonKey(name: 'receiver_name')
-  String? get receiverName;
+  @JsonKey(name: 'vendor_invoice_quantity')
+  double? get invoiceQnty;
   @override
-  @JsonKey(name: 'receiver_department')
-  String? get receiverDept;
+  @JsonKey(name: 'invoice_amount')
+  double? get invoiceAmt;
   @override
-  @JsonKey(name: 'receiver_email')
-  String? get receiverEmail;
+  @JsonKey(name: 'gate_entry_date')
+  String? get gateEntryDate;
   @override
-  @JsonKey(name: 'receiver_mobile_number')
-  String? get receiverMobile;
+  @JsonKey(name: 'created_time', defaultValue: '')
+  String? get createdTime;
   @override
-  @JsonKey(name: 'po_number')
-  String? get poNumber;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  File? get beforeWork;
   @override
-  @JsonKey(name: 'is_eway_bill', defaultValue: 0)
-  int? get isewayBill;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  File? get vehiclePhoto;
   @override
-  @JsonKey(name: 'eway_bill')
-  String? get ewayBill;
+  @JsonKey(name: 'after_work')
+  String? get afterWork;
   @override
-  @JsonKey(name: 'challan_number')
-  String? get challanNumber;
+  @JsonKey(name: 'in_time')
+  String? get intime;
   @override
-  @JsonKey(name: 'people_count')
-  int? get peopleCount;
+  @JsonKey(name: 'out_time')
+  String? get outTime;
   @override
-  @JsonKey(name: 'vehicle_type')
-  String? get vehicleType;
+  @JsonKey(name: 'per_hour_amount')
+  String? get perHrAmt;
   @override
-  @JsonKey(name: 'vehicle_number')
-  String? get vehicleNumber;
+  @JsonKey(name: 'amount')
+  double? get amount;
+  @override
+  @JsonKey(name: 'driver_mobile')
+  String? get drivermobileNo;
   @override
   @JsonKey(name: 'driver_name')
   String? get driverName;
   @override
-  @JsonKey(name: 'driver_mobile_number')
-  String? get drivermobileNo;
-  @override
-  @JsonKey(name: 'weighment_slip_token_no')
-  String? get weightSlipNo;
-  @override
-  @JsonKey(name: 'weight__in_kgs_')
-  double? get weight;
-  @override
-  @JsonKey(name: 'weighment_date')
-  String? get weighmentDate;
-  @override
-  @JsonKey(name: 'weighment_time')
-  String? get weighmentTime;
-  @override
-  @JsonKey(name: 'commentremark')
+  @JsonKey(name: 'remarks')
   String? get remarks;
-  @override
-  @JsonKey(name: 'docstatus')
-  int? get docStatus;
-  @override
-  @JsonKey(name: 'sender_name')
-  String? get senderName;
-  @override
-  @JsonKey(name: 'drivers_license_photo')
-  String? get driversLicensePhoto;
-  @override
-  @JsonKey(name: 'vehicle_image')
-  String? get vehicleImg;
-  @override
-  @JsonKey(name: 'seal_photo')
-  String? get sealPhoto;
-  @override
-  @JsonKey(name: 'breath_analyser')
-  String? get breathAnalyser;
-  @override
-  @JsonKey(name: 'invoicedc_image_ocr_scanning')
-  String? get ocrScanning;
-  @override
-  @JsonKey(name: 'total_amount')
-  double? get totalAmount;
-  @override
-  @JsonKey(
-      includeFromJson: true,
-      includeToJson: false,
-      toJson: toNull,
-      fromJson: toNull)
-  File? get licensePhotoImg;
-  @override
-  @JsonKey(
-      includeFromJson: true,
-      includeToJson: false,
-      toJson: toNull,
-      fromJson: toNull)
-  File? get vehiclePhotoImg;
-  @override
-  @JsonKey(
-      includeFromJson: true,
-      includeToJson: false,
-      toJson: toNull,
-      fromJson: toNull)
-  File? get sealPhotoImg;
-  @override
-  @JsonKey(
-      includeFromJson: true,
-      includeToJson: false,
-      toJson: toNull,
-      fromJson: toNull)
-  File? get breathAnalyserImg;
-  @override
-  @JsonKey(
-      includeFromJson: true,
-      includeToJson: false,
-      toJson: toNull,
-      fromJson: toNull)
-  List<File> get invoiceImg;
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  List<String> get addInvs;
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  List<String> get deletedLines;
 
   /// Create a copy of GateEntryForm
   /// with the given fields replaced by the non-null parameter values.

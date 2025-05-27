@@ -30,7 +30,7 @@ class Urls {
   static final getUsers = '$cusWs/alufluoride.contractor_api.getUsers';
   static final getList = '$cusWs/frappe.client.get_list';
   static final getOutwardList = '$cusWs/frappe.client';
-  static final createGateEntry = '$cusWs/alufluoride.api.create_gate_entry';
+  static final createGateEntry = '$cusWs/alufluoride.api.createGateEntry';
   static final submitGateEntry = '$cusWs/alufluoride.api.submit_gate_entry';
   static final createInviteVisitor = '$cusWs/alufluoride.api.create_invite_visitor';
   static final submitInviteVisitor = '$cusWs/alufluoride.api.submit_invite_visitor';

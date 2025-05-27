@@ -119,7 +119,7 @@ class IncidentRegistersRepoImpl extends BaseApiRepository
   }
 
   @override
-  AsyncValueOf<List<String>> companyName() async {
+  AsyncValueOf<List<String>> companyName() async {  
     return await executeSafely(() async {
       final config = RequestConfig(
         url: Urls.companyName,
