@@ -103,7 +103,7 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
     return response.process((r) => right(r.data!));
   }
 
-    @override
+  @override
   AsyncValueOf<List<PurchaseOrderForm>> fetchPurchaseOrderList() async {
     final requestConfig = RequestConfig(
       url: Urls.getList,
@@ -206,6 +206,7 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
 
     formJson.update('status', (value) => 'Draft');
     log('form-----:$form');
+
     // final files = {
     //   'vehicle_photo': form.vehiclePhoto,
     //   'before_work': form.beforeWork,
@@ -224,21 +225,25 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
 
     // }
 
-    final filemap = {
-      'vehicle_photo': '/private/files/bharat.png',
-      'before_work': '/private/files/bharat.png',
-    };
-    final finalMap = {...removeNullValues(form.toJson()), ...filemap};
+    // final filemap = {
+    //   'vehicle_photo': '/private/files/bharat.png',
+    //   'before_work': '/private/files/bharat.png',
+    // };
 
-    log('finalMap--:$finalMap');
+    final finalMap = {...removeNullValues(form.toJson())};
+
+    if (form.entryType == 'Purchase' && finalMap.containsKey('vehicle')) {
+      finalMap['vehicle1'] = finalMap['vehicle'];
+      finalMap.remove('vehicle');
+    }
 
     final requestConfig = RequestConfig(
       url: Urls.createGateEntry,
       body: jsonEncode(finalMap),
       parser: (json) {
-        final data = json['message']['message'] as String;
-        final docNo = json['message']['data'] as String;
-        return Pair(data, docNo);
+        final data = json['message']['data']['name'] as String;
+        // final docNo = json['message']['data'] as List<dynamic>;
+        return Pair(data, '');
       },
       headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     );
@@ -301,10 +306,7 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
           body: jsonEncode(
               {"gate_entry_id": form.name, 'per_hour_amount': form.perHrAmt}));
 
-
-              log('submit config-----:$config');
-
-
+      log('submit config-----:$config');
 
       final response = await post(config);
       log('submit response-----:$response');

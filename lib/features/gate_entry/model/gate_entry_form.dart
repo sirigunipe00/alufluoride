@@ -21,8 +21,6 @@ class GateEntryForm with _$GateEntryForm {
     @JsonKey(name: 'invoice_amount') double? invoiceAmt,
     @JsonKey(name: 'gate_entry_date') String? gateEntryDate,
     @JsonKey(name: 'created_time', defaultValue: '') String? createdTime,
-    @JsonKey(includeToJson: false, includeFromJson: false) File? beforeWork,
-    @JsonKey(includeToJson: false, includeFromJson: false) File? vehiclePhoto,
     @JsonKey(name: 'after_work') String? afterWork,
     @JsonKey(name: 'in_time') String? intime,
     @JsonKey(name: 'out_time') String? outTime,
@@ -34,7 +32,8 @@ class GateEntryForm with _$GateEntryForm {
     @JsonKey(name: 'po_number') String? poNumber,
     @JsonKey(name: 'vendor_invoice_no') String? vendorInvNum,
     @JsonKey(name: 'vendor_invoice_photo') String? vendorInvPhoto,
-
+    @JsonKey(name: 'vehicle_photo') String? vehiclePhoto,
+    @JsonKey(name: 'before_work') String? beforeWork,
     // @JsonKey(name: 'weight__in_kgs_') double? weight,
     // @JsonKey(name: 'weighment_date') String? weighmentDate,
     // @JsonKey(name: 'weighment_time') String? weighmentTime,

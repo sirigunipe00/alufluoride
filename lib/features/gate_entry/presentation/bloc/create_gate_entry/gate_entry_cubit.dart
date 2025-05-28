@@ -34,9 +34,9 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
     String? driverMobileNo,
     String? entryDate,
     String? vehicle,
-    File? vehiclephoto,
+    String? vehiclephoto,
     String? payType,
-    File? beforeWork,
+    String? beforeWork,
     String? inTime,
     String? outTime,
     String? perHrAmt,
@@ -75,7 +75,7 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
       vendorInvNum: vendorInvNum ?? form.vendorInvNum,
       vendorInvPhoto: venorInvPhoto ?? form.vendorInvPhoto,
       vendorInvoiceDate: venorInvDate ?? form.vendorInvoiceDate
-      
+
 
     );
     emitSafeState(state.copyWith(form: newForm));
@@ -201,7 +201,7 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
 
           return response.fold(
             (l) {
-              emitSafeState(state.copyWith(isLoading: false, error: l));
+              emitSafeState(state.copyWith(isLoading: false, error: l,));
             },
             (r) {
               shouldAskForConfirmation.value = false;
@@ -211,9 +211,10 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
                 isSuccess: true,
                 form: state.form.copyWith(
                   status: status,
-                  name: docstatus,
+                  name: r.first,
+                  docstatus: 0
                 ),
-                successMsg: r.first,
+                successMsg: 'Gate Entry Created Succesfully',
                 view: nextMode,
               ));
             },
