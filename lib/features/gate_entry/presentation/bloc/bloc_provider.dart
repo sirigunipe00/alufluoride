@@ -4,6 +4,7 @@ import 'package:alufluoride/features/gate_entry/model/customer_name_form.dart';
 import 'package:alufluoride/features/gate_entry/model/gate_entry_form.dart';
 import 'package:alufluoride/features/gate_entry/model/gate_entry_lines_form.dart';
 import 'package:alufluoride/features/gate_entry/model/material_name_form.dart';
+import 'package:alufluoride/features/gate_entry/model/purchase_order_form.dart';
 import 'package:alufluoride/features/gate_entry/model/vehicle_form.dart';
 import 'package:alufluoride/features/gate_entry/model/vehicle_request_form.dart';
 
@@ -29,6 +30,12 @@ typedef VehicleRequestListState = NetworkRequestState<List<VehcileRequestForm>>;
 
 typedef VehicleList = NetworkRequestCubit<List<VehcileForm>, None>;
 typedef VehicleListState = NetworkRequestState<List<VehcileForm>>;
+
+
+
+typedef PurchaseOrderList = NetworkRequestCubit<List<PurchaseOrderForm>, None>;
+typedef PurchaseOrderListState = NetworkRequestState<List<PurchaseOrderForm>>;
+
 
 typedef AttachmentsList = NetworkRequestCubit<List<String>, String>;
 typedef AttachmentsListState = NetworkRequestState<List<String>>;
@@ -67,6 +74,12 @@ class GateEntryBlocProvider {
     onRequest: (_, state) => repo.fetchVehicleList()
 
   );
+
+   PurchaseOrderList purchaseOrderListCubit() => PurchaseOrderList(
+    onRequest: (_, state) => repo.fetchPurchaseOrderList()
+
+  );
+
 
   AttachmentsList attachmentsList() => AttachmentsList(
     onRequest:(params, state) => repo.fetchAttachments(params!), );

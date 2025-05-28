@@ -64,6 +64,12 @@ mixin _$GateEntryForm {
   String? get driverName => throw _privateConstructorUsedError;
   @JsonKey(name: 'remarks')
   String? get remarks => throw _privateConstructorUsedError;
+  @JsonKey(name: 'po_number')
+  String? get poNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'vendor_invoice_no')
+  String? get vendorInvNum => throw _privateConstructorUsedError;
+  @JsonKey(name: 'vendor_invoice_photo')
+  String? get vendorInvPhoto => throw _privateConstructorUsedError;
 
   /// Serializes this GateEntryForm to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -104,7 +110,10 @@ abstract class $GateEntryFormCopyWith<$Res> {
       @JsonKey(name: 'amount') double? amount,
       @JsonKey(name: 'driver_mobile') String? drivermobileNo,
       @JsonKey(name: 'driver_name') String? driverName,
-      @JsonKey(name: 'remarks') String? remarks});
+      @JsonKey(name: 'remarks') String? remarks,
+      @JsonKey(name: 'po_number') String? poNumber,
+      @JsonKey(name: 'vendor_invoice_no') String? vendorInvNum,
+      @JsonKey(name: 'vendor_invoice_photo') String? vendorInvPhoto});
 }
 
 /// @nodoc
@@ -145,6 +154,9 @@ class _$GateEntryFormCopyWithImpl<$Res, $Val extends GateEntryForm>
     Object? drivermobileNo = freezed,
     Object? driverName = freezed,
     Object? remarks = freezed,
+    Object? poNumber = freezed,
+    Object? vendorInvNum = freezed,
+    Object? vendorInvPhoto = freezed,
   }) {
     return _then(_value.copyWith(
       status: freezed == status
@@ -239,6 +251,18 @@ class _$GateEntryFormCopyWithImpl<$Res, $Val extends GateEntryForm>
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
               as String?,
+      poNumber: freezed == poNumber
+          ? _value.poNumber
+          : poNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorInvNum: freezed == vendorInvNum
+          ? _value.vendorInvNum
+          : vendorInvNum // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorInvPhoto: freezed == vendorInvPhoto
+          ? _value.vendorInvPhoto
+          : vendorInvPhoto // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -274,7 +298,10 @@ abstract class _$$GateEntryFormImplCopyWith<$Res>
       @JsonKey(name: 'amount') double? amount,
       @JsonKey(name: 'driver_mobile') String? drivermobileNo,
       @JsonKey(name: 'driver_name') String? driverName,
-      @JsonKey(name: 'remarks') String? remarks});
+      @JsonKey(name: 'remarks') String? remarks,
+      @JsonKey(name: 'po_number') String? poNumber,
+      @JsonKey(name: 'vendor_invoice_no') String? vendorInvNum,
+      @JsonKey(name: 'vendor_invoice_photo') String? vendorInvPhoto});
 }
 
 /// @nodoc
@@ -313,6 +340,9 @@ class __$$GateEntryFormImplCopyWithImpl<$Res>
     Object? drivermobileNo = freezed,
     Object? driverName = freezed,
     Object? remarks = freezed,
+    Object? poNumber = freezed,
+    Object? vendorInvNum = freezed,
+    Object? vendorInvPhoto = freezed,
   }) {
     return _then(_$GateEntryFormImpl(
       status: freezed == status
@@ -407,6 +437,18 @@ class __$$GateEntryFormImplCopyWithImpl<$Res>
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
               as String?,
+      poNumber: freezed == poNumber
+          ? _value.poNumber
+          : poNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorInvNum: freezed == vendorInvNum
+          ? _value.vendorInvNum
+          : vendorInvNum // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorInvPhoto: freezed == vendorInvPhoto
+          ? _value.vendorInvPhoto
+          : vendorInvPhoto // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -437,7 +479,10 @@ class _$GateEntryFormImpl implements _GateEntryForm {
       @JsonKey(name: 'amount') this.amount,
       @JsonKey(name: 'driver_mobile') this.drivermobileNo,
       @JsonKey(name: 'driver_name') this.driverName,
-      @JsonKey(name: 'remarks') this.remarks});
+      @JsonKey(name: 'remarks') this.remarks,
+      @JsonKey(name: 'po_number') this.poNumber,
+      @JsonKey(name: 'vendor_invoice_no') this.vendorInvNum,
+      @JsonKey(name: 'vendor_invoice_photo') this.vendorInvPhoto});
 
   factory _$GateEntryFormImpl.fromJson(Map<String, dynamic> json) =>
       _$$GateEntryFormImplFromJson(json);
@@ -509,10 +554,19 @@ class _$GateEntryFormImpl implements _GateEntryForm {
   @override
   @JsonKey(name: 'remarks')
   final String? remarks;
+  @override
+  @JsonKey(name: 'po_number')
+  final String? poNumber;
+  @override
+  @JsonKey(name: 'vendor_invoice_no')
+  final String? vendorInvNum;
+  @override
+  @JsonKey(name: 'vendor_invoice_photo')
+  final String? vendorInvPhoto;
 
   @override
   String toString() {
-    return 'GateEntryForm(status: $status, docstatus: $docstatus, name: $name, entryTime: $entryTime, entryType: $entryType, vehicleRequest: $vehicleRequest, vehicle: $vehicle, payType: $payType, vendorInvoiceDate: $vendorInvoiceDate, invoiceQnty: $invoiceQnty, invoiceAmt: $invoiceAmt, gateEntryDate: $gateEntryDate, createdTime: $createdTime, beforeWork: $beforeWork, vehiclePhoto: $vehiclePhoto, afterWork: $afterWork, intime: $intime, outTime: $outTime, perHrAmt: $perHrAmt, amount: $amount, drivermobileNo: $drivermobileNo, driverName: $driverName, remarks: $remarks)';
+    return 'GateEntryForm(status: $status, docstatus: $docstatus, name: $name, entryTime: $entryTime, entryType: $entryType, vehicleRequest: $vehicleRequest, vehicle: $vehicle, payType: $payType, vendorInvoiceDate: $vendorInvoiceDate, invoiceQnty: $invoiceQnty, invoiceAmt: $invoiceAmt, gateEntryDate: $gateEntryDate, createdTime: $createdTime, beforeWork: $beforeWork, vehiclePhoto: $vehiclePhoto, afterWork: $afterWork, intime: $intime, outTime: $outTime, perHrAmt: $perHrAmt, amount: $amount, drivermobileNo: $drivermobileNo, driverName: $driverName, remarks: $remarks, poNumber: $poNumber, vendorInvNum: $vendorInvNum, vendorInvPhoto: $vendorInvPhoto)';
   }
 
   @override
@@ -557,7 +611,13 @@ class _$GateEntryFormImpl implements _GateEntryForm {
                 other.drivermobileNo == drivermobileNo) &&
             (identical(other.driverName, driverName) ||
                 other.driverName == driverName) &&
-            (identical(other.remarks, remarks) || other.remarks == remarks));
+            (identical(other.remarks, remarks) || other.remarks == remarks) &&
+            (identical(other.poNumber, poNumber) ||
+                other.poNumber == poNumber) &&
+            (identical(other.vendorInvNum, vendorInvNum) ||
+                other.vendorInvNum == vendorInvNum) &&
+            (identical(other.vendorInvPhoto, vendorInvPhoto) ||
+                other.vendorInvPhoto == vendorInvPhoto));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -586,7 +646,10 @@ class _$GateEntryFormImpl implements _GateEntryForm {
         amount,
         drivermobileNo,
         driverName,
-        remarks
+        remarks,
+        poNumber,
+        vendorInvNum,
+        vendorInvPhoto
       ]);
 
   /// Create a copy of GateEntryForm
@@ -632,7 +695,11 @@ abstract class _GateEntryForm implements GateEntryForm {
       @JsonKey(name: 'amount') final double? amount,
       @JsonKey(name: 'driver_mobile') final String? drivermobileNo,
       @JsonKey(name: 'driver_name') final String? driverName,
-      @JsonKey(name: 'remarks') final String? remarks}) = _$GateEntryFormImpl;
+      @JsonKey(name: 'remarks') final String? remarks,
+      @JsonKey(name: 'po_number') final String? poNumber,
+      @JsonKey(name: 'vendor_invoice_no') final String? vendorInvNum,
+      @JsonKey(name: 'vendor_invoice_photo')
+      final String? vendorInvPhoto}) = _$GateEntryFormImpl;
 
   factory _GateEntryForm.fromJson(Map<String, dynamic> json) =
       _$GateEntryFormImpl.fromJson;
@@ -704,6 +771,15 @@ abstract class _GateEntryForm implements GateEntryForm {
   @override
   @JsonKey(name: 'remarks')
   String? get remarks;
+  @override
+  @JsonKey(name: 'po_number')
+  String? get poNumber;
+  @override
+  @JsonKey(name: 'vendor_invoice_no')
+  String? get vendorInvNum;
+  @override
+  @JsonKey(name: 'vendor_invoice_photo')
+  String? get vendorInvPhoto;
 
   /// Create a copy of GateEntryForm
   /// with the given fields replaced by the non-null parameter values.
