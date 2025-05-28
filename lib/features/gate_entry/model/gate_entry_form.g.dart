@@ -34,6 +34,8 @@ _$GateEntryFormImpl _$$GateEntryFormImplFromJson(Map<String, dynamic> json) =>
       vendorInvPhoto: json['vendor_invoice_photo'] as String?,
       vehiclePhoto: json['vehicle_photo'] as String?,
       beforeWork: json['before_work'] as String?,
+      qtyinTonnes: (json['qty_in_tonnes'] as num?)?.toInt() ?? 0,
+      ratePerTonnes: (json['rate_per_tonnes'] as num?)?.toDouble() ?? 0.0,
     );
 
 Map<String, dynamic> _$$GateEntryFormImplToJson(_$GateEntryFormImpl instance) =>
@@ -64,4 +66,6 @@ Map<String, dynamic> _$$GateEntryFormImplToJson(_$GateEntryFormImpl instance) =>
       'vendor_invoice_photo': instance.vendorInvPhoto,
       'vehicle_photo': instance.vehiclePhoto,
       'before_work': instance.beforeWork,
+      'qty_in_tonnes': instance.qtyinTonnes,
+      'rate_per_tonnes': instance.ratePerTonnes,
     };

@@ -49,6 +49,8 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
     String? vendorInvNum,
     String? venorInvPhoto,
     String? venorInvDate,
+    int? qtyTonnes,
+    double? ratePerTonnes 
   }) {
     shouldAskForConfirmation.value = true;
     final form = state.form;
@@ -74,7 +76,9 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
       poNumber: poNumber ?? form.poNumber,
       vendorInvNum: vendorInvNum ?? form.vendorInvNum,
       vendorInvPhoto: venorInvPhoto ?? form.vendorInvPhoto,
-      vendorInvoiceDate: venorInvDate ?? form.vendorInvoiceDate
+      vendorInvoiceDate: venorInvDate ?? form.vendorInvoiceDate,
+      qtyinTonnes: qtyTonnes ?? form.qtyinTonnes,
+       ratePerTonnes: ratePerTonnes ?? form.ratePerTonnes
 
 
     );
