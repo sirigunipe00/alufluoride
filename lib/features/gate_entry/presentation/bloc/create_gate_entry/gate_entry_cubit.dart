@@ -41,6 +41,14 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
     String? outTime,
     String? perHrAmt,
     String? remarks,
+
+    String? invDate,
+    String? poNumber,
+    String? vendorInvQty,
+    String? invAmt,
+    String? vendorInvNum,
+    String? venorInvPhoto,
+    String? venorInvDate,
   }) {
     shouldAskForConfirmation.value = true;
     final form = state.form;
@@ -57,7 +65,18 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
       entryType: gateEntryType ?? form.entryType,
       gateEntryDate: entryDate ?? form.gateEntryDate,
       beforeWork: beforeWork ?? form.beforeWork,
-      vehiclePhoto: vehiclephoto ?? form.vehiclePhoto
+      vehiclePhoto: vehiclephoto ?? form.vehiclePhoto,
+      driverName: driverName ?? form.driverName,
+      drivermobileNo: driverMobileNo ?? form.drivermobileNo,
+      invoiceAmt: double.tryParse(invAmt ?? '') ?? form.invoiceAmt,
+      invoiceQnty: double.tryParse(vendorInvQty ?? '')  ?? form.invoiceQnty,
+      perHrAmt: perHrAmt  ?? form.perHrAmt,
+      poNumber: poNumber ?? form.poNumber,
+      vendorInvNum: vendorInvNum ?? form.vendorInvNum,
+      vendorInvPhoto: venorInvPhoto ?? form.vendorInvPhoto,
+      vendorInvoiceDate: venorInvDate ?? form.vendorInvoiceDate
+      
+
     );
     emitSafeState(state.copyWith(form: newForm));
   }

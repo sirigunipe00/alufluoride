@@ -10,6 +10,7 @@ import 'package:alufluoride/features/gate_entry/model/customer_name_form.dart';
 import 'package:alufluoride/features/gate_entry/model/gate_entry_form.dart';
 import 'package:alufluoride/features/gate_entry/model/gate_entry_lines_form.dart';
 import 'package:alufluoride/features/gate_entry/model/material_name_form.dart';
+import 'package:alufluoride/features/gate_entry/model/purchase_order_form.dart';
 import 'package:alufluoride/features/gate_entry/model/vehicle_form.dart';
 import 'package:alufluoride/features/gate_entry/model/vehicle_request_form.dart';
 import 'package:dartz/dartz.dart';
@@ -67,7 +68,6 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
         return listdata.map((e) => VehcileRequestForm.fromJson(e)).toList();
       },
       reqParams: {
-        'limit': 20,
         'order_by': 'creation DESC',
         'doctype': 'Vehicle Request',
         'fields': ["*"]
@@ -89,9 +89,33 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
         return listdata.map((e) => VehcileForm.fromJson(e)).toList();
       },
       reqParams: {
-        'limit': 20,
         'order_by': 'creation DESC',
         'doctype': 'Vehicle',
+        'fields': ["*"]
+      },
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    );
+
+    log('requestConfig vehicle--:$requestConfig');
+
+    final response = await get(requestConfig);
+    log('response:$response');
+    return response.process((r) => right(r.data!));
+  }
+
+    @override
+  AsyncValueOf<List<PurchaseOrderForm>> fetchPurchaseOrderList() async {
+    final requestConfig = RequestConfig(
+      url: Urls.getList,
+      parser: (json) {
+        final data = json['message'];
+
+        final listdata = data as List<dynamic>;
+        return listdata.map((e) => PurchaseOrderForm.fromJson(e)).toList();
+      },
+      reqParams: {
+        'order_by': 'creation DESC',
+        'doctype': 'Purchase Order',
         'fields': ["*"]
       },
       headers: {HttpHeaders.contentTypeHeader: 'application/json'},

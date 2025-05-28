@@ -29,6 +29,9 @@ _$GateEntryFormImpl _$$GateEntryFormImplFromJson(Map<String, dynamic> json) =>
       drivermobileNo: json['driver_mobile'] as String?,
       driverName: json['driver_name'] as String?,
       remarks: json['remarks'] as String?,
+      poNumber: json['po_number'] as String?,
+      vendorInvNum: json['vendor_invoice_no'] as String?,
+      vendorInvPhoto: json['vendor_invoice_photo'] as String?,
     );
 
 Map<String, dynamic> _$$GateEntryFormImplToJson(_$GateEntryFormImpl instance) =>
@@ -54,4 +57,7 @@ Map<String, dynamic> _$$GateEntryFormImplToJson(_$GateEntryFormImpl instance) =>
       'driver_mobile': instance.drivermobileNo,
       'driver_name': instance.driverName,
       'remarks': instance.remarks,
+      'po_number': instance.poNumber,
+      'vendor_invoice_no': instance.vendorInvNum,
+      'vendor_invoice_photo': instance.vendorInvPhoto,
     };

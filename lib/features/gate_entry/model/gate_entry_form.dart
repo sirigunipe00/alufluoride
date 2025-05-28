@@ -31,6 +31,10 @@ class GateEntryForm with _$GateEntryForm {
     @JsonKey(name: 'driver_mobile') String? drivermobileNo,
     @JsonKey(name: 'driver_name') String? driverName,
     @JsonKey(name: 'remarks') String? remarks,
+    @JsonKey(name: 'po_number') String? poNumber,
+    @JsonKey(name: 'vendor_invoice_no') String? vendorInvNum,
+    @JsonKey(name: 'vendor_invoice_photo') String? vendorInvPhoto,
+
     // @JsonKey(name: 'weight__in_kgs_') double? weight,
     // @JsonKey(name: 'weighment_date') String? weighmentDate,
     // @JsonKey(name: 'weighment_time') String? weighmentTime,
