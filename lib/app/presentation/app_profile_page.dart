@@ -33,7 +33,7 @@ class AppProfilePage extends StatelessWidget {
               const _ProfileItem(
                 Icon(Icons.business, color: AppColors.lavender),
                 'Organization',
-                'Aparna',
+                'Alufluoride',
               ),
               FutureBuilder(
                 future: _appversion(),

@@ -34,6 +34,8 @@ class GateEntryForm with _$GateEntryForm {
     @JsonKey(name: 'vendor_invoice_photo') String? vendorInvPhoto,
     @JsonKey(name: 'vehicle_photo') String? vehiclePhoto,
     @JsonKey(name: 'before_work') String? beforeWork,
+    @JsonKey(name: 'qty_in_tonnes', defaultValue: 0) int? qtyinTonnes,
+    @JsonKey(name: 'rate_per_tonnes', defaultValue: 0.0) double? ratePerTonnes,
     // @JsonKey(name: 'weight__in_kgs_') double? weight,
     // @JsonKey(name: 'weighment_date') String? weighmentDate,
     // @JsonKey(name: 'weighment_time') String? weighmentTime,

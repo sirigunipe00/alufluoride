@@ -338,29 +338,45 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 items: const ['Hours', 'Qty'],
                 focusNode: focusNodes.elementAt(7),
                 onSelected: (value) {
+                  setState(() {
+                    payType = value;
+                  });
+                  
                   context
                       .cubit<CreateGateEntryCubit>()
                       .onValueChanged(payType: value);
                 },
               ),
-              PhotoSelectionWidget(
-                isReadOnly: isCompleted,
-                fileName: 'Before Work',
+              if(payType == 'Qty')...[
+                 InputField(
+                readOnly: isCompleted,
+                title: 'Qty in Tonnes',
                 borderColor: AppColors.marigoldDDust,
-                title: 'Before Work',
-                isRequired: true,
-                // defaultValue: File(newform.beforeWork ?? ''),
-                // isReadOnly: isSubmitted,
-                // imageUrl: newform.beforeWork,
-                onFileCapture: (file) {
-                  if (file != null) {
-                    context
-                        .cubit<CreateGateEntryCubit>()
-                        .onValueChanged(beforeWork: file.path);
-                  }
+                inputType: TextInputType.number,
+                initialValue: newform.perHrAmt,
+                focusNode: focusNodes.elementAt(8),
+                onChanged: (p0) {
+                  context
+                      .cubit<CreateGateEntryCubit>()
+                      .onValueChanged(qtyTonnes: int.tryParse(p0));
                 },
               ),
-              TimeSelectionField(
+
+               InputField(
+                readOnly: isCompleted,
+                title: 'Rate Per Tonnes',
+                borderColor: AppColors.marigoldDDust,
+                inputType: TextInputType.number,
+                initialValue: newform.perHrAmt,
+                focusNode: focusNodes.elementAt(8),
+                onChanged: (p0) {
+                  context
+                      .cubit<CreateGateEntryCubit>()
+                      .onValueChanged(ratePerTonnes: double.tryParse(p0));
+                },
+              ),
+              ] else...[
+                TimeSelectionField(
                 readOnly: isCompleted,
                 key: UniqueKey(),
                 // key: ValueKey(inTime),
@@ -399,6 +415,27 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                       .onValueChanged(perHrAmt: p0);
                 },
               ),
+
+
+              ],
+              PhotoSelectionWidget(
+                isReadOnly: isCompleted,
+                fileName: 'Before Work',
+                borderColor: AppColors.marigoldDDust,
+                title: 'Before Work',
+                isRequired: true,
+                // defaultValue: File(newform.beforeWork ?? ''),
+                // isReadOnly: isSubmitted,
+                // imageUrl: newform.beforeWork,
+                onFileCapture: (file) {
+                  if (file != null) {
+                    context
+                        .cubit<CreateGateEntryCubit>()
+                        .onValueChanged(beforeWork: file.path);
+                  }
+                },
+              ),
+              
             ],
             InputField(
               title: 'Gate Entry Date',

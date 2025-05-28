@@ -70,6 +70,10 @@ mixin _$GateEntryForm {
   String? get vehiclePhoto => throw _privateConstructorUsedError;
   @JsonKey(name: 'before_work')
   String? get beforeWork => throw _privateConstructorUsedError;
+  @JsonKey(name: 'qty_in_tonnes', defaultValue: 0)
+  int? get qtyinTonnes => throw _privateConstructorUsedError;
+  @JsonKey(name: 'rate_per_tonnes', defaultValue: 0.0)
+  double? get ratePerTonnes => throw _privateConstructorUsedError;
 
   /// Serializes this GateEntryForm to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -113,7 +117,10 @@ abstract class $GateEntryFormCopyWith<$Res> {
       @JsonKey(name: 'vendor_invoice_no') String? vendorInvNum,
       @JsonKey(name: 'vendor_invoice_photo') String? vendorInvPhoto,
       @JsonKey(name: 'vehicle_photo') String? vehiclePhoto,
-      @JsonKey(name: 'before_work') String? beforeWork});
+      @JsonKey(name: 'before_work') String? beforeWork,
+      @JsonKey(name: 'qty_in_tonnes', defaultValue: 0) int? qtyinTonnes,
+      @JsonKey(name: 'rate_per_tonnes', defaultValue: 0.0)
+      double? ratePerTonnes});
 }
 
 /// @nodoc
@@ -157,6 +164,8 @@ class _$GateEntryFormCopyWithImpl<$Res, $Val extends GateEntryForm>
     Object? vendorInvPhoto = freezed,
     Object? vehiclePhoto = freezed,
     Object? beforeWork = freezed,
+    Object? qtyinTonnes = freezed,
+    Object? ratePerTonnes = freezed,
   }) {
     return _then(_value.copyWith(
       status: freezed == status
@@ -263,6 +272,14 @@ class _$GateEntryFormCopyWithImpl<$Res, $Val extends GateEntryForm>
           ? _value.beforeWork
           : beforeWork // ignore: cast_nullable_to_non_nullable
               as String?,
+      qtyinTonnes: freezed == qtyinTonnes
+          ? _value.qtyinTonnes
+          : qtyinTonnes // ignore: cast_nullable_to_non_nullable
+              as int?,
+      ratePerTonnes: freezed == ratePerTonnes
+          ? _value.ratePerTonnes
+          : ratePerTonnes // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 }
@@ -301,7 +318,10 @@ abstract class _$$GateEntryFormImplCopyWith<$Res>
       @JsonKey(name: 'vendor_invoice_no') String? vendorInvNum,
       @JsonKey(name: 'vendor_invoice_photo') String? vendorInvPhoto,
       @JsonKey(name: 'vehicle_photo') String? vehiclePhoto,
-      @JsonKey(name: 'before_work') String? beforeWork});
+      @JsonKey(name: 'before_work') String? beforeWork,
+      @JsonKey(name: 'qty_in_tonnes', defaultValue: 0) int? qtyinTonnes,
+      @JsonKey(name: 'rate_per_tonnes', defaultValue: 0.0)
+      double? ratePerTonnes});
 }
 
 /// @nodoc
@@ -343,6 +363,8 @@ class __$$GateEntryFormImplCopyWithImpl<$Res>
     Object? vendorInvPhoto = freezed,
     Object? vehiclePhoto = freezed,
     Object? beforeWork = freezed,
+    Object? qtyinTonnes = freezed,
+    Object? ratePerTonnes = freezed,
   }) {
     return _then(_$GateEntryFormImpl(
       status: freezed == status
@@ -449,6 +471,14 @@ class __$$GateEntryFormImplCopyWithImpl<$Res>
           ? _value.beforeWork
           : beforeWork // ignore: cast_nullable_to_non_nullable
               as String?,
+      qtyinTonnes: freezed == qtyinTonnes
+          ? _value.qtyinTonnes
+          : qtyinTonnes // ignore: cast_nullable_to_non_nullable
+              as int?,
+      ratePerTonnes: freezed == ratePerTonnes
+          ? _value.ratePerTonnes
+          : ratePerTonnes // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -482,7 +512,9 @@ class _$GateEntryFormImpl implements _GateEntryForm {
       @JsonKey(name: 'vendor_invoice_no') this.vendorInvNum,
       @JsonKey(name: 'vendor_invoice_photo') this.vendorInvPhoto,
       @JsonKey(name: 'vehicle_photo') this.vehiclePhoto,
-      @JsonKey(name: 'before_work') this.beforeWork});
+      @JsonKey(name: 'before_work') this.beforeWork,
+      @JsonKey(name: 'qty_in_tonnes', defaultValue: 0) this.qtyinTonnes,
+      @JsonKey(name: 'rate_per_tonnes', defaultValue: 0.0) this.ratePerTonnes});
 
   factory _$GateEntryFormImpl.fromJson(Map<String, dynamic> json) =>
       _$$GateEntryFormImplFromJson(json);
@@ -563,10 +595,16 @@ class _$GateEntryFormImpl implements _GateEntryForm {
   @override
   @JsonKey(name: 'before_work')
   final String? beforeWork;
+  @override
+  @JsonKey(name: 'qty_in_tonnes', defaultValue: 0)
+  final int? qtyinTonnes;
+  @override
+  @JsonKey(name: 'rate_per_tonnes', defaultValue: 0.0)
+  final double? ratePerTonnes;
 
   @override
   String toString() {
-    return 'GateEntryForm(status: $status, docstatus: $docstatus, name: $name, entryTime: $entryTime, entryType: $entryType, vehicleRequest: $vehicleRequest, vehicle: $vehicle, payType: $payType, vendorInvoiceDate: $vendorInvoiceDate, invoiceQnty: $invoiceQnty, invoiceAmt: $invoiceAmt, gateEntryDate: $gateEntryDate, createdTime: $createdTime, afterWork: $afterWork, intime: $intime, outTime: $outTime, perHrAmt: $perHrAmt, amount: $amount, drivermobileNo: $drivermobileNo, driverName: $driverName, remarks: $remarks, poNumber: $poNumber, vendorInvNum: $vendorInvNum, vendorInvPhoto: $vendorInvPhoto, vehiclePhoto: $vehiclePhoto, beforeWork: $beforeWork)';
+    return 'GateEntryForm(status: $status, docstatus: $docstatus, name: $name, entryTime: $entryTime, entryType: $entryType, vehicleRequest: $vehicleRequest, vehicle: $vehicle, payType: $payType, vendorInvoiceDate: $vendorInvoiceDate, invoiceQnty: $invoiceQnty, invoiceAmt: $invoiceAmt, gateEntryDate: $gateEntryDate, createdTime: $createdTime, afterWork: $afterWork, intime: $intime, outTime: $outTime, perHrAmt: $perHrAmt, amount: $amount, drivermobileNo: $drivermobileNo, driverName: $driverName, remarks: $remarks, poNumber: $poNumber, vendorInvNum: $vendorInvNum, vendorInvPhoto: $vendorInvPhoto, vehiclePhoto: $vehiclePhoto, beforeWork: $beforeWork, qtyinTonnes: $qtyinTonnes, ratePerTonnes: $ratePerTonnes)';
   }
 
   @override
@@ -617,7 +655,11 @@ class _$GateEntryFormImpl implements _GateEntryForm {
             (identical(other.vehiclePhoto, vehiclePhoto) ||
                 other.vehiclePhoto == vehiclePhoto) &&
             (identical(other.beforeWork, beforeWork) ||
-                other.beforeWork == beforeWork));
+                other.beforeWork == beforeWork) &&
+            (identical(other.qtyinTonnes, qtyinTonnes) ||
+                other.qtyinTonnes == qtyinTonnes) &&
+            (identical(other.ratePerTonnes, ratePerTonnes) ||
+                other.ratePerTonnes == ratePerTonnes));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -649,7 +691,9 @@ class _$GateEntryFormImpl implements _GateEntryForm {
         vendorInvNum,
         vendorInvPhoto,
         vehiclePhoto,
-        beforeWork
+        beforeWork,
+        qtyinTonnes,
+        ratePerTonnes
       ]);
 
   /// Create a copy of GateEntryForm
@@ -670,34 +714,36 @@ class _$GateEntryFormImpl implements _GateEntryForm {
 
 abstract class _GateEntryForm implements GateEntryForm {
   const factory _GateEntryForm(
-          {final String? status,
-          final int? docstatus,
-          @JsonKey(name: 'name') final String? name,
-          @JsonKey(name: 'gate_entry_time') final String? entryTime,
-          @JsonKey(name: 'gate_entry_type') final String? entryType,
-          @JsonKey(name: 'vehicle_request') final String? vehicleRequest,
-          @JsonKey(name: 'vehicle') final String? vehicle,
-          @JsonKey(name: 'pay_type') final String? payType,
-          @JsonKey(name: 'vendor_invoice_date') final String? vendorInvoiceDate,
-          @JsonKey(name: 'vendor_invoice_quantity') final double? invoiceQnty,
-          @JsonKey(name: 'invoice_amount') final double? invoiceAmt,
-          @JsonKey(name: 'gate_entry_date') final String? gateEntryDate,
-          @JsonKey(name: 'created_time', defaultValue: '')
-          final String? createdTime,
-          @JsonKey(name: 'after_work') final String? afterWork,
-          @JsonKey(name: 'in_time') final String? intime,
-          @JsonKey(name: 'out_time') final String? outTime,
-          @JsonKey(name: 'per_hour_amount') final String? perHrAmt,
-          @JsonKey(name: 'amount') final double? amount,
-          @JsonKey(name: 'driver_mobile') final String? drivermobileNo,
-          @JsonKey(name: 'driver_name') final String? driverName,
-          @JsonKey(name: 'remarks') final String? remarks,
-          @JsonKey(name: 'po_number') final String? poNumber,
-          @JsonKey(name: 'vendor_invoice_no') final String? vendorInvNum,
-          @JsonKey(name: 'vendor_invoice_photo') final String? vendorInvPhoto,
-          @JsonKey(name: 'vehicle_photo') final String? vehiclePhoto,
-          @JsonKey(name: 'before_work') final String? beforeWork}) =
-      _$GateEntryFormImpl;
+      {final String? status,
+      final int? docstatus,
+      @JsonKey(name: 'name') final String? name,
+      @JsonKey(name: 'gate_entry_time') final String? entryTime,
+      @JsonKey(name: 'gate_entry_type') final String? entryType,
+      @JsonKey(name: 'vehicle_request') final String? vehicleRequest,
+      @JsonKey(name: 'vehicle') final String? vehicle,
+      @JsonKey(name: 'pay_type') final String? payType,
+      @JsonKey(name: 'vendor_invoice_date') final String? vendorInvoiceDate,
+      @JsonKey(name: 'vendor_invoice_quantity') final double? invoiceQnty,
+      @JsonKey(name: 'invoice_amount') final double? invoiceAmt,
+      @JsonKey(name: 'gate_entry_date') final String? gateEntryDate,
+      @JsonKey(name: 'created_time', defaultValue: '')
+      final String? createdTime,
+      @JsonKey(name: 'after_work') final String? afterWork,
+      @JsonKey(name: 'in_time') final String? intime,
+      @JsonKey(name: 'out_time') final String? outTime,
+      @JsonKey(name: 'per_hour_amount') final String? perHrAmt,
+      @JsonKey(name: 'amount') final double? amount,
+      @JsonKey(name: 'driver_mobile') final String? drivermobileNo,
+      @JsonKey(name: 'driver_name') final String? driverName,
+      @JsonKey(name: 'remarks') final String? remarks,
+      @JsonKey(name: 'po_number') final String? poNumber,
+      @JsonKey(name: 'vendor_invoice_no') final String? vendorInvNum,
+      @JsonKey(name: 'vendor_invoice_photo') final String? vendorInvPhoto,
+      @JsonKey(name: 'vehicle_photo') final String? vehiclePhoto,
+      @JsonKey(name: 'before_work') final String? beforeWork,
+      @JsonKey(name: 'qty_in_tonnes', defaultValue: 0) final int? qtyinTonnes,
+      @JsonKey(name: 'rate_per_tonnes', defaultValue: 0.0)
+      final double? ratePerTonnes}) = _$GateEntryFormImpl;
 
   factory _GateEntryForm.fromJson(Map<String, dynamic> json) =
       _$GateEntryFormImpl.fromJson;
@@ -778,6 +824,12 @@ abstract class _GateEntryForm implements GateEntryForm {
   @override
   @JsonKey(name: 'before_work')
   String? get beforeWork;
+  @override
+  @JsonKey(name: 'qty_in_tonnes', defaultValue: 0)
+  int? get qtyinTonnes;
+  @override
+  @JsonKey(name: 'rate_per_tonnes', defaultValue: 0.0)
+  double? get ratePerTonnes;
 
   /// Create a copy of GateEntryForm
   /// with the given fields replaced by the non-null parameter values.
