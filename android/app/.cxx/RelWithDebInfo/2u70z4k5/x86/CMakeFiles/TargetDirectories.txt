@@ -1,0 +1,2 @@
+/home/geetha-chikati/Desktop/alufluoride/android/app/.cxx/RelWithDebInfo/2u70z4k5/x86/CMakeFiles/edit_cache.dir
+/home/geetha-chikati/Desktop/alufluoride/android/app/.cxx/RelWithDebInfo/2u70z4k5/x86/CMakeFiles/rebuild_cache.dir

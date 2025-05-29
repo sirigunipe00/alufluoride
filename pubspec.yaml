@@ -58,6 +58,12 @@ flutter:
     - assets/icons/
     - assets/logo/
 
+flutter_launcher_icons: 
+  android: 'ic_launcher'
+  image_path: 'assets/logo/alufluoride.png'
+  remove_alpha_ios: true
+  ios: true
+  min_sdk_android: 21 
 
   # example:
   # fonts:
