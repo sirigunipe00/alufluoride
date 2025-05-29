@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/features/gate_entry/data/static_data.dart';
@@ -466,7 +465,6 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
               initialValue: newform.driverName,
               borderColor: AppColors.marigoldDDust,
               focusNode: focusNodes.elementAt(2),
-              inputType: const TextInputType.numberWithOptions(decimal: true),
               onChanged: (name) {
                 context
                     .cubit<CreateGateEntryCubit>()
