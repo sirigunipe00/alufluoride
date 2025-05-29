@@ -64,7 +64,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '97864712774',
     projectId: 'alufluoride-8f2e1',
     storageBucket: 'alufluoride-8f2e1.firebasestorage.app',
-    iosBundleId: 'com.example.alufluoride',
+    iosBundleId: 'in.easycloud.alufluoride',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -73,7 +73,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '97864712774',
     projectId: 'alufluoride-8f2e1',
     storageBucket: 'alufluoride-8f2e1.firebasestorage.app',
-    iosBundleId: 'com.example.alufluoride',
+    iosBundleId: 'in.easycloud.alufluoride',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(

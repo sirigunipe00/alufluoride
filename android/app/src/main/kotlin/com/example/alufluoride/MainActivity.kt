@@ -1,4 +1,4 @@
-package com.example.alufluoride
+package `in`.easycloud.alufluoride
 
 import io.flutter.embedding.android.FlutterActivity
 
