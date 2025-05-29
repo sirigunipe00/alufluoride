@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:alufluoride/core/consts/doctypes.dart';
 import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/features/gate_entry/model/gate_entry_lines_form.dart';
-
 import 'package:alufluoride/features/gate_exit/data/gate_exit_repo.dart';
 import 'package:alufluoride/features/gate_exit/model/gate_exit_form.dart';
 import 'package:alufluoride/features/gate_exit/model/receiver_address_form.dart';
