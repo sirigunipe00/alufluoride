@@ -161,7 +161,6 @@ class CreateOutwardCubit extends AppBaseCubit<CreateOutwardState> {
   }
 
   void processOutwardGatePass() {
-    log('state.form===:${state.form}');
     try {
       if (state.type == ActionType.edit) {
         return _createOutwardGatePass();
@@ -182,8 +181,6 @@ class CreateOutwardCubit extends AppBaseCubit<CreateOutwardState> {
       final msg = validation.getOrElse(() => throw Exception());
       return _emitError(msg);
     }
- 
-    log('STATE LINES in create:${state.lines}');
 
     emitSafeState(state.copyWith(isLoading: true));
     final res = await repo.createOutwardGatePass(state.form, state.lines);
@@ -213,7 +210,6 @@ class CreateOutwardCubit extends AppBaseCubit<CreateOutwardState> {
     //       'Add Atleast One Outward Gate Pass item to Proceed Further', null));
     //    return ;
     //   }
-    log('STATE LINES in submit:${state.lines}');
     emitSafeState(state.copyWith(isLoading: true));
     final res = await repo.submitOutwardGatePass(state.form, state.lines);
     return res.fold(

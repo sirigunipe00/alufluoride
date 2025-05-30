@@ -96,10 +96,7 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
       headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     );
 
-    log('requestConfig vehicle--:$requestConfig');
-
     final response = await get(requestConfig);
-    log('response:$response');
     return response.process((r) => right(r.data!));
   }
 
@@ -121,10 +118,7 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
       headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     );
 
-    log('requestConfig vehicle--:$requestConfig');
-
     final response = await get(requestConfig);
-    log('response:$response');
     return response.process((r) => right(r.data!));
   }
 
@@ -205,7 +199,6 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
     final formJson = form.toJson();
 
     formJson.update('status', (value) => 'Draft');
-    log('form-----:$form');
 
     // final files = {
     //   'vehicle_photo': form.vehiclePhoto,
@@ -306,10 +299,7 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
           body: jsonEncode(
               {"gate_entry_id": form.name, 'per_hour_amount': form.perHrAmt}));
 
-      log('submit config-----:$config');
-
       final response = await post(config);
-      log('submit response-----:$response');
       return response.process((r) {
         return right(Pair(r.data!.first, ''));
       });

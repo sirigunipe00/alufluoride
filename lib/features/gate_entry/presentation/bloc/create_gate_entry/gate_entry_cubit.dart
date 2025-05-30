@@ -37,6 +37,7 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
     String? vehiclephoto,
     String? payType,
     String? beforeWork,
+    String? afterWork,
     String? inTime,
     String? outTime,
     String? perHrAmt,
@@ -78,9 +79,8 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
       vendorInvPhoto: venorInvPhoto ?? form.vendorInvPhoto,
       vendorInvoiceDate: venorInvDate ?? form.vendorInvoiceDate,
       qtyinTonnes: qtyTonnes ?? form.qtyinTonnes,
-       ratePerTonnes: ratePerTonnes ?? form.ratePerTonnes
-
-
+      ratePerTonnes: ratePerTonnes ?? form.ratePerTonnes,
+      afterWork: afterWork ?? form.afterWork
     );
     emitSafeState(state.copyWith(form: newForm));
   }

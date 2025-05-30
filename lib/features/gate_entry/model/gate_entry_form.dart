@@ -15,6 +15,7 @@ class GateEntryForm with _$GateEntryForm {
     @JsonKey(name: 'gate_entry_type') String? entryType,
     @JsonKey(name: 'vehicle_request') String? vehicleRequest,
     @JsonKey(name: 'vehicle') String? vehicle,
+    @JsonKey(name: 'vehicle1') String? vehicle1,
     @JsonKey(name: 'pay_type') String? payType,
     @JsonKey(name: 'vendor_invoice_date') String? vendorInvoiceDate,
     @JsonKey(name: 'vendor_invoice_quantity') double? invoiceQnty,

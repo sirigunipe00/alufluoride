@@ -40,7 +40,6 @@ class AuthRepoImpl extends BaseApiRepository implements AuthRepo {
       );
 
       final response = await post(requestConfig, includeAuthHeader: false);
-      log('response:$response');
 
       return response.processAsync((r) async {
         if (r.data.isNull) {

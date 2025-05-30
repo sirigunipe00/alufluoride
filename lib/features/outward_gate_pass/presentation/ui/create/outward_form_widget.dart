@@ -434,7 +434,6 @@ class _OutwardFormWidgetState extends State<OutwardFormWidget> {
               AppSpacer.p4(),
               OutwardLinesWidget(
                 oncall: (lines) {
-                  log('lines in oncall:$lines');
                 },
               ),
               AppSpacer.p8(),
@@ -444,7 +443,6 @@ class _OutwardFormWidgetState extends State<OutwardFormWidget> {
                     return AppButton(
                       isLoading: state.isLoading,
                       onPressed: () {
-                        log('form in widget==:${state.lines}');
                         context
                             .cubit<CreateOutwardCubit>()
                             .onFieldValueChanged(items: List.from(state.lines));

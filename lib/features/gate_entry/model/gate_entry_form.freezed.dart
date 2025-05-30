@@ -32,6 +32,8 @@ mixin _$GateEntryForm {
   String? get vehicleRequest => throw _privateConstructorUsedError;
   @JsonKey(name: 'vehicle')
   String? get vehicle => throw _privateConstructorUsedError;
+  @JsonKey(name: 'vehicle1')
+  String? get vehicle1 => throw _privateConstructorUsedError;
   @JsonKey(name: 'pay_type')
   String? get payType => throw _privateConstructorUsedError;
   @JsonKey(name: 'vendor_invoice_date')
@@ -99,6 +101,7 @@ abstract class $GateEntryFormCopyWith<$Res> {
       @JsonKey(name: 'gate_entry_type') String? entryType,
       @JsonKey(name: 'vehicle_request') String? vehicleRequest,
       @JsonKey(name: 'vehicle') String? vehicle,
+      @JsonKey(name: 'vehicle1') String? vehicle1,
       @JsonKey(name: 'pay_type') String? payType,
       @JsonKey(name: 'vendor_invoice_date') String? vendorInvoiceDate,
       @JsonKey(name: 'vendor_invoice_quantity') double? invoiceQnty,
@@ -145,6 +148,7 @@ class _$GateEntryFormCopyWithImpl<$Res, $Val extends GateEntryForm>
     Object? entryType = freezed,
     Object? vehicleRequest = freezed,
     Object? vehicle = freezed,
+    Object? vehicle1 = freezed,
     Object? payType = freezed,
     Object? vendorInvoiceDate = freezed,
     Object? invoiceQnty = freezed,
@@ -195,6 +199,10 @@ class _$GateEntryFormCopyWithImpl<$Res, $Val extends GateEntryForm>
       vehicle: freezed == vehicle
           ? _value.vehicle
           : vehicle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vehicle1: freezed == vehicle1
+          ? _value.vehicle1
+          : vehicle1 // ignore: cast_nullable_to_non_nullable
               as String?,
       payType: freezed == payType
           ? _value.payType
@@ -300,6 +308,7 @@ abstract class _$$GateEntryFormImplCopyWith<$Res>
       @JsonKey(name: 'gate_entry_type') String? entryType,
       @JsonKey(name: 'vehicle_request') String? vehicleRequest,
       @JsonKey(name: 'vehicle') String? vehicle,
+      @JsonKey(name: 'vehicle1') String? vehicle1,
       @JsonKey(name: 'pay_type') String? payType,
       @JsonKey(name: 'vendor_invoice_date') String? vendorInvoiceDate,
       @JsonKey(name: 'vendor_invoice_quantity') double? invoiceQnty,
@@ -344,6 +353,7 @@ class __$$GateEntryFormImplCopyWithImpl<$Res>
     Object? entryType = freezed,
     Object? vehicleRequest = freezed,
     Object? vehicle = freezed,
+    Object? vehicle1 = freezed,
     Object? payType = freezed,
     Object? vendorInvoiceDate = freezed,
     Object? invoiceQnty = freezed,
@@ -394,6 +404,10 @@ class __$$GateEntryFormImplCopyWithImpl<$Res>
       vehicle: freezed == vehicle
           ? _value.vehicle
           : vehicle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vehicle1: freezed == vehicle1
+          ? _value.vehicle1
+          : vehicle1 // ignore: cast_nullable_to_non_nullable
               as String?,
       payType: freezed == payType
           ? _value.payType
@@ -494,6 +508,7 @@ class _$GateEntryFormImpl implements _GateEntryForm {
       @JsonKey(name: 'gate_entry_type') this.entryType,
       @JsonKey(name: 'vehicle_request') this.vehicleRequest,
       @JsonKey(name: 'vehicle') this.vehicle,
+      @JsonKey(name: 'vehicle1') this.vehicle1,
       @JsonKey(name: 'pay_type') this.payType,
       @JsonKey(name: 'vendor_invoice_date') this.vendorInvoiceDate,
       @JsonKey(name: 'vendor_invoice_quantity') this.invoiceQnty,
@@ -538,6 +553,9 @@ class _$GateEntryFormImpl implements _GateEntryForm {
   @override
   @JsonKey(name: 'vehicle')
   final String? vehicle;
+  @override
+  @JsonKey(name: 'vehicle1')
+  final String? vehicle1;
   @override
   @JsonKey(name: 'pay_type')
   final String? payType;
@@ -604,7 +622,7 @@ class _$GateEntryFormImpl implements _GateEntryForm {
 
   @override
   String toString() {
-    return 'GateEntryForm(status: $status, docstatus: $docstatus, name: $name, entryTime: $entryTime, entryType: $entryType, vehicleRequest: $vehicleRequest, vehicle: $vehicle, payType: $payType, vendorInvoiceDate: $vendorInvoiceDate, invoiceQnty: $invoiceQnty, invoiceAmt: $invoiceAmt, gateEntryDate: $gateEntryDate, createdTime: $createdTime, afterWork: $afterWork, intime: $intime, outTime: $outTime, perHrAmt: $perHrAmt, amount: $amount, drivermobileNo: $drivermobileNo, driverName: $driverName, remarks: $remarks, poNumber: $poNumber, vendorInvNum: $vendorInvNum, vendorInvPhoto: $vendorInvPhoto, vehiclePhoto: $vehiclePhoto, beforeWork: $beforeWork, qtyinTonnes: $qtyinTonnes, ratePerTonnes: $ratePerTonnes)';
+    return 'GateEntryForm(status: $status, docstatus: $docstatus, name: $name, entryTime: $entryTime, entryType: $entryType, vehicleRequest: $vehicleRequest, vehicle: $vehicle, vehicle1: $vehicle1, payType: $payType, vendorInvoiceDate: $vendorInvoiceDate, invoiceQnty: $invoiceQnty, invoiceAmt: $invoiceAmt, gateEntryDate: $gateEntryDate, createdTime: $createdTime, afterWork: $afterWork, intime: $intime, outTime: $outTime, perHrAmt: $perHrAmt, amount: $amount, drivermobileNo: $drivermobileNo, driverName: $driverName, remarks: $remarks, poNumber: $poNumber, vendorInvNum: $vendorInvNum, vendorInvPhoto: $vendorInvPhoto, vehiclePhoto: $vehiclePhoto, beforeWork: $beforeWork, qtyinTonnes: $qtyinTonnes, ratePerTonnes: $ratePerTonnes)';
   }
 
   @override
@@ -623,6 +641,8 @@ class _$GateEntryFormImpl implements _GateEntryForm {
             (identical(other.vehicleRequest, vehicleRequest) ||
                 other.vehicleRequest == vehicleRequest) &&
             (identical(other.vehicle, vehicle) || other.vehicle == vehicle) &&
+            (identical(other.vehicle1, vehicle1) ||
+                other.vehicle1 == vehicle1) &&
             (identical(other.payType, payType) || other.payType == payType) &&
             (identical(other.vendorInvoiceDate, vendorInvoiceDate) ||
                 other.vendorInvoiceDate == vendorInvoiceDate) &&
@@ -673,6 +693,7 @@ class _$GateEntryFormImpl implements _GateEntryForm {
         entryType,
         vehicleRequest,
         vehicle,
+        vehicle1,
         payType,
         vendorInvoiceDate,
         invoiceQnty,
@@ -721,6 +742,7 @@ abstract class _GateEntryForm implements GateEntryForm {
       @JsonKey(name: 'gate_entry_type') final String? entryType,
       @JsonKey(name: 'vehicle_request') final String? vehicleRequest,
       @JsonKey(name: 'vehicle') final String? vehicle,
+      @JsonKey(name: 'vehicle1') final String? vehicle1,
       @JsonKey(name: 'pay_type') final String? payType,
       @JsonKey(name: 'vendor_invoice_date') final String? vendorInvoiceDate,
       @JsonKey(name: 'vendor_invoice_quantity') final double? invoiceQnty,
@@ -767,6 +789,9 @@ abstract class _GateEntryForm implements GateEntryForm {
   @override
   @JsonKey(name: 'vehicle')
   String? get vehicle;
+  @override
+  @JsonKey(name: 'vehicle1')
+  String? get vehicle1;
   @override
   @JsonKey(name: 'pay_type')
   String? get payType;
