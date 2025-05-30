@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'dart:io';
 import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/features/gate_entry/data/static_data.dart';
 import 'package:alufluoride/features/gate_entry/model/purchase_order_form.dart';
@@ -21,7 +21,7 @@ import 'package:alufluoride/widgets/spaced_column.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-
+ 
 class GateEntryFormWidget extends StatefulWidget {
   const GateEntryFormWidget({super.key});
 
@@ -46,7 +46,9 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
     final isCreating = formState.view == GateEntryView.create;
     final isCompleted = formState.view == GateEntryView.completed;
     final newform = formState.form;
-    log('---newform---:${ newform.vehiclePhoto}');
+    log('---newform---:${ newform}');
+    entryType = newform.entryType;
+
 
     
 
@@ -101,8 +103,9 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
             if (entryType == 'Purchase') ...[
               DateSelectionField(
                   title: 'Vendor Invoice Date',
-                  // initialValue: form.scheduledDate,
+                  initialValue: newform.vendorInvoiceDate,
                   isRequired: true,
+                  readOnly: isCompleted,
                   firstDate: DFU.now(),
                   lastDate: DFU.now().add(const Duration(days: 365)),
                   onDateSelect: (date) {
@@ -119,12 +122,16 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                     orElse: () => <PurchaseOrderForm>[],
                     success: (data) => data,
                   );
+
+                  log('address:$address');
                   return SearchDropDownList(
                     key: UniqueKey(),
                     color: AppColors.marigoldDDust,
                     items: address,
                     defaultSelection: address
-                        .where((e) => e.name == newform.vehicle)
+                        .where((e) {
+                          return e.name == newform.poNumber;
+                        })
                         .firstOrNull,
                     title: 'PO Number',
                     hint: 'PO Number',
@@ -162,7 +169,7 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 title: 'Vendor Invoice Quantity',
                 isRequired: true,
                 readOnly: isCompleted,
-                // initialValue: newform.gateEntryDate,
+                initialValue: newform.invoiceQnty != null ? newform.invoiceQnty.toString() : '',
                 borderColor: AppColors.marigoldDDust,
                 focusNode: focusNodes.elementAt(2),
                 inputType: const TextInputType.numberWithOptions(decimal: true),
@@ -176,7 +183,7 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 title: 'Invoice Amount',
                 isRequired: true,
                 readOnly: isCompleted,
-                // initialValue: newform.gateEntryDate,
+                initialValue: newform.invoiceAmt != null ? newform.invoiceAmt.toString() : '',
                 borderColor: AppColors.marigoldDDust,
                 focusNode: focusNodes.elementAt(2),
                 inputType: const TextInputType.numberWithOptions(decimal: true),
@@ -190,7 +197,7 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 title: 'Vehicle',
                 isRequired: true,
                 readOnly: isCompleted,
-                // initialValue: newform.gateEntryDate,
+                initialValue: newform.vehicle1,
                 borderColor: AppColors.marigoldDDust,
                 focusNode: focusNodes.elementAt(2),
                 inputType: const TextInputType.numberWithOptions(decimal: true),
@@ -204,7 +211,7 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 title: 'Vendor Invoice No',
                 isRequired: true,
                 readOnly: isCompleted,
-                // initialValue: newform.gateEntryDate,
+                initialValue: newform.vendorInvNum,
                 borderColor: AppColors.marigoldDDust,
                 focusNode: focusNodes.elementAt(2),
                 inputType: const TextInputType.numberWithOptions(decimal: true),
@@ -220,8 +227,7 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 borderColor: AppColors.marigoldDDust,
                 title: 'Vendor Invoice Photo',
                 isRequired: true,
-                // defaultValue: newform.vendorInvPhoto != null ? File(newform.vendorInvPhoto ?? '') : null,
-                // isReadOnly: isSubmitted,
+                defaultValue: newform.vendorInvPhoto != null ? File(newform.vendorInvPhoto ?? '') : null,
                 imageUrl: newform.vendorInvPhoto,
                 onFileCapture: (file) {
                   if (file != null) {
@@ -423,14 +429,30 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 borderColor: AppColors.marigoldDDust,
                 title: 'Before Work',
                 isRequired: true,
-                // defaultValue: File(newform.beforeWork ?? ''),
-                // isReadOnly: isSubmitted,
-                // imageUrl: newform.beforeWork,
+                defaultValue: isCompleted ? File(newform.beforeWork ?? '') : null,
+                imageUrl: newform.beforeWork,
                 onFileCapture: (file) {
                   if (file != null) {
                     context
                         .cubit<CreateGateEntryCubit>()
                         .onValueChanged(beforeWork: file.path);
+                  }
+                },
+              ),
+
+                  PhotoSelectionWidget(
+                isReadOnly: isCompleted,
+                fileName: 'After Work',
+                borderColor: AppColors.marigoldDDust,
+                title: 'After Work',
+                isRequired: true,
+                defaultValue: isCompleted ?  File(newform.afterWork ?? '') : null,
+                imageUrl: newform.afterWork,
+                onFileCapture: (file) {
+                  if (file != null) {
+                    context
+                        .cubit<CreateGateEntryCubit>()
+                        .onValueChanged(afterWork: file.path);
                   }
                 },
               ),
@@ -493,9 +515,8 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
               borderColor: AppColors.marigoldDDust,
               title: 'Vehicle Photo',
               isRequired: true,
-              // defaultValue: File(newform.vehiclePhoto ?? ''),
-              // isReadOnly: isSubmitted,
-              // imageUrl: newform.vehiclePhoto!.path,
+              defaultValue: isCompleted ? File(newform.vehiclePhoto ?? '') : null,
+              imageUrl: newform.vehiclePhoto,
               onFileCapture: (file) {
                 if (file != null) {
                   context
