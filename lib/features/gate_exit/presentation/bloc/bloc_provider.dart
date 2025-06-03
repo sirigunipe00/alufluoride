@@ -1,29 +1,20 @@
-import 'package:alufluoride/core/core.dart';
-import 'package:alufluoride/features/gate_entry/model/gate_entry_lines_form.dart';
+import 'package:alufluoride/core/cubit/infinite_list/infinite_list_cubit.dart';
+import 'package:alufluoride/core/cubit/network_request/network_request_cubit.dart';
+import 'package:alufluoride/core/di/injector.dart';
+import 'package:alufluoride/core/model/page_view_filters.dart';
 import 'package:alufluoride/features/gate_exit/data/gate_exit_repo.dart';
-import 'package:alufluoride/features/gate_exit/model/gate_exit_form.dart';
-import 'package:alufluoride/features/gate_exit/model/receiver_address_form.dart';
-import 'package:alufluoride/features/gate_exit/model/receiver_name_form.dart';
-import 'package:dartz/dartz.dart';
+import 'package:alufluoride/features/gate_exit/model/gate_exit.dart';
 
 import 'package:injectable/injectable.dart';
 
-typedef GateExitListCubit
-    = InfiniteListCubit<GateExitForm, Pair<int?, String?>, Pair<int?, String?>>;
-typedef GateExitListCubitState = InfiniteListState<GateExitForm>;
+typedef GateExitsCubit = InfiniteListCubit<GateExit, PageViewFilters, PageViewFilters>;
+typedef GateExitsCubitState = InfiniteListState<GateExit>;
 
-typedef ReceiverAddressList
-    = NetworkRequestCubit<List<ReceiverAddressForm>, String>;
-typedef ReceiverAddressListState
-    = NetworkRequestState<List<ReceiverAddressForm>>;
+typedef GateExitDetails = NetworkRequestCubit<GateExit, String>;
+typedef GateExitDetailsState = NetworkRequestState<GateExit>;
 
-typedef GateExitLinesCubit
-    = NetworkRequestCubit<List<GateEntryLinesForm>, String>;
-typedef GateExitLinesCubitState
-    = NetworkRequestState<List<GateEntryLinesForm>>;
-
-typedef ReceiverNameList = NetworkRequestCubit<List<ReceiverNameForm>, None>;
-typedef ReceiverNameListState = NetworkRequestState<List<ReceiverNameForm>>;
+typedef GetVehicleNumber = NetworkRequestCubit<String?, String>;
+typedef GetVehicleNumberState = NetworkRequestState<String?>;
 
 @lazySingleton
 class GateExitBlocProvider {
@@ -33,12 +24,16 @@ class GateExitBlocProvider {
 
   static GateExitBlocProvider get() => $sl.get<GateExitBlocProvider>();
 
-  GateExitListCubit gateExitList() => GateExitListCubit(
-        requestInitial: (params, state) => repo.fetchExits(0, params!.first, params.second),
-        requestMore: (params, state) => repo.fetchExits(state.curLength, params!.first, params.second),
-      );
-  ReceiverAddressList receiverAddressList() => ReceiverAddressList(
-        onRequest: (params, state) => repo.receiverAddress(params!),);
-  GateExitLinesCubit fetchGateExitLines() => GateExitLinesCubit(onRequest: (params, state) => repo.fetchExitLines(params!),);
-  ReceiverNameList receiverNameList() => ReceiverNameList(onRequest: (_, state) => repo.receiverName(),);
+  GateExitsCubit createGateExitsCubit() => GateExitsCubit(
+    requestInitial: (params, state) => repo.fetchGateExits(1, 20, params!),
+    requestMore: (params, state) => repo.fetchGateExits(state.curLength + 1, state.curLength + 20, params!),
+  );
+
+  GateExitDetails getDetails() => GateExitDetails(
+    onRequest: (params, _) => repo.getGateExit(params!),
+  );
+
+  GetVehicleNumber getVehicleNumber() => GetVehicleNumber(
+    onRequest: (params, _) => repo.getvehicleNumber(params!),
+  );
 }

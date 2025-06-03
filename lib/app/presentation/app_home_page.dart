@@ -46,14 +46,14 @@ class AppHomePage extends StatelessWidget {
               featureColor: AppColors.marigoldDDust,
               onTap: () => AppRoute.gateEntry.push(context),
             ),
-            // AppFeatureWidget(
-            //   icon: AppIcons.vehcileExit
-            //       .toWidget(height: 100, width: 120, fit: BoxFit.contain),
-            //   title: Text('Gate Exit',
-            //       style: AppTextStyles.featureLabelStyle(context)),
-            //   featureColor: AppColors.shyMoment,
-            //   onTap: () => AppRoute.gateExit.push(context),
-            // ),
+            AppFeatureWidget(
+              icon: AppIcons.vehcileExit
+                  .toWidget(height: 100, width: 120, fit: BoxFit.contain),
+              title: Text('Gate Exit',
+                  style: AppTextStyles.featureLabelStyle(context)),
+              featureColor: AppColors.shyMoment,
+              onTap: () => AppRoute.gateExit.push(context),
+            ),
             // AppFeatureWidget(
             //   icon: AppIcons.incidentRegistration
             //       .toWidget(height: 100, width: 120, fit: BoxFit.contain),

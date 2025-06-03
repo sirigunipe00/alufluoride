@@ -7,12 +7,13 @@ class StatusMenuWidget extends StatefulWidget {
     super.key,
     required this.onChange,
     required this.items,
-    this.defaultSel,
+    this.defaultSel, this.defaultStatus,
   });
 
   final List<String> items;
   final String? defaultSel;
   final void Function(String status) onChange;
+  final String? defaultStatus;
   @override
   State<StatusMenuWidget> createState() => _StatusMenuWidgetState();
 }

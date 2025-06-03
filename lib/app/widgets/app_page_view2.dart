@@ -105,6 +105,7 @@ class AppPageView2<T extends PageViewFiltersCubit> extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: SimpleSearchBar(
+                      inputType: TextInputType.number,
                       initial: context.read<T>().state.query,
                       hintText: hintText,
                       onCancel: context.cubit<T>().onSearch,

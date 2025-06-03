@@ -1,6 +1,6 @@
+import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/core/model/page_view_filters.dart';
 import 'package:alufluoride/core/model/page_view_filters_cubit.dart';
-import 'package:alufluoride/core/utils/utils.dart';
 
 class IncidentRegisterFilterCubit extends PageViewFiltersCubit {
   IncidentRegisterFilterCubit() : super(PageViewFilters.initial());

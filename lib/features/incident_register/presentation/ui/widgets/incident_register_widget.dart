@@ -1,4 +1,5 @@
-import 'package:alufluoride/core/core.dart';
+import 'package:alufluoride/core/utils/date_format_util.dart';
+import 'package:alufluoride/core/utils/string_utils.dart';
 import 'package:alufluoride/features/incident_register/model/incident_register_form.dart';
 import 'package:alufluoride/styles/app_colors.dart';
 import 'package:alufluoride/styles/app_text_styles.dart';
@@ -6,6 +7,7 @@ import 'package:alufluoride/widgets/app_spacer.dart';
 import 'package:alufluoride/widgets/buttons/app_view_btn.dart';
 import 'package:alufluoride/widgets/doc_status_widget.dart';
 import 'package:alufluoride/widgets/spaced_column.dart';
+
 import 'package:flutter/material.dart';
 
 class IncidentRegisterWidget extends StatelessWidget {
@@ -33,12 +35,13 @@ class IncidentRegisterWidget extends StatelessWidget {
             margin: const EdgeInsets.all(12),
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(registerForm.name ?? '',
                       style: AppTextStyles.titleLarge(context)
                           .copyWith(color: AppColors.black)),
-                          Text(DFU.ddMMyyyyFromStr(registerForm.date!),
+                  Text(DFU.ddMMyyyyFromStr(registerForm.date!),
                       style: AppTextStyles.titleLarge(context)
                           .copyWith(color: AppColors.black)),
                 ],
