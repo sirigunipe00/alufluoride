@@ -1,11 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:alufluoride/core/consts/urls.dart';
 import 'package:alufluoride/core/core.dart';
-import 'package:alufluoride/features/gate_exit/model/receiver_name_form.dart';
-
+import 'package:alufluoride/core/network/base_api_repo.dart';
+import 'package:alufluoride/core/network/request_config.dart';
+import 'package:alufluoride/core/utils/typedefs.dart';
 import 'package:alufluoride/features/incident_register/data/incident_register_repo.dart';
 import 'package:alufluoride/features/incident_register/model/incident_register_form.dart';
+import 'package:alufluoride/features/incident_register/model/receiver_form.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
@@ -119,7 +122,7 @@ class IncidentRegistersRepoImpl extends BaseApiRepository
   }
 
   @override
-  AsyncValueOf<List<String>> companyName() async {  
+  AsyncValueOf<List<String>> companyName() async {
     return await executeSafely(() async {
       final config = RequestConfig(
         url: Urls.companyName,

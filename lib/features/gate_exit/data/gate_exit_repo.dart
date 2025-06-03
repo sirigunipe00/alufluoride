@@ -1,19 +1,15 @@
+import 'package:alufluoride/core/model/page_view_filters.dart';
+import 'package:alufluoride/core/model/pair.dart';
 import 'package:alufluoride/core/utils/typedefs.dart';
-import 'package:alufluoride/features/gate_entry/model/gate_entry_lines_form.dart';
-import 'package:alufluoride/features/gate_exit/model/gate_exit_form.dart';
-import 'package:alufluoride/features/gate_exit/model/receiver_address_form.dart';
-import 'package:alufluoride/features/gate_exit/model/receiver_name_form.dart';
+import 'package:alufluoride/features/gate_exit/model/gate_exit.dart';
+import 'package:alufluoride/features/gate_exit/model/new_gate_exit_form.dart';
 
 
 abstract interface class GateExitRepo {
-  AsyncValueOf<List<GateExitForm>> fetchExits(
-    int start,
-    int? docStatus,
-    String? search,);
-  AsyncValueOf<String> createGateExit(GateExitForm form, List<GateEntryLinesForm> lines);
-  AsyncValueOf<String> submitGateExit(GateExitForm form, List<GateEntryLinesForm> lines);
-  AsyncValueOf<List<GateEntryLinesForm>> fetchExitLines(String itemName,);
-  AsyncValueOf<String> updateGateExit(GateExitForm form,List<GateEntryLinesForm> lines,);
-  AsyncValueOf<List<ReceiverAddressForm>> receiverAddress(String id);
-  AsyncValueOf<List<ReceiverNameForm>> receiverName();
+  AsyncValueOf<List<GateExit>> fetchGateExits(int start, int end, PageViewFilters filters);
+  AsyncValueOf<GateExit> getGateExit(String name);
+
+  AsyncValueOf<String?> getvehicleNumber(String siNumber);
+  AsyncValueOf<Pair<String, String>> createGateExit(NewGateExitForm form);
+  AsyncValueOf<Pair<String, String>>submitGateExit(NewGateExitForm form);
 }

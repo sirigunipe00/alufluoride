@@ -1,11 +1,16 @@
 import 'package:alufluoride/core/core.dart';
+import 'package:alufluoride/core/utils/string_utils.dart';
 import 'package:alufluoride/features/incident_register/presentation/bloc/bloc_provider.dart';
 import 'package:alufluoride/features/incident_register/presentation/bloc/create_incident_register/incident_register_cubit.dart';
 import 'package:alufluoride/styles/app_colors.dart';
+import 'package:alufluoride/widgets/app_spacer.dart';
+import 'package:alufluoride/widgets/buttons/app_btn.dart';
+import 'package:alufluoride/widgets/inputs/app_dropdown_widget.dart';
 import 'package:alufluoride/widgets/inputs/compact_listtile.dart';
+import 'package:alufluoride/widgets/inputs/input_filed.dart';
 import 'package:alufluoride/widgets/inputs/photo_selection_widget.dart';
 import 'package:alufluoride/widgets/inputs/search_dropdown_list.dart';
-import 'package:alufluoride/widgets/widgets.dart';
+import 'package:alufluoride/widgets/spaced_column.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

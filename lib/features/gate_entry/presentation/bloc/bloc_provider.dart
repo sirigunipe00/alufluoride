@@ -5,8 +5,10 @@ import 'package:alufluoride/features/gate_entry/model/gate_entry_form.dart';
 import 'package:alufluoride/features/gate_entry/model/gate_entry_lines_form.dart';
 import 'package:alufluoride/features/gate_entry/model/material_name_form.dart';
 import 'package:alufluoride/features/gate_entry/model/purchase_order_form.dart';
+import 'package:alufluoride/features/gate_entry/model/recevier_address_form.dart';
 import 'package:alufluoride/features/gate_entry/model/vehicle_form.dart';
 import 'package:alufluoride/features/gate_entry/model/vehicle_request_form.dart';
+import 'package:alufluoride/features/incident_register/model/receiver_form.dart';
 
 import 'package:dartz/dartz.dart';
 
@@ -39,6 +41,14 @@ typedef PurchaseOrderListState = NetworkRequestState<List<PurchaseOrderForm>>;
 
 typedef AttachmentsList = NetworkRequestCubit<List<String>, String>;
 typedef AttachmentsListState = NetworkRequestState<List<String>>;
+
+typedef ReceiverAddressList
+    = NetworkRequestCubit<List<ReceiverAddressForm>, String>;
+typedef ReceiverAddressListState
+    = NetworkRequestState<List<ReceiverAddressForm>>;
+
+typedef ReceiverNameList = NetworkRequestCubit<List<ReceiverNameForm>, None>;
+typedef ReceiverNameListState = NetworkRequestState<List<ReceiverNameForm>>;
 
 
 // typedef DeleteLines = NetworkRequestCubit<String, Pair<String ,List<String>>>;
@@ -83,6 +93,10 @@ class GateEntryBlocProvider {
 
   AttachmentsList attachmentsList() => AttachmentsList(
     onRequest:(params, state) => repo.fetchAttachments(params!), );
+
+    ReceiverAddressList receiverAddressList() => ReceiverAddressList(
+        onRequest: (params, state) => repo.receiverAddress(params!),);
+  ReceiverNameList receiverNameList() => ReceiverNameList(onRequest: (_, state) => repo.receiverName(),);
 
     // DeleteLines removeGaylord() => DeleteLines(
     // onRequest:(params, state) =>repo.deleteLines(params!.first, params.second));

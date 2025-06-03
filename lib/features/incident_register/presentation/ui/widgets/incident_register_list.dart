@@ -1,12 +1,15 @@
 import 'package:alufluoride/app/widgets/app_page_view2.dart';
+import 'package:alufluoride/core/app_router/app_route.dart';
 import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/core/model/page_view_filters.dart';
+import 'package:alufluoride/core/utils/string_utils.dart';
 import 'package:alufluoride/features/incident_register/model/incident_register_form.dart';
 import 'package:alufluoride/features/incident_register/presentation/bloc/bloc_provider.dart';
 import 'package:alufluoride/features/incident_register/presentation/bloc/incident_register_filter_cubit.dart';
 import 'package:alufluoride/features/incident_register/presentation/ui/widgets/incident_register_widget.dart';
 import 'package:alufluoride/styles/icons.dart';
 import 'package:alufluoride/widgets/infinite_list_widget.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

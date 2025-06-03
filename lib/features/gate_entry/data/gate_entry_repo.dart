@@ -4,8 +4,10 @@ import 'package:alufluoride/features/gate_entry/model/gate_entry_form.dart';
 import 'package:alufluoride/features/gate_entry/model/gate_entry_lines_form.dart';
 import 'package:alufluoride/features/gate_entry/model/material_name_form.dart';
 import 'package:alufluoride/features/gate_entry/model/purchase_order_form.dart';
+import 'package:alufluoride/features/gate_entry/model/recevier_address_form.dart';
 import 'package:alufluoride/features/gate_entry/model/vehicle_form.dart';
 import 'package:alufluoride/features/gate_entry/model/vehicle_request_form.dart';
+import 'package:alufluoride/features/incident_register/model/receiver_form.dart';
 
 abstract interface class GateEntryRepo {
   AsyncValueOf<List<GateEntryForm>> fetchEntries(
@@ -36,6 +38,8 @@ abstract interface class GateEntryRepo {
   AsyncValueOf<List<String>> fetchAttachments(
     String id,
   );
+   AsyncValueOf<List<ReceiverAddressForm>> receiverAddress(String id);
+  AsyncValueOf<List<ReceiverNameForm>> receiverName();
   //  AsyncValueOf<String> deleteLines(
   //   String id, List<String> lines
   // );

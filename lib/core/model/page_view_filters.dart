@@ -5,7 +5,7 @@ class PageViewFilters extends Equatable {
 
   final String status;
   final String? query;
-  
+
   @override
   List<Object?> get props => [status, query];
 
@@ -14,5 +14,7 @@ class PageViewFilters extends Equatable {
   PageViewFilters copyWith({
     String? status,
     String? query,
-  }) => PageViewFilters(status: status ?? this.status, query: query ?? this.query);
+  }) =>
+      PageViewFilters(
+          status: status ?? this.status, query: query ?? this.query);
 }

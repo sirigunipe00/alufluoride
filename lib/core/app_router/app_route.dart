@@ -9,20 +9,21 @@ abstract class _AppRoutePaths {
   static const newGateEntry = '/home/gateentry/newGateEntry';
   static const gateExit = '/home/gateexit';
   static const newGateExit = '/home/gateexit/newGateExit';
+  static const newGateExitPreview = '/home/gateexit/newGateExit/preview';
   static const incidentRegister = '/home/incidentRegister';
   static const newIncidentReg = '/home/incidentRegister/newIncReg';
-  static const inviteVisitor = '/home/inviteVisitor';
-  static const newInviteVisitor = '/home/inviteVisitor/newInviteVisitor';
-  static const visitorInOut = '/home/visitorInOut';
-  static const newVisitorInOut = '/home/visitorInOut/newVisitorInOut';
-  static const createVisit = '/home/createVisit';
-  static const newCreateVisit = '/home/createVisit/newCreateVisit';
-  static const outWardGatePass = '/home/outWardGatePass';
-  static const newOutWardGatePass = '/home/outWardGatePass/newOutWardGatePass';
-  static const inWardGatePass = '/home/inWardGatePass';
-  static const newInWardGatePass = '/home/inWardGatePass/newInWardGatePass';
-  static const emptyVehicle = '/home/emptyVehicle';
-  static const newEmptyVehicle =  '/home/emptyVehicle/newEmptyVehicle';
+  // static const inviteVisitor = '/home/inviteVisitor';
+  // static const newInviteVisitor = '/home/inviteVisitor/newInviteVisitor';
+  // static const visitorInOut = '/home/visitorInOut';
+  // static const newVisitorInOut = '/home/visitorInOut/newVisitorInOut';
+  // static const createVisit = '/home/createVisit';
+  // static const newCreateVisit = '/home/createVisit/newCreateVisit';
+  // static const outWardGatePass = '/home/outWardGatePass';
+  // static const newOutWardGatePass = '/home/outWardGatePass/newOutWardGatePass';
+  // static const inWardGatePass = '/home/inWardGatePass';
+  // static const newInWardGatePass = '/home/inWardGatePass/newInWardGatePass';
+  // static const emptyVehicle = '/home/emptyVehicle';
+  // static const newEmptyVehicle =  '/home/emptyVehicle/newEmptyVehicle';
 
   static const account = '/account';
 }
@@ -35,21 +36,21 @@ enum AppRoute {
   newGateEntry(_AppRoutePaths.newGateEntry),
   gateExit(_AppRoutePaths.gateExit),
   newGateExit(_AppRoutePaths.newGateExit),
+  newGateExitPreview(_AppRoutePaths.newGateExitPreview),
   incidentRegister(_AppRoutePaths.incidentRegister),
   newIncidentReg(_AppRoutePaths.newIncidentReg),
-  inviteVisitor(_AppRoutePaths.inviteVisitor),
-  newInviteVisitor(_AppRoutePaths.newInviteVisitor),
-  visitorInOut(_AppRoutePaths.visitorInOut),
-  newVisitorInOut(_AppRoutePaths.newVisitorInOut),
-  createVisit(_AppRoutePaths.createVisit),
-  newCreateVisit(_AppRoutePaths.newCreateVisit),
-  outWardGatePass(_AppRoutePaths.outWardGatePass),
-  newOutWardGatePass(_AppRoutePaths.newOutWardGatePass),
-  inWardGatePass(_AppRoutePaths.inWardGatePass),
-  newInWardGatePass(_AppRoutePaths.newInWardGatePass),
-  emptyVehicle(_AppRoutePaths.emptyVehicle),
-  newEmptyVehicle(_AppRoutePaths.newEmptyVehicle),
-
+  // inviteVisitor(_AppRoutePaths.inviteVisitor),
+  // newInviteVisitor(_AppRoutePaths.newInviteVisitor),
+  // visitorInOut(_AppRoutePaths.visitorInOut),
+  // newVisitorInOut(_AppRoutePaths.newVisitorInOut),
+  // createVisit(_AppRoutePaths.createVisit),
+  // newCreateVisit(_AppRoutePaths.newCreateVisit),
+  // outWardGatePass(_AppRoutePaths.outWardGatePass),
+  // newOutWardGatePass(_AppRoutePaths.newOutWardGatePass),
+  // inWardGatePass(_AppRoutePaths.inWardGatePass),
+  // newInWardGatePass(_AppRoutePaths.newInWardGatePass),
+  // emptyVehicle(_AppRoutePaths.emptyVehicle),
+  // newEmptyVehicle(_AppRoutePaths.newEmptyVehicle),
 
   account(_AppRoutePaths.account);
 

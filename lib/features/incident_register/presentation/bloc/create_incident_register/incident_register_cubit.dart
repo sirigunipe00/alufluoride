@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:alufluoride/core/core.dart';
+import 'package:alufluoride/core/cubit/base/base_cubit.dart';
+import 'package:alufluoride/core/utils/date_format_util.dart';
+import 'package:alufluoride/core/utils/typedefs.dart';
 import 'package:alufluoride/features/incident_register/data/incident_register_repo.dart';
 import 'package:alufluoride/features/incident_register/model/incident_register_form.dart';
 import 'package:dartz/dartz.dart';
@@ -103,7 +106,8 @@ class CreateIncidentRegisterCubit
         final nextMode = switch (state.view) {
           IncidentRegisterView.create => IncidentRegisterView.edit,
           IncidentRegisterView.edit ||
-          IncidentRegisterView.completed => IncidentRegisterView.completed,
+          IncidentRegisterView.completed =>
+            IncidentRegisterView.completed,
         };
 
         if (state.view == IncidentRegisterView.create) {
@@ -117,7 +121,7 @@ class CreateIncidentRegisterCubit
               emitSafeState(state.copyWith(
                 isLoading: false,
                 isSuccess: true,
-                form: state.form.copyWith(name: docNo,docStatus: 0),
+                form: state.form.copyWith(name: docNo, docStatus: 0),
                 successMsg: r.first,
                 view: nextMode,
               ));
@@ -146,50 +150,52 @@ class CreateIncidentRegisterCubit
     );
   }
 
-  void _emitError(Pair<String,int?> error) {
-    final failure = Failure(error: error.first, title: 'Missing Fields',status: error.second);
+  void _emitError(Pair<String, int?> error) {
+    final failure = Failure(
+        error: error.first, title: 'Missing Fields', status: error.second);
     emitSafeState(state.copyWith(error: failure, isLoading: false));
   }
 
   void errorHandled() {
-    emitSafeState(state.copyWith(error: null, isLoading: false,isSuccess: false,successMsg: null));
+    emitSafeState(state.copyWith(
+        error: null, isLoading: false, isSuccess: false, successMsg: null));
   }
 
   Option<Pair<String, int?>> _validate() {
     final form = state.form;
 
     if (form.incidentInvestigator.doesNotHaveValue) {
-      return optionOf(const Pair('Enter Incident Invesigator',2));
+      return optionOf(const Pair('Enter Incident Invesigator', 2));
     } else if (form.incidentPlantName.doesNotHaveValue) {
-      return optionOf(const Pair('Select Incident PlantName',3));
+      return optionOf(const Pair('Select Incident PlantName', 3));
     } else if (form.incidentType.isNull) {
-      return optionOf(const Pair('Select Type of Incident',4));
+      return optionOf(const Pair('Select Type of Incident', 4));
     } else if (form.associatedInvol.isNull) {
-      return optionOf(const Pair('Select AEL Associated Involved',5));
+      return optionOf(const Pair('Select AEL Associated Involved', 5));
     } else if (form.assetsInvolve.isNull) {
-      return optionOf(const Pair('Select AEL Assets Involved',6));
+      return optionOf(const Pair('Select AEL Assets Involved', 6));
     } else if (form.amount.isNull) {
-      return optionOf(const Pair('Enter Amount.',7));
+      return optionOf(const Pair('Enter Amount.', 7));
     } else if (form.complaint.isNull) {
-      return optionOf(const Pair('Select FIR - Complaint',8));
+      return optionOf(const Pair('Select FIR - Complaint', 8));
     } else if (form.employeeEmail.isNull) {
-      return optionOf(const Pair('Enter Notify Employee Email',9));
+      return optionOf(const Pair('Enter Notify Employee Email', 9));
     } else if (form.incPhotoImg == null && form.photo == null) {
-      return optionOf(const Pair('Attach Photographs of Incident',10));
-    } 
+      return optionOf(const Pair('Attach Photographs of Incident', 10));
+    }
     // else if (form.remarks.isNull) {
     //   return optionOf('Enter Remarks');
     // }
-     else if (form.otherPartyDetails.isNull) {
-      return optionOf(const Pair('Enter Details Of Other Party',11));
-    } 
+    else if (form.otherPartyDetails.isNull) {
+      return optionOf(const Pair('Enter Details Of Other Party', 11));
+    }
     // else if (form.desc1.isNull) {
     //   return optionOf('Enter Incident Description 1');
     // }
-     else if (form.desc2.isNull) {
-      return optionOf(const Pair('Enter Incident Description',12));
+    else if (form.desc2.isNull) {
+      return optionOf(const Pair('Enter Incident Description', 12));
     } else if (form.desc3.isNull) {
-      return optionOf(const Pair('Enter Action taken/Recommendation',13));
+      return optionOf(const Pair('Enter Action taken/Recommendation', 13));
     }
 
     return const None();

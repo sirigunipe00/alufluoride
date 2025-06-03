@@ -8,13 +8,14 @@ class SimpleSearchBar extends StatefulWidget {
     required this.onSearch,
     required this.onCancel,
     this.initial,
-    super.key,
+    super.key, required this.inputType,
   });
 
   final String hintText;
   final String? initial;
   final Function(String) onSearch;
   final Function() onCancel;
+  final TextInputType inputType;
 
   @override
   State<SimpleSearchBar> createState() => _SimpleSearchBarState();

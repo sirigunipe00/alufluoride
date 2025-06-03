@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:alufluoride/core/consts/doctypes.dart';
@@ -11,8 +10,10 @@ import 'package:alufluoride/features/gate_entry/model/gate_entry_form.dart';
 import 'package:alufluoride/features/gate_entry/model/gate_entry_lines_form.dart';
 import 'package:alufluoride/features/gate_entry/model/material_name_form.dart';
 import 'package:alufluoride/features/gate_entry/model/purchase_order_form.dart';
+import 'package:alufluoride/features/gate_entry/model/recevier_address_form.dart';
 import 'package:alufluoride/features/gate_entry/model/vehicle_form.dart';
 import 'package:alufluoride/features/gate_entry/model/vehicle_request_form.dart';
+import 'package:alufluoride/features/incident_register/model/receiver_form.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
@@ -401,6 +402,42 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
       final response = await post(config);
 
       return response.process((r) => right('Successfully Deleted'));
+    });
+  }
+
+   @override
+  AsyncValueOf<List<ReceiverAddressForm>> receiverAddress(String id) async {
+    return await executeSafely(() async {
+      final config = RequestConfig(
+        url: Urls.receiverAddress,
+        reqParams: {'receiver_id': id, 'limit_page_length': 'None'},
+        parser: (p0) {
+          final data = p0['message']['data'] as List<dynamic>;
+          return data.map((e) => ReceiverAddressForm.fromJson(e)).toList();
+        },
+      );
+      final response = await get(config);
+      return response.process((r) => right(r.data!));
+    });
+  }
+
+  @override
+  AsyncValueOf<List<ReceiverNameForm>> receiverName() async {
+    return await executeSafely(() async {
+      final config = RequestConfig(
+        url: Urls.customerName,
+        reqParams: {
+          'fields': ['name', 'customer_name', 'gstin'],
+          'limit_page_length': 'None'
+        },
+        parser: (p0) {
+          final data = p0['data'] as List<dynamic>;
+          return data.map((e) => ReceiverNameForm.fromJson(e)).toList();
+        },
+      );
+      final response = await get(config);
+
+      return response.process((r) => right(r.data!));
     });
   }
 }
