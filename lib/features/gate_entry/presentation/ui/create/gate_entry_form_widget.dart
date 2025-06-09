@@ -519,9 +519,24 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
               imageUrl: newform.vehiclePhoto,
               onFileCapture: (file) {
                 if (file != null) {
+                  debugPrint('Updating vehicle photo path: ${file.path}');
                   context
                       .cubit<CreateGateEntryCubit>()
                       .onValueChanged(vehiclephoto: file.path);
+                }
+              },
+              onTextExtracted: (extractedText) {
+                debugPrint('Received extracted text for remarks: $extractedText');
+                // Update remarks with extracted text
+                if (extractedText.isNotEmpty) {
+                  final currentRemarks = newform.remarks ?? '';
+                  final updatedRemarks = currentRemarks.isEmpty 
+                      ? extractedText 
+                      : '$currentRemarks\n$extractedText';
+                  debugPrint('Updating remarks with: $updatedRemarks');
+                  context
+                      .cubit<CreateGateEntryCubit>()
+                      .onValueChanged(remarks: updatedRemarks);
                 }
               },
             ),
