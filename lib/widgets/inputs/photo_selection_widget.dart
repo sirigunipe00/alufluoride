@@ -7,6 +7,7 @@ import 'package:alufluoride/widgets/caption_text.dart';
 import 'package:alufluoride/widgets/spaced_column.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 
 enum PhotoState { capture, view }
 
@@ -18,11 +19,12 @@ class PhotoSelectionWidget extends StatefulWidget {
     this.isReadOnly = false,
     this.imageUrl,
     this.defaultValue,
-    required this.onFileCapture, 
-    this.focusNode, 
-    required this.fileName, 
-    this.isWarning,  
+    required this.onFileCapture,
+    this.focusNode,
+    required this.fileName,
+    this.isWarning,
     required this.borderColor,
+    this.onTextExtracted,
   });
 
   final String? title;
@@ -31,6 +33,7 @@ class PhotoSelectionWidget extends StatefulWidget {
   final String? imageUrl;
   final File? defaultValue;
   final Function(File? file) onFileCapture;
+  final Function(String text)? onTextExtracted;
   final bool isReadOnly;
   final FocusNode? focusNode;
   final bool? isWarning;
@@ -44,6 +47,7 @@ class _PhotoSelectionWidgetState extends State<PhotoSelectionWidget>
     with AttahcmentSelectionMixin {
   File? _selectedImage;
   PhotoState _photoState = PhotoState.capture;
+  final textRecognizer = TextRecognizer();
 
   @override
   void initState() {
@@ -58,19 +62,55 @@ class _PhotoSelectionWidgetState extends State<PhotoSelectionWidget>
     }
   }
 
+  @override
+  void dispose() {
+    textRecognizer.close();
+    super.dispose();
+  }
+
+  Future<String?> _extractTextFromImage(File imageFile) async {
+    try {
+      debugPrint('Starting text extraction from image: ${imageFile.path}');
+      final inputImage = InputImage.fromFile(imageFile);
+      final recognizedText = await textRecognizer.processImage(inputImage);
+      final extractedText = recognizedText.text;
+      debugPrint('Extracted text: $extractedText');
+      return extractedText;
+    } catch (e) {
+      debugPrint('Error extracting text: $e');
+      return null;
+    }
+  }
+
   Future<void> _capture() async {
     final capturedFile = await captureImage();
     if (capturedFile != null) {
+      debugPrint('Image captured successfully at: ${capturedFile.path}');
       final directoryPath = capturedFile.parent.path;
       final exten = path.extension(capturedFile.path);
       final newFileName = '${widget.fileName}$exten';
       final newPath = path.join(directoryPath, newFileName);
       final renamedFile = await capturedFile.rename(newPath);
+      debugPrint('Image renamed to: ${renamedFile.path}');
+      
+      // Extract text from the image
+      final extractedText = await _extractTextFromImage(renamedFile);
+      debugPrint('Text extraction completed. Result: $extractedText');
+      
+      if (extractedText != null && extractedText.isNotEmpty) {
+        debugPrint('Calling onTextExtracted with text: $extractedText');
+        widget.onTextExtracted?.call(extractedText);
+      } else {
+        debugPrint('No text was extracted from the image');
+      }
+
       setState(() {
         _selectedImage = renamedFile;
         _photoState = PhotoState.view;
       });
       widget.onFileCapture(renamedFile);
+    } else {
+      debugPrint('No image was captured');
     }
   }
 

@@ -1,0 +1,2 @@
+/Users/sumithtulluru/Desktop/alufluoride/android/app/.cxx/Debug/6k30d6w1/x86_64/CMakeFiles/edit_cache.dir
+/Users/sumithtulluru/Desktop/alufluoride/android/app/.cxx/Debug/6k30d6w1/x86_64/CMakeFiles/rebuild_cache.dir

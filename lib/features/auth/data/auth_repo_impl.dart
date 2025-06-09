@@ -6,6 +6,7 @@ import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/features/auth/data/auth_repo.dart';
 import 'package:alufluoride/features/auth/model/logged_in_user.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 
@@ -38,6 +39,8 @@ class AuthRepoImpl extends BaseApiRepository implements AuthRepo {
         },
         body: jsonEncode({'usr' : username, 'pwd' : pswd}),
       );
+
+      debugPrint('requestConfig: ${requestConfig.body}');
 
       final response = await post(requestConfig, includeAuthHeader: false);
 
