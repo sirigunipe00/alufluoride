@@ -526,18 +526,51 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 }
               },
               onTextExtracted: (extractedText) {
-                debugPrint('Received extracted text for remarks: $extractedText');
-                // Update remarks with extracted text
-                if (extractedText.isNotEmpty) {
-                  final currentRemarks = newform.remarks ?? '';
-                  final updatedRemarks = currentRemarks.isEmpty 
-                      ? extractedText 
-                      : '$currentRemarks\n$extractedText';
-                  debugPrint('Updating remarks with: $updatedRemarks');
-                  context
-                      .cubit<CreateGateEntryCubit>()
-                      .onValueChanged(remarks: updatedRemarks);
+                debugPrint('=== Processing Extracted Text ===');
+                debugPrint('Raw extracted text: $extractedText');
+                debugPrint('Current remarks before update: ${newform.remarks}');
+                
+                // Try to find the weight value
+                final weightPattern = RegExp(r'\d+\.?\d*');
+                final matches = weightPattern.allMatches(extractedText);
+                
+                if (matches.isNotEmpty) {
+                  final weight = matches.first.group(0);
+                  debugPrint('Found weight: $weight');
+                  
+                  if (weight != null) {
+                    // Force clear any existing weight entries
+                    final currentRemarks = newform.remarks ?? '';
+                    final cleanedRemarks = currentRemarks
+                        .split('\n')
+                        .where((line) => !line.trim().toLowerCase().startsWith('weight:'))
+                        .join('\n')
+                        .trim();
+                    
+                    debugPrint('Cleaned remarks: $cleanedRemarks');
+                    
+                    final weightText = 'Weight: $weight kg';
+                    final updatedRemarks = cleanedRemarks.isEmpty 
+                        ? weightText 
+                        : '$cleanedRemarks\n$weightText';
+                    
+                    debugPrint('Final remarks to be set: $updatedRemarks');
+                    
+                    // Update remarks
+                    context
+                        .cubit<CreateGateEntryCubit>()
+                        .onValueChanged(remarks: updatedRemarks);
+                        
+                    // Force UI update
+                    setState(() {});
+                    
+                    // Verify update
+                    debugPrint('Remarks after update: ${newform.remarks}');
+                  }
+                } else {
+                  debugPrint('No weight value found in extracted text');
                 }
+                debugPrint('=== Text Processing Complete ===');
               },
             ),
             InputField(
@@ -548,10 +581,11 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
               maxLines: 3,
               initialValue: newform.remarks,
               focusNode: focusNodes.elementAt(11),
-              onChanged: (p0) {
+              onChanged: (value) {
+                debugPrint('Remarks manually changed to: $value');
                 context
                     .cubit<CreateGateEntryCubit>()
-                    .onValueChanged(remarks: p0);
+                    .onValueChanged(remarks: value);
               },
             ),
             AppSpacer.p32(),

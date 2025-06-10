@@ -550,7 +550,7 @@ packages:
     source: hosted
     version: "6.2.1"
   google_mlkit_commons:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: google_mlkit_commons
       sha256: "046586b381cdd139f7f6a05ad6998f7e339d061bd70158249907358394b5f496"
@@ -598,7 +598,7 @@ packages:
     source: hosted
     version: "4.0.2"
   image:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: image
       sha256: "4e973fcf4caae1a4be2fa0a13157aa38a8f9cb049db6529aa00b4d71abc4d928"

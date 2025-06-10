@@ -54,6 +54,12 @@ class AppHomePage extends StatelessWidget {
               featureColor: AppColors.shyMoment,
               onTap: () => AppRoute.gateExit.push(context),
             ),
+             AppFeatureWidget(
+              icon: AppIcons.vechileEntry.toWidget(height: 100, width: 120, fit: BoxFit.contain),
+              title: Text('Contract Employee', style: AppTextStyles.featureLabelStyle(context).copyWith(fontSize: 14, fontWeight: FontWeight.w500)),
+              featureColor: AppColors.green,
+              onTap: () => AppRoute.contractEmployee.push(context),
+            ),
             // AppFeatureWidget(
             //   icon: AppIcons.incidentRegistration
             //       .toWidget(height: 100, width: 120, fit: BoxFit.contain),
