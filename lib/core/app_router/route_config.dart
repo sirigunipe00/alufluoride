@@ -6,6 +6,7 @@ import 'package:alufluoride/app/widgets/app_scaffold_widget.dart';
 import 'package:alufluoride/app/widgets/image_preview_scrn.dart';
 import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/features/auth/presentation/authentication_scrn.dart';
+import 'package:alufluoride/features/contract_employee/presentation/ui/create/new_contract_employee.dart';
 import 'package:alufluoride/features/gate_entry/model/gate_entry_form.dart';
 import 'package:alufluoride/features/gate_entry/presentation/bloc/bloc_provider.dart';
 import 'package:alufluoride/features/gate_entry/presentation/bloc/create_gate_entry/gate_entry_cubit.dart';
@@ -182,6 +183,10 @@ class AppRouterConfig {
                         },
                       ),
                     ],
+                  ),
+                  GoRoute(
+                    path: _getPath(AppRoute.contractEmployee),
+                    builder: (_, state) => const NewContractEmployee(),
                   ),
                 ],
               ),
