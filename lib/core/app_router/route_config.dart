@@ -6,7 +6,11 @@ import 'package:alufluoride/app/widgets/app_scaffold_widget.dart';
 import 'package:alufluoride/app/widgets/image_preview_scrn.dart';
 import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/features/auth/presentation/authentication_scrn.dart';
+import 'package:alufluoride/features/contract_employee/model/contract_employee_form.dart';
+import 'package:alufluoride/features/contract_employee/presentation/bloc/bloc_provider.dart';
+import 'package:alufluoride/features/contract_employee/presentation/bloc/create_contract_employee/contract_employee_cubit.dart';
 import 'package:alufluoride/features/contract_employee/presentation/ui/create/new_contract_employee.dart';
+import 'package:alufluoride/features/contract_employee/presentation/ui/widgets/contract_employess_list.dart';
 import 'package:alufluoride/features/gate_entry/model/gate_entry_form.dart';
 import 'package:alufluoride/features/gate_entry/presentation/bloc/bloc_provider.dart';
 import 'package:alufluoride/features/gate_entry/presentation/bloc/create_gate_entry/gate_entry_cubit.dart';
@@ -25,6 +29,7 @@ import 'package:alufluoride/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
 class AppRouterConfig {
   static final parentNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -177,6 +182,7 @@ class AppRouterConfig {
                                     $sl.get<CreateIncidentRegisterCubit>()
                                       ..initDetails(incRegForm),
                               ),
+                             
                             ],
                             child: const NewIncidentRegister(),
                           );
@@ -186,7 +192,33 @@ class AppRouterConfig {
                   ),
                   GoRoute(
                     path: _getPath(AppRoute.contractEmployee),
-                    builder: (_, state) => const NewContractEmployee(),
+                    builder: (_, state) => const ContractEmployessList(),
+                    routes: [
+                      GoRoute(
+                        path: _getPath(AppRoute.newContractEmployee),
+                        onExit: (context, state) async =>
+                            await _promptConf(context),
+                        builder: (_, state) {
+                          final provider = ContractEmployeeBlocProvider.get();
+                          final incRegForm =
+                              state.extra as ContractEmployeeForm?;
+                          return MultiBlocProvider(
+                            providers: [
+                              BlocProvider(
+                                  create: (_) =>
+                                      provider.contractorsListCubit()),
+                              BlocProvider(
+                                  create: (_) =>
+                                      $sl.get<CreateContractEmployeeCubit>()
+                                        ..initDetails(incRegForm)),
+
+                                
+                            ],
+                            child: const NewContractEmployee(),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),

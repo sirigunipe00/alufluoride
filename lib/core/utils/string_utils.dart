@@ -51,6 +51,7 @@ class StringUtils {
       return '';
     }
   }
+  
 }
 
 extension StringExentions on String? {

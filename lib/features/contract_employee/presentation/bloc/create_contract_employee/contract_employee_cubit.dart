@@ -1,87 +1,81 @@
+import 'dart:convert';
+
 import 'dart:io';
 
 import 'package:alufluoride/core/core.dart';
-import 'package:alufluoride/features/gate_entry/data/gate_entry_repo.dart';
-import 'package:alufluoride/features/gate_entry/model/gate_entry_form.dart';
-import 'package:alufluoride/features/gate_entry/model/gate_entry_lines_form.dart';
+import 'package:alufluoride/features/contract_employee/data/contract_employee_repo.dart';
+import 'package:alufluoride/features/contract_employee/model/contract_employee_form.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-part 'gate_entry_cubit.freezed.dart';
+part 'contract_employee_cubit.freezed.dart';
 
-enum GateEntryView { create, edit, completed }
+enum ContractEmployeeView { create, edit, completed }
 
-extension ActionType on GateEntryView {
+extension ActionType on ContractEmployeeView {
   String toName() {
     return switch (this) {
-      GateEntryView.create => 'Create',
-      GateEntryView.edit => 'Submit',
-      GateEntryView.completed => 'Submitted',
+      ContractEmployeeView.create => 'Create',
+      ContractEmployeeView.edit => 'Submit',
+      ContractEmployeeView.completed => 'Submitted',
     };
   }
 }
 
 @injectable
-class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
-  CreateGateEntryCubit(this.repo) : super(CreateGateEntryState.initial());
-  final GateEntryRepo repo;
+class CreateContractEmployeeCubit
+    extends AppBaseCubit<CreateContractEmployeeState> {
+  CreateContractEmployeeCubit(this.repo)
+      : super(CreateContractEmployeeState.initial());
+  final ContractEmployeeRepo repo;
 
   void onValueChanged({
-    String? vehicleRequest,
-    String? gateEntryType,
-    String? driverName,
-    String? driverMobileNo,
-    String? entryDate,
-    String? vehicle,
-    String? vehiclephoto,
-    String? payType,
-    String? beforeWork,
-    String? afterWork,
-    String? inTime,
-    String? outTime,
-    String? perHrAmt,
-    String? remarks,
-
-    String? invDate,
-    String? poNumber,
-    String? vendorInvQty,
-    String? invAmt,
-    String? vendorInvNum,
-    String? venorInvPhoto,
-    String? venorInvDate,
-    int? qtyTonnes,
-    double? ratePerTonnes 
+    String? creation,
+    String? modified,
+    String? modifiedBy,
+    int? idx,
+    String? name,
+    String? amendedFrom,
+    String? contractor,
+    String? skillType,
+    int? dailyWages,
+    String? contractEmployee,
+    String? genders,
+    String? aadhaar,
+    String? dob,
+    String? pf,
+    int? esi,
+    File? photo,
+    String? supplierGroup,
+    String? supplierType,
   }) {
     shouldAskForConfirmation.value = true;
     final form = state.form;
 
+      final photos = photo.isNull
+        ? form.photo
+        : base64Encode(photo!.readAsBytesSync());
+
     final newForm = form.copyWith(
       name: form.name,
-      status: form.status,
-      vehicleRequest: vehicleRequest ?? form.vehicleRequest,
-      intime: inTime ?? form.intime,
-      outTime: outTime ?? form.outTime,
-      vehicle: vehicle ?? form.vehicle,
-      payType: payType ?? form.payType,
-      remarks: remarks ?? form.remarks,
-      entryType: gateEntryType ?? form.entryType,
-      gateEntryDate: entryDate ?? form.gateEntryDate,
-      beforeWork: beforeWork ?? form.beforeWork,
-      vehiclePhoto: vehiclephoto ?? form.vehiclePhoto,
-      driverName: driverName ?? form.driverName,
-      drivermobileNo: driverMobileNo ?? form.drivermobileNo,
-      invoiceAmt: double.tryParse(invAmt ?? '') ?? form.invoiceAmt,
-      invoiceQnty: double.tryParse(vendorInvQty ?? '')  ?? form.invoiceQnty,
-      perHrAmt: perHrAmt  ?? form.perHrAmt,
-      poNumber: poNumber ?? form.poNumber,
-      vendorInvNum: vendorInvNum ?? form.vendorInvNum,
-      vendorInvPhoto: venorInvPhoto ?? form.vendorInvPhoto,
-      vendorInvoiceDate: venorInvDate ?? form.vendorInvoiceDate,
-      qtyinTonnes: qtyTonnes ?? form.qtyinTonnes,
-      ratePerTonnes: ratePerTonnes ?? form.ratePerTonnes,
-      afterWork: afterWork ?? form.afterWork
+      creation: creation ?? form.creation,
+      modified: modified ?? form.modified,
+      modifiedBy: modifiedBy ?? form.modifiedBy,
+      idx: idx ?? form.idx,
+      amendedFrom: amendedFrom ?? form.amendedFrom,
+      contractor: contractor ?? form.contractor,
+      skillType: skillType ?? form.skillType,
+      dailyWages: dailyWages ?? form.dailyWages,
+      photo: photos,
+      contractEmployee: contractEmployee ?? form.contractEmployee,
+      gender: genders ?? form.gender,
+      aadhaar: aadhaar ?? form.aadhaar,
+      dob: dob ?? form.dob,
+      pf: pf ?? form.pf,
+      esi: esi ?? form.esi,
     );
+
     emitSafeState(state.copyWith(form: newForm));
   }
 
@@ -90,35 +84,46 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
     // emitSafeState(state.copyWith(form: form));
   }
 
-  void removeLineAt(int index) {
-    final lines = [...state.lines];
-    final lineItem = lines.elementAt(index);
-    lines.removeAt(index);
-    // final deletedLines = [...state.form.deletedLines,lineItem.name].nonNulls;
-    // final totalAmt =  lines.fold(0.0, (previousValue, element) => previousValue+( element.amount ?? 0) );
-    // final form = state.form.copyWith(totalAmount:totalAmt ,deletedLines:deletedLines.toList());
+  // void removeLineAt(int index) {
+  //   final lines = [...state.lines];
+  //   final lineItem = lines.elementAt(index);
+  //   lines.removeAt(index);
+  //   // final deletedLines = [...state.form.deletedLines,lineItem.name].nonNulls;
+  //   // final totalAmt =  lines.fold(0.0, (previousValue, element) => previousValue+( element.amount ?? 0) );
+  //   // final form = state.form.copyWith(totalAmount:totalAmt ,deletedLines:deletedLines.toList());
 
-    // emit(state.copyWith(lines: lines, form:form ));
-  }
+  //   // emit(state.copyWith(lines: lines, form:form ));
+  // }
 
   void initDetails(Object? entry) {
     shouldAskForConfirmation.value = false;
-    if (entry is GateEntryForm) {
+    if (entry is ContractEmployeeForm) {
+      print('entry.creation---:${entry}');
+      if (entry.creation == null) {
+        final creationDate = DFU.friendlyFormat(DFU.now());
+        final createdtime = DFU.hhMMss(DFU.now());
+        emitSafeState(state.copyWith(
+          form: entry.copyWith(creation: creationDate, modified: createdtime),
+        ));
+        return;
+      }
       final parsedDate =
-          DFU.toDateTime(entry.gateEntryDate.valueOrEmpty, 'yyyy-MM-dd');
+          DFU.toDateTime(entry.creation.valueOrEmpty, 'yyyy-MM-dd');
       final formattedStr = DFU.friendlyFormat(parsedDate);
 
-      final status = entry.docstatus;
+      final status = entry.docStatus;
 
       final isSubmitted = StringUtils.equalsIgnoreCase(
           StringUtils.docStatus(status!), 'Submitted');
       final isCancelled = StringUtils.equalsIgnoreCase(
           StringUtils.docStatus(status).trim(), 'Cancelled');
       final mode = (isSubmitted || isCancelled)
-          ? GateEntryView.completed
-          : GateEntryView.edit;
+          ? ContractEmployeeView.completed
+          : ContractEmployeeView.edit;
+
+      print('form--:$entry');
       emitSafeState(state.copyWith(
-        form: entry.copyWith(gateEntryDate: formattedStr),
+        form: entry.copyWith(creation: formattedStr),
         view: mode,
       ));
     }
@@ -136,20 +141,20 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
     String? description,
   }) {
     shouldAskForConfirmation.value = true;
-    final item = GateEntryLinesForm(
-      serialNumber: code,
-      assetNumber: int.tryParse(asset),
-      materialName: name,
-      quantity: double.tryParse(qty),
-      oums: uom,
-      // isreturn: isreturn ? 1 : 0,
-      amount: double.tryParse(amt),
-    );
-    final prevLines = [...state.lines];
-    prevLines.add(item);
+    // final item = ContractEmployeeLinesForm(
+    //   serialNumber: code,
+    //   assetNumber: int.tryParse(asset),
+    //   materialName: name,
+    //   quantity: double.tryParse(qty),
+    //   oums: uom,
+    //   // isreturn: isreturn ? 1 : 0,
+    //   amount: double.tryParse(amt),
+    // );
+    // final prevLines = [...state.lines];
+    // prevLines.add(item);
     // final ttlAmt = (state.form.totalAmount ?? 0.0) + (item.amount ?? 0.0);
     // final updForm = state.form.copyWith(totalAmount: ttlAmt);
-    emitSafeState(state.copyWith(lines: prevLines));
+    emitSafeState(state);
   }
   // {
   //   shouldAskForConfirmation.value = true;
@@ -169,10 +174,6 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
   //   emitSafeState(state.copyWith(lines: prevLines, form: updForm));
   // }
 
-  void addAllLines(List<GateEntryLinesForm> lines) {
-    emitSafeState(state.copyWith(lines: lines));
-  }
-
   void removeFile(int indx) {
     // final invs = [...state.form.invoiceImg];
     // invs.removeAt(indx);
@@ -184,47 +185,47 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
       () async {
         emitSafeState(state.copyWith(isLoading: true, isSuccess: false));
         final nextMode = switch (state.view) {
-          GateEntryView.create => GateEntryView.edit,
-          GateEntryView.edit ||
-          GateEntryView.completed =>
-            GateEntryView.completed,
+          ContractEmployeeView.create => ContractEmployeeView.edit,
+          ContractEmployeeView.edit ||
+          ContractEmployeeView.completed =>
+            ContractEmployeeView.completed,
         };
 
         final status = switch (state.view) {
-          GateEntryView.create => 'Draft',
-          GateEntryView.edit || GateEntryView.completed => 'Submitted',
+          ContractEmployeeView.create => 'Draft',
+          ContractEmployeeView.edit ||
+          ContractEmployeeView.completed =>
+            'Submitted',
         };
-        if (state.view == GateEntryView.create) {
-          final startTime = DateTime.now();
+        if (state.view == ContractEmployeeView.create) {
+          // final startTime = DateTime.now();
 
-          final response = await repo.createGateEntry(state.form, state.lines);
+          final response = await repo.createContractEmployee(state.form);
+          // final endTime = DateTime.now();
 
-          final endTime = DateTime.now();
-
-          final duration = endTime.difference(startTime);
+          // final duration = endTime.difference(startTime);
 
           return response.fold(
             (l) {
-              emitSafeState(state.copyWith(isLoading: false, error: l,));
+              emitSafeState(state.copyWith(
+                isLoading: false,
+                error: l,
+              ));
             },
             (r) {
               shouldAskForConfirmation.value = false;
-              final docstatus = r.second;
+              // final doctatus = r.second;
               emitSafeState(state.copyWith(
                 isLoading: false,
                 isSuccess: true,
-                form: state.form.copyWith(
-                  status: status,
-                  name: r.first,
-                  docstatus: 0
-                ),
-                successMsg: 'Gate Entry Created Succesfully',
+                form: state.form.copyWith(name: r.first, docStatus: 0),
+                successMsg: 'Doc No : ${r.second}',
                 view: nextMode,
               ));
             },
           );
         } else {
-          final response = await repo.submitGateEntry(state.form, state.lines);
+          final response = await repo.submitContractEmployee(state.form);
 
           return response.fold(
             (l) => emitSafeState(state.copyWith(isLoading: false, error: l)),
@@ -233,9 +234,9 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
               emitSafeState(state.copyWith(
                 isLoading: false,
                 isSuccess: true,
-                form: state.form.copyWith(docstatus: 1),
+                form: state.form.copyWith(docStatus: 1),
                 successMsg: r.first,
-                view: GateEntryView.completed,
+                view: ContractEmployeeView.completed,
               ));
             },
           );
@@ -304,28 +305,23 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
 }
 
 @freezed
-class CreateGateEntryState with _$CreateGateEntryState {
-  const factory CreateGateEntryState({
-    required GateEntryForm form,
+class CreateContractEmployeeState with _$CreateContractEmployeeState {
+  const factory CreateContractEmployeeState({
+    required ContractEmployeeForm form,
     required bool isLoading,
     required bool isSuccess,
-    required GateEntryView view,
-    required List<GateEntryLinesForm> lines,
+    required ContractEmployeeView view,
     String? successMsg,
     Failure? error,
-  }) = _CreateGateEntryState;
+  }) = _CreateContractEmployeeState;
 
-  factory CreateGateEntryState.initial() {
+  factory CreateContractEmployeeState.initial() {
     final creationDate = DFU.friendlyFormat(DFU.now());
     final createdtime = DFU.hhMMss(DFU.now());
 
-    return CreateGateEntryState(
-      lines: [],   
-      form: GateEntryForm(
-        gateEntryDate: creationDate,
-        entryTime: createdtime,
-      ),
-      view: GateEntryView.create,
+    return CreateContractEmployeeState(
+      form: ContractEmployeeForm(creation: creationDate, modified: createdtime),
+      view: ContractEmployeeView.create,
       isLoading: false,
       isSuccess: false,
     );

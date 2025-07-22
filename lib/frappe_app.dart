@@ -2,6 +2,8 @@ import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/core/model/page_view_filters.dart';
 import 'package:alufluoride/features/auth/presentation/bloc/auth/auth_cubit.dart';
 import 'package:alufluoride/features/auth/presentation/bloc/sign_in/sign_in_cubit.dart';
+import 'package:alufluoride/features/contract_employee/presentation/bloc/bloc_provider.dart';
+import 'package:alufluoride/features/contract_employee/presentation/bloc/contract_employee_filter.dart';
 import 'package:alufluoride/features/gate_entry/presentation/bloc/bloc_provider.dart';
 import 'package:alufluoride/features/gate_entry/presentation/bloc/gate_entry_filter_cubit.dart';
 import 'package:alufluoride/features/gate_exit/presentation/bloc/bloc_provider.dart';
@@ -26,11 +28,14 @@ class AparnaApp extends StatelessWidget {
         BlocProvider(create: (_) => $sl.get<SignInCubit>()),
         BlocProvider(create: (_) => GateEntryFilterCubit()),
         BlocProvider(create: (_) => GateExitFilterCubit()),
+        BlocProvider(create: (_) => ContractEmployeeFilterCubit()),
         BlocProvider(create: (_) => IncidentRegisterFilterCubit()),
         BlocProvider(
             create: (_) => GateEntryBlocProvider.get().materialNameList()),
         BlocProvider(
             create: (_) => GateEntryBlocProvider.get().fetchGateEntries()),
+        BlocProvider(
+            create: (_) => ContractEmployeeBlocProvider.get().fetchEmployees()),
         BlocProvider(
             create: (_) => GateExitBlocProvider.get().createGateExitsCubit()),
         BlocProvider(
@@ -48,8 +53,10 @@ class AparnaApp extends StatelessWidget {
                 ..cubit<GateEntriesCubit>().fetchInitial(filters)
                 ..cubit<IncidentRegistersListCubit>().fetchInitial(filters)
                 ..cubit<MaterialNameList>().request()
+                ..cubit<ContractEmployeesCubit>().fetchInitial(filters)
                 ..cubit<GateExitsCubit>()
                     .fetchInitial(PageViewFilters.initial());
+                   
               AppRoute.home.go(routerCtxt);
             },
             unAuthenticated: () => AppRoute.login.go(routerCtxt!),

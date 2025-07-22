@@ -1,10 +1,14 @@
 import 'package:alufluoride/core/di/injector.dart';
+import 'package:alufluoride/features/contract_employee/presentation/bloc/create_contract_employee/contract_employee_cubit.dart';
 
 final _reqisteredUrl = $sl.get<Urls>(instanceName: 'baseUrl');
 
 class Urls {
+
   factory Urls.alufluorideUAT() =>
-      const Urls('https://alufluorideuat.easycloud.co.in/api');
+      const Urls('http://157.180.120.125:8000/api');
+  // factory Urls.alufluorideUAT() =>
+  //     const Urls')('https://alufluorideuat.easycloud.co.in/api;
   factory Urls.local() => const Urls('192.168.0.147:8000/api');
   factory Urls.alufluorideLive() =>
       const Urls('https://alufluoridegmlive.easycloud.co.in/api');
@@ -27,12 +31,16 @@ class Urls {
 
   static final appUpdate = '$cusWs/easy_common.api.get_app_version';
 
+
   static final login = '$cusWs/login';
   static final getUsers = '$cusWs/alufluoride.contractor_api.getUsers';
   static final getList = '$cusWs/frappe.client.get_list';
   static final getOutwardList = '$cusWs/frappe.client';
   static final createGateEntry = '$cusWs/alufluoride.api.createGateEntry';
   static final submitGateEntry = '$cusWs/alufluoride.api.submit_gate_entry';
+  static final submitContractEmployee = '$cusWs/alufluoride.api.submitContractEmployee';
+  static final createContractEmployee = '$cusWs/alufluoride.api.create_contractor';
+
   static final gateExitList = '$cusWs/alufluoride.api.getGateExit';
   static final getGateExit = '$cusWs/alufluoride.api.getGateExitDetails';
   static final newGateExit = '$cusWs/alufluoride.api.createGateExit';
@@ -45,6 +53,8 @@ class Urls {
   static final submitInviteVisitor =
       '$cusWs/alufluoride.api.submit_invite_visitor';
   static final updateGateEntry = '$cusWs/alufluoride.api.update_gate_entry';
+    static final updateContractEmployee = '$cusWs/alufluoride.api.update_contractors_employee';
+
   static final updateGateExit = '$cusWs/alufluoride.api.update_gate_exit';
   static final deleteLines = '$cusWs/alufluoride.api.remove_lines';
 
@@ -66,6 +76,7 @@ class Urls {
 
   static final createIncidentRegister =
       '$cusWs/alufluoride.api.create_incident_register';
+      
   static final submitIncidentRegister =
       '$cusWs/alufluoride.api.submit_incident_register';
 

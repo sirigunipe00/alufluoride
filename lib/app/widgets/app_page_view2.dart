@@ -18,7 +18,9 @@ enum PageMode2 {
   createVisit('Create Visit'),
   outWardGatePass('Outward Gate Pass'),
   inWardGatePass('Inward Gate Pass'),
+  contractEmployees('Contract Employees'),
   emptyVehicle('Empty Vehicle Tracking');
+  
 
   final String name;
   const PageMode2(this.name);
@@ -49,6 +51,8 @@ class AppPageView2<T extends PageViewFiltersCubit> extends StatelessWidget {
     PageMode2.createVisit => 'Search Visit ID',
     PageMode2.outWardGatePass => 'Search Gate Pass ID',
     PageMode2.inWardGatePass => 'Search Gate Pass ID',
+    PageMode2.contractEmployees => 'Search Contract Employee ID',
+
 
     PageMode2.emptyVehicle => 'Search Empty Vehicle ID',
   };
@@ -63,6 +67,8 @@ class AppPageView2<T extends PageViewFiltersCubit> extends StatelessWidget {
     PageMode2.outWardGatePass => AppColors.shyMoment,
     PageMode2.inWardGatePass => AppColors.marigoldDDust,
     PageMode2.emptyVehicle => AppColors.registration,
+    PageMode2.contractEmployees => AppColors.green,
+
   };
 
   @override

@@ -27,7 +27,7 @@ class AppRepository extends BaseApiRepository {
       if (data['status'] == 400) {
         return left(Failure(error: data['message']));
       }
-      final serverVersion = data['app_version'];
+      final serverVersion = data['app_version'] ?? '';
       final appVersionStr = await appVersion.getAppVersion();
       print("APPVERSION:$appVersionStr");
       print("SERVER VERSION:$serverVersion");

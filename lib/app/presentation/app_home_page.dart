@@ -18,7 +18,7 @@ class AppHomePage extends StatelessWidget {
       mode: PageMode.home,
       child: BlocListener<AppVersionCubit, AppVersionCubitState>(
         listener: (context, state) {
-            state.maybeWhen(
+          state.maybeWhen(
             orElse: () {},
             success: (data) {
               if (data) {
@@ -41,8 +41,10 @@ class AppHomePage extends StatelessWidget {
           childAspectRatio: 1,
           children: [
             AppFeatureWidget(
-              icon: AppIcons.vechileEntry.toWidget(height: 100, width: 120, fit: BoxFit.contain),
-              title: Text('Gate Entry', style: AppTextStyles.featureLabelStyle(context)),
+              icon: AppIcons.vechileEntry
+                  .toWidget(height: 100, width: 120, fit: BoxFit.contain),
+              title: Text('Gate Entry',
+                  style: AppTextStyles.featureLabelStyle(context)),
               featureColor: AppColors.marigoldDDust,
               onTap: () => AppRoute.gateEntry.push(context),
             ),
@@ -54,9 +56,12 @@ class AppHomePage extends StatelessWidget {
               featureColor: AppColors.shyMoment,
               onTap: () => AppRoute.gateExit.push(context),
             ),
-             AppFeatureWidget(
-              icon: AppIcons.vechileEntry.toWidget(height: 100, width: 120, fit: BoxFit.contain),
-              title: Text('Contract Employee', style: AppTextStyles.featureLabelStyle(context).copyWith(fontSize: 14, fontWeight: FontWeight.w500)),
+            AppFeatureWidget(
+              icon: AppIcons.vechileEntry
+                  .toWidget(height: 100, width: 120, fit: BoxFit.contain),
+              title: Text('Contract Employee',
+                  style: AppTextStyles.featureLabelStyle(context)
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.bold)),
               featureColor: AppColors.green,
               onTap: () => AppRoute.contractEmployee.push(context),
             ),

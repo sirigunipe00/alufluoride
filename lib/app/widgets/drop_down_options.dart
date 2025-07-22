@@ -22,10 +22,10 @@ abstract class Dropdownoptions {
     "Visitor",
     "Other"
   ];
-    static const List<String> passTypeVisitor = [
+  static const List<String> passTypeVisitor = [
     "Interview",
     "Government Officials",
-     "Delivery",
+    "Delivery",
     "Vendor",
     "Contractor",
     "Visitor",
@@ -40,7 +40,7 @@ abstract class Dropdownoptions {
   ];
 
   static const List<String> type = ["In", "Out"];
-   static const List<String> passTypeCreate = [
+  static const List<String> passTypeCreate = [
     "Delivery",
     "Vendor",
     "Contractor",
@@ -48,24 +48,18 @@ abstract class Dropdownoptions {
     "Interview",
     "Other"
   ];
-   static const List<String> gatePassTypes = [
+  static const List<String> gatePassTypes = [
     "Gatepass Returnable",
     "Gatepass Non-Returnable",
     "Job Work Delivery Challan"
   ];
 
-
-    static const List<String> vehicleTypeOut = [
+  static const List<String> vehicleTypeOut = [
     "Truck",
     "Trailer Truck",
     "Box Truck"
-    
   ];
-  static const List<String> vendorCustomerType = [
-    "Supplier",
-    "Customer"
-    
-  ];
+  static const List<String> vendorCustomerType = ["Supplier", "Customer"];
   static const List<String> inGatePassTypes = [
     "Gatepass Returnable",
     "Gatepass Non-Returnable",
@@ -78,9 +72,24 @@ abstract class Dropdownoptions {
     "Box Truck",
     "By Hand"
   ];
-   static const List<String> vehicleTypeEmpty = [
+  static const List<String> vehicleTypeEmpty = [
     "Customer Vehicle",
     "Aparna Vehicle",
     "Rented Vehicle"
+  ];
+  static const List<String> skillTyp = [
+    "Fabrication",
+    "Fitter",
+    "Helper",
+    "Welder"
+  ];
+  static const List<String> genders = [
+    'Male',
+    'Female',
+    'Genderqueer',
+    'Transgender',
+    'Non-Conforming',
+    'Prefer not to say',
+    'Other'
   ];
 }

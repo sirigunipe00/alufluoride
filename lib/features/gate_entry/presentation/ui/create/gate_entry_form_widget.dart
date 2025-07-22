@@ -21,7 +21,7 @@ import 'package:alufluoride/widgets/spaced_column.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
- 
+
 class GateEntryFormWidget extends StatefulWidget {
   const GateEntryFormWidget({super.key});
 
@@ -46,11 +46,8 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
     final isCreating = formState.view == GateEntryView.create;
     final isCompleted = formState.view == GateEntryView.completed;
     final newform = formState.form;
-    log('---newform---:${ newform}');
+    log('---newform---:${newform}');
     entryType = newform.entryType;
-
-
-    
 
     return MultiBlocListener(
       listeners: [
@@ -128,11 +125,9 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                     key: UniqueKey(),
                     color: AppColors.marigoldDDust,
                     items: address,
-                    defaultSelection: address
-                        .where((e) {
-                          return e.name == newform.poNumber;
-                        })
-                        .firstOrNull,
+                    defaultSelection: address.where((e) {
+                      return e.name == newform.poNumber;
+                    }).firstOrNull,
                     title: 'PO Number',
                     hint: 'PO Number',
                     readOnly: isCompleted,
@@ -169,7 +164,9 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 title: 'Vendor Invoice Quantity',
                 isRequired: true,
                 readOnly: isCompleted,
-                initialValue: newform.invoiceQnty != null ? newform.invoiceQnty.toString() : '',
+                initialValue: newform.invoiceQnty != null
+                    ? newform.invoiceQnty.toString()
+                    : '',
                 borderColor: AppColors.marigoldDDust,
                 focusNode: focusNodes.elementAt(2),
                 inputType: const TextInputType.numberWithOptions(decimal: true),
@@ -183,7 +180,9 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 title: 'Invoice Amount',
                 isRequired: true,
                 readOnly: isCompleted,
-                initialValue: newform.invoiceAmt != null ? newform.invoiceAmt.toString() : '',
+                initialValue: newform.invoiceAmt != null
+                    ? newform.invoiceAmt.toString()
+                    : '',
                 borderColor: AppColors.marigoldDDust,
                 focusNode: focusNodes.elementAt(2),
                 inputType: const TextInputType.numberWithOptions(decimal: true),
@@ -227,7 +226,9 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 borderColor: AppColors.marigoldDDust,
                 title: 'Vendor Invoice Photo',
                 isRequired: true,
-                defaultValue: newform.vendorInvPhoto != null ? File(newform.vendorInvPhoto ?? '') : null,
+                defaultValue: newform.vendorInvPhoto != null
+                    ? File(newform.vendorInvPhoto ?? '')
+                    : null,
                 imageUrl: newform.vendorInvPhoto,
                 onFileCapture: (file) {
                   if (file != null) {
@@ -295,6 +296,7 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                     orElse: () => <VehcileForm>[],
                     success: (data) => data,
                   );
+
                   return SearchDropDownList(
                     key: UniqueKey(),
                     color: AppColors.marigoldDDust,
@@ -346,82 +348,79 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                   setState(() {
                     payType = value;
                   });
-                  
+
                   context
                       .cubit<CreateGateEntryCubit>()
                       .onValueChanged(payType: value);
                 },
               ),
-              if(payType == 'Qty')...[
-                 InputField(
-                readOnly: isCompleted,
-                title: 'Qty in Tonnes',
-                borderColor: AppColors.marigoldDDust,
-                inputType: TextInputType.number,
-                initialValue: newform.perHrAmt,
-                focusNode: focusNodes.elementAt(8),
-                onChanged: (p0) {
-                  context
-                      .cubit<CreateGateEntryCubit>()
-                      .onValueChanged(qtyTonnes: int.tryParse(p0));
-                },
-              ),
-
-               InputField(
-                readOnly: isCompleted,
-                title: 'Rate Per Tonnes',
-                borderColor: AppColors.marigoldDDust,
-                inputType: TextInputType.number,
-                initialValue: newform.perHrAmt,
-                focusNode: focusNodes.elementAt(8),
-                onChanged: (p0) {
-                  context
-                      .cubit<CreateGateEntryCubit>()
-                      .onValueChanged(ratePerTonnes: double.tryParse(p0));
-                },
-              ),
-              ] else...[
+              if (payType == 'Qty') ...[
+                InputField(
+                  readOnly: isCompleted,
+                  title: 'Qty in Tonnes',
+                  borderColor: AppColors.marigoldDDust,
+                  inputType: TextInputType.number,
+                  initialValue: newform.perHrAmt,
+                  focusNode: focusNodes.elementAt(8),
+                  onChanged: (p0) {
+                    context
+                        .cubit<CreateGateEntryCubit>()
+                        .onValueChanged(qtyTonnes: int.tryParse(p0));
+                  },
+                ),
+                InputField(
+                  readOnly: isCompleted,
+                  title: 'Rate Per Tonnes',
+                  borderColor: AppColors.marigoldDDust,
+                  inputType: TextInputType.number,
+                  initialValue: newform.perHrAmt,
+                  focusNode: focusNodes.elementAt(8),
+                  onChanged: (p0) {
+                    context
+                        .cubit<CreateGateEntryCubit>()
+                        .onValueChanged(ratePerTonnes: double.tryParse(p0));
+                  },
+                ),
+              ] else ...[
                 TimeSelectionField(
-                readOnly: isCompleted,
-                key: UniqueKey(),
-                // key: ValueKey(inTime),
-                initialValue: newform.intime,
-                borderColor: AppColors.marigoldDDust,
-                title: 'In Time',
-                onTimeSelect: (time) {
-                  context
-                      .cubit<CreateGateEntryCubit>()
-                      .onValueChanged(inTime: time.format(context));
-                },
-              ),
-              TimeSelectionField(
-                readOnly: isCompleted,
-                // key: ValueKey(outTime),
-                key: UniqueKey(),
-                initialValue: newform.outTime,
-                borderColor: AppColors.marigoldDDust,
-                title: 'Out Time',
-                onTimeSelect: (time) {
-                  context
-                      .cubit<CreateGateEntryCubit>()
-                      .onValueChanged(outTime: time.format(context));
-                },
-              ),
-              InputField(
-                readOnly: isCompleted,
-                title: 'Per Hour Amount',
-                borderColor: AppColors.marigoldDDust,
-                inputType: TextInputType.number,
-                initialValue: newform.perHrAmt,
-                focusNode: focusNodes.elementAt(8),
-                onChanged: (p0) {
-                  context
-                      .cubit<CreateGateEntryCubit>()
-                      .onValueChanged(perHrAmt: p0);
-                },
-              ),
-
-
+                  readOnly: isCompleted,
+                  key: UniqueKey(),
+                  // key: ValueKey(inTime),
+                  initialValue: newform.intime,
+                  borderColor: AppColors.marigoldDDust,
+                  title: 'In Time',
+                  onTimeSelect: (time) {
+                    context
+                        .cubit<CreateGateEntryCubit>()
+                        .onValueChanged(inTime: time.format(context));
+                  },
+                ),
+                TimeSelectionField(
+                  readOnly: isCompleted,
+                  // key: ValueKey(outTime),
+                  key: UniqueKey(),
+                  initialValue: newform.outTime,
+                  borderColor: AppColors.marigoldDDust,
+                  title: 'Out Time',
+                  onTimeSelect: (time) {
+                    context
+                        .cubit<CreateGateEntryCubit>()
+                        .onValueChanged(outTime: time.format(context));
+                  },
+                ),
+                InputField(
+                  readOnly: isCompleted,
+                  title: 'Per Hour Amount',
+                  borderColor: AppColors.marigoldDDust,
+                  inputType: TextInputType.number,
+                  initialValue: newform.perHrAmt,
+                  focusNode: focusNodes.elementAt(8),
+                  onChanged: (p0) {
+                    context
+                        .cubit<CreateGateEntryCubit>()
+                        .onValueChanged(perHrAmt: p0);
+                  },
+                ),
               ],
               PhotoSelectionWidget(
                 isReadOnly: isCompleted,
@@ -429,7 +428,8 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 borderColor: AppColors.marigoldDDust,
                 title: 'Before Work',
                 isRequired: true,
-                defaultValue: isCompleted ? File(newform.beforeWork ?? '') : null,
+                defaultValue:
+                    isCompleted ? File(newform.beforeWork ?? '') : null,
                 imageUrl: newform.beforeWork,
                 onFileCapture: (file) {
                   if (file != null) {
@@ -439,14 +439,14 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                   }
                 },
               ),
-
-                  PhotoSelectionWidget(
+              PhotoSelectionWidget(
                 isReadOnly: isCompleted,
                 fileName: 'After Work',
                 borderColor: AppColors.marigoldDDust,
                 title: 'After Work',
                 isRequired: true,
-                defaultValue: isCompleted ?  File(newform.afterWork ?? '') : null,
+                defaultValue:
+                    isCompleted ? File(newform.afterWork ?? '') : null,
                 imageUrl: newform.afterWork,
                 onFileCapture: (file) {
                   if (file != null) {
@@ -456,7 +456,6 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                   }
                 },
               ),
-              
             ],
             InputField(
               title: 'Gate Entry Date',
@@ -515,11 +514,13 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
               borderColor: AppColors.marigoldDDust,
               title: 'Vehicle Photo',
               isRequired: true,
-              defaultValue: isCompleted ? File(newform.vehiclePhoto ?? '') : null,
+              defaultValue:
+                  isCompleted ? File(newform.vehiclePhoto ?? '') : null,
               imageUrl: newform.vehiclePhoto,
               onFileCapture: (file) {
                 if (file != null) {
                   debugPrint('Updating vehicle photo path: ${file.path}');
+
                   context
                       .cubit<CreateGateEntryCubit>()
                       .onValueChanged(vehiclephoto: file.path);
@@ -527,52 +528,187 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
               },
               onTextExtracted: (extractedText) {
                 debugPrint('=== Processing Extracted Text ===');
-                debugPrint('Raw extracted text: $extractedText');
+                debugPrint('Raw extracted text: "$extractedText"');
                 debugPrint('Current remarks before update: ${newform.remarks}');
-                
-                // Try to find the weight value
-                final weightPattern = RegExp(r'\d+\.?\d*');
-                final matches = weightPattern.allMatches(extractedText);
-                
-                if (matches.isNotEmpty) {
-                  final weight = matches.first.group(0);
-                  debugPrint('Found weight: $weight');
-                  
-                  if (weight != null) {
-                    // Force clear any existing weight entries
-                    final currentRemarks = newform.remarks ?? '';
-                    final cleanedRemarks = currentRemarks
-                        .split('\n')
-                        .where((line) => !line.trim().toLowerCase().startsWith('weight:'))
-                        .join('\n')
-                        .trim();
-                    
-                    debugPrint('Cleaned remarks: $cleanedRemarks');
-                    
-                    final weightText = 'Weight: $weight kg';
-                    final updatedRemarks = cleanedRemarks.isEmpty 
-                        ? weightText 
-                        : '$cleanedRemarks\n$weightText';
-                    
-                    debugPrint('Final remarks to be set: $updatedRemarks');
-                    
-                    // Update remarks
-                    context
-                        .cubit<CreateGateEntryCubit>()
-                        .onValueChanged(remarks: updatedRemarks);
-                        
-                    // Force UI update
-                    setState(() {});
-                    
-                    // Verify update
-                    debugPrint('Remarks after update: ${newform.remarks}');
+
+                String cleaned =
+                    extractedText.replaceAll(RegExp(r'[^0-9.]'), '').trim();
+
+                debugPrint('Cleaned extracted string: "$cleaned"');
+
+                String? finalWeight;
+
+                if (cleaned.isNotEmpty) {
+                  final match = RegExp(r'\d+\.\d{2,3}').firstMatch(cleaned);
+                  if (match != null) {
+                    finalWeight = match.group(0);
+                  } else {
+                    final onlyDigits = cleaned.replaceAll('.', '');
+                    if (onlyDigits.length >2) {
+                      finalWeight =
+                          onlyDigits.substring(0, onlyDigits.length - 2) +
+                              '.' +
+                              onlyDigits.substring(onlyDigits.length - 3);
+                    } else {
+                      finalWeight = '0.' + onlyDigits.padLeft(1, '0');
+                    }
                   }
-                } else {
-                  debugPrint('No weight value found in extracted text');
                 }
+
+                if (finalWeight != null) {
+                  debugPrint('✅ Final formatted weight: $finalWeight');
+
+                  final currentRemarks = newform.remarks ?? '';
+                  final cleanedRemarks = currentRemarks
+                      .split('\n')
+                      .where((line) =>
+                          !line.trim().toLowerCase().startsWith('weight:'))
+                      .join('\n')
+                      .trim();
+                  String unit = 'g'; // default
+
+                  final unitMatch = RegExp(
+                          r'\b(kg|kgs|g|gram|grams|ton|tons|t)\b',
+                          caseSensitive: false)
+                      .firstMatch(extractedText.toLowerCase());
+
+                  if (unitMatch != null) {
+                    unit = unitMatch.group(0)!.toLowerCase();
+                    if (unit == 'kgs') unit = 'kg';
+                    if (unit == 'gram' || unit == 'grams') unit = 'g';
+                    if (unit == 'tons' || unit == 't') unit = 'ton';
+                  }
+
+                  final weightText = 'Weight: $finalWeight $unit';
+
+                  context
+                      .cubit<CreateGateEntryCubit>()
+                      .onValueChanged(remarks: weightText);
+                  setState(() {});
+                } else {
+                  debugPrint(
+                      '❌ No valid weight digits found. OCR likely failed.');
+                }
+
                 debugPrint('=== Text Processing Complete ===');
               },
             ),
+
+            //   onTextExtracted: (extractedText) {
+            //     debugPrint('=== Processing Extracted Text ===');
+            //     debugPrint('Raw extracted text: $extractedText');
+            //     debugPrint('Current remarks before update: ${newform.remarks}');
+
+            //     // Try to find the weight value
+            //     final weightPattern = RegExp(r'\d+\.?\d*');
+            //     final matches = weightPattern.allMatches(extractedText);
+
+            //     if (matches.isNotEmpty) {
+            //       final weight = matches.first.group(0);
+            //       debugPrint('Found weight: $weight');
+
+            //       if (weight != null) {
+            //         // Force clear any existing weight entries
+            //         final currentRemarks = newform.remarks ?? '';
+            //         final cleanedRemarks = currentRemarks
+            //             .split('\n')
+            //             .where((line) =>
+            //                 !line.trim().toLowerCase().startsWith('weight:'))
+            //             .join('\n')
+            //             .trim();
+
+            //         debugPrint('Cleaned remarks: $cleanedRemarks');
+
+            //         final weightText = 'Weight: $weight kg';
+            //         final updatedRemarks = cleanedRemarks.isEmpty
+            //             ? weightText
+            //             : '$cleanedRemarks\n$weightText';
+
+            //         debugPrint('Final remarks to be set: $updatedRemarks');
+
+            //         // Update remarks
+            //         context
+            //             .cubit<CreateGateEntryCubit>()
+            //             .onValueChanged(remarks: updatedRemarks);
+
+            //         // Force UI update
+            //         setState(() {});
+
+            //         // Verify update
+            //         debugPrint('Remarks after update: ${newform.remarks}');
+            //       }
+            //     } else {
+            //       debugPrint('No weight value found in extracted text');
+            //     }
+            //     debugPrint('=== Text Processing Complete ===');
+            //   },
+            // ),
+            // PhotoSelectionWidget(
+            //   isReadOnly: isCompleted,
+            //   fileName: 'Vehicle Photo',
+            //   borderColor: AppColors.marigoldDDust,
+            //   title: 'Vehicle Photo',
+            //   isRequired: true,
+            //   defaultValue:
+            //       isCompleted ? File(newform.vehiclePhoto ?? '') : null,
+            //   imageUrl: newform.vehiclePhoto,
+            //   onFileCapture: (file) {
+            //     if (file != null) {
+            //       debugPrint('Updating vehicle photo path: ${file.path}');
+            //       context
+            //           .cubit<CreateGateEntryCubit>()
+            //           .onValueChanged(vehiclephoto: file.path);
+            //     }
+            //   },
+            //   onTextExtracted: (extractedText) {
+            //     debugPrint('=== Processing Extracted Text ===');
+            //     debugPrint('Raw extracted text: "$extractedText"');
+
+            //     // Clean 7-segment misreads (optional)
+            //     final cleanedText = extractedText
+            //         .replaceAll('B', '8')
+            //         .replaceAll('O', '0')
+            //         .replaceAll('D', '0')
+            //         .replaceAll('S', '5')
+            //         .replaceAll('I', '1')
+            //         .replaceAll(RegExp(r'[^\d.]'), ''); // remove extra symbols
+
+            //     // Match decimal weight like 0.068
+            //     final weightPattern = RegExp(r'\b\d\.\d{3}\b');
+            //     final matches = weightPattern.allMatches(cleanedText);
+
+            //     if (matches.isNotEmpty) {
+            //       final weight = matches.first.group(0);
+            //       debugPrint('Found weight: $weight');
+
+            //       if (weight != null) {
+            //         final currentRemarks = newform.remarks ?? '';
+            //         final cleanedRemarks = currentRemarks
+            //             .split('\n')
+            //             .where((line) =>
+            //                 !line.trim().toLowerCase().startsWith('weight:'))
+            //             .join('\n')
+            //             .trim();
+
+            //         final weightText = 'Weight: $weight kg';
+            //         final updatedRemarks = cleanedRemarks.isEmpty
+            //             ? weightText
+            //             : '$cleanedRemarks\n$weightText';
+
+            //         context
+            //             .cubit<CreateGateEntryCubit>()
+            //             .onValueChanged(remarks: updatedRemarks);
+
+            //         setState(() {}); // Force UI refresh
+            //         debugPrint('Updated remarks: $updatedRemarks');
+            //       }
+            //     } else {
+            //       debugPrint('⚠️ No valid weight value found in text.');
+            //     }
+
+            //     debugPrint('=== Text Processing Complete ===');
+            //   },
+            // ),
             InputField(
               readOnly: isCompleted,
               title: 'Remarks',

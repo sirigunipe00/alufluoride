@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:alufluoride/features/contract_employee/presentation/ui/create/new_contract_employee.dart';
 
 abstract class _AppRoutePaths {
   static const initial = '/';
@@ -14,6 +13,7 @@ abstract class _AppRoutePaths {
   static const incidentRegister = '/home/incidentRegister';
   static const newIncidentReg = '/home/incidentRegister/newIncReg';
   static const contractEmployee = '/home/contractEmployee';
+  static const newContractEmployee='/home/contractEmployee/newContractEmployee';
   // static const inviteVisitor = '/home/inviteVisitor';
   // static const newInviteVisitor = '/home/inviteVisitor/newInviteVisitor';
   // static const visitorInOut = '/home/visitorInOut';
@@ -42,6 +42,7 @@ enum AppRoute {
   incidentRegister(_AppRoutePaths.incidentRegister),
   newIncidentReg(_AppRoutePaths.newIncidentReg),
   contractEmployee(_AppRoutePaths.contractEmployee),
+  newContractEmployee(_AppRoutePaths.newContractEmployee),
   // inviteVisitor(_AppRoutePaths.inviteVisitor),
   // newInviteVisitor(_AppRoutePaths.newInviteVisitor),
   // visitorInOut(_AppRoutePaths.visitorInOut),

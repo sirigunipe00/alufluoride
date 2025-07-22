@@ -1,11 +1,12 @@
 import 'dart:io';
-
+import 'package:image/image.dart' as img;
 import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/core/utils/attachment_selection_mixin.dart';
 import 'package:alufluoride/styles/app_colors.dart';
 import 'package:alufluoride/widgets/caption_text.dart';
 import 'package:alufluoride/widgets/spaced_column.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 
@@ -82,37 +83,72 @@ class _PhotoSelectionWidgetState extends State<PhotoSelectionWidget>
     }
   }
 
-  Future<void> _capture() async {
-    final capturedFile = await captureImage();
-    if (capturedFile != null) {
-      debugPrint('Image captured successfully at: ${capturedFile.path}');
-      final directoryPath = capturedFile.parent.path;
-      final exten = path.extension(capturedFile.path);
-      final newFileName = '${widget.fileName}$exten';
-      final newPath = path.join(directoryPath, newFileName);
-      final renamedFile = await capturedFile.rename(newPath);
-      debugPrint('Image renamed to: ${renamedFile.path}');
-      
-      // Extract text from the image
-      final extractedText = await _extractTextFromImage(renamedFile);
-      debugPrint('Text extraction completed. Result: $extractedText');
-      
-      if (extractedText != null && extractedText.isNotEmpty) {
-        debugPrint('Calling onTextExtracted with text: $extractedText');
-        widget.onTextExtracted?.call(extractedText);
-      } else {
-        debugPrint('No text was extracted from the image');
-      }
+  
 
-      setState(() {
-        _selectedImage = renamedFile;
-        _photoState = PhotoState.view;
-      });
-      widget.onFileCapture(renamedFile);
-    } else {
-      debugPrint('No image was captured');
+  Future<void> _capture() async {
+    try {
+      final picker = ImagePicker();
+      final pickedFile = await picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 85,
+      );
+
+      if (pickedFile != null) {
+        final selectedImage = File(pickedFile.path);
+        debugPrint('🖼️ Image picked from gallery: ${selectedImage.path}');
+
+        // Extract text using MLKit
+        final extractedText = await _extractTextFromImage(selectedImage);
+        if (extractedText != null && extractedText.isNotEmpty) {
+          debugPrint('Calling onTextExtracted with: $extractedText');
+          widget.onTextExtracted?.call(extractedText);
+        }
+
+        setState(() {
+          _selectedImage = selectedImage;
+          _photoState = PhotoState.view;
+        });
+
+        widget.onFileCapture(selectedImage);
+      } else {
+        debugPrint('❌ No image selected');
+      }
+    } catch (e) {
+      debugPrint('❌ Error while picking image: $e');
     }
   }
+
+  // Future<void> _capture() async {
+  //   final capturedFile = await captureImage();
+  //   if (capturedFile != null) {
+  //     debugPrint('Image captured successfully at: ${capturedFile.path}');
+  //     final directoryPath = capturedFile.parent.path;
+  //     final exten = path.extension(capturedFile.path);
+  //     final newFileName = '${widget.fileName}$exten';
+  //     final newPath = path.join(directoryPath, newFileName);
+  //     final renamedFile = await capturedFile.rename(newPath);
+  //     debugPrint('Image renamed to: ${renamedFile.path}');
+
+  //     // Extract text from the image
+  //     final extractedText = await _extractTextFromImage(renamedFile);
+  //     debugPrint('Text extraction completed. Result: $extractedText');
+
+  //     if (extractedText != null && extractedText.isNotEmpty) {
+  //       debugPrint('Calling onTextExtracted with text: $extractedText');
+  //       widget.onTextExtracted?.call(extractedText);
+  //     } else {
+  //       debugPrint('No text was extracted from the image');
+  //     }
+
+  //     setState(() {
+  //       _selectedImage = renamedFile;
+  //       _photoState = PhotoState.view;
+  //     });
+  //     widget.onFileCapture(renamedFile);
+  //   } else {
+  //     debugPrint('No image was captured');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -127,12 +163,12 @@ class _PhotoSelectionWidgetState extends State<PhotoSelectionWidget>
         ],
         GestureDetector(
           onTap: _photoState == PhotoState.view
-            ? () => context.goToPage(ImagePreviewPage(
-                title: widget.title.valueOrEmpty,
-                imageUrl: widget.imageUrl,
-                image: _selectedImage,
-              ))
-            : null,
+              ? () => context.goToPage(ImagePreviewPage(
+                    title: widget.title.valueOrEmpty,
+                    imageUrl: widget.imageUrl,
+                    image: _selectedImage,
+                  ))
+              : null,
           child: Focus(
             focusNode: widget.focusNode,
             child: Container(
@@ -156,14 +192,18 @@ class _PhotoSelectionWidgetState extends State<PhotoSelectionWidget>
                   if (_photoState == PhotoState.capture)
                     Center(
                       child: IconButton(
-                        onPressed: widget.isReadOnly 
-                          ? null 
-                          : () async => await _capture(),
-                        icon: Icon(widget.isWarning == true 
-                          ? Icons.warning_amber_outlined :
-                            Icons.add_a_photo, size: 24, 
-                              color: widget.isReadOnly ? AppColors.grey : widget.borderColor,
-                          ),
+                        onPressed: widget.isReadOnly
+                            ? null
+                            : () async => await _capture(),
+                        icon: Icon(
+                          widget.isWarning == true
+                              ? Icons.warning_amber_outlined
+                              : Icons.add_a_photo,
+                          size: 24,
+                          color: widget.isReadOnly
+                              ? AppColors.grey
+                              : widget.borderColor,
+                        ),
                       ),
                     )
                   else if (_photoState == PhotoState.view)
@@ -178,7 +218,7 @@ class _PhotoSelectionWidgetState extends State<PhotoSelectionWidget>
                         ),
                       ),
                     ),
-                  if(_photoState == PhotoState.view && !widget.isReadOnly)...[
+                  if (_photoState == PhotoState.view && !widget.isReadOnly) ...[
                     Positioned(
                       right: 8.0,
                       child: TextButton(
@@ -186,12 +226,12 @@ class _PhotoSelectionWidgetState extends State<PhotoSelectionWidget>
                           backgroundColor: AppColors.himlayaPeeks,
                         ),
                         onPressed: _capture,
-                        child: Text('RETAKE', 
+                        child: Text(
+                          'RETAKE',
                           style: context.textTheme.labelLarge?.copyWith(
-                            color: AppColors.vibrantBlue,
-                            fontWeight: FontWeight.bold,
-                            decorationStyle: TextDecorationStyle.dashed
-                          ),
+                              color: AppColors.vibrantBlue,
+                              fontWeight: FontWeight.bold,
+                              decorationStyle: TextDecorationStyle.dashed),
                         ),
                       ),
                     ),
@@ -261,7 +301,8 @@ class ImagePreviewPage extends StatelessWidget {
                       child: CircularProgressIndicator(
                         color: AppColors.haintBlue,
                         value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes!
                             : null,
                       ),
                     );
