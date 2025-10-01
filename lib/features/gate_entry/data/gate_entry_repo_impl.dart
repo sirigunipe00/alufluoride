@@ -1,0 +1,512 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:alufluoride/core/consts/doctypes.dart';
+import 'package:alufluoride/core/core.dart';
+
+import 'package:alufluoride/features/gate_entry/data/gate_entry_repo.dart';
+import 'package:alufluoride/features/gate_entry/model/customer_name_form.dart';
+import 'package:alufluoride/features/gate_entry/model/gate_entry_form.dart';
+import 'package:alufluoride/features/gate_entry/model/gate_entry_lines_form.dart';
+import 'package:alufluoride/features/gate_entry/model/image_inp.dart';
+import 'package:alufluoride/features/gate_entry/model/material_name_form.dart';
+import 'package:alufluoride/features/gate_entry/model/purchase_order_form.dart';
+import 'package:alufluoride/features/gate_entry/model/recevier_address_form.dart';
+import 'package:alufluoride/features/gate_entry/model/vehicle_form.dart';
+import 'package:alufluoride/features/gate_entry/model/vehicle_request_form.dart';
+import 'package:alufluoride/features/incident_register/model/receiver_form.dart';
+import 'package:dartz/dartz.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
+// import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:injectable/injectable.dart';
+
+@LazySingleton(as: GateEntryRepo)
+class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
+  const GateEntryRepoImpl(super.client);
+
+  @override
+  AsyncValueOf<List<GateEntryForm>> fetchEntries(
+    int start,
+    int? docStatus,
+    String? search,
+  ) async {
+    final requestConfig = RequestConfig(
+      url: Urls.getList,
+      parser: (json) {
+        final data = json['message'];
+
+        final listdata = data as List<dynamic>;
+        return listdata.map((e) => GateEntryForm.fromJson(e)).toList();
+      },
+      reqParams: {
+        if (!(docStatus == null)) ...{
+          'filters': [
+            ["docstatus", "=", docStatus],
+            if (search.containsValidValue) ...{
+              ["name", "Like", "%$search%"]
+            }
+          ],
+        },
+        'limit_start': start,
+        'limit': 20,
+        'order_by': 'creation DESC',
+        'doctype': 'Gate Entry',
+        'fields': ["*"]
+      },
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    );
+    $logger.devLog(requestConfig);
+    final response = await get(requestConfig);
+    $logger.devLog(response);
+    return response.process((r) => right(r.data!));
+  }
+
+  @override
+  AsyncValueOf<List<VehcileRequestForm>> fetchVechicleEntries() async {
+    final requestConfig = RequestConfig(
+      url: Urls.getList,
+      parser: (json) {
+        final data = json['message'];
+
+        final listdata = data as List<dynamic>;
+        return listdata.map((e) => VehcileRequestForm.fromJson(e)).toList();
+      },
+      reqParams: {
+        'order_by': 'creation DESC',
+        'doctype': 'Vehicle Request',
+        'fields': ["*"]
+      },
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    );
+    final response = await get(requestConfig);
+    return response.process((r) => right(r.data!));
+  }
+
+  @override
+  AsyncValueOf<List<VehcileForm>> fetchVehicleList() async {
+    final requestConfig = RequestConfig(
+      url: Urls.getList,
+      parser: (json) {
+        final data = json['message'];
+
+        final listdata = data as List<dynamic>;
+        return listdata.map((e) => VehcileForm.fromJson(e)).toList();
+      },
+      reqParams: {
+        'order_by': 'creation DESC',
+        'doctype': 'Vehicle',
+        'fields': ["*"]
+      },
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    );
+
+    final response = await get(requestConfig);
+    return response.process((r) => right(r.data!));
+  }
+
+  @override
+  AsyncValueOf<List<PurchaseOrderForm>> fetchPurchaseOrderList() async {
+    final requestConfig = RequestConfig(
+      url: Urls.getList,
+      parser: (json) {
+        final data = json['message'];
+
+        final listdata = data as List<dynamic>;
+        return listdata.map((e) => PurchaseOrderForm.fromJson(e)).toList();
+      },
+      reqParams: {
+        'order_by': 'creation DESC',
+        'doctype': 'Purchase Order',
+        'fields': ["*"]
+      },
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    );
+
+    final response = await get(requestConfig);
+    return response.process((r) => right(r.data!));
+  }
+
+  @override
+  AsyncValueOf<List<GateEntryLinesForm>> fetchEntriesLines(
+      String itemName) async {
+    final requestConfig = RequestConfig(
+      url: '${Urls.defaultGateEntry}/$itemName',
+      parser: (json) {
+        final data = json['data']['gate_entry_lines'];
+        final listdata = data as List<dynamic>;
+        return listdata.map((e) => GateEntryLinesForm.fromJson(e)).toList();
+      },
+      reqParams: {
+        'limit': 20,
+        'order_by': 'name DESC',
+        'doctype': 'Gate Entry Lines',
+        'fields': ["*"]
+      },
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    );
+    final response = await get(requestConfig);
+    return response.process((r) => right(r.data!));
+  }
+
+  @override
+  AsyncValueOf<List<MaterialNameForm>> materialName() async {
+    return await executeSafely(() async {
+      final config = RequestConfig(
+        url: Urls.item,
+        reqParams: {
+          'fields': MaterialNameForm.fields,
+          'limit_page_length': 'None'
+        },
+        parser: (p0) {
+          final data = p0['data'] as List<dynamic>;
+          return data.map((e) => MaterialNameForm.fromJson(e)).toList();
+        },
+      );
+
+      final response = await get(config);
+      return response.process((r) => right(r.data!));
+    });
+  }
+
+  @override
+  AsyncValueOf<String> updateGateEntry(
+      GateEntryForm form, List<GateEntryLinesForm> lines) async {
+    final formData = form.toJson();
+    formData
+      ..remove('name')
+      ..remove('creation')
+      ..remove('gate_entry_date')
+      ..remove('weighment_date');
+    final reqMap = lines
+      ..where((element) => element.name == null)
+      ..map((e) => removeNullValues(e.toJson())).toList();
+    final requestConfig = RequestConfig(
+      url: Urls.updateGateEntry,
+      body: jsonEncode(removeNullValues({
+        'ge_id': form.name,
+        'gate_entry_lines': reqMap,
+        ...formData,
+      })),
+      parser: (json) {
+        final data = json['message']['message'];
+        return data;
+      },
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    );
+    final response = await post(requestConfig);
+    return response.process((r) => right(r.data!));
+  }
+
+  @override
+  AsyncValueOf<Pair<String, String>> createGateEntry(
+      GateEntryForm form, List<GateEntryLinesForm> lines) async {
+    final formJson = form.toJson();
+
+    formJson.update('status', (value) => 'Draft');
+
+    // final files = {
+    //   'vehicle_photo': form.vehiclePhoto,
+    //   'before_work': form.beforeWork,
+    // };
+    // final addFiles = <File>[];
+    // for (int i = 1; i < form.invoiceImg.length; i++) {
+    //   addFiles.add(form.invoiceImg.elementAt(i));
+    // }
+    // files.removeWhere((key, value) => value == null);
+    // final responseurlMap = <String, dynamic>{};
+    // final fileUrlRes = await _uploadfiles(files.values.nonNulls.toList());
+    // final urls = fileUrlRes.fold((l) => throw Exception(l.error), (r) => r);
+    // for (final file in files.keys) {
+    //   final indx = files.keys.toList().indexOf(file);
+    //   responseurlMap[file] = urls.elementAtOrNull(indx);
+
+    // }
+
+    // final filemap = {
+    //   'vehicle_photo': '/private/files/bharat.png',
+    //   'before_work': '/private/files/bharat.png',
+    // };
+
+    final finalMap = {...removeNullValues(form.toJson())};
+
+    if (form.entryType == 'Purchase' && finalMap.containsKey('vehicle')) {
+      finalMap['vehicle1'] = finalMap['vehicle'];
+      finalMap.remove('vehicle');
+    }
+
+    final requestConfig = RequestConfig(
+      url: Urls.createGateEntry,
+      body: jsonEncode(finalMap),
+      parser: (json) {
+        final data = json['message']['data']['name'] as String;
+        // final docNo = json['message']['data'] as List<dynamic>;
+        return Pair(data, '');
+      },
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    );
+    $logger.devLog('create requestConfig----:$requestConfig ');
+    final response = await post(requestConfig);
+    return response.processAsync((r) async {
+      await updateGateEntry(form.copyWith(name: r.data!.second), lines);
+      // if (addFiles.isNotEmpty) {
+      //   await _uploadAddfiles(addFiles, r.data!.second);
+      // }
+      return right(Pair(r.data!.first, r.data!.second));
+    });
+  }
+
+  @override
+  AsyncValueOf<Pair<String, String>> submitGateEntry(
+      GateEntryForm form, List<GateEntryLinesForm> lines) async {
+    return await executeSafely(() async {
+      // final unsavedLines = lines.where((e) => e.name.doesNotHaveValue);
+      // await updateGateEntry(
+      //     form.copyWith(name: form.name), unsavedLines.toList());
+      // final files = {
+      //   'drivers_license_photo': form.licensePhotoImg,
+      //   'vehicle_image': form.vehiclePhotoImg,
+      //   'seal_photo': form.sealPhotoImg,
+      //   'breath_analyser': form.breathAnalyserImg,
+      //   'invoicedc_image_ocr_scanning': form.invoiceImg.firstOrNull,
+      // };
+      //   files.removeWhere((key, value) => value == null);
+      //   final responseurlMap = <String, dynamic>{};
+      //   final fileUrlRes = await _uploadfiles(files.values.nonNulls.toList());
+      //   final urls = fileUrlRes.fold((l) => throw Exception(l.error), (r) => r);
+      //   for (final file in files.keys) {
+      //     final indx = files.keys.toList().indexOf(file);
+      //     responseurlMap[file] = urls.elementAtOrNull(indx);
+      //   }
+      //   final addFiles = <File>[];
+      //   if (form.invoiceImg.length > 1) {
+      //     for (int i = 1; i < form.invoiceImg.length; i++) {
+      //       addFiles.add(form.invoiceImg.elementAt(i));
+      //     }
+      //   }
+      //   await _uploadAddfiles(addFiles, form.name!);
+
+      //   final finalMap = {
+      //     ...removeNullValues(form.toJson()),
+      //     ...responseurlMap,
+      //   };
+      //   if(form.deletedLines.isNotEmpty){
+      //  await deleteLines(form.name!,form.deletedLines);
+
+      //   }
+      // final reqBody = finalMap..remove('status');
+      final config = RequestConfig(
+          url: Urls.submitGateEntry,
+          parser: (json) {
+            final data = json['message']['message'] as String;
+            return Pair(data, '');
+          },
+          body: jsonEncode(
+              {"gate_entry_id": form.name, 'per_hour_amount': form.perHrAmt}));
+
+      final response = await post(config);
+      return response.process((r) {
+        return right(Pair(r.data!.first, ''));
+      });
+    });
+  }
+
+  AsyncValueOf<List<String>> _uploadfiles(List<File> files) async {
+    return await executeSafely(() async {
+      if (files.isEmpty) return right(<String>[]);
+      final config = RequestConfig(
+        url: Urls.uploadFiles,
+        parser: (p0) {
+          final msgList = p0['message']['uploaded_files_data'] as List<dynamic>;
+          final urls = msgList.map((e) => e['file_url'].toString()).toList();
+          return urls;
+        },
+        reqParams: {'file': files},
+      );
+      final response = await multiPart(config);
+      return response.process((r) => right(r.data!));
+    });
+  }
+
+  AsyncValueOf<List<String>> _uploadAddfiles(
+      List<File> files, String name) async {
+    return await executeSafely(() async {
+      if (files.isEmpty) return right(<String>[]);
+      final config = RequestConfig(
+        url: Urls.uploadFiles,
+        parser: (p0) {
+          final msgList = p0['message']['uploaded_files_data'] as List<dynamic>;
+          final urls = msgList.map((e) => e['file_url'].toString()).toList();
+          return urls;
+        },
+        reqParams: {
+          'file': files,
+          'attached_to_doctype': DocTypes.gateEntryList,
+          'attached_to_field': 'invoicedc_image_ocr_scanning',
+          'attached_to_name': name,
+        },
+      );
+      final response = await multiPart(config);
+      return response.process((r) => right(r.data!));
+    });
+  }
+
+  @override
+  AsyncValueOf<List<SupplierNameForm>> supplierName() async {
+    return await executeSafely(() async {
+      final config = RequestConfig(
+        url: Urls.supplierName,
+        reqParams: {
+          'fields': ['*'],
+          'limit_page_length': 'None'
+        },
+        parser: (p0) {
+          final data = p0['data'] as List<dynamic>;
+          return data.map((e) => SupplierNameForm.fromJson(e)).toList();
+        },
+      );
+
+      final response = await get(config);
+      return response.process((r) => right(r.data!));
+    });
+  }
+
+  @override
+  AsyncValueOf<List<String>> fetchAttachments(String id) async {
+    return await executeSafely(() async {
+      final config = RequestConfig(
+        url: Urls.getList,
+        reqParams: {
+          "doctype": "File",
+          "filters": [
+            ["file_name", "LIKE", "%Inv%"],
+            ["attached_to_name", "LIKE", id]
+          ],
+          "fields": ["file_url"]
+        },
+        parser: (p0) {
+          final data = p0['message'] as List<dynamic>;
+          return data.map((e) => e['file_url'].toString()).toList();
+        },
+      );
+      final response = await get(config);
+      return response.process((r) => right(r.data!));
+    });
+  }
+
+  AsyncValueOf<String> deleteLines(String id, List<String> lines) async {
+    return await executeSafely(() async {
+      final config = RequestConfig(
+          url: Urls.deleteLines,
+          parser: (json) => json,
+          body: jsonEncode(
+              {"doctype": "Gate Entry", "ge_id": id, "lines": lines}),
+          headers: {HttpHeaders.contentTypeHeader: 'application/json'});
+
+      final response = await post(config);
+
+      return response.process((r) => right('Successfully Deleted'));
+    });
+  }
+
+  @override
+  AsyncValueOf<List<ReceiverAddressForm>> receiverAddress(String id) async {
+    return await executeSafely(() async {
+      final config = RequestConfig(
+        url: Urls.receiverAddress,
+        reqParams: {'receiver_id': id, 'limit_page_length': 'None'},
+        parser: (p0) {
+          final data = p0['message']['data'] as List<dynamic>;
+          return data.map((e) => ReceiverAddressForm.fromJson(e)).toList();
+        },
+      );
+      final response = await get(config);
+      return response.process((r) => right(r.data!));
+    });
+  }
+
+  @override
+  AsyncValueOf<List<ReceiverNameForm>> receiverName() async {
+    return await executeSafely(() async {
+      final config = RequestConfig(
+        url: Urls.customerName,
+        reqParams: {
+          'fields': ['name', 'customer_name', 'gstin'],
+          'limit_page_length': 'None'
+        },
+        parser: (p0) {
+          final data = p0['data'] as List<dynamic>;
+          return data.map((e) => ReceiverNameForm.fromJson(e)).toList();
+        },
+      );
+      final response = await get(config);
+
+      return response.process((r) => right(r.data!));
+    });
+  }
+
+  @override
+  AsyncValueOf<ImpProcessInp> uploadImage(ImpProcessInp inp) async {
+    try {
+      const apiKey = 'AIzaSyDEgkM8hoLRdyx2vcaXQJvco6E-FWGP4Wg';
+
+      final model = GenerativeModel(model: 'gemini-1.5-flash-latest', apiKey: apiKey);
+      final fileData = await inp.file!.readAsBytes();
+      final prompt = TextPart(
+        'Analyze the provided image and accurately extract the numerical value displayed on the digital meter, '
+        'ensuring all digits, including leading zeros, are correctly recognized. The value is presented in a horizontal sequence, '
+        'and the background may be dark with the digits brightly colored or glowing. '
+        'Pay close attention to retaining every digit without omitting any leading zeros to ensure precise extraction. '
+        'The response should be formatted as a JSON object: '
+        '{"status": "success", "data": {"value": "<extracted_value>"}} for successful extraction or '
+        '{"status": "error", "message": "<error_message>"} if an error occurs during the process.',
+      );
+      final imageParts = [DataPart('image/jpeg', fileData)];
+
+      final response = await model.generateContent([
+        Content.multi([prompt, ...imageParts]),
+      ]);
+      print('response--:$response');
+      final finalResponse = response.text?.replaceAll('```', '').replaceAll('json', '');
+      if (finalResponse == null) {
+        return right(inp);
+      }
+
+      print('finalResponse--:$finalResponse');
+      final responseMap = jsonDecode(finalResponse) as Map<String, dynamic>;
+      if (responseMap['status_code'] == 200 ||
+          responseMap['status'] == 'success') {
+        final dataMap = responseMap['data'] as Map<String, dynamic>;
+
+        final strValue = dataMap['value'].toString();
+        print('Extracted value from Gemini: $strValue');
+
+        final isValidNumber = RegExp(r'^\d+(\.\d+)?$').hasMatch(strValue);
+        if (!isValidNumber) {
+          return left(Failure(error: 'Invalid numeric format returned: $strValue'));
+        }
+
+        return right(inp.copyWith(value: strValue));
+
+      } else {
+        final error = responseMap['message'].toString();
+        return left(Failure(error: error));
+      }
+    } on Exception catch (e, st) {
+      $logger.error('[Image Processing]', e, st);
+      return left(Failure(error: e.toString()));
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
