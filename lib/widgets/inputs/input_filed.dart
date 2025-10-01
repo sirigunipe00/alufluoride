@@ -84,7 +84,6 @@ class InputField extends StatelessWidget {
             child: TextFormField(
               style: AppTextStyles.textEntryStyle(context),
               controller: controller,
-              
               decoration: InputDecoration(
                 border: textFieldBorder,
                 enabledBorder: textFieldBorder,

@@ -32,7 +32,7 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget{
           margin: const EdgeInsets.only(right: 12.0),
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(context.user.username, style: AppTextStyles.titleMediumBlack(context)),
+            Text(context.user.username ?? '', style: AppTextStyles.titleMediumBlack(context)),
             Text(DFU.currentTimeFormat(DateTime.now()), style: AppTextStyles.titleMediumBlack(context)),
           ],
         ),

@@ -20,20 +20,20 @@ LoggedInUser _$LoggedInUserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LoggedInUser {
-  String get name => throw _privateConstructorUsedError;
-  String get username => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get username => throw _privateConstructorUsedError;
   @JsonKey(name: 'first_name', defaultValue: '')
-  String get firstName => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
   @JsonKey(name: 'last_name', defaultValue: '')
-  String get lastName => throw _privateConstructorUsedError;
+  String? get lastName => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_key', defaultValue: '')
-  String get apiKey => throw _privateConstructorUsedError;
+  String? get apiKey => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_secret', defaultValue: '')
-  String get apiSecret => throw _privateConstructorUsedError;
+  String? get apiSecret => throw _privateConstructorUsedError;
   @JsonKey(name: 'email', defaultValue: '')
   String? get email => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: '')
-  String get password => throw _privateConstructorUsedError;
+  String? get password => throw _privateConstructorUsedError;
   @JsonKey(name: 'role_profile_name', defaultValue: '')
   String? get roleProfileName => throw _privateConstructorUsedError;
   @JsonKey(name: 'gender')
@@ -63,14 +63,14 @@ abstract class $LoggedInUserCopyWith<$Res> {
       _$LoggedInUserCopyWithImpl<$Res, LoggedInUser>;
   @useResult
   $Res call(
-      {String name,
-      String username,
-      @JsonKey(name: 'first_name', defaultValue: '') String firstName,
-      @JsonKey(name: 'last_name', defaultValue: '') String lastName,
-      @JsonKey(name: 'api_key', defaultValue: '') String apiKey,
-      @JsonKey(name: 'api_secret', defaultValue: '') String apiSecret,
+      {String? name,
+      String? username,
+      @JsonKey(name: 'first_name', defaultValue: '') String? firstName,
+      @JsonKey(name: 'last_name', defaultValue: '') String? lastName,
+      @JsonKey(name: 'api_key', defaultValue: '') String? apiKey,
+      @JsonKey(name: 'api_secret', defaultValue: '') String? apiSecret,
       @JsonKey(name: 'email', defaultValue: '') String? email,
-      @JsonKey(defaultValue: '') String password,
+      @JsonKey(defaultValue: '') String? password,
       @JsonKey(name: 'role_profile_name', defaultValue: '')
       String? roleProfileName,
       @JsonKey(name: 'gender') String? gender,
@@ -96,14 +96,14 @@ class _$LoggedInUserCopyWithImpl<$Res, $Val extends LoggedInUser>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? username = null,
-    Object? firstName = null,
-    Object? lastName = null,
-    Object? apiKey = null,
-    Object? apiSecret = null,
+    Object? name = freezed,
+    Object? username = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? apiKey = freezed,
+    Object? apiSecret = freezed,
     Object? email = freezed,
-    Object? password = null,
+    Object? password = freezed,
     Object? roleProfileName = freezed,
     Object? gender = freezed,
     Object? bithDate = freezed,
@@ -113,38 +113,38 @@ class _$LoggedInUserCopyWithImpl<$Res, $Val extends LoggedInUser>
     Object? mobileNo = freezed,
   }) {
     return _then(_value.copyWith(
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      username: null == username
+              as String?,
+      username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      firstName: null == firstName
+              as String?,
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
+              as String?,
+      lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
-      apiKey: null == apiKey
+              as String?,
+      apiKey: freezed == apiKey
           ? _value.apiKey
           : apiKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      apiSecret: null == apiSecret
+              as String?,
+      apiSecret: freezed == apiSecret
           ? _value.apiSecret
           : apiSecret // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      password: null == password
+      password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       roleProfileName: freezed == roleProfileName
           ? _value.roleProfileName
           : roleProfileName // ignore: cast_nullable_to_non_nullable
@@ -186,14 +186,14 @@ abstract class _$$LoggedInUserImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name,
-      String username,
-      @JsonKey(name: 'first_name', defaultValue: '') String firstName,
-      @JsonKey(name: 'last_name', defaultValue: '') String lastName,
-      @JsonKey(name: 'api_key', defaultValue: '') String apiKey,
-      @JsonKey(name: 'api_secret', defaultValue: '') String apiSecret,
+      {String? name,
+      String? username,
+      @JsonKey(name: 'first_name', defaultValue: '') String? firstName,
+      @JsonKey(name: 'last_name', defaultValue: '') String? lastName,
+      @JsonKey(name: 'api_key', defaultValue: '') String? apiKey,
+      @JsonKey(name: 'api_secret', defaultValue: '') String? apiSecret,
       @JsonKey(name: 'email', defaultValue: '') String? email,
-      @JsonKey(defaultValue: '') String password,
+      @JsonKey(defaultValue: '') String? password,
       @JsonKey(name: 'role_profile_name', defaultValue: '')
       String? roleProfileName,
       @JsonKey(name: 'gender') String? gender,
@@ -217,14 +217,14 @@ class __$$LoggedInUserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? username = null,
-    Object? firstName = null,
-    Object? lastName = null,
-    Object? apiKey = null,
-    Object? apiSecret = null,
+    Object? name = freezed,
+    Object? username = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? apiKey = freezed,
+    Object? apiSecret = freezed,
     Object? email = freezed,
-    Object? password = null,
+    Object? password = freezed,
     Object? roleProfileName = freezed,
     Object? gender = freezed,
     Object? bithDate = freezed,
@@ -234,38 +234,38 @@ class __$$LoggedInUserImplCopyWithImpl<$Res>
     Object? mobileNo = freezed,
   }) {
     return _then(_$LoggedInUserImpl(
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      username: null == username
+              as String?,
+      username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      firstName: null == firstName
+              as String?,
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
+              as String?,
+      lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
-      apiKey: null == apiKey
+              as String?,
+      apiKey: freezed == apiKey
           ? _value.apiKey
           : apiKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      apiSecret: null == apiSecret
+              as String?,
+      apiSecret: freezed == apiSecret
           ? _value.apiSecret
           : apiSecret // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      password: null == password
+      password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       roleProfileName: freezed == roleProfileName
           ? _value.roleProfileName
           : roleProfileName // ignore: cast_nullable_to_non_nullable
@@ -302,14 +302,14 @@ class __$$LoggedInUserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LoggedInUserImpl extends _LoggedInUser {
   const _$LoggedInUserImpl(
-      {required this.name,
-      required this.username,
-      @JsonKey(name: 'first_name', defaultValue: '') required this.firstName,
-      @JsonKey(name: 'last_name', defaultValue: '') required this.lastName,
-      @JsonKey(name: 'api_key', defaultValue: '') required this.apiKey,
-      @JsonKey(name: 'api_secret', defaultValue: '') required this.apiSecret,
+      {this.name,
+      this.username,
+      @JsonKey(name: 'first_name', defaultValue: '') this.firstName,
+      @JsonKey(name: 'last_name', defaultValue: '') this.lastName,
+      @JsonKey(name: 'api_key', defaultValue: '') this.apiKey,
+      @JsonKey(name: 'api_secret', defaultValue: '') this.apiSecret,
       @JsonKey(name: 'email', defaultValue: '') this.email,
-      @JsonKey(defaultValue: '') required this.password,
+      @JsonKey(defaultValue: '') this.password,
       @JsonKey(name: 'role_profile_name', defaultValue: '')
       this.roleProfileName,
       @JsonKey(name: 'gender') this.gender,
@@ -324,27 +324,27 @@ class _$LoggedInUserImpl extends _LoggedInUser {
       _$$LoggedInUserImplFromJson(json);
 
   @override
-  final String name;
+  final String? name;
   @override
-  final String username;
+  final String? username;
   @override
   @JsonKey(name: 'first_name', defaultValue: '')
-  final String firstName;
+  final String? firstName;
   @override
   @JsonKey(name: 'last_name', defaultValue: '')
-  final String lastName;
+  final String? lastName;
   @override
   @JsonKey(name: 'api_key', defaultValue: '')
-  final String apiKey;
+  final String? apiKey;
   @override
   @JsonKey(name: 'api_secret', defaultValue: '')
-  final String apiSecret;
+  final String? apiSecret;
   @override
   @JsonKey(name: 'email', defaultValue: '')
   final String? email;
   @override
   @JsonKey(defaultValue: '')
-  final String password;
+  final String? password;
   @override
   @JsonKey(name: 'role_profile_name', defaultValue: '')
   final String? roleProfileName;
@@ -438,17 +438,14 @@ class _$LoggedInUserImpl extends _LoggedInUser {
 
 abstract class _LoggedInUser extends LoggedInUser {
   const factory _LoggedInUser(
-      {required final String name,
-      required final String username,
-      @JsonKey(name: 'first_name', defaultValue: '')
-      required final String firstName,
-      @JsonKey(name: 'last_name', defaultValue: '')
-      required final String lastName,
-      @JsonKey(name: 'api_key', defaultValue: '') required final String apiKey,
-      @JsonKey(name: 'api_secret', defaultValue: '')
-      required final String apiSecret,
+      {final String? name,
+      final String? username,
+      @JsonKey(name: 'first_name', defaultValue: '') final String? firstName,
+      @JsonKey(name: 'last_name', defaultValue: '') final String? lastName,
+      @JsonKey(name: 'api_key', defaultValue: '') final String? apiKey,
+      @JsonKey(name: 'api_secret', defaultValue: '') final String? apiSecret,
       @JsonKey(name: 'email', defaultValue: '') final String? email,
-      @JsonKey(defaultValue: '') required final String password,
+      @JsonKey(defaultValue: '') final String? password,
       @JsonKey(name: 'role_profile_name', defaultValue: '')
       final String? roleProfileName,
       @JsonKey(name: 'gender') final String? gender,
@@ -463,27 +460,27 @@ abstract class _LoggedInUser extends LoggedInUser {
       _$LoggedInUserImpl.fromJson;
 
   @override
-  String get name;
+  String? get name;
   @override
-  String get username;
+  String? get username;
   @override
   @JsonKey(name: 'first_name', defaultValue: '')
-  String get firstName;
+  String? get firstName;
   @override
   @JsonKey(name: 'last_name', defaultValue: '')
-  String get lastName;
+  String? get lastName;
   @override
   @JsonKey(name: 'api_key', defaultValue: '')
-  String get apiKey;
+  String? get apiKey;
   @override
   @JsonKey(name: 'api_secret', defaultValue: '')
-  String get apiSecret;
+  String? get apiSecret;
   @override
   @JsonKey(name: 'email', defaultValue: '')
   String? get email;
   @override
   @JsonKey(defaultValue: '')
-  String get password;
+  String? get password;
   @override
   @JsonKey(name: 'role_profile_name', defaultValue: '')
   String? get roleProfileName;

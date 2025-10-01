@@ -50,8 +50,8 @@ class AuthRepoImpl extends BaseApiRepository implements AuthRepo {
         }
         final userWithPswd = r.data!.copyWith(password: pswd);
         await _persistUser(userWithPswd);
-        await storage.setString(LocalKeys.apiKey, userWithPswd.apiKey);
-        await storage.setString(LocalKeys.apiSecret, userWithPswd.apiSecret);
+        await storage.setString(LocalKeys.apiKey, userWithPswd.apiKey ?? '');
+        await storage.setString(LocalKeys.apiSecret, userWithPswd.apiSecret ?? '');
         return right(userWithPswd);
       });
     });

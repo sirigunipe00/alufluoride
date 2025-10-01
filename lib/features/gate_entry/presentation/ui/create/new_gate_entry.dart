@@ -87,6 +87,10 @@ class _NewGateEntryState extends State<NewGateEntry> {
                   GateEntryBlocProvider.get().purchaseOrderListCubit()
                     ..request(),
             ),
+             BlocProvider(
+              create: (context) =>
+                  GateEntryBlocProvider.get().processImg(),
+            ),
           ],
           child: GateEntryFormWidget(key: ValueKey(status)),
         ),

@@ -1,17 +1,13 @@
 import 'package:alufluoride/core/di/injector.dart';
-import 'package:alufluoride/features/contract_employee/presentation/bloc/create_contract_employee/contract_employee_cubit.dart';
 
 final _reqisteredUrl = $sl.get<Urls>(instanceName: 'baseUrl');
 
 class Urls {
 
-  factory Urls.alufluorideUAT() =>
-      const Urls('http://157.180.120.125:8000/api');
-  // factory Urls.alufluorideUAT() =>
-  //     const Urls')('https://alufluorideuat.easycloud.co.in/api;
+  // factory Urls.alufluorideUAT() => const Urls('http://157.180.120.125:8000/api');
+  factory Urls.alufluorideUAT() => const Urls('https://alufluorideuat.easycloud.co.in/api');
   factory Urls.local() => const Urls('192.168.0.147:8000/api');
-  factory Urls.alufluorideLive() =>
-      const Urls('https://alufluoridegmlive.easycloud.co.in/api');
+  factory Urls.alufluorideLive() => const Urls('https://alufluoridegmlive.easycloud.co.in/api');
 
   const Urls(this.url);
 
@@ -102,11 +98,9 @@ class Urls {
       '$cusWs/alufluoride.api.create_empty_vehicle_tracking';
   static final updateEmptyVehicle =
       '$cusWs/alufluoride.api.update_empty_vehicle_tracking';
-  static final submitEmptyVehicle =
-      '$cusWs/alufluoride.api.submit_empty_vehicle_tracking';
+  static final submitEmptyVehicle = '$cusWs/alufluoride.api.submit_empty_vehicle_tracking';
 
-  static final removelines =
-      '$cusWs/alufluoride.api.remove_outward_or_inward_items';
+  static final removelines = '$cusWs/alufluoride.api.remove_outward_or_inward_items';
 
   static filepath(String path) {
     return '${baseUrl.replaceAll('api', '')}/${path.replaceAll('/private', '').replaceAll("///", '/')}';
