@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:alufluoride/core/core.dart';
@@ -27,61 +28,79 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
   CreateGateEntryCubit(this.repo) : super(CreateGateEntryState.initial());
   final GateEntryRepo repo;
 
-  void onValueChanged({
-    String? vehicleRequest,
-    String? gateEntryType,
-    String? driverName,
-    String? driverMobileNo,
-    String? entryDate,
-    String? vehicle,
-    String? vehiclephoto,
-    String? payType,
-    String? beforeWork,
-    String? afterWork,
-    String? inTime,
-    String? outTime,
-    String? perHrAmt,
-    String? remarks,
-
-    String? invDate,
-    String? poNumber,
-    String? vendorInvQty,
-    String? invAmt,
-    String? vendorInvNum,
-    String? venorInvPhoto,
-    String? venorInvDate,
-    int? qtyTonnes,
-    double? ratePerTonnes 
-  }) {
+  void onValueChanged(
+      {String? vehicleRequest,
+      String? gateEntryType,
+      String? driverName,
+      String? driverMobileNo,
+      String? entryDate,
+      String? vehicle,
+      File? vehiclephoto,
+      String? payType,
+      File? beforeWork,
+      File? afterWork,
+      String? inTime,
+      String? outTime,
+      String? perHrAmt,
+      String? remarks,
+      String? invDate,
+      String? poNumber,
+      String? vendorInvQty,
+      String? invAmt,
+      String? vendorInvNum,
+      File? venorInvPhoto,
+      String? venorInvDate,
+      int? qtyTonnes,
+      double? ratePerTonnes}) {
     shouldAskForConfirmation.value = true;
     final form = state.form;
 
+
+         final vendorInvPhoto = venorInvPhoto.isNull
+        ? form.vendorInvPhoto
+        : base64Encode(venorInvPhoto!.readAsBytesSync());
+
+         final vehPhoto = vehiclephoto.isNull
+        ? form.vehiclePhoto
+        : base64Encode(vehiclephoto!.readAsBytesSync());
+
+
+         final beforeWorkFile = beforeWork.isNull
+        ? form.beforeWork
+        : base64Encode(beforeWork!.readAsBytesSync());
+
+         final afterWorkFile = afterWork.isNull
+        ? form.afterWork
+        : base64Encode(afterWork!.readAsBytesSync());
+
+
+
     final newForm = form.copyWith(
-      name: form.name,
-      status: form.status,
-      vehicleRequest: vehicleRequest ?? form.vehicleRequest,
-      intime: inTime ?? form.intime,
-      outTime: outTime ?? form.outTime,
-      vehicle: vehicle ?? form.vehicle,
-      payType: payType ?? form.payType,
-      remarks: remarks ?? form.remarks,
-      entryType: gateEntryType ?? form.entryType,
-      gateEntryDate: entryDate ?? form.gateEntryDate,
-      beforeWork: beforeWork ?? form.beforeWork,
-      vehiclePhoto: vehiclephoto ?? form.vehiclePhoto,
-      driverName: driverName ?? form.driverName,
-      drivermobileNo: driverMobileNo ?? form.drivermobileNo,
-      invoiceAmt: double.tryParse(invAmt ?? '') ?? form.invoiceAmt,
-      invoiceQnty: double.tryParse(vendorInvQty ?? '')  ?? form.invoiceQnty,
-      perHrAmt: perHrAmt  ?? form.perHrAmt,
-      poNumber: poNumber ?? form.poNumber,
-      vendorInvNum: vendorInvNum ?? form.vendorInvNum,
-      vendorInvPhoto: venorInvPhoto ?? form.vendorInvPhoto,
-      vendorInvoiceDate: venorInvDate ?? form.vendorInvoiceDate,
-      qtyinTonnes: qtyTonnes ?? form.qtyinTonnes,
-      ratePerTonnes: ratePerTonnes ?? form.ratePerTonnes,
-      afterWork: afterWork ?? form.afterWork
-    );
+        name: form.name,
+        status: form.status,
+        vehicleRequest: vehicleRequest ?? form.vehicleRequest,
+        intime: inTime ?? form.intime,
+        outTime: outTime ?? form.outTime,
+        vehicle: vehicle ?? form.vehicle,
+        payType: payType ?? form.payType,
+        remarks: remarks ?? form.remarks,
+        entryType: gateEntryType ?? form.entryType,
+        gateEntryDate: entryDate ?? form.gateEntryDate,
+        beforeWork: beforeWorkFile,
+        vehiclePhoto: vehPhoto,
+        // vehiclephoto ?? form.vehiclePhoto,
+        driverName: driverName ?? form.driverName,
+        drivermobileNo: driverMobileNo ?? form.drivermobileNo,
+        invoiceAmt: double.tryParse(invAmt ?? '') ?? form.invoiceAmt,
+        invoiceQnty: double.tryParse(vendorInvQty ?? '') ?? form.invoiceQnty,
+        perHrAmt: perHrAmt ?? form.perHrAmt,
+        poNumber: poNumber ?? form.poNumber,
+        vendorInvNum: vendorInvNum ?? form.vendorInvNum,
+        vendorInvPhoto: vendorInvPhoto,
+        vendorInvoiceDate: venorInvDate ?? form.vendorInvoiceDate,
+        qtyinTonnes: qtyTonnes ?? form.qtyinTonnes,
+        ratePerTonnes: ratePerTonnes ?? form.ratePerTonnes,
+        afterWork: afterWorkFile);
     emitSafeState(state.copyWith(form: newForm));
   }
 
@@ -205,7 +224,10 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
 
           return response.fold(
             (l) {
-              emitSafeState(state.copyWith(isLoading: false, error: l,));
+              emitSafeState(state.copyWith(
+                isLoading: false,
+                error: l,
+              ));
             },
             (r) {
               shouldAskForConfirmation.value = false;
@@ -213,11 +235,8 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
               emitSafeState(state.copyWith(
                 isLoading: false,
                 isSuccess: true,
-                form: state.form.copyWith(
-                  status: status,
-                  name: r.first,
-                  docstatus: 0
-                ),
+                form: state.form
+                    .copyWith(status: status, name: r.first, docstatus: 0),
                 successMsg: 'Gate Entry Created Succesfully',
                 view: nextMode,
               ));
@@ -320,7 +339,7 @@ class CreateGateEntryState with _$CreateGateEntryState {
     final createdtime = DFU.hhMMss(DFU.now());
 
     return CreateGateEntryState(
-      lines: [],   
+      lines: [],
       form: GateEntryForm(
         gateEntryDate: creationDate,
         entryTime: createdtime,

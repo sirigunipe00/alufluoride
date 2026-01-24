@@ -25,6 +25,12 @@ import 'package:alufluoride/features/incident_register/presentation/bloc/bloc_pr
 import 'package:alufluoride/features/incident_register/presentation/bloc/create_incident_register/incident_register_cubit.dart';
 import 'package:alufluoride/features/incident_register/presentation/ui/create/new_incident_register.dart';
 import 'package:alufluoride/features/incident_register/presentation/ui/widgets/incident_register_list.dart';
+import 'package:alufluoride/features/production_baggging_entry/model/bagging_entry_model.dart';
+import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/blocprovider.dart';
+import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/create_bagging_entry_cubit/create_bagging_entry_cubit.dart';
+import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/create_weightment_cubit/create_weightment_cubit.dart';
+import 'package:alufluoride/features/production_baggging_entry/presentation/ui/create/new_bagging_entry.dart';
+import 'package:alufluoride/features/production_baggging_entry/presentation/ui/widget/bagging_entry_list.dart';
 import 'package:alufluoride/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -182,7 +188,6 @@ class AppRouterConfig {
                                     $sl.get<CreateIncidentRegisterCubit>()
                                       ..initDetails(incRegForm),
                               ),
-                             
                             ],
                             child: const NewIncidentRegister(),
                           );
@@ -211,12 +216,48 @@ class AppRouterConfig {
                                   create: (_) =>
                                       $sl.get<CreateContractEmployeeCubit>()
                                         ..initDetails(incRegForm)),
-
-                                
                             ],
                             child: const NewContractEmployee(),
                           );
                         },
+                      ),
+                    ],
+                  ),
+                  GoRoute(
+                    path: _getPath(AppRoute.baggingEntry),
+                    builder: (ctxt, state) => const BaggingEntryListScrn(),
+                    routes: [
+                      GoRoute(
+                         onExit: (context, state) async =>
+                            await _promptConf(context),
+                        path: _getPath(AppRoute.newBaggingEntry),
+                        builder: (_, state) {
+                          final form = state.extra as BaggingEntryModel?;
+                          return MultiBlocProvider(
+                            providers: [
+                              BlocProvider(
+                                  create: (_) => $sl.get<WeightmentCubit>()),
+                              BlocProvider(
+                                  create: (_) => BaggingEntryBlocProvider.get()
+                                      .fetchItems()
+                                    ..request(form?.name ?? '')),
+                              BlocProvider(
+                                  create: (_) =>
+                                      $sl.get<CreateBaggingEntryCubit>()
+                                        ..initDetails(form)),
+                            ],
+                            child: const NewBaggingEntry(),
+                          );
+                        },
+                        routes: [
+                          GoRoute(
+                            path: _getPath(AppRoute.newBaggingEntry),
+                            builder: (_, state) {
+                              final data = state.extra as Pair<String, String?>;
+                              return ImagePreviewScrn.fromPair(data);
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),

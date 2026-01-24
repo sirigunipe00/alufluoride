@@ -24,6 +24,7 @@ class AppIcons {
   static const incidentRegistration = AppIcon('$basePath/logo/register.png');
   static const inviteVisitor = AppIcon('$basePath/logo/invite.png');
   static const visitorInOut = AppIcon('$basePath/logo/visitor_in_out.png');
+  static const baggingEntry = AppIcon('$imagesPath/bagging_entry.png');
 }
 
 class AppIcon {

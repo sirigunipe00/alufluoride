@@ -56,15 +56,35 @@ class AppHomePage extends StatelessWidget {
               featureColor: AppColors.shyMoment,
               onTap: () => AppRoute.gateExit.push(context),
             ),
+            // AppFeatureWidget(
+            //   icon: AppIcons.vechileEntry
+            //       .toWidget(height: 100, width: 120, fit: BoxFit.contain),
+            //   title: Text('Contract Employee',
+            //       style: AppTextStyles.featureLabelStyle(context)
+            //           .copyWith(fontSize: 16, fontWeight: FontWeight.bold)),
+            //   featureColor: AppColors.green,
+            //   onTap: () => AppRoute.contractEmployee.push(context),
+            // ),
+
             AppFeatureWidget(
-              icon: AppIcons.vechileEntry
-                  .toWidget(height: 100, width: 120, fit: BoxFit.contain),
-              title: Text('Contract Employee',
-                  style: AppTextStyles.featureLabelStyle(context)
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.bold)),
-              featureColor: AppColors.green,
-              onTap: () => AppRoute.contractEmployee.push(context),
+              icon: AppIcons.baggingEntry
+                  .toWidget(height: 100, width: 120, fit: BoxFit.fill),
+              title: const Text(
+                'Bagging Entry',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              // Text('Bagging Entry kjahdfkjh',
+              //     style: AppTextStyles.featureLabelStyle(context)),
+              featureColor: AppColors.invite,
+              onTap: () => AppRoute.baggingEntry.push(context),
             ),
+
             // AppFeatureWidget(
             //   icon: AppIcons.incidentRegistration
             //       .toWidget(height: 100, width: 120, fit: BoxFit.contain),

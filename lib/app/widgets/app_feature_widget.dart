@@ -38,7 +38,7 @@ class AppFeatureWidget extends StatelessWidget {
               Container(
                 width: double.infinity, 
                 margin: const EdgeInsets.all(4),
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
                 decoration: BoxDecoration(
                   color: AppColors.white,
                   borderRadius: BorderRadius.circular(10),

@@ -31,15 +31,29 @@ class StringUtils {
     }
   }
 
-  static int docStatusInt(String status) {
-    if (status == 'Draft') {
-      return 0;
-    } else if (status == 'Submitted') {
-      return 1;
-    } else {
-      return 0;
-    }
+  // static int docStatusInt(String status) {
+  //   if (status == 'Draft') {
+  //     return 0;
+  //   } else if (status == 'Submitted') {
+  //     return 1;
+  //   } else {
+  //     return 0;
+  //   }
+  // }
+
+  static int? docStatusInt(String status) {
+  if (status == 'Draft') {
+    return 0;
+  } else if (status == 'Submitted') {
+    return 1;
+  } else if (status == 'All') {
+    return null;
+  } else {
+    return null;
   }
+}
+
+
 
   static String docId(String input) {
     RegExp regExp = RegExp(r'RR-\d+');

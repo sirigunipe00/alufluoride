@@ -51,6 +51,16 @@ import '../../features/incident_register/presentation/bloc/bloc_provider.dart'
     as _i840;
 import '../../features/incident_register/presentation/bloc/create_incident_register/incident_register_cubit.dart'
     as _i816;
+import '../../features/production_baggging_entry/data/bagging_entry_repo.dart'
+    as _i876;
+import '../../features/production_baggging_entry/data/bagging_entry_repoimpl.dart'
+    as _i457;
+import '../../features/production_baggging_entry/presentation/bloc/blocprovider.dart'
+    as _i290;
+import '../../features/production_baggging_entry/presentation/bloc/create_bagging_entry_cubit/create_bagging_entry_cubit.dart'
+    as _i610;
+import '../../features/production_baggging_entry/presentation/bloc/create_weightment_cubit/create_weightment_cubit.dart'
+    as _i571;
 import '../core.dart' as _i351;
 import '../local_storage/key_vale_storage.dart' as _i1012;
 import '../network/api_client.dart' as _i557;
@@ -98,6 +108,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1017.ContractEmployeeRepoImpl(gh<_i351.ApiClient>()));
     gh.lazySingleton<_i310.IncidentRegistersRepo>(
         () => _i49.IncidentRegistersRepoImpl(gh<_i351.ApiClient>()));
+    gh.lazySingleton<_i876.BaggingEntryRepo>(
+        () => _i457.BaggingEntryRepoImpl(gh<_i351.ApiClient>()));
+    gh.lazySingleton<_i290.BaggingEntryBlocProvider>(
+        () => _i290.BaggingEntryBlocProvider(gh<_i876.BaggingEntryRepo>()));
+    gh.factory<_i571.WeightmentCubit>(
+        () => _i571.WeightmentCubit(gh<_i876.BaggingEntryRepo>()));
+    gh.factory<_i610.CreateBaggingEntryCubit>(
+        () => _i610.CreateBaggingEntryCubit(gh<_i876.BaggingEntryRepo>()));
     gh.lazySingleton<_i46.ContractEmployeeBlocProvider>(() =>
         _i46.ContractEmployeeBlocProvider(gh<_i908.ContractEmployeeRepo>()));
     gh.factory<_i400.CreateContractEmployeeCubit>(() =>

@@ -790,7 +790,6 @@
 //   }
 // }
 
-
 import 'dart:developer';
 import 'dart:io';
 import 'package:alufluoride/core/core.dart';
@@ -814,7 +813,7 @@ import 'package:alufluoride/widgets/spaced_column.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
- 
+
 class GateEntryFormWidget extends StatefulWidget {
   const GateEntryFormWidget({super.key});
 
@@ -839,11 +838,8 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
     final isCreating = formState.view == GateEntryView.create;
     final isCompleted = formState.view == GateEntryView.completed;
     final newform = formState.form;
-    log('---newform---:${ newform}');
+    log('---newform---:${newform}');
     entryType = newform.entryType;
-
-
-    
 
     return MultiBlocListener(
       listeners: [
@@ -894,13 +890,32 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
               },
             ),
             if (entryType == 'Purchase') ...[
+              // DateSelectionField(
+              //   title: 'Vendor Invoice Date',
+              //   initialValue: newform.vendorInvoiceDate,
+              //   isRequired: true,
+              //   readOnly: isCompleted,
+              //   firstDate: DateTime(2000),
+              //   lastDate: DFU.now(),
+              //   onDateSelect: (date) {
+              //     final formattedDate = DateFormat('yyyy-MM-dd').format(date);
+
+              //     context
+              //         .cubit<CreateGateEntryCubit>()
+              //         .onValueChanged(venorInvDate: formattedDate);
+              //   },
+              //   suffixIcon: const Icon(Icons.calendar_month_outlined),
+              // ),
               DateSelectionField(
                   title: 'Vendor Invoice Date',
                   initialValue: newform.vendorInvoiceDate,
                   isRequired: true,
                   readOnly: isCompleted,
-                  firstDate: DFU.now(),
-                  lastDate: DFU.now().add(const Duration(days: 365)),
+                  // firstDate: DFU.now(),
+                  // lastDate: DFU.now().add(const Duration(days: 365)),
+
+                  firstDate: DateTime(2000),
+                  lastDate: DFU.now(),
                   onDateSelect: (date) {
                     final formattedDate = DateFormat('yyyy-MM-dd')
                         .format(date); // or your desired format
@@ -921,11 +936,9 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                     key: UniqueKey(),
                     color: AppColors.marigoldDDust,
                     items: address,
-                    defaultSelection: address
-                        .where((e) {
-                          return e.name == newform.poNumber;
-                        })
-                        .firstOrNull,
+                    defaultSelection: address.where((e) {
+                      return e.name == newform.poNumber;
+                    }).firstOrNull,
                     title: 'PO Number',
                     hint: 'PO Number',
                     readOnly: isCompleted,
@@ -962,7 +975,9 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 title: 'Vendor Invoice Quantity',
                 isRequired: true,
                 readOnly: isCompleted,
-                initialValue: newform.invoiceQnty != null ? newform.invoiceQnty.toString() : '',
+                initialValue: newform.invoiceQnty != null
+                    ? newform.invoiceQnty.toString()
+                    : '',
                 borderColor: AppColors.marigoldDDust,
                 focusNode: focusNodes.elementAt(2),
                 inputType: const TextInputType.numberWithOptions(decimal: true),
@@ -976,7 +991,9 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 title: 'Invoice Amount',
                 isRequired: true,
                 readOnly: isCompleted,
-                initialValue: newform.invoiceAmt != null ? newform.invoiceAmt.toString() : '',
+                initialValue: newform.invoiceAmt != null
+                    ? newform.invoiceAmt.toString()
+                    : '',
                 borderColor: AppColors.marigoldDDust,
                 focusNode: focusNodes.elementAt(2),
                 inputType: const TextInputType.numberWithOptions(decimal: true),
@@ -987,13 +1004,13 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 },
               ),
               InputField(
-                title: 'Vehicle',
+                title: 'Vehicle Number',
                 isRequired: true,
                 readOnly: isCompleted,
                 initialValue: newform.vehicle1,
                 borderColor: AppColors.marigoldDDust,
                 focusNode: focusNodes.elementAt(2),
-                inputType: const TextInputType.numberWithOptions(decimal: true),
+                // inputType: const TextInputType.numberWithOptions(decimal: true),
                 onChanged: (p0) {
                   context
                       .cubit<CreateGateEntryCubit>()
@@ -1007,7 +1024,7 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 initialValue: newform.vendorInvNum,
                 borderColor: AppColors.marigoldDDust,
                 focusNode: focusNodes.elementAt(2),
-                inputType: const TextInputType.numberWithOptions(decimal: true),
+                // inputType: const TextInputType.numberWithOptions(decimal: true),
                 onChanged: (p0) {
                   context
                       .cubit<CreateGateEntryCubit>()
@@ -1020,13 +1037,15 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 borderColor: AppColors.marigoldDDust,
                 title: 'Vendor Invoice Photo',
                 isRequired: true,
-                defaultValue: newform.vendorInvPhoto != null ? File(newform.vendorInvPhoto ?? '') : null,
+                defaultValue: newform.vendorInvPhoto != null
+                    ? File(newform.vendorInvPhoto ?? '')
+                    : null,
                 imageUrl: newform.vendorInvPhoto,
                 onFileCapture: (file) {
                   if (file != null) {
                     context
                         .cubit<CreateGateEntryCubit>()
-                        .onValueChanged(venorInvPhoto: file.path);
+                        .onValueChanged(venorInvPhoto: file);
                   }
                 },
               ),
@@ -1139,83 +1158,80 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                   setState(() {
                     payType = value;
                   });
-                  
+
                   context
                       .cubit<CreateGateEntryCubit>()
                       .onValueChanged(payType: value);
                 },
               ),
-              if(payType == 'Qty')...[
-                 InputField(
-                readOnly: isCompleted,
-                title: 'Qty in Tonnes',
-                borderColor: AppColors.marigoldDDust,
-                inputType: TextInputType.number,
-                initialValue: newform.perHrAmt,
-                focusNode: focusNodes.elementAt(8),
-                onChanged: (p0) {
-                  context
-                      .cubit<CreateGateEntryCubit>()
-                      .onValueChanged(qtyTonnes: int.tryParse(p0));
-                },
-              ),
-
-               InputField(
-                readOnly: isCompleted,
-                title: 'Rate Per Tonnes',
-                borderColor: AppColors.marigoldDDust,
-                inputType: TextInputType.number,
-                initialValue: newform.perHrAmt,
-                focusNode: focusNodes.elementAt(8),
-                onChanged: (p0) {
-                  context
-                      .cubit<CreateGateEntryCubit>()
-                      .onValueChanged(ratePerTonnes: double.tryParse(p0));
-                },
-              ),
-              ] else...[
+              if (payType == 'Qty') ...[
+                InputField(
+                  readOnly: isCompleted,
+                  title: 'Qty in Tonnes',
+                  borderColor: AppColors.marigoldDDust,
+                  inputType: TextInputType.number,
+                  initialValue: newform.perHrAmt,
+                  focusNode: focusNodes.elementAt(8),
+                  onChanged: (p0) {
+                    context
+                        .cubit<CreateGateEntryCubit>()
+                        .onValueChanged(qtyTonnes: int.tryParse(p0));
+                  },
+                ),
+                InputField(
+                  readOnly: isCompleted,
+                  title: 'Rate Per Tonnes',
+                  borderColor: AppColors.marigoldDDust,
+                  inputType: TextInputType.number,
+                  initialValue: newform.perHrAmt,
+                  focusNode: focusNodes.elementAt(8),
+                  onChanged: (p0) {
+                    context
+                        .cubit<CreateGateEntryCubit>()
+                        .onValueChanged(ratePerTonnes: double.tryParse(p0));
+                  },
+                ),
+              ] else ...[
                 TimeSelectionField(
-                readOnly: isCompleted,
-                key: UniqueKey(),
-                // key: ValueKey(inTime),
-                initialValue: newform.intime,
-                borderColor: AppColors.marigoldDDust,
-                title: 'In Time',
-                onTimeSelect: (time) {
-                  context
-                      .cubit<CreateGateEntryCubit>()
-                      .onValueChanged(inTime: time.format(context));
-                },
-              ),
-              TimeSelectionField(
-                readOnly: isCompleted,
-                // key: ValueKey(outTime),
-                key: UniqueKey(),
-                initialValue: newform.outTime,
-                borderColor: AppColors.marigoldDDust,
-                title: 'Out Time',
-                onTimeSelect: (time) {
-                  context
-                      .cubit<CreateGateEntryCubit>()
-                      .onValueChanged(outTime: time.format(context));
-                },
-              ),
-              InputField(
-                isRequired: true,
-                readOnly: isCompleted,
-                title: 'Per Hour Amount',
-                borderColor: AppColors.marigoldDDust,
-                inputType: TextInputType.number,
-                initialValue: newform.perHrAmt,
-                focusNode: focusNodes.elementAt(8),
-                onChanged: (p0) {
-                  context
-                      .cubit<CreateGateEntryCubit>()
-                      .onValueChanged(perHrAmt: p0);
-                },
-              ),
-
-
+                  readOnly: isCompleted,
+                  key: UniqueKey(),
+                  // key: ValueKey(inTime),
+                  initialValue: newform.intime,
+                  borderColor: AppColors.marigoldDDust,
+                  title: 'In Time',
+                  onTimeSelect: (time) {
+                    context
+                        .cubit<CreateGateEntryCubit>()
+                        .onValueChanged(inTime: time.format(context));
+                  },
+                ),
+                TimeSelectionField(
+                  readOnly: isCompleted,
+                  // key: ValueKey(outTime),
+                  key: UniqueKey(),
+                  initialValue: newform.outTime,
+                  borderColor: AppColors.marigoldDDust,
+                  title: 'Out Time',
+                  onTimeSelect: (time) {
+                    context
+                        .cubit<CreateGateEntryCubit>()
+                        .onValueChanged(outTime: time.format(context));
+                  },
+                ),
+                InputField(
+                  isRequired: true,
+                  readOnly: isCompleted,
+                  title: 'Per Hour Amount',
+                  borderColor: AppColors.marigoldDDust,
+                  inputType: TextInputType.number,
+                  initialValue: newform.perHrAmt,
+                  focusNode: focusNodes.elementAt(8),
+                  onChanged: (p0) {
+                    context
+                        .cubit<CreateGateEntryCubit>()
+                        .onValueChanged(perHrAmt: p0);
+                  },
+                ),
               ],
               PhotoSelectionWidget(
                 isReadOnly: isCompleted,
@@ -1223,39 +1239,39 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
                 borderColor: AppColors.marigoldDDust,
                 title: 'Before Work',
                 isRequired: true,
-                defaultValue: isCompleted ? File(newform.beforeWork ?? '') : null,
+                defaultValue:
+                    isCompleted ? File(newform.beforeWork ?? '') : null,
                 imageUrl: newform.beforeWork,
                 onFileCapture: (file) {
                   if (file != null) {
                     context
                         .cubit<CreateGateEntryCubit>()
-                        .onValueChanged(beforeWork: file.path);
+                        .onValueChanged(beforeWork: file);
                   }
                 },
               ),
-
-                  PhotoSelectionWidget(
+              PhotoSelectionWidget(
                 isReadOnly: isCompleted,
                 fileName: 'After Work',
                 borderColor: AppColors.marigoldDDust,
                 title: 'After Work',
                 isRequired: true,
-                defaultValue: isCompleted ?  File(newform.afterWork ?? '') : null,
+                defaultValue:
+                    isCompleted ? File(newform.afterWork ?? '') : null,
                 imageUrl: newform.afterWork,
                 onFileCapture: (file) {
                   if (file != null) {
                     context
                         .cubit<CreateGateEntryCubit>()
-                        .onValueChanged(afterWork: file.path);
+                        .onValueChanged(afterWork: file);
                   }
                 },
               ),
-              
             ],
             InputField(
               title: 'Gate Entry Date',
               isRequired: true,
-              readOnly: isCompleted,
+              readOnly: true,
               initialValue: newform.gateEntryDate,
               borderColor: AppColors.marigoldDDust,
               focusNode: focusNodes.elementAt(2),
@@ -1309,55 +1325,57 @@ class _GateEntryFormWidgetState extends State<GateEntryFormWidget> {
               borderColor: AppColors.marigoldDDust,
               title: 'Vehicle Photo',
               isRequired: true,
-              defaultValue: isCompleted ? File(newform.vehiclePhoto ?? '') : null,
+              defaultValue:
+                  isCompleted ? File(newform.vehiclePhoto ?? '') : null,
               imageUrl: newform.vehiclePhoto,
               onFileCapture: (file) {
                 if (file != null) {
                   debugPrint('Updating vehicle photo path: ${file.path}');
                   context
                       .cubit<CreateGateEntryCubit>()
-                      .onValueChanged(vehiclephoto: file.path);
+                      .onValueChanged(vehiclephoto: file);
                 }
               },
               onTextExtracted: (extractedText) {
                 debugPrint('=== Processing Extracted Text ===');
                 debugPrint('Raw extracted text: $extractedText');
                 debugPrint('Current remarks before update: ${newform.remarks}');
-                
+
                 // Try to find the weight value
                 final weightPattern = RegExp(r'\d+\.?\d*');
                 final matches = weightPattern.allMatches(extractedText);
-                
+
                 if (matches.isNotEmpty) {
                   final weight = matches.first.group(0);
                   debugPrint('Found weight: $weight');
-                  
+
                   if (weight != null) {
                     // Force clear any existing weight entries
                     final currentRemarks = newform.remarks ?? '';
                     final cleanedRemarks = currentRemarks
                         .split('\n')
-                        .where((line) => !line.trim().toLowerCase().startsWith('weight:'))
+                        .where((line) =>
+                            !line.trim().toLowerCase().startsWith('weight:'))
                         .join('\n')
                         .trim();
-                    
+
                     debugPrint('Cleaned remarks: $cleanedRemarks');
-                    
+
                     final weightText = 'Weight: $weight kg';
-                    final updatedRemarks = cleanedRemarks.isEmpty 
-                        ? weightText 
+                    final updatedRemarks = cleanedRemarks.isEmpty
+                        ? weightText
                         : '$cleanedRemarks\n$weightText';
-                    
+
                     debugPrint('Final remarks to be set: $updatedRemarks');
-                    
+
                     // Update remarks
                     context
                         .cubit<CreateGateEntryCubit>()
                         .onValueChanged(remarks: updatedRemarks);
-                        
+
                     // Force UI update
                     setState(() {});
-                    
+
                     // Verify update
                     debugPrint('Remarks after update: ${newform.remarks}');
                   }

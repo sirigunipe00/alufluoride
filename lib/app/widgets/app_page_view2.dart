@@ -19,8 +19,8 @@ enum PageMode2 {
   outWardGatePass('Outward Gate Pass'),
   inWardGatePass('Inward Gate Pass'),
   contractEmployees('Contract Employees'),
-  emptyVehicle('Empty Vehicle Tracking');
-  
+  emptyVehicle('Empty Vehicle Tracking'),
+  baggingEntry('Bagging Entry');
 
   final String name;
   const PageMode2(this.name);
@@ -43,33 +43,32 @@ class AppPageView2<T extends PageViewFiltersCubit> extends StatelessWidget {
   final String scaffoldBg;
 
   String get hintText => switch (mode) {
-    PageMode2.gateentry => 'Search Gate-Entry ID',
-    PageMode2.gateexit => 'Search Gate-Exit ID',
-    PageMode2.incidentregister => 'Search Incident Register ID',
-    PageMode2.inviteVisitor => 'Search Invite Visitor ID',
-    PageMode2.visitorInOut => 'Search Visitor In Out',
-    PageMode2.createVisit => 'Search Visit ID',
-    PageMode2.outWardGatePass => 'Search Gate Pass ID',
-    PageMode2.inWardGatePass => 'Search Gate Pass ID',
-    PageMode2.contractEmployees => 'Search Contract Employee ID',
-
-
-    PageMode2.emptyVehicle => 'Search Empty Vehicle ID',
-  };
+        PageMode2.gateentry => 'Search Gate-Entry ID',
+        PageMode2.gateexit => 'Search Gate-Exit ID',
+        PageMode2.incidentregister => 'Search Incident Register ID',
+        PageMode2.inviteVisitor => 'Search Invite Visitor ID',
+        PageMode2.visitorInOut => 'Search Visitor In Out',
+        PageMode2.createVisit => 'Search Visit ID',
+        PageMode2.outWardGatePass => 'Search Gate Pass ID',
+        PageMode2.inWardGatePass => 'Search Gate Pass ID',
+        PageMode2.contractEmployees => 'Search Contract Employee ID',
+        PageMode2.emptyVehicle => 'Search Empty Vehicle ID',
+        PageMode2.baggingEntry => 'Search Bagging Entry ID',
+      };
 
   Color get bgColor => switch (mode) {
-    PageMode2.gateentry => AppColors.marigoldDDust,
-    PageMode2.gateexit => AppColors.shyMoment,
-    PageMode2.incidentregister => const Color(0xFF808080),
-    PageMode2.inviteVisitor => AppColors.invite,
-    PageMode2.visitorInOut => AppColors.registration,
-    PageMode2.createVisit => AppColors.invite,
-    PageMode2.outWardGatePass => AppColors.shyMoment,
-    PageMode2.inWardGatePass => AppColors.marigoldDDust,
-    PageMode2.emptyVehicle => AppColors.registration,
-    PageMode2.contractEmployees => AppColors.green,
-
-  };
+        PageMode2.gateentry => AppColors.marigoldDDust,
+        PageMode2.gateexit => AppColors.shyMoment,
+        PageMode2.incidentregister => const Color(0xFF808080),
+        PageMode2.inviteVisitor => AppColors.invite,
+        PageMode2.visitorInOut => AppColors.registration,
+        PageMode2.createVisit => AppColors.invite,
+        PageMode2.outWardGatePass => AppColors.shyMoment,
+        PageMode2.inWardGatePass => AppColors.marigoldDDust,
+        PageMode2.emptyVehicle => AppColors.registration,
+        PageMode2.contractEmployees => AppColors.green,
+        PageMode2.baggingEntry => AppColors.invite,
+      };
 
   @override
   Widget build(BuildContext context) {
@@ -123,8 +122,7 @@ class AppPageView2<T extends PageViewFiltersCubit> extends StatelessWidget {
                     flex: 1,
                     child: StatusMenuWidget(
                       defaultSel: context.read<T>().state.status,
-                      items: mode == PageMode2.createVisit ?  ['Draft','Submitted','Pending', 'Approved', 'Rejected'] :
-                      const ['Draft', 'Submitted'],
+                      items: const ['Draft', 'Submitted', 'All'],
                       onChange: context.cubit<T>().onChangeStatus,
                     ),
                   )
@@ -158,22 +156,24 @@ class AppPageView2<T extends PageViewFiltersCubit> extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        extendedPadding: const EdgeInsets.symmetric(
-          horizontal: 28,
-        ),
-        onPressed: onNew,
-        backgroundColor: backgroundColor,
-        icon: const Icon(
-          Icons.add,
-          color: AppColors.white,
-        ),
-        label: Text(
-          "New",
-          style: AppTextStyles.titleLarge(context)
-              .copyWith(color: AppColors.white, fontSize: 22),
-        ),
-      ),
+      floatingActionButton: mode != PageMode2.baggingEntry
+          ? FloatingActionButton.extended(
+              extendedPadding: const EdgeInsets.symmetric(
+                horizontal: 28,
+              ),
+              onPressed: onNew,
+              backgroundColor: backgroundColor,
+              icon: const Icon(
+                Icons.add,
+                color: AppColors.white,
+              ),
+              label: Text(
+                "New",
+                style: AppTextStyles.titleLarge(context)
+                    .copyWith(color: AppColors.white, fontSize: 22),
+              ),
+            )
+          : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }

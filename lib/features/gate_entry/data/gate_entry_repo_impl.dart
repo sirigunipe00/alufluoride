@@ -19,6 +19,7 @@ import 'package:dartz/dartz.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 // import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 
 @LazySingleton(as: GateEntryRepo)
 class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
@@ -204,30 +205,34 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
 
     formJson.update('status', (value) => 'Draft');
 
-    // final files = {
-    //   'vehicle_photo': form.vehiclePhoto,
-    //   'before_work': form.beforeWork,
-    // };
-    // final addFiles = <File>[];
-    // for (int i = 1; i < form.invoiceImg.length; i++) {
-    //   addFiles.add(form.invoiceImg.elementAt(i));
-    // }
-    // files.removeWhere((key, value) => value == null);
-    // final responseurlMap = <String, dynamic>{};
-    // final fileUrlRes = await _uploadfiles(files.values.nonNulls.toList());
-    // final urls = fileUrlRes.fold((l) => throw Exception(l.error), (r) => r);
-    // for (final file in files.keys) {
-    //   final indx = files.keys.toList().indexOf(file);
-    //   responseurlMap[file] = urls.elementAtOrNull(indx);
+    print('invoice data ...:${form.vendorInvPhoto}');
 
-    // }
+    // if (form.vendorInvoiceDate == null) {
+    //   formJson.remove('vendor_invoice_date');
+    // } else {
+    //   final parsedDate =
+    //       DateFormat('yyyy-MM-dd').parse(form.vendorInvoiceDate ?? '');
+    //   final date = DateFormat('dd-MM-yyyy').format(parsedDate);
 
-    // final filemap = {
-    //   'vehicle_photo': '/private/files/bharat.png',
-    //   'before_work': '/private/files/bharat.png',
-    // };
+    //   print('date ...:$date');
+
+    //   formJson['vendor_invoice_date'] = date;
+    // }
 
     final finalMap = {...removeNullValues(form.toJson())};
+
+    if (form.vendorInvoiceDate == null) {
+      finalMap.remove('vendor_invoice_date');
+    } else {
+      final parsedDate =
+          DateFormat('yyyy-MM-dd').parse(form.vendorInvoiceDate!);
+
+      final formattedDate = DateFormat('dd-MM-yyyy').format(parsedDate);
+
+      print('date ...:$formattedDate');
+
+      finalMap['vendor_invoice_date'] = formattedDate;
+    }
 
     if (form.entryType == 'Purchase' && finalMap.containsKey('vehicle')) {
       finalMap['vehicle1'] = finalMap['vehicle'];
@@ -449,7 +454,8 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
     try {
       const apiKey = 'AIzaSyDEgkM8hoLRdyx2vcaXQJvco6E-FWGP4Wg';
 
-      final model = GenerativeModel(model: 'gemini-1.5-flash-latest', apiKey: apiKey);
+      final model =
+          GenerativeModel(model: 'gemini-1.5-flash-latest', apiKey: apiKey);
       final fileData = await inp.file!.readAsBytes();
       final prompt = TextPart(
         'Analyze the provided image and accurately extract the numerical value displayed on the digital meter, '
@@ -466,7 +472,8 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
         Content.multi([prompt, ...imageParts]),
       ]);
       print('response--:$response');
-      final finalResponse = response.text?.replaceAll('```', '').replaceAll('json', '');
+      final finalResponse =
+          response.text?.replaceAll('```', '').replaceAll('json', '');
       if (finalResponse == null) {
         return right(inp);
       }
@@ -482,11 +489,11 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
 
         final isValidNumber = RegExp(r'^\d+(\.\d+)?$').hasMatch(strValue);
         if (!isValidNumber) {
-          return left(Failure(error: 'Invalid numeric format returned: $strValue'));
+          return left(
+              Failure(error: 'Invalid numeric format returned: $strValue'));
         }
 
         return right(inp.copyWith(value: strValue));
-
       } else {
         final error = responseMap['message'].toString();
         return left(Failure(error: error));
@@ -496,17 +503,24 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
       return left(Failure(error: e.toString()));
     }
   }
+
+  // @override
+  //  AsyncValueOf<WeightmentResult> getweightmentResult(String imagePath){
+  //   return executeSafely(() async {
+  //     final config = RequestConfig(
+  //       url: Urls.getweightmentResult,
+  //       body: jsonEncode({
+  //         'base64_image': imagePath,
+  //       }),
+  //       parser: (p0) {
+  //         final data = p0['message'];
+  //         return WeightmentResult.fromJson(data);
+  //       },
+  //       headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+  //     );
+
+  //     final response = await post(config);
+  //     return response.process((r) => right(r.data!));
+  //   });
+  //  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

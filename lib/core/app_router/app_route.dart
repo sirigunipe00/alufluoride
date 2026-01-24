@@ -14,6 +14,8 @@ abstract class _AppRoutePaths {
   static const newIncidentReg = '/home/incidentRegister/newIncReg';
   static const contractEmployee = '/home/contractEmployee';
   static const newContractEmployee='/home/contractEmployee/newContractEmployee';
+  static const baggingEntry = '/home/baggingEntry';
+  static const newBaggingEntry='/home/baggingEntry/newBaggingEntry';
   // static const inviteVisitor = '/home/inviteVisitor';
   // static const newInviteVisitor = '/home/inviteVisitor/newInviteVisitor';
   // static const visitorInOut = '/home/visitorInOut';
@@ -43,6 +45,8 @@ enum AppRoute {
   newIncidentReg(_AppRoutePaths.newIncidentReg),
   contractEmployee(_AppRoutePaths.contractEmployee),
   newContractEmployee(_AppRoutePaths.newContractEmployee),
+  baggingEntry(_AppRoutePaths.baggingEntry),
+  newBaggingEntry(_AppRoutePaths.newBaggingEntry),
   // inviteVisitor(_AppRoutePaths.inviteVisitor),
   // newInviteVisitor(_AppRoutePaths.newInviteVisitor),
   // visitorInOut(_AppRoutePaths.visitorInOut),

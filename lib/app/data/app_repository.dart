@@ -1,5 +1,6 @@
 import 'package:alufluoride/app/data/app_version.dart';
 import 'package:alufluoride/core/consts/urls.dart';
+import 'package:alufluoride/core/logger/app_logger.dart';
 import 'package:alufluoride/core/model/failure.dart';
 import 'package:alufluoride/core/network/base_api_repo.dart';
 import 'package:alufluoride/core/network/request_config.dart';
@@ -29,12 +30,28 @@ class AppRepository extends BaseApiRepository {
       }
       final serverVersion = data['app_version'] ?? '';
       final appVersionStr = await appVersion.getAppVersion();
-      print("APPVERSION:$appVersionStr");
-      print("SERVER VERSION:$serverVersion");
-      if (appVersionStr.compareTo(serverVersion) < 0) {
+      $logger.devLog("APPVERSION:$appVersionStr");
+      $logger.devLog("SERVER VERSION:$serverVersion");
+      bool updateRequired = isUpdateRequired(appVersionStr, serverVersion);
+
+      if (updateRequired) {
         return right(true);
+      } else {
+        return right(false);
       }
-      return right(false);
-    });
+    }); 
   }
+}
+bool isUpdateRequired(String appVersion, String serverVersion) {
+  List<int> appParts = appVersion.split('.').map(int.parse).toList();
+  List<int> serverParts = serverVersion.split('.').map(int.parse).toList();
+
+  for (int i = 0; i < serverParts.length; i++) {
+    int app = (i < appParts.length) ? appParts[i] : 0;
+    int server = serverParts[i];
+
+    if (app < server) return true; // app is older → update needed
+    if (app > server) return false; // app is newer → no update needed
+  }
+  return false; // equal versions
 }

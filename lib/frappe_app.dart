@@ -10,6 +10,8 @@ import 'package:alufluoride/features/gate_exit/presentation/bloc/bloc_provider.d
 import 'package:alufluoride/features/gate_exit/presentation/bloc/gate_exit_filter.dart';
 import 'package:alufluoride/features/incident_register/presentation/bloc/bloc_provider.dart';
 import 'package:alufluoride/features/incident_register/presentation/bloc/incident_register_filter_cubit.dart';
+import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/bagging_entry_filter.dart';
+import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/blocprovider.dart';
 
 import 'package:alufluoride/styles/material_theme.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +43,10 @@ class AparnaApp extends StatelessWidget {
         BlocProvider(
             create: (_) =>
                 IncidentRegisterBlocProvider.get().fetchRegistrations()),
+        BlocProvider(
+            create: (_) =>
+                BaggingEntryBlocProvider.get().fetchBaggingEntries()),
+        BlocProvider(create: (_) => BaggingEntryFilterCubit()),
       ],
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (_, state) {
@@ -52,11 +58,12 @@ class AparnaApp extends StatelessWidget {
               routerCtxt!
                 ..cubit<GateEntriesCubit>().fetchInitial(filters)
                 ..cubit<IncidentRegistersListCubit>().fetchInitial(filters)
+                ..cubit<BaggingEntryCubit>().fetchInitial(filters)
                 ..cubit<MaterialNameList>().request()
                 ..cubit<ContractEmployeesCubit>().fetchInitial(filters)
                 ..cubit<GateExitsCubit>()
                     .fetchInitial(PageViewFilters.initial());
-                   
+
               AppRoute.home.go(routerCtxt);
             },
             unAuthenticated: () => AppRoute.login.go(routerCtxt!),

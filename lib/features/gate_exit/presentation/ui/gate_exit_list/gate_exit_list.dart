@@ -1,5 +1,4 @@
 import 'package:alufluoride/app/widgets/app_page_view3.dart';
-import 'package:alufluoride/core/app_router/app_route.dart';
 import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/features/gate_exit/model/gate_exit.dart';
 import 'package:alufluoride/features/gate_exit/presentation/bloc/bloc_provider.dart';
@@ -10,7 +9,6 @@ import 'package:alufluoride/styles/icons.dart';
 import 'package:alufluoride/widgets/infinite_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 class GateExitListScrn extends StatelessWidget {
   const GateExitListScrn({super.key});
@@ -30,13 +28,12 @@ class GateExitListScrn extends StatelessWidget {
         context.cubit<GateExitFilterCubit>().onChangeStatus(value);
         fetchInital(context);
       },
-      status: const ['All','Draft', 'Submitted','Cancelled'],
+      status: const ['Draft', 'Submitted', 'All'],
       child: InfiniteListViewWidget<GateExitsCubit, GateExit>(
         childBuilder: (context, exit) => GateExitWidget(
           gateExit: exit,
           onTap: () =>
-            AppRoute.newGateExit.push<bool?>(context, extra: exit.name),
-          
+              AppRoute.newGateExit.push<bool?>(context, extra: exit.name),
         ),
         fetchInitial: () => fetchInital(context),
         fetchMore: () => fetchMore(context),
