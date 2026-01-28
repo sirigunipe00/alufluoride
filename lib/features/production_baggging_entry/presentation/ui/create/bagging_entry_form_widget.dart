@@ -5,7 +5,10 @@ import 'package:alufluoride/features/production_baggging_entry/presentation/bloc
 import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/create_weightment_cubit/create_weightment_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 
 class BaggingEntryFormWidget extends StatefulWidget {
   const BaggingEntryFormWidget({super.key});
@@ -56,19 +59,37 @@ class _BaggingEntryFormWidgetState extends State<BaggingEntryFormWidget> {
     print('newform.docstatus :::${newform.docstatus}');
 
     print('state.newlines :::${state.lines.length}');
+Future<void> onBagButtonPressed() async {
+  final picker = ImagePicker();
+  final XFile? photo = await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
 
-    Future<void> onBagButtonPressed() async {
-      final picker = ImagePicker();
-      final XFile? photo =
-          await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+  if (photo != null && mounted) {
 
-      if (photo != null) {
-        if (mounted) {
-          _lastCapturedPhoto = File(photo.path);
-          context.read<WeightmentCubit>().extractWeight(_lastCapturedPhoto!);
-        }
-      }
+    setState(() { _lastCapturedPhoto = File(photo.path); }); 
+
+
+    final watermarkedFile = await _addWatermark(File(photo.path));
+
+    if (mounted) {
+      _lastCapturedPhoto = watermarkedFile;
+      // Now pass the watermarked file to the cubit
+      context.read<WeightmentCubit>().extractWeight(_lastCapturedPhoto!);
     }
+  }
+}
+    // Future<void> onBagButtonPressed() async {
+    //   final picker = ImagePicker();
+    //   final XFile? photo =
+    //       await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+    //       final watermarkedFile = await _addWatermark(File(photo!.path));
+
+    //   if (photo != null) {
+    //     if (mounted) {
+    //       _lastCapturedPhoto = File(photo.path);
+    //       context.read<WeightmentCubit>().extractWeight(_lastCapturedPhoto!);
+    //     }
+    //   }
+    // }
 
     return MultiBlocListener(
       listeners: [
@@ -426,4 +447,33 @@ class _TableCell extends StatelessWidget {
       ),
     );
   }
+}
+Future<File> _addWatermark(File imageFile) async {
+
+  final bytes = await imageFile.readAsBytes();
+  img.Image? originalImage = img.decodeImage(bytes);
+  if (originalImage == null) return imageFile;
+
+
+  String timestamp = DateFormat('dd-MM-yyyy HH:mm:ss').format(DateTime.now());
+
+
+
+  img.drawString(
+    originalImage,
+    timestamp,
+    font: img.arial24, 
+    x: 20, 
+    y: originalImage.height - 50, 
+    color: img.ColorRgb8(255, 255, 255), 
+  );
+
+
+  final tempDir = await getTemporaryDirectory();
+  final path = "${tempDir.path}/watermarked_${DateTime.now().millisecondsSinceEpoch}.jpg";
+  
+  final watermarkedFile = File(path);
+  await watermarkedFile.writeAsBytes(img.encodeJpg(originalImage, quality: 85));
+
+  return watermarkedFile;
 }
