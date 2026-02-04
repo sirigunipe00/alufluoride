@@ -51,7 +51,6 @@ class AppUpdateDialog extends StatelessWidget {
   void launchPlayStore(String appId) async {
     var url =
         Uri.parse('https://play.google.com/store/apps/details?id=$appId&hl=en');
-        print('URL:$url');
     if (await canLaunchUrl(url)) {
       await launchUrl(url, mode: LaunchMode.externalApplication);
     } else {

@@ -1,7 +1,5 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:json_annotation/json_annotation.dart';
-
 part 'contract_employee_form.freezed.dart';
 part 'contract_employee_form.g.dart';
 

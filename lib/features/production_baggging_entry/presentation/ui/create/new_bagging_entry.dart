@@ -1,4 +1,3 @@
-import 'package:alufluoride/core/app_router/app_route.dart';
 import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/features/gate_entry/presentation/bloc/bloc_provider.dart';
 import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/bagging_entry_filter.dart';
@@ -44,7 +43,6 @@ class _NewBaggingEntryState extends State<NewBaggingEntry> {
       body: BlocListener<CreateBaggingEntryCubit, CreateBaggingEntryState>(
         listener: (_, state) async {
           if (state.isSuccess && state.successMsg!.isNotNull) {
-            print('state.successMsg: ${state.successMsg}');
 
             AppDialog.showSuccessDialog(
               context,
@@ -66,7 +64,6 @@ class _NewBaggingEntryState extends State<NewBaggingEntry> {
             );
           }
           if (state.error.isNotNull) {
-            print('state.error: ${state.error}');
             await AppDialog.showErrorDialog(
               context,
               title: state.error!.title,

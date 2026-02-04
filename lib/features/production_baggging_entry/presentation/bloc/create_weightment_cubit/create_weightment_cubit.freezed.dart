@@ -19,6 +19,7 @@ mixin _$WeightmentState {
   bool get isExtracting => throw _privateConstructorUsedError;
   String? get extractedWeight => throw _privateConstructorUsedError;
   Failure? get error => throw _privateConstructorUsedError;
+  File? get watermarkedImage => throw _privateConstructorUsedError;
 
   /// Create a copy of WeightmentState
   /// with the given fields replaced by the non-null parameter values.
@@ -33,7 +34,11 @@ abstract class $WeightmentStateCopyWith<$Res> {
           WeightmentState value, $Res Function(WeightmentState) then) =
       _$WeightmentStateCopyWithImpl<$Res, WeightmentState>;
   @useResult
-  $Res call({bool isExtracting, String? extractedWeight, Failure? error});
+  $Res call(
+      {bool isExtracting,
+      String? extractedWeight,
+      Failure? error,
+      File? watermarkedImage});
 
   $FailureCopyWith<$Res>? get error;
 }
@@ -56,6 +61,7 @@ class _$WeightmentStateCopyWithImpl<$Res, $Val extends WeightmentState>
     Object? isExtracting = null,
     Object? extractedWeight = freezed,
     Object? error = freezed,
+    Object? watermarkedImage = freezed,
   }) {
     return _then(_value.copyWith(
       isExtracting: null == isExtracting
@@ -70,6 +76,10 @@ class _$WeightmentStateCopyWithImpl<$Res, $Val extends WeightmentState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Failure?,
+      watermarkedImage: freezed == watermarkedImage
+          ? _value.watermarkedImage
+          : watermarkedImage // ignore: cast_nullable_to_non_nullable
+              as File?,
     ) as $Val);
   }
 
@@ -96,7 +106,11 @@ abstract class _$$WeightmentStateImplCopyWith<$Res>
       __$$WeightmentStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isExtracting, String? extractedWeight, Failure? error});
+  $Res call(
+      {bool isExtracting,
+      String? extractedWeight,
+      Failure? error,
+      File? watermarkedImage});
 
   @override
   $FailureCopyWith<$Res>? get error;
@@ -118,6 +132,7 @@ class __$$WeightmentStateImplCopyWithImpl<$Res>
     Object? isExtracting = null,
     Object? extractedWeight = freezed,
     Object? error = freezed,
+    Object? watermarkedImage = freezed,
   }) {
     return _then(_$WeightmentStateImpl(
       isExtracting: null == isExtracting
@@ -132,15 +147,24 @@ class __$$WeightmentStateImplCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Failure?,
+      watermarkedImage: freezed == watermarkedImage
+          ? _value.watermarkedImage
+          : watermarkedImage // ignore: cast_nullable_to_non_nullable
+              as File?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$WeightmentStateImpl implements _WeightmentState {
+class _$WeightmentStateImpl
+    with DiagnosticableTreeMixin
+    implements _WeightmentState {
   const _$WeightmentStateImpl(
-      {required this.isExtracting, this.extractedWeight, this.error});
+      {required this.isExtracting,
+      this.extractedWeight,
+      this.error,
+      this.watermarkedImage});
 
   @override
   final bool isExtracting;
@@ -148,10 +172,23 @@ class _$WeightmentStateImpl implements _WeightmentState {
   final String? extractedWeight;
   @override
   final Failure? error;
+  @override
+  final File? watermarkedImage;
 
   @override
-  String toString() {
-    return 'WeightmentState(isExtracting: $isExtracting, extractedWeight: $extractedWeight, error: $error)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'WeightmentState(isExtracting: $isExtracting, extractedWeight: $extractedWeight, error: $error, watermarkedImage: $watermarkedImage)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'WeightmentState'))
+      ..add(DiagnosticsProperty('isExtracting', isExtracting))
+      ..add(DiagnosticsProperty('extractedWeight', extractedWeight))
+      ..add(DiagnosticsProperty('error', error))
+      ..add(DiagnosticsProperty('watermarkedImage', watermarkedImage));
   }
 
   @override
@@ -163,12 +200,14 @@ class _$WeightmentStateImpl implements _WeightmentState {
                 other.isExtracting == isExtracting) &&
             (identical(other.extractedWeight, extractedWeight) ||
                 other.extractedWeight == extractedWeight) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.watermarkedImage, watermarkedImage) ||
+                other.watermarkedImage == watermarkedImage));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isExtracting, extractedWeight, error);
+  int get hashCode => Object.hash(
+      runtimeType, isExtracting, extractedWeight, error, watermarkedImage);
 
   /// Create a copy of WeightmentState
   /// with the given fields replaced by the non-null parameter values.
@@ -184,7 +223,8 @@ abstract class _WeightmentState implements WeightmentState {
   const factory _WeightmentState(
       {required final bool isExtracting,
       final String? extractedWeight,
-      final Failure? error}) = _$WeightmentStateImpl;
+      final Failure? error,
+      final File? watermarkedImage}) = _$WeightmentStateImpl;
 
   @override
   bool get isExtracting;
@@ -192,6 +232,8 @@ abstract class _WeightmentState implements WeightmentState {
   String? get extractedWeight;
   @override
   Failure? get error;
+  @override
+  File? get watermarkedImage;
 
   /// Create a copy of WeightmentState
   /// with the given fields replaced by the non-null parameter values.

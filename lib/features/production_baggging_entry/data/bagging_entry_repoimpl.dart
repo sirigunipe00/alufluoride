@@ -54,7 +54,6 @@ class BaggingEntryRepoImpl extends BaseApiRepository
   @override
   AsyncValueOf<Pair<String, String>> createBaggingEntry(
       List<ItemModel> items, String name) async {
-    print('items to be sent for createBaggingEntry :${items.length}');
     final requestConfig = RequestConfig(
       url: Urls.createBaggigEntry,
       parser: (json) {
@@ -93,11 +92,9 @@ class BaggingEntryRepoImpl extends BaseApiRepository
 
   @override
   AsyncValueOf<String> submitBaggingEntry(String id) async {
-    print('items to be sent for submitBaggingEntry :$id');
     final requestConfig = RequestConfig(
       url: Urls.submitBaggigEntry,
       parser: (json) {
-        print('submitBaggingEntry response json :$json');
         final outerMessage = json['message']['message'] as String;
 
         return outerMessage;
@@ -120,7 +117,6 @@ class BaggingEntryRepoImpl extends BaseApiRepository
       url: Urls.getList,
       parser: (json) {
         final data = json['message'];
-        print('data:$data');
 
         final listdata = data as List<dynamic>;
         return listdata.map((e) => ItemModel.fromJson(e)).toList();

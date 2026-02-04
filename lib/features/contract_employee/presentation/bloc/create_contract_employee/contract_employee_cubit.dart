@@ -98,7 +98,6 @@ class CreateContractEmployeeCubit
   void initDetails(Object? entry) {
     shouldAskForConfirmation.value = false;
     if (entry is ContractEmployeeForm) {
-      print('entry.creation---:${entry}');
       if (entry.creation == null) {
         final creationDate = DFU.friendlyFormat(DFU.now());
         final createdtime = DFU.hhMMss(DFU.now());
@@ -121,7 +120,6 @@ class CreateContractEmployeeCubit
           ? ContractEmployeeView.completed
           : ContractEmployeeView.edit;
 
-      print('form--:$entry');
       emitSafeState(state.copyWith(
         form: entry.copyWith(creation: formattedStr),
         view: mode,
@@ -258,7 +256,6 @@ class CreateContractEmployeeCubit
   }
 
   Option<Pair<String, int?>> _validate() {
-    final form = state.form;
     // final isMand = form.entryType == 'Gatepass Returnable' &&
     //     form.expectedReturnDate.doesNotHaveValue;
     //   if (isMand) {

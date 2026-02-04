@@ -28,10 +28,6 @@ class _NewContractEmployeeState extends State<NewContractEmployee> {
     final name = newform.name;
     final isNew = contractEmployeeState.view == ContractEmployeeView.create;
 
-    print('---newform-----$newform');
-
-    print('---newform-----${contractEmployeeState.view}');
-
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: isNew
@@ -52,7 +48,6 @@ class _NewContractEmployeeState extends State<NewContractEmployee> {
               content: state.successMsg.valueOrEmpty,
               onTapDismiss: context.exit,
             ).then((_) {
-              final docName = state.form.name;
 
               if (!context.mounted) return;
               context.cubit<CreateContractEmployeeCubit>().errorHandled();

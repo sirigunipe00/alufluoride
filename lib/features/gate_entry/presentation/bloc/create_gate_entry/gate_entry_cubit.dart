@@ -105,19 +105,11 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
   }
 
   void addInvUrls(List<String> urls) {
-    // final form = state.form.copyWith(addInvs: urls);
-    // emitSafeState(state.copyWith(form: form));
   }
 
   void removeLineAt(int index) {
     final lines = [...state.lines];
-    final lineItem = lines.elementAt(index);
     lines.removeAt(index);
-    // final deletedLines = [...state.form.deletedLines,lineItem.name].nonNulls;
-    // final totalAmt =  lines.fold(0.0, (previousValue, element) => previousValue+( element.amount ?? 0) );
-    // final form = state.form.copyWith(totalAmount:totalAmt ,deletedLines:deletedLines.toList());
-
-    // emit(state.copyWith(lines: lines, form:form ));
   }
 
   void initDetails(Object? entry) {
@@ -276,48 +268,6 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
   }
 
   Option<Pair<String, int?>> _validate() {
-    final form = state.form;
-    // final isMand = form.entryType == 'Gatepass Returnable' &&
-    //     form.expectedReturnDate.doesNotHaveValue;
-    //   if (isMand) {
-    //   return optionOf(const Pair('Select Expected Return Date', 31));
-    // }
-    //  else if (form.senderName.isNull) {
-    //   return optionOf(const Pair('Enter Sender Name', 6));
-    // }
-    // else if (form.poNumber.doesNotHaveValue) {
-    //   return optionOf(const Pair('Enter PO Number', 12));
-    // }
-    // if (form.isewayBill == 1) {
-    //   if (form.ewayBill.doesNotHaveValue) {
-    //     return optionOf(const Pair('Enter Eway Number', 13));
-    //   }
-    // }
-    // if (form.vehicleType.isNull) {
-    //   return optionOf(const Pair('Select Vehicle Type', 14));
-    // } else if (form.vehicleNumber.isNull && form.vehicleType != 'By Hand') {
-    //   return optionOf(const Pair('Enter Vehicle Number', 17));
-    // } else if (form.driverName.isNull && form.vehicleType != 'By Hand') {
-    //   return optionOf(const Pair('Enter Driver Name', 18));
-    // } else if (form.drivermobileNo.isNull && form.vehicleType != 'By Hand') {
-    //   return optionOf(const Pair('Enter Driver Mobile Number', 19));
-    // }
-    // else if (form.totalAmount.isNull) {
-    //   return optionOf(const Pair('Enter Total Amount', null));
-    // }
-    // else if (form.weight.isNull && form.weightSlipNo != null) {
-    //   return optionOf(const Pair('Enter weight in Kgs', 21));
-    // }
-    //  else if (form.weighmentDate.isNull) {
-    //   return optionOf(const Pair('Enter Weighment Date', 22));
-    // } else if (form.weighmentTime.isNull) {
-    //   return optionOf(const Pair('Enter weighment Time', 23));
-    // }
-    // else if(state.lines.isEmpty){
-    //   return optionOf(const Pair('Add Atleast One GateEnrty Lineitem to Proceed Further', null));
-
-    // }
-
     return const None();
   }
 }

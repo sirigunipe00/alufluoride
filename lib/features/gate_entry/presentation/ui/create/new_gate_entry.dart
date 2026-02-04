@@ -48,10 +48,8 @@ class _NewGateEntryState extends State<NewGateEntry> {
               onTapDismiss: context.exit,
             ).then(
               (_) {
-                final docName = state.form.name;
                 if (!context.mounted) return;
                 context.cubit<CreateGateEntryCubit>().errorHandled();
-                // context.cubit<GateEntryLinesCubit>().request(docName);
                 final gateEntryFilters =
                     context.read<GateEntryFilterCubit>().state;
                 context.cubit<GateEntriesCubit>().fetchInitial(Pair(

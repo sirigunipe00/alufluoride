@@ -1,7 +1,7 @@
 name: alufluoride
 description: "A new Flutter project."
 
-version: 1.0.4+9
+version: 1.0.5+10
 
 environment:
   sdk: ^3.5.4
@@ -42,6 +42,7 @@ dependencies:
   image: ^4.5.4
   google_generative_ai: ^0.4.7
   auto_size_text: ^3.0.0
+  image_watermark: ^0.1.0
 
 dev_dependencies:
   flutter_test:

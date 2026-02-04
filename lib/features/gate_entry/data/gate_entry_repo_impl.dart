@@ -118,7 +118,8 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
       reqParams: {
         'order_by': 'creation DESC',
         'doctype': 'Purchase Order',
-        'fields': ["*"]
+        'fields': ["*"],
+        'limit_page_length': 'None'
       },
       headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     );
@@ -205,31 +206,14 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
 
     formJson.update('status', (value) => 'Draft');
 
-    print('invoice data ...:${form.vendorInvPhoto}');
-
-    // if (form.vendorInvoiceDate == null) {
-    //   formJson.remove('vendor_invoice_date');
-    // } else {
-    //   final parsedDate =
-    //       DateFormat('yyyy-MM-dd').parse(form.vendorInvoiceDate ?? '');
-    //   final date = DateFormat('dd-MM-yyyy').format(parsedDate);
-
-    //   print('date ...:$date');
-
-    //   formJson['vendor_invoice_date'] = date;
-    // }
-
     final finalMap = {...removeNullValues(form.toJson())};
 
     if (form.vendorInvoiceDate == null) {
       finalMap.remove('vendor_invoice_date');
     } else {
-      final parsedDate =
-          DateFormat('yyyy-MM-dd').parse(form.vendorInvoiceDate!);
+      final parsedDate = DateFormat('yyyy-MM-dd').parse(form.vendorInvoiceDate!);
 
       final formattedDate = DateFormat('dd-MM-yyyy').format(parsedDate);
-
-      print('date ...:$formattedDate');
 
       finalMap['vendor_invoice_date'] = formattedDate;
     }
@@ -244,18 +228,13 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
       body: jsonEncode(finalMap),
       parser: (json) {
         final data = json['message']['data']['name'] as String;
-        // final docNo = json['message']['data'] as List<dynamic>;
         return Pair(data, '');
       },
       headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     );
-    $logger.devLog('create requestConfig----:$requestConfig ');
     final response = await post(requestConfig);
     return response.processAsync((r) async {
       await updateGateEntry(form.copyWith(name: r.data!.second), lines);
-      // if (addFiles.isNotEmpty) {
-      //   await _uploadAddfiles(addFiles, r.data!.second);
-      // }
       return right(Pair(r.data!.first, r.data!.second));
     });
   }
@@ -264,41 +243,6 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
   AsyncValueOf<Pair<String, String>> submitGateEntry(
       GateEntryForm form, List<GateEntryLinesForm> lines) async {
     return await executeSafely(() async {
-      // final unsavedLines = lines.where((e) => e.name.doesNotHaveValue);
-      // await updateGateEntry(
-      //     form.copyWith(name: form.name), unsavedLines.toList());
-      // final files = {
-      //   'drivers_license_photo': form.licensePhotoImg,
-      //   'vehicle_image': form.vehiclePhotoImg,
-      //   'seal_photo': form.sealPhotoImg,
-      //   'breath_analyser': form.breathAnalyserImg,
-      //   'invoicedc_image_ocr_scanning': form.invoiceImg.firstOrNull,
-      // };
-      //   files.removeWhere((key, value) => value == null);
-      //   final responseurlMap = <String, dynamic>{};
-      //   final fileUrlRes = await _uploadfiles(files.values.nonNulls.toList());
-      //   final urls = fileUrlRes.fold((l) => throw Exception(l.error), (r) => r);
-      //   for (final file in files.keys) {
-      //     final indx = files.keys.toList().indexOf(file);
-      //     responseurlMap[file] = urls.elementAtOrNull(indx);
-      //   }
-      //   final addFiles = <File>[];
-      //   if (form.invoiceImg.length > 1) {
-      //     for (int i = 1; i < form.invoiceImg.length; i++) {
-      //       addFiles.add(form.invoiceImg.elementAt(i));
-      //     }
-      //   }
-      //   await _uploadAddfiles(addFiles, form.name!);
-
-      //   final finalMap = {
-      //     ...removeNullValues(form.toJson()),
-      //     ...responseurlMap,
-      //   };
-      //   if(form.deletedLines.isNotEmpty){
-      //  await deleteLines(form.name!,form.deletedLines);
-
-      //   }
-      // final reqBody = finalMap..remove('status');
       final config = RequestConfig(
           url: Urls.submitGateEntry,
           parser: (json) {
@@ -471,21 +415,17 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
       final response = await model.generateContent([
         Content.multi([prompt, ...imageParts]),
       ]);
-      print('response--:$response');
       final finalResponse =
           response.text?.replaceAll('```', '').replaceAll('json', '');
       if (finalResponse == null) {
         return right(inp);
       }
-
-      print('finalResponse--:$finalResponse');
       final responseMap = jsonDecode(finalResponse) as Map<String, dynamic>;
       if (responseMap['status_code'] == 200 ||
           responseMap['status'] == 'success') {
         final dataMap = responseMap['data'] as Map<String, dynamic>;
 
         final strValue = dataMap['value'].toString();
-        print('Extracted value from Gemini: $strValue');
 
         final isValidNumber = RegExp(r'^\d+(\.\d+)?$').hasMatch(strValue);
         if (!isValidNumber) {

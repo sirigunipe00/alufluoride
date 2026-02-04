@@ -45,7 +45,6 @@ class _ContractEmployeeFormWidgetState
     final isCreating = formState.view == ContractEmployeeView.create;
     final isCompleted = formState.view == ContractEmployeeView.completed;
     final newform = formState.form;
-    log('----newform----:$newform');
     selectedSkillType = newform.skillType;
     selectedContractorName = newform.contractor;
 
@@ -79,8 +78,6 @@ class _ContractEmployeeFormWidgetState
 
             // data.where((e) => e.isContractor == true).toList(),
           );
-
-          log('Address List: ${address}');
 
           return ListView(
             padding: const EdgeInsets.all(16),
