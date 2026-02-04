@@ -224,7 +224,7 @@ class _BaggingEntryFormWidgetState extends State<BaggingEntryFormWidget> {
                                 )
                               : const Text(
                                   'Submit',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),

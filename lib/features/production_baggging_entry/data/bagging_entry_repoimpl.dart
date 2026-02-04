@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/features/production_baggging_entry/data/bagging_entry_repo.dart';
@@ -83,10 +82,7 @@ class BaggingEntryRepoImpl extends BaseApiRepository
       headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     );
 
-    log('requestConfig for createBaggingEntry :${requestConfig.body}');
-
     final response = await post(requestConfig);
-    log('response for createBaggingEntry :$response');
     return response.process((r) => right(r.data!));
   }
 
@@ -104,8 +100,6 @@ class BaggingEntryRepoImpl extends BaseApiRepository
       }),
       headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     );
-
-    log('requestConfig for createBaggingEntry :$requestConfig');
 
     final response = await post(requestConfig);
     return response.process((r) => right(r.data!));

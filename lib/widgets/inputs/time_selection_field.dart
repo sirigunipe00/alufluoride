@@ -41,7 +41,6 @@ class _TimeSelectionFieldState extends State<TimeSelectionField> {
   @override
   void initState() {
     super.initState();
-    print('widget.initialValue---:${widget.initialValue}');
     controller = TextEditingController(text: widget.initialValue);
     if (widget.initialValue.containsValidValue) {
       final parts = widget.initialValue!.split(':');

@@ -81,18 +81,6 @@ class CreateBaggingEntryCubit extends AppBaseCubit<CreateBaggingEntryState> {
   }
 
   void addnewItem() {
-    print('addnewItem called....');
-
-    // final newLine = ItemModel(
-    //   bagNo: bagNo,
-    //   qty: weight,
-    //   serialNo: "$batchNo - $bagNo",
-    //   weighingScale: base64Encode(imageFile.readAsBytesSync()),
-    //   stickerPrinted: 0,
-    // );
-
-    // final updatedLines = [...currentLines, newLine];
-
     emitSafeState(state.copyWith(
       newlines: [],
       form: state.form,
@@ -145,15 +133,10 @@ class CreateBaggingEntryCubit extends AppBaseCubit<CreateBaggingEntryState> {
 
         final response = await repo.submitBaggingEntry(state.form.name ?? "");
 
-        print('response from submit :$response');
-
         return response.fold(
           (l) => emitSafeState(state.copyWith(isLoading: false, error: l)),
           (r) {
-            print('submit response :$r');
             shouldAskForConfirmation.value = false;
-            // final docStatus = r.second;
-            // initDetails(state.form);
             emitSafeState(state.copyWith(
               form: state.form.copyWith(name: state.form.name, docstatus: 1),
               isLoading: false,

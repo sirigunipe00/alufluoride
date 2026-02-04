@@ -1,13 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:alufluoride/core/consts/urls.dart';
 import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/core/model/page_view_filters.dart';
-import 'package:alufluoride/core/model/pair.dart';
-import 'package:alufluoride/core/network/base_api_repo.dart';
-import 'package:alufluoride/core/network/request_config.dart';
-import 'package:alufluoride/core/utils/typedefs.dart';
 import 'package:alufluoride/features/gate_exit/data/gate_exit_repo.dart';
 import 'package:alufluoride/features/gate_exit/model/gate_exit.dart';
 import 'package:alufluoride/features/gate_exit/model/new_gate_exit_form.dart';

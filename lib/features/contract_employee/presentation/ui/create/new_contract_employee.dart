@@ -67,6 +67,7 @@ class _NewContractEmployeeState extends State<NewContractEmployee> {
           }
 
           if (state.error.isNotNull) {
+            if (!context.mounted) return;
             await AppDialog.showErrorDialog(
               context,
               title: state.error!.title,

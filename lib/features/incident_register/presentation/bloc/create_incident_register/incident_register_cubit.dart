@@ -1,9 +1,6 @@
 import 'dart:io';
 
 import 'package:alufluoride/core/core.dart';
-import 'package:alufluoride/core/cubit/base/base_cubit.dart';
-import 'package:alufluoride/core/utils/date_format_util.dart';
-import 'package:alufluoride/core/utils/typedefs.dart';
 import 'package:alufluoride/features/incident_register/data/incident_register_repo.dart';
 import 'package:alufluoride/features/incident_register/model/incident_register_form.dart';
 import 'package:dartz/dartz.dart';

@@ -1,5 +1,4 @@
 import 'package:alufluoride/core/core.dart';
-import 'package:alufluoride/core/utils/string_utils.dart';
 import 'package:alufluoride/features/incident_register/presentation/bloc/bloc_provider.dart';
 import 'package:alufluoride/features/incident_register/presentation/bloc/create_incident_register/incident_register_cubit.dart';
 import 'package:alufluoride/styles/app_colors.dart';

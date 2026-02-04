@@ -44,8 +44,8 @@ class Urls {
   static final newGateExit = '$cusWs/alufluoride.api.createGateExit';
   static final submitGateExit = '$cusWs/alufluoride.api.submitGateExit';
   static final getVehicleNumber =
-      '$cusWs/easygateentry.api.getvehiclenumberfromsalesinvoice';
-  static final poList = '$cusWs/easygateentry.api.po_list';
+      '$cusWs/alufluoride.api.getvehiclenumberfromsalesinvoice';
+  static final poList = '$cusWs/alufluoride.api.po_list';
   static final createInviteVisitor =
       '$cusWs/alufluoride.api.create_invite_visitor';
   static final submitInviteVisitor =

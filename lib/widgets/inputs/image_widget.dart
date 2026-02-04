@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:alufluoride/core/core.dart';
@@ -61,8 +62,7 @@ class _GateEntryImageWidget1State extends State<ImageSelectionWidget1>
                           double fileSizeInKB = fileSizeInBytes / 1024;
                           double fileSizeInMB = fileSizeInKB / 1024;
 
-                          print(
-                              'Captured Image Size: ${fileSizeInKB.toStringAsFixed(2)} KB (${fileSizeInMB.toStringAsFixed(2)} MB)');
+                          log('Captured Image Size: ${fileSizeInKB.toStringAsFixed(2)} KB (${fileSizeInMB.toStringAsFixed(2)} MB)');
 
                           _selectedImage = capturedFile;
                           widget.onImage(capturedFile);

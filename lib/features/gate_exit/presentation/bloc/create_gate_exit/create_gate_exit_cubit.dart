@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:alufluoride/core/core.dart';
-import 'package:alufluoride/core/cubit/base/base_cubit.dart';
-import 'package:alufluoride/core/utils/string_utils.dart';
 import 'package:alufluoride/features/gate_exit/data/gate_exit_repo.dart';
 import 'package:alufluoride/features/gate_exit/model/gate_exit.dart';
 import 'package:alufluoride/features/gate_exit/model/new_gate_exit_form.dart';
