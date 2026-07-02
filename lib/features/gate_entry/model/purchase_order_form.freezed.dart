@@ -31,12 +31,8 @@ mixin _$PurchaseOrderForm {
   @JsonKey(name: 'modified')
   String? get modified => throw _privateConstructorUsedError;
 
-  /// Serializes this PurchaseOrderForm to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PurchaseOrderForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PurchaseOrderFormCopyWith<PurchaseOrderForm> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -65,8 +61,6 @@ class _$PurchaseOrderFormCopyWithImpl<$Res, $Val extends PurchaseOrderForm>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PurchaseOrderForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -125,8 +119,6 @@ class __$$PurchaseOrderFormImplCopyWithImpl<$Res>
       $Res Function(_$PurchaseOrderFormImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of PurchaseOrderForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -210,14 +202,12 @@ class _$PurchaseOrderFormImpl implements _PurchaseOrderForm {
                 other.modified == modified));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, name, creationDate, supplier, status, modified);
 
-  /// Create a copy of PurchaseOrderForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PurchaseOrderFormImplCopyWith<_$PurchaseOrderFormImpl> get copyWith =>
@@ -259,11 +249,8 @@ abstract class _PurchaseOrderForm implements PurchaseOrderForm {
   @override
   @JsonKey(name: 'modified')
   String? get modified;
-
-  /// Create a copy of PurchaseOrderForm
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PurchaseOrderFormImplCopyWith<_$PurchaseOrderFormImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

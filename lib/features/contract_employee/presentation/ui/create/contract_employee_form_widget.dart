@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/features/contract_employee/data/static_data.dart';
 import 'package:alufluoride/features/contract_employee/model/contractors_form.dart';

@@ -1,9 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:alufluoride/core/consts/doctypes.dart';
 import 'package:alufluoride/core/core.dart';
-
 import 'package:alufluoride/features/gate_entry/data/gate_entry_repo.dart';
 import 'package:alufluoride/features/gate_entry/model/customer_name_form.dart';
 import 'package:alufluoride/features/gate_entry/model/gate_entry_form.dart';
@@ -17,7 +14,6 @@ import 'package:alufluoride/features/gate_entry/model/vehicle_request_form.dart'
 import 'package:alufluoride/features/incident_register/model/receiver_form.dart';
 import 'package:dartz/dartz.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
-// import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 
@@ -256,46 +252,6 @@ class GateEntryRepoImpl extends BaseApiRepository implements GateEntryRepo {
       return response.process((r) {
         return right(Pair(r.data!.first, ''));
       });
-    });
-  }
-
-  AsyncValueOf<List<String>> _uploadfiles(List<File> files) async {
-    return await executeSafely(() async {
-      if (files.isEmpty) return right(<String>[]);
-      final config = RequestConfig(
-        url: Urls.uploadFiles,
-        parser: (p0) {
-          final msgList = p0['message']['uploaded_files_data'] as List<dynamic>;
-          final urls = msgList.map((e) => e['file_url'].toString()).toList();
-          return urls;
-        },
-        reqParams: {'file': files},
-      );
-      final response = await multiPart(config);
-      return response.process((r) => right(r.data!));
-    });
-  }
-
-  AsyncValueOf<List<String>> _uploadAddfiles(
-      List<File> files, String name) async {
-    return await executeSafely(() async {
-      if (files.isEmpty) return right(<String>[]);
-      final config = RequestConfig(
-        url: Urls.uploadFiles,
-        parser: (p0) {
-          final msgList = p0['message']['uploaded_files_data'] as List<dynamic>;
-          final urls = msgList.map((e) => e['file_url'].toString()).toList();
-          return urls;
-        },
-        reqParams: {
-          'file': files,
-          'attached_to_doctype': DocTypes.gateEntryList,
-          'attached_to_field': 'invoicedc_image_ocr_scanning',
-          'attached_to_name': name,
-        },
-      );
-      final response = await multiPart(config);
-      return response.process((r) => right(r.data!));
     });
   }
 

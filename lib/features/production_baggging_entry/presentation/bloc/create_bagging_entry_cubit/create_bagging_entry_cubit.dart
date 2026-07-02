@@ -87,7 +87,7 @@ class CreateBaggingEntryCubit extends AppBaseCubit<CreateBaggingEntryState> {
     ));
   }
 
-  void addLineItem({required double weight, required File imageFile}) {
+  void addLineItem({required double weight, required File imageFile, required String palletWeight}) {
     shouldAskForConfirmation.value = true;
     final currentLines = [...state.lines];
     final currentNewLines = [...state.newlines];
@@ -96,6 +96,8 @@ class CreateBaggingEntryCubit extends AppBaseCubit<CreateBaggingEntryState> {
     int nextBagIndex = currentLines.length + 1;
     String bagNo = nextBagIndex.toString();
     String batchNo = state.form.batch ?? "N/A";
+    $logger.devLog('Adding line item: bagNo=$bagNo, weight=$weight, palletWeight=$palletWeight');
+  
 
     final newLine = ItemModel(
       bagNo: bagNo,
@@ -103,6 +105,7 @@ class CreateBaggingEntryCubit extends AppBaseCubit<CreateBaggingEntryState> {
       serialNo: "$batchNo - $bagNo",
       weighingScale: base64Encode(imageFile.readAsBytesSync()),
       stickerPrinted: 0,
+      palletWeight: double.tryParse(palletWeight),
     );
 
     final updatedLines = [...currentLines, newLine];

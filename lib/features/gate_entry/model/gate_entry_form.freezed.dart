@@ -77,12 +77,8 @@ mixin _$GateEntryForm {
   @JsonKey(name: 'rate_per_tonnes', defaultValue: 0.0)
   double? get ratePerTonnes => throw _privateConstructorUsedError;
 
-  /// Serializes this GateEntryForm to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of GateEntryForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $GateEntryFormCopyWith<GateEntryForm> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -136,8 +132,6 @@ class _$GateEntryFormCopyWithImpl<$Res, $Val extends GateEntryForm>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GateEntryForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -341,8 +335,6 @@ class __$$GateEntryFormImplCopyWithImpl<$Res>
       _$GateEntryFormImpl _value, $Res Function(_$GateEntryFormImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GateEntryForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -682,7 +674,7 @@ class _$GateEntryFormImpl implements _GateEntryForm {
                 other.ratePerTonnes == ratePerTonnes));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -717,9 +709,7 @@ class _$GateEntryFormImpl implements _GateEntryForm {
         ratePerTonnes
       ]);
 
-  /// Create a copy of GateEntryForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GateEntryFormImplCopyWith<_$GateEntryFormImpl> get copyWith =>
@@ -855,11 +845,8 @@ abstract class _GateEntryForm implements GateEntryForm {
   @override
   @JsonKey(name: 'rate_per_tonnes', defaultValue: 0.0)
   double? get ratePerTonnes;
-
-  /// Create a copy of GateEntryForm
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GateEntryFormImplCopyWith<_$GateEntryFormImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

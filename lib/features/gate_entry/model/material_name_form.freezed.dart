@@ -29,12 +29,8 @@ mixin _$MaterialNameForm {
   @JsonKey(name: 'item_name')
   String? get itemName => throw _privateConstructorUsedError;
 
-  /// Serializes this MaterialNameForm to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of MaterialNameForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MaterialNameFormCopyWith<MaterialNameForm> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -62,8 +58,6 @@ class _$MaterialNameFormCopyWithImpl<$Res, $Val extends MaterialNameForm>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MaterialNameForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -116,8 +110,6 @@ class __$$MaterialNameFormImplCopyWithImpl<$Res>
       $Res Function(_$MaterialNameFormImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of MaterialNameForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -190,14 +182,12 @@ class _$MaterialNameFormImpl implements _MaterialNameForm {
                 other.itemName == itemName));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, name, description, uom, itemName);
 
-  /// Create a copy of MaterialNameForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MaterialNameFormImplCopyWith<_$MaterialNameFormImpl> get copyWith =>
@@ -235,11 +225,8 @@ abstract class _MaterialNameForm implements MaterialNameForm {
   @override
   @JsonKey(name: 'item_name')
   String? get itemName;
-
-  /// Create a copy of MaterialNameForm
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MaterialNameFormImplCopyWith<_$MaterialNameFormImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

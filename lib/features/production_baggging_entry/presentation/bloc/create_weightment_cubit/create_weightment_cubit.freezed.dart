@@ -21,9 +21,7 @@ mixin _$WeightmentState {
   Failure? get error => throw _privateConstructorUsedError;
   File? get watermarkedImage => throw _privateConstructorUsedError;
 
-  /// Create a copy of WeightmentState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $WeightmentStateCopyWith<WeightmentState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,8 +51,6 @@ class _$WeightmentStateCopyWithImpl<$Res, $Val extends WeightmentState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of WeightmentState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -83,8 +79,6 @@ class _$WeightmentStateCopyWithImpl<$Res, $Val extends WeightmentState>
     ) as $Val);
   }
 
-  /// Create a copy of WeightmentState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FailureCopyWith<$Res>? get error {
@@ -124,8 +118,6 @@ class __$$WeightmentStateImplCopyWithImpl<$Res>
       _$WeightmentStateImpl _value, $Res Function(_$WeightmentStateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of WeightmentState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -209,9 +201,7 @@ class _$WeightmentStateImpl
   int get hashCode => Object.hash(
       runtimeType, isExtracting, extractedWeight, error, watermarkedImage);
 
-  /// Create a copy of WeightmentState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$WeightmentStateImplCopyWith<_$WeightmentStateImpl> get copyWith =>
@@ -234,11 +224,8 @@ abstract class _WeightmentState implements WeightmentState {
   Failure? get error;
   @override
   File? get watermarkedImage;
-
-  /// Create a copy of WeightmentState
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$WeightmentStateImplCopyWith<_$WeightmentStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -44,12 +44,8 @@ mixin _$GateEntryLinesForm {
   @JsonKey(name: 'tracking_id')
   String? get trackingId => throw _privateConstructorUsedError;
 
-  /// Serializes this GateEntryLinesForm to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of GateEntryLinesForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $GateEntryLinesFormCopyWith<GateEntryLinesForm> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -84,8 +80,6 @@ class _$GateEntryLinesFormCopyWithImpl<$Res, $Val extends GateEntryLinesForm>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GateEntryLinesForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -180,8 +174,6 @@ class __$$GateEntryLinesFormImplCopyWithImpl<$Res>
       $Res Function(_$GateEntryLinesFormImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GateEntryLinesForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -331,7 +323,7 @@ class _$GateEntryLinesFormImpl implements _GateEntryLinesForm {
                 other.trackingId == trackingId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -347,9 +339,7 @@ class _$GateEntryLinesFormImpl implements _GateEntryLinesForm {
       parentName,
       trackingId);
 
-  /// Create a copy of GateEntryLinesForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GateEntryLinesFormImplCopyWith<_$GateEntryLinesFormImpl> get copyWith =>
@@ -416,11 +406,8 @@ abstract class _GateEntryLinesForm implements GateEntryLinesForm {
   @override
   @JsonKey(name: 'tracking_id')
   String? get trackingId;
-
-  /// Create a copy of GateEntryLinesForm
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GateEntryLinesFormImplCopyWith<_$GateEntryLinesFormImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

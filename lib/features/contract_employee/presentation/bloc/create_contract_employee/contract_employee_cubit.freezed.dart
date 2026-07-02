@@ -23,9 +23,7 @@ mixin _$CreateContractEmployeeState {
   String? get successMsg => throw _privateConstructorUsedError;
   Failure? get error => throw _privateConstructorUsedError;
 
-  /// Create a copy of CreateContractEmployeeState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateContractEmployeeStateCopyWith<CreateContractEmployeeState>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -61,8 +59,6 @@ class _$CreateContractEmployeeStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateContractEmployeeState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -101,8 +97,6 @@ class _$CreateContractEmployeeStateCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateContractEmployeeState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ContractEmployeeFormCopyWith<$Res> get form {
@@ -111,8 +105,6 @@ class _$CreateContractEmployeeStateCopyWithImpl<$Res,
     });
   }
 
-  /// Create a copy of CreateContractEmployeeState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FailureCopyWith<$Res>? get error {
@@ -159,8 +151,6 @@ class __$$CreateContractEmployeeStateImplCopyWithImpl<$Res>
       $Res Function(_$CreateContractEmployeeStateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateContractEmployeeState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -250,9 +240,7 @@ class _$CreateContractEmployeeStateImpl
   int get hashCode => Object.hash(
       runtimeType, form, isLoading, isSuccess, view, successMsg, error);
 
-  /// Create a copy of CreateContractEmployeeState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateContractEmployeeStateImplCopyWith<_$CreateContractEmployeeStateImpl>
@@ -282,11 +270,8 @@ abstract class _CreateContractEmployeeState
   String? get successMsg;
   @override
   Failure? get error;
-
-  /// Create a copy of CreateContractEmployeeState
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateContractEmployeeStateImplCopyWith<_$CreateContractEmployeeStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

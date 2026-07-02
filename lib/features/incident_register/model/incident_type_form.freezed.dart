@@ -29,12 +29,8 @@ mixin _$IncidentTypeForm {
   @JsonKey(name: 'address_line2')
   String? get line2 => throw _privateConstructorUsedError;
 
-  /// Serializes this IncidentTypeForm to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of IncidentTypeForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $IncidentTypeFormCopyWith<IncidentTypeForm> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -63,8 +59,6 @@ class _$IncidentTypeFormCopyWithImpl<$Res, $Val extends IncidentTypeForm>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of IncidentTypeForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -123,8 +117,6 @@ class __$$IncidentTypeFormImplCopyWithImpl<$Res>
       $Res Function(_$IncidentTypeFormImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of IncidentTypeForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -203,14 +195,12 @@ class _$IncidentTypeFormImpl implements _IncidentTypeForm {
             (identical(other.line2, line2) || other.line2 == line2));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, name, city, pincode, line1, line2);
 
-  /// Create a copy of IncidentTypeForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$IncidentTypeFormImplCopyWith<_$IncidentTypeFormImpl> get copyWith =>
@@ -250,11 +240,8 @@ abstract class _IncidentTypeForm implements IncidentTypeForm {
   @override
   @JsonKey(name: 'address_line2')
   String? get line2;
-
-  /// Create a copy of IncidentTypeForm
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$IncidentTypeFormImplCopyWith<_$IncidentTypeFormImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

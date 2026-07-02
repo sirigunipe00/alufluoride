@@ -71,6 +71,21 @@ class AppHomePage extends StatelessWidget {
               featureColor: AppColors.invite,
               onTap: () => AppRoute.baggingEntry.push(context),
             ),
+            AppFeatureWidget(
+              icon: AppIcons.baggingEntry
+                  .toWidget(height: 100, width: 120, fit: BoxFit.fill),
+              title: const Text(
+                'Bagging Dispatch',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              featureColor: AppColors.registration,
+              onTap: () => AppRoute.baggingDispatch.push(context),
+            ),
           ],
         ),
       ),

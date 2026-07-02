@@ -35,8 +35,8 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "in.easycloud.alufluoride"
-    compileSdk = 35
-    ndkVersion = "25.1.8937393"
+    compileSdk = 36
+    ndkVersion = "26.1.10909125"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -92,6 +92,11 @@ android {
         }
     }
 
+}
+tasks.whenTaskAdded {
+    if (name.contains("uploadCrashlyticsMappingFile")) {
+        enabled = false
+    }
 }
 
 flutter {

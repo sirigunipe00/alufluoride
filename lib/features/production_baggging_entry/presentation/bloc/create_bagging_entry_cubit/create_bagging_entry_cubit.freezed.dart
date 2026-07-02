@@ -26,9 +26,7 @@ mixin _$CreateBaggingEntryState {
   String? get successMsg => throw _privateConstructorUsedError;
   Failure? get error => throw _privateConstructorUsedError;
 
-  /// Create a copy of CreateBaggingEntryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateBaggingEntryStateCopyWith<CreateBaggingEntryState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -66,8 +64,6 @@ class _$CreateBaggingEntryStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateBaggingEntryState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -121,8 +117,6 @@ class _$CreateBaggingEntryStateCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateBaggingEntryState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $BaggingEntryModelCopyWith<$Res> get form {
@@ -131,8 +125,6 @@ class _$CreateBaggingEntryStateCopyWithImpl<$Res,
     });
   }
 
-  /// Create a copy of CreateBaggingEntryState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ItemModelCopyWith<$Res> get items {
@@ -141,8 +133,6 @@ class _$CreateBaggingEntryStateCopyWithImpl<$Res,
     });
   }
 
-  /// Create a copy of CreateBaggingEntryState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FailureCopyWith<$Res>? get error {
@@ -194,8 +184,6 @@ class __$$CreateBaggingEntryStateImplCopyWithImpl<$Res>
       $Res Function(_$CreateBaggingEntryStateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateBaggingEntryState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -334,9 +322,7 @@ class _$CreateBaggingEntryStateImpl implements _CreateBaggingEntryState {
       successMsg,
       error);
 
-  /// Create a copy of CreateBaggingEntryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateBaggingEntryStateImplCopyWith<_$CreateBaggingEntryStateImpl>
@@ -374,11 +360,8 @@ abstract class _CreateBaggingEntryState implements CreateBaggingEntryState {
   String? get successMsg;
   @override
   Failure? get error;
-
-  /// Create a copy of CreateBaggingEntryState
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateBaggingEntryStateImplCopyWith<_$CreateBaggingEntryStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

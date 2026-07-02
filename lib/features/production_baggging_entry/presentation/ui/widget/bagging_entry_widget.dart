@@ -48,7 +48,7 @@ class BaggingEntryWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                 Text('Batch : ${baggingEntry.batch ?? ''}', style: AppTextStyles.titleLarge(context)
-                          .copyWith(color: AppColors.black.withOpacity(0.7))),
+                          .copyWith(color: AppColors.black.withValues(alpha: (0.7)))),
                 Text('Shift : ${baggingEntry.shift ?? ''}', style: AppTextStyles.titleLarge(context)
                           .copyWith(color: AppColors.black)),
                 ],

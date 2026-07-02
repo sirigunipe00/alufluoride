@@ -11,6 +11,11 @@ import 'package:alufluoride/features/contract_employee/presentation/bloc/bloc_pr
 import 'package:alufluoride/features/contract_employee/presentation/bloc/create_contract_employee/contract_employee_cubit.dart';
 import 'package:alufluoride/features/contract_employee/presentation/ui/create/new_contract_employee.dart';
 import 'package:alufluoride/features/contract_employee/presentation/ui/widgets/contract_employess_list.dart';
+import 'package:alufluoride/features/dispatch_bagging/model/dispatch_bagging.dart';
+import 'package:alufluoride/features/dispatch_bagging/presentation/bloc/bloc_provider.dart';
+import 'package:alufluoride/features/dispatch_bagging/presentation/bloc/create_dispatch_cubit/create_dispatch_cubit.dart';
+import 'package:alufluoride/features/dispatch_bagging/presentation/ui/create/new_dispatch_bagging.dart';
+import 'package:alufluoride/features/dispatch_bagging/presentation/ui/widget/dispatch_list.dart';
 import 'package:alufluoride/features/gate_entry/model/gate_entry_form.dart';
 import 'package:alufluoride/features/gate_entry/presentation/bloc/bloc_provider.dart';
 import 'package:alufluoride/features/gate_entry/presentation/bloc/create_gate_entry/gate_entry_cubit.dart';
@@ -258,6 +263,34 @@ class AppRouterConfig {
                             },
                           ),
                         ],
+                      ),
+                    ],
+                  ),
+                  GoRoute(
+                    path: _getPath(AppRoute.baggingDispatch),
+                    builder: (_, state) => const DispatchBaggingList(),
+                    routes: [
+                      GoRoute(
+                        path: _getPath(AppRoute.newBaggingDispatch),
+                        onExit: (context, state) async =>
+                            await _promptConf(context),
+                        builder: (_, state) {
+                          final provider = DispatchBaggingBlocProvider.get();
+                          final dispatch =
+                              state.extra as DispatchBaggingModel?;
+                          return MultiBlocProvider(
+                            providers: [
+                              BlocProvider(
+                                  create: (_) =>
+                                      provider.fetchItems()..request(dispatch?.name ?? '')),
+                              BlocProvider(
+                                  create: (_) =>
+                                      $sl.get<CreateDispatchCubit>()
+                                        ..initDetails(dispatch)),
+                            ],
+                            child: const NewDispatchbagging(),
+                          );
+                        },
                       ),
                     ],
                   ),

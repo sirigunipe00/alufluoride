@@ -19,9 +19,9 @@ Future<void> bootstrap(void Function() runApp) async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await _initInjector();
   if(kDebugMode) {
-    await register<Urls>(Urls.alufluorideLive(), instanceName: 'baseUrl');
+    await register<Urls>(Urls.alufluorideUAT(), instanceName: 'baseUrl');
   } else {
-    await register<Urls>(Urls.alufluorideLive(), instanceName: 'baseUrl');
+    await register<Urls>(Urls.alufluorideUAT(), instanceName: 'baseUrl');
   }
   await _initFirebase();
   _setupErrorHandling(runApp);

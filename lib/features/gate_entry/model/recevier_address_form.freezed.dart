@@ -35,12 +35,8 @@ mixin _$ReceiverAddressForm {
   @JsonKey(name: 'address_line2')
   String? get line2 => throw _privateConstructorUsedError;
 
-  /// Serializes this ReceiverAddressForm to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ReceiverAddressForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ReceiverAddressFormCopyWith<ReceiverAddressForm> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -72,8 +68,6 @@ class _$ReceiverAddressFormCopyWithImpl<$Res, $Val extends ReceiverAddressForm>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ReceiverAddressForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,8 +144,6 @@ class __$$ReceiverAddressFormImplCopyWithImpl<$Res>
       $Res Function(_$ReceiverAddressFormImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ReceiverAddressForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -262,14 +254,12 @@ class _$ReceiverAddressFormImpl implements _ReceiverAddressForm {
             (identical(other.line2, line2) || other.line2 == line2));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, name, addressTitle, addressType,
       city, pincode, parent, line1, line2);
 
-  /// Create a copy of ReceiverAddressForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ReceiverAddressFormImplCopyWith<_$ReceiverAddressFormImpl> get copyWith =>
@@ -321,11 +311,8 @@ abstract class _ReceiverAddressForm implements ReceiverAddressForm {
   @override
   @JsonKey(name: 'address_line2')
   String? get line2;
-
-  /// Create a copy of ReceiverAddressForm
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ReceiverAddressFormImplCopyWith<_$ReceiverAddressFormImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

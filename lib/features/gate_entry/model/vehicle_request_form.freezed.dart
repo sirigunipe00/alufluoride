@@ -36,12 +36,8 @@ mixin _$VehcileRequestForm {
   @JsonKey(name: 'out_time')
   String? get outTime => throw _privateConstructorUsedError;
 
-  /// Serializes this VehcileRequestForm to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of VehcileRequestForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $VehcileRequestFormCopyWith<VehcileRequestForm> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -73,8 +69,6 @@ class _$VehcileRequestFormCopyWithImpl<$Res, $Val extends VehcileRequestForm>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of VehcileRequestForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -151,8 +145,6 @@ class __$$VehcileRequestFormImplCopyWithImpl<$Res>
       $Res Function(_$VehcileRequestFormImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of VehcileRequestForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -265,14 +257,12 @@ class _$VehcileRequestFormImpl implements _VehcileRequestForm {
             (identical(other.outTime, outTime) || other.outTime == outTime));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, status, name, creationDate,
       workFlowState, vehicleType, date, inTime, outTime);
 
-  /// Create a copy of VehcileRequestForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$VehcileRequestFormImplCopyWith<_$VehcileRequestFormImpl> get copyWith =>
@@ -325,11 +315,8 @@ abstract class _VehcileRequestForm implements VehcileRequestForm {
   @override
   @JsonKey(name: 'out_time')
   String? get outTime;
-
-  /// Create a copy of VehcileRequestForm
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$VehcileRequestFormImplCopyWith<_$VehcileRequestFormImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

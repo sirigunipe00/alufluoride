@@ -38,12 +38,8 @@ mixin _$VehcileForm {
   @JsonKey(name: 'uom')
   String? get uom => throw _privateConstructorUsedError;
 
-  /// Serializes this VehcileForm to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of VehcileForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $VehcileFormCopyWith<VehcileForm> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -76,8 +72,6 @@ class _$VehcileFormCopyWithImpl<$Res, $Val extends VehcileForm>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of VehcileForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -160,8 +154,6 @@ class __$$VehcileFormImplCopyWithImpl<$Res>
       _$VehcileFormImpl _value, $Res Function(_$VehcileFormImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of VehcileForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -285,14 +277,12 @@ class _$VehcileFormImpl implements _VehcileForm {
             (identical(other.uom, uom) || other.uom == uom));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, status, name, creationDate,
       licenseplate, make, model, lastodometer, fuelType, uom);
 
-  /// Create a copy of VehcileForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$VehcileFormImplCopyWith<_$VehcileFormImpl> get copyWith =>
@@ -347,11 +337,8 @@ abstract class _VehcileForm implements VehcileForm {
   @override
   @JsonKey(name: 'uom')
   String? get uom;
-
-  /// Create a copy of VehcileForm
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$VehcileFormImplCopyWith<_$VehcileFormImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

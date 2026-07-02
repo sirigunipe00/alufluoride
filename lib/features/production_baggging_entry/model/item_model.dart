@@ -20,11 +20,12 @@ class ItemModel with _$ItemModel {
     @JsonKey(name: 'parentfield') String? parentfield,
     @JsonKey(name: 'parenttype') String? parenttype,
     @JsonKey(name: 'bag_no') String? bagNo,
+    @JsonKey(name: 'pallet_weight') double? palletWeight,
     @JsonKey(name: 'qty') double? qty,
     @JsonKey(name: 'serial_no') String? serialNo,
     @JsonKey(name: 'sticker_printed') int? stickerPrinted,
     @JsonKey(name: 'weighing_scale') String? weighingScale,
-     @JsonKey(
+    @JsonKey(
       includeFromJson: true,
       includeToJson: false,
       toJson: toNull,
@@ -33,5 +34,6 @@ class ItemModel with _$ItemModel {
     File? imageFile,
   }) = _ItemModel;
 
-  factory ItemModel.fromJson(Map<String, dynamic> json) => _$ItemModelFromJson(json);
+  factory ItemModel.fromJson(Map<String, dynamic> json) =>
+      _$ItemModelFromJson(json);
 }

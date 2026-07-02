@@ -114,6 +114,8 @@ class Urls {
   static final submitBaggigEntry =
       '$cusWs/alufluoride.api.submit_bagging_entry';
 
+  static final dispatchBagging = '$cusWs/alufluoride.api.scan_delivery_bag';
+
 
   static filepath(String path) {
     return '${baseUrl.replaceAll('api', '')}/${path.replaceAll('/private', '').replaceAll("///", '/')}';

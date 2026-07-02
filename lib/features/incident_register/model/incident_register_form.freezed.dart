@@ -63,12 +63,8 @@ mixin _$IncidentRegisterForm {
       fromJson: toNull)
   File? get incPhotoImg => throw _privateConstructorUsedError;
 
-  /// Serializes this IncidentRegisterForm to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of IncidentRegisterForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $IncidentRegisterFormCopyWith<IncidentRegisterForm> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -121,8 +117,6 @@ class _$IncidentRegisterFormCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of IncidentRegisterForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -284,8 +278,6 @@ class __$$IncidentRegisterFormImplCopyWithImpl<$Res>
       $Res Function(_$IncidentRegisterFormImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of IncidentRegisterForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -544,7 +536,7 @@ class _$IncidentRegisterFormImpl implements _IncidentRegisterForm {
                 other.incPhotoImg == incPhotoImg));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -571,9 +563,7 @@ class _$IncidentRegisterFormImpl implements _IncidentRegisterForm {
         incPhotoImg
       ]);
 
-  /// Create a copy of IncidentRegisterForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$IncidentRegisterFormImplCopyWith<_$IncidentRegisterFormImpl>
@@ -686,11 +676,8 @@ abstract class _IncidentRegisterForm implements IncidentRegisterForm {
       toJson: toNull,
       fromJson: toNull)
   File? get incPhotoImg;
-
-  /// Create a copy of IncidentRegisterForm
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$IncidentRegisterFormImplCopyWith<_$IncidentRegisterFormImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

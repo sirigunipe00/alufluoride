@@ -20,7 +20,8 @@ enum PageMode2 {
   inWardGatePass('Inward Gate Pass'),
   contractEmployees('Contract Employees'),
   emptyVehicle('Empty Vehicle Tracking'),
-  baggingEntry('Bagging Entry');
+  baggingEntry('Bagging Entry'),
+  baggingDispatch('Bagging Dispatch');
 
   final String name;
   const PageMode2(this.name);
@@ -54,6 +55,7 @@ class AppPageView2<T extends PageViewFiltersCubit> extends StatelessWidget {
         PageMode2.contractEmployees => 'Search Contract Employee ID',
         PageMode2.emptyVehicle => 'Search Empty Vehicle ID',
         PageMode2.baggingEntry => 'Search Bagging Entry ID',
+        PageMode2.baggingDispatch => 'Search Dispatch ID',
       };
 
   Color get bgColor => switch (mode) {
@@ -68,6 +70,7 @@ class AppPageView2<T extends PageViewFiltersCubit> extends StatelessWidget {
         PageMode2.emptyVehicle => AppColors.registration,
         PageMode2.contractEmployees => AppColors.green,
         PageMode2.baggingEntry => AppColors.invite,
+        PageMode2.baggingDispatch => AppColors.registration,
       };
 
   @override
@@ -145,7 +148,7 @@ class AppPageView2<T extends PageViewFiltersCubit> extends StatelessWidget {
                 border: Border.all(color: AppColors.white),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.black.withOpacity(0.5),
+                    color: AppColors.black.withValues(alpha: (0.5)),
                     blurRadius: 10,
                     offset: const Offset(0, -1),
                   )
@@ -156,7 +159,7 @@ class AppPageView2<T extends PageViewFiltersCubit> extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: mode != PageMode2.baggingEntry
+      floatingActionButton: mode != PageMode2.baggingEntry && mode != PageMode2.baggingDispatch
           ? FloatingActionButton.extended(
               extendedPadding: const EdgeInsets.symmetric(
                 horizontal: 28,

@@ -16,18 +16,8 @@ abstract class _AppRoutePaths {
   static const newContractEmployee='/home/contractEmployee/newContractEmployee';
   static const baggingEntry = '/home/baggingEntry';
   static const newBaggingEntry='/home/baggingEntry/newBaggingEntry';
-  // static const inviteVisitor = '/home/inviteVisitor';
-  // static const newInviteVisitor = '/home/inviteVisitor/newInviteVisitor';
-  // static const visitorInOut = '/home/visitorInOut';
-  // static const newVisitorInOut = '/home/visitorInOut/newVisitorInOut';
-  // static const createVisit = '/home/createVisit';
-  // static const newCreateVisit = '/home/createVisit/newCreateVisit';
-  // static const outWardGatePass = '/home/outWardGatePass';
-  // static const newOutWardGatePass = '/home/outWardGatePass/newOutWardGatePass';
-  // static const inWardGatePass = '/home/inWardGatePass';
-  // static const newInWardGatePass = '/home/inWardGatePass/newInWardGatePass';
-  // static const emptyVehicle = '/home/emptyVehicle';
-  // static const newEmptyVehicle =  '/home/emptyVehicle/newEmptyVehicle';
+  static const baggingDispatch = '/home/baggingDispatch';
+  static const newBaggingDispatch = '/home/baggingDispatch/newBaggingDispatch';
 
   static const account = '/account';
 }
@@ -47,18 +37,8 @@ enum AppRoute {
   newContractEmployee(_AppRoutePaths.newContractEmployee),
   baggingEntry(_AppRoutePaths.baggingEntry),
   newBaggingEntry(_AppRoutePaths.newBaggingEntry),
-  // inviteVisitor(_AppRoutePaths.inviteVisitor),
-  // newInviteVisitor(_AppRoutePaths.newInviteVisitor),
-  // visitorInOut(_AppRoutePaths.visitorInOut),
-  // newVisitorInOut(_AppRoutePaths.newVisitorInOut),
-  // createVisit(_AppRoutePaths.createVisit),
-  // newCreateVisit(_AppRoutePaths.newCreateVisit),
-  // outWardGatePass(_AppRoutePaths.outWardGatePass),
-  // newOutWardGatePass(_AppRoutePaths.newOutWardGatePass),
-  // inWardGatePass(_AppRoutePaths.inWardGatePass),
-  // newInWardGatePass(_AppRoutePaths.newInWardGatePass),
-  // emptyVehicle(_AppRoutePaths.emptyVehicle),
-  // newEmptyVehicle(_AppRoutePaths.newEmptyVehicle),
+  baggingDispatch(_AppRoutePaths.baggingDispatch),
+  newBaggingDispatch(_AppRoutePaths.newBaggingDispatch),
 
   account(_AppRoutePaths.account);
 

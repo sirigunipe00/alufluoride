@@ -4,6 +4,7 @@ import 'package:alufluoride/features/auth/presentation/bloc/auth/auth_cubit.dart
 import 'package:alufluoride/features/auth/presentation/bloc/sign_in/sign_in_cubit.dart';
 import 'package:alufluoride/features/contract_employee/presentation/bloc/bloc_provider.dart';
 import 'package:alufluoride/features/contract_employee/presentation/bloc/contract_employee_filter.dart';
+import 'package:alufluoride/features/dispatch_bagging/presentation/bloc/bloc_provider.dart';
 import 'package:alufluoride/features/gate_entry/presentation/bloc/bloc_provider.dart';
 import 'package:alufluoride/features/gate_entry/presentation/bloc/gate_entry_filter_cubit.dart';
 import 'package:alufluoride/features/gate_exit/presentation/bloc/bloc_provider.dart';
@@ -12,6 +13,7 @@ import 'package:alufluoride/features/incident_register/presentation/bloc/bloc_pr
 import 'package:alufluoride/features/incident_register/presentation/bloc/incident_register_filter_cubit.dart';
 import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/bagging_entry_filter.dart';
 import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/blocprovider.dart';
+import 'package:alufluoride/features/dispatch_bagging/presentation/bloc/dispatch_filter_cubit.dart';
 
 import 'package:alufluoride/styles/material_theme.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +34,7 @@ class AparnaApp extends StatelessWidget {
         BlocProvider(create: (_) => GateExitFilterCubit()),
         BlocProvider(create: (_) => ContractEmployeeFilterCubit()),
         BlocProvider(create: (_) => IncidentRegisterFilterCubit()),
+        BlocProvider(create: (_) => DispatchFilterCubit()),
         BlocProvider(
             create: (_) => GateEntryBlocProvider.get().materialNameList()),
         BlocProvider(
@@ -47,6 +50,9 @@ class AparnaApp extends StatelessWidget {
             create: (_) =>
                 BaggingEntryBlocProvider.get().fetchBaggingEntries()),
         BlocProvider(create: (_) => BaggingEntryFilterCubit()),
+         BlocProvider(
+            create: (_) => DispatchBaggingBlocProvider.get().fetchDispatchEntries()),
+
       ],
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (_, state) {
@@ -62,7 +68,8 @@ class AparnaApp extends StatelessWidget {
                 ..cubit<MaterialNameList>().request()
                 ..cubit<ContractEmployeesCubit>().fetchInitial(filters)
                 ..cubit<GateExitsCubit>()
-                    .fetchInitial(PageViewFilters.initial());
+                    .fetchInitial(PageViewFilters.initial())
+              ..cubit<DispatchBaggingCubit>().fetchInitial(filters);
 
               AppRoute.home.go(routerCtxt);
             },

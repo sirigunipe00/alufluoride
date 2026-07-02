@@ -3,9 +3,12 @@ import 'package:alufluoride/core/utils/date_format_util.dart';
 import 'package:alufluoride/features/production_baggging_entry/model/item_model.dart';
 import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/create_bagging_entry_cubit/create_bagging_entry_cubit.dart';
 import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/create_weightment_cubit/create_weightment_cubit.dart';
+import 'package:alufluoride/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:qr_scanner_overlay/qr_scanner_overlay.dart';
 
 class BaggingEntryFormWidget extends StatefulWidget {
   const BaggingEntryFormWidget({super.key});
@@ -17,9 +20,14 @@ class BaggingEntryFormWidget extends StatefulWidget {
 class _BaggingEntryFormWidgetState extends State<BaggingEntryFormWidget> {
   final ScrollController _scrollController = ScrollController();
   final focusNodes = List.generate(60, (index) => FocusNode());
+  double? palletWeight;
 
   final Color primaryTeal = const Color(0xFF26A69A);
   final Color lightBg = const Color(0xFFF1F8F9);
+  void onPalletQrScanned(String qrValue) {
+    palletWeight = double.tryParse(qrValue);
+  }
+
   void _showBlurryImageDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -53,15 +61,95 @@ class _BaggingEntryFormWidgetState extends State<BaggingEntryFormWidget> {
     final lines = state.lines;
 
     Future<void> onBagButtonPressed() async {
+      bool hasScanned = false;
+
+      final scannedWeight = await Navigator.of(context).push<String>(
+        MaterialPageRoute(
+          builder: (routeContext) => Scaffold(
+            appBar: AppBar(
+              title: const Text("Scan Pallet QR"),
+              backgroundColor: primaryTeal,
+              foregroundColor: Colors.white,
+            ),
+            body: Stack(children: [
+              MobileScanner(
+                controller: MobileScannerController(
+                  formats: const [BarcodeFormat.qrCode],
+                ),
+                onDetect: (capture) {
+                  if (hasScanned) return;
+
+                  final value = capture.barcodes.first.rawValue;
+
+                  if (value == null || value.trim().isEmpty) return;
+
+                  hasScanned = true;
+                  Navigator.of(routeContext).pop(value.trim());
+                },
+              ),
+              QRScannerOverlay(
+                overlayColor: Colors.black54,
+                borderColor: AppColors.invite,
+                borderRadius: 16,
+              ),
+            ]),
+          ),
+        ),
+      );
+
+      if (scannedWeight == null) return;
+
+      palletWeight = double.tryParse(scannedWeight);
+
+      if (palletWeight == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Invalid Pallet QR"),
+          ),
+        );
+        return;
+      }
+      final proceed = await showDialog<bool>(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => AlertDialog(
+          title: const Text("Pallet Weight"),
+          content: Text(
+            "Scanned Pallet Weight\n\n${palletWeight!.toStringAsFixed(2)} Kg",
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 18),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () =>
+                  Navigator.of(context, rootNavigator: true).pop(false),
+              child: const Text("Cancel"),
+            ),
+            ElevatedButton(
+              onPressed: () =>
+                  Navigator.of(context, rootNavigator: true).pop(true),
+              child: const Text("OK"),
+            ),
+          ],
+        ),
+      );
+
+      if (proceed != true) {
+        onBagButtonPressed(); // Open scanner again
+        return;
+      }
+
       final picker = ImagePicker();
-      final XFile? photo =
-          await picker.pickImage(source: ImageSource.camera, imageQuality: 80);
+
+      final photo = await picker.pickImage(
+        source: ImageSource.camera,
+        imageQuality: 80,
+      );
 
       if (photo != null && mounted) {
-
-        if (context.mounted) {
-          context.read<WeightmentCubit>().extractWeight(File(photo.path));
-        }
+        context.read<WeightmentCubit>().extractWeight(
+              File(photo.path),
+            );
       }
     }
 
@@ -94,21 +182,40 @@ class _BaggingEntryFormWidgetState extends State<BaggingEntryFormWidget> {
 
             if (weightState.extractedWeight != null) {
               final baggingCubit = context.read<CreateBaggingEntryCubit>();
-              double? weight = double.tryParse(weightState.extractedWeight!);
 
-              if (weight == null || weight <= 0) {
+              final totalWeight = double.tryParse(weightState.extractedWeight!);
+
+              if (totalWeight == null || totalWeight <= 0) {
                 _showBlurryImageDialog(context);
-              } else if (baggingCubit.state.lines.length >= 10) {
+                return;
+              }
+
+              if (palletWeight == null) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                      content: Text("Maximum limit of 10 bags reached.")),
+                    content: Text("Please scan the pallet QR first."),
+                  ),
                 );
-              } else {
-                baggingCubit.addLineItem(
-                  weight: weight,
-                  imageFile: weightState.watermarkedImage!,
-                );
+                return;
               }
+
+              final bagWeight = totalWeight - palletWeight!;
+
+              if (bagWeight <= 0) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text(
+                        "Invalid weight. Total weight is less than pallet weight."),
+                  ),
+                );
+                return;
+              }
+
+              baggingCubit.addLineItem(
+                weight: bagWeight,
+                palletWeight: palletWeight.toString(),
+                imageFile: weightState.watermarkedImage!,
+              );
 
               context.read<WeightmentCubit>().reset();
             }
@@ -131,7 +238,7 @@ class _BaggingEntryFormWidgetState extends State<BaggingEntryFormWidget> {
                       )
                     : const Icon(Icons.camera_alt, color: Colors.white),
                 label: Text(
-                  weightState.isExtracting ? "Extracting..." : "Bag",
+                  weightState.isExtracting ? "Extracting..." : "Scan Pallet",
                   style: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
@@ -152,7 +259,7 @@ class _BaggingEntryFormWidgetState extends State<BaggingEntryFormWidget> {
                       child: SizedBox(
                         width: 125,
                         height: 50,
-                        child: ElevatedButton( 
+                        child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: primaryTeal,
                             shape: RoundedRectangleBorder(
@@ -344,9 +451,10 @@ class _BaggingEntryFormWidgetState extends State<BaggingEntryFormWidget> {
               children: [
                 _TableCell(text: "#", isHeader: true, flex: 1),
                 _TableCell(text: "Bag No.", isHeader: true, flex: 2),
+                _TableCell(text: 'Pallet\nWeight', isHeader: true, flex: 2),
                 _TableCell(text: "Qty (kg)", isHeader: true, flex: 2),
                 _TableCell(text: "Serial No.", isHeader: true, flex: 3),
-                _TableCell(text: "Sticker Print", isHeader: true, flex: 2),
+                _TableCell(text: "Sticker\nPrint", isHeader: true, flex: 2),
               ],
             ),
           ),
@@ -361,6 +469,11 @@ class _BaggingEntryFormWidgetState extends State<BaggingEntryFormWidget> {
                     flex: 1,
                     textColor: primaryTeal),
                 _TableCell(text: line.bagNo ?? "", isHeader: false, flex: 2),
+                _TableCell(
+                  text: line.palletWeight?.toString() ?? "",
+                  isHeader: false,
+                  flex: 2,
+                ),
                 _TableCell(
                     text: line.qty?.toString() ?? "", isHeader: false, flex: 2),
                 _TableCell(text: line.serialNo ?? "", isHeader: false, flex: 3),

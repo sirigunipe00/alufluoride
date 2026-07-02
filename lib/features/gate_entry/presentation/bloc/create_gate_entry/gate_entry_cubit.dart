@@ -206,14 +206,7 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
           GateEntryView.edit || GateEntryView.completed => 'Submitted',
         };
         if (state.view == GateEntryView.create) {
-          final startTime = DateTime.now();
-
           final response = await repo.createGateEntry(state.form, state.lines);
-
-          final endTime = DateTime.now();
-
-          final duration = endTime.difference(startTime);
-
           return response.fold(
             (l) {
               emitSafeState(state.copyWith(
@@ -223,7 +216,7 @@ class CreateGateEntryCubit extends AppBaseCubit<CreateGateEntryState> {
             },
             (r) {
               shouldAskForConfirmation.value = false;
-              final docstatus = r.second;
+              // final docstatus = r.second;
               emitSafeState(state.copyWith(
                 isLoading: false,
                 isSuccess: true,

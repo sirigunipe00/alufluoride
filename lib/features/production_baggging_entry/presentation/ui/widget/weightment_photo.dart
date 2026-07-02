@@ -120,7 +120,7 @@ class _WeightmentPhotoWidgetState extends State<WeightmentPhotoWidget>
                 borderRadius: BorderRadius.circular(4.0),
                 boxShadow: [
                   BoxShadow(
-                    color: widget.borderColor.withOpacity(0.3),
+                    color: widget.borderColor.withValues(alpha: (0.3)),
                     blurRadius: 2,
                     offset: const Offset(2, 2),
                   ),

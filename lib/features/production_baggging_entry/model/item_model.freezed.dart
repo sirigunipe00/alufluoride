@@ -42,6 +42,8 @@ mixin _$ItemModel {
   String? get parenttype => throw _privateConstructorUsedError;
   @JsonKey(name: 'bag_no')
   String? get bagNo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'pallet_weight')
+  double? get palletWeight => throw _privateConstructorUsedError;
   @JsonKey(name: 'qty')
   double? get qty => throw _privateConstructorUsedError;
   @JsonKey(name: 'serial_no')
@@ -57,12 +59,8 @@ mixin _$ItemModel {
       fromJson: toNull)
   File? get imageFile => throw _privateConstructorUsedError;
 
-  /// Serializes this ItemModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ItemModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ItemModelCopyWith<ItemModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -84,6 +82,7 @@ abstract class $ItemModelCopyWith<$Res> {
       @JsonKey(name: 'parentfield') String? parentfield,
       @JsonKey(name: 'parenttype') String? parenttype,
       @JsonKey(name: 'bag_no') String? bagNo,
+      @JsonKey(name: 'pallet_weight') double? palletWeight,
       @JsonKey(name: 'qty') double? qty,
       @JsonKey(name: 'serial_no') String? serialNo,
       @JsonKey(name: 'sticker_printed') int? stickerPrinted,
@@ -106,8 +105,6 @@ class _$ItemModelCopyWithImpl<$Res, $Val extends ItemModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ItemModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,6 +119,7 @@ class _$ItemModelCopyWithImpl<$Res, $Val extends ItemModel>
     Object? parentfield = freezed,
     Object? parenttype = freezed,
     Object? bagNo = freezed,
+    Object? palletWeight = freezed,
     Object? qty = freezed,
     Object? serialNo = freezed,
     Object? stickerPrinted = freezed,
@@ -173,6 +171,10 @@ class _$ItemModelCopyWithImpl<$Res, $Val extends ItemModel>
           ? _value.bagNo
           : bagNo // ignore: cast_nullable_to_non_nullable
               as String?,
+      palletWeight: freezed == palletWeight
+          ? _value.palletWeight
+          : palletWeight // ignore: cast_nullable_to_non_nullable
+              as double?,
       qty: freezed == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -217,6 +219,7 @@ abstract class _$$ItemModelImplCopyWith<$Res>
       @JsonKey(name: 'parentfield') String? parentfield,
       @JsonKey(name: 'parenttype') String? parenttype,
       @JsonKey(name: 'bag_no') String? bagNo,
+      @JsonKey(name: 'pallet_weight') double? palletWeight,
       @JsonKey(name: 'qty') double? qty,
       @JsonKey(name: 'serial_no') String? serialNo,
       @JsonKey(name: 'sticker_printed') int? stickerPrinted,
@@ -237,8 +240,6 @@ class __$$ItemModelImplCopyWithImpl<$Res>
       _$ItemModelImpl _value, $Res Function(_$ItemModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ItemModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -253,6 +254,7 @@ class __$$ItemModelImplCopyWithImpl<$Res>
     Object? parentfield = freezed,
     Object? parenttype = freezed,
     Object? bagNo = freezed,
+    Object? palletWeight = freezed,
     Object? qty = freezed,
     Object? serialNo = freezed,
     Object? stickerPrinted = freezed,
@@ -304,6 +306,10 @@ class __$$ItemModelImplCopyWithImpl<$Res>
           ? _value.bagNo
           : bagNo // ignore: cast_nullable_to_non_nullable
               as String?,
+      palletWeight: freezed == palletWeight
+          ? _value.palletWeight
+          : palletWeight // ignore: cast_nullable_to_non_nullable
+              as double?,
       qty: freezed == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -343,6 +349,7 @@ class _$ItemModelImpl implements _ItemModel {
       @JsonKey(name: 'parentfield') this.parentfield,
       @JsonKey(name: 'parenttype') this.parenttype,
       @JsonKey(name: 'bag_no') this.bagNo,
+      @JsonKey(name: 'pallet_weight') this.palletWeight,
       @JsonKey(name: 'qty') this.qty,
       @JsonKey(name: 'serial_no') this.serialNo,
       @JsonKey(name: 'sticker_printed') this.stickerPrinted,
@@ -391,6 +398,9 @@ class _$ItemModelImpl implements _ItemModel {
   @JsonKey(name: 'bag_no')
   final String? bagNo;
   @override
+  @JsonKey(name: 'pallet_weight')
+  final double? palletWeight;
+  @override
   @JsonKey(name: 'qty')
   final double? qty;
   @override
@@ -412,7 +422,7 @@ class _$ItemModelImpl implements _ItemModel {
 
   @override
   String toString() {
-    return 'ItemModel(name: $name, owner: $owner, creation: $creation, modified: $modified, modifiedBy: $modifiedBy, docstatus: $docstatus, idx: $idx, parent: $parent, parentfield: $parentfield, parenttype: $parenttype, bagNo: $bagNo, qty: $qty, serialNo: $serialNo, stickerPrinted: $stickerPrinted, weighingScale: $weighingScale, imageFile: $imageFile)';
+    return 'ItemModel(name: $name, owner: $owner, creation: $creation, modified: $modified, modifiedBy: $modifiedBy, docstatus: $docstatus, idx: $idx, parent: $parent, parentfield: $parentfield, parenttype: $parenttype, bagNo: $bagNo, palletWeight: $palletWeight, qty: $qty, serialNo: $serialNo, stickerPrinted: $stickerPrinted, weighingScale: $weighingScale, imageFile: $imageFile)';
   }
 
   @override
@@ -437,6 +447,8 @@ class _$ItemModelImpl implements _ItemModel {
             (identical(other.parenttype, parenttype) ||
                 other.parenttype == parenttype) &&
             (identical(other.bagNo, bagNo) || other.bagNo == bagNo) &&
+            (identical(other.palletWeight, palletWeight) ||
+                other.palletWeight == palletWeight) &&
             (identical(other.qty, qty) || other.qty == qty) &&
             (identical(other.serialNo, serialNo) ||
                 other.serialNo == serialNo) &&
@@ -448,7 +460,7 @@ class _$ItemModelImpl implements _ItemModel {
                 other.imageFile == imageFile));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -463,15 +475,14 @@ class _$ItemModelImpl implements _ItemModel {
       parentfield,
       parenttype,
       bagNo,
+      palletWeight,
       qty,
       serialNo,
       stickerPrinted,
       weighingScale,
       imageFile);
 
-  /// Create a copy of ItemModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ItemModelImplCopyWith<_$ItemModelImpl> get copyWith =>
@@ -498,6 +509,7 @@ abstract class _ItemModel implements ItemModel {
       @JsonKey(name: 'parentfield') final String? parentfield,
       @JsonKey(name: 'parenttype') final String? parenttype,
       @JsonKey(name: 'bag_no') final String? bagNo,
+      @JsonKey(name: 'pallet_weight') final double? palletWeight,
       @JsonKey(name: 'qty') final double? qty,
       @JsonKey(name: 'serial_no') final String? serialNo,
       @JsonKey(name: 'sticker_printed') final int? stickerPrinted,
@@ -546,6 +558,9 @@ abstract class _ItemModel implements ItemModel {
   @JsonKey(name: 'bag_no')
   String? get bagNo;
   @override
+  @JsonKey(name: 'pallet_weight')
+  double? get palletWeight;
+  @override
   @JsonKey(name: 'qty')
   double? get qty;
   @override
@@ -564,11 +579,8 @@ abstract class _ItemModel implements ItemModel {
       toJson: toNull,
       fromJson: toNull)
   File? get imageFile;
-
-  /// Create a copy of ItemModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ItemModelImplCopyWith<_$ItemModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

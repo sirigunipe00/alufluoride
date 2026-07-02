@@ -58,12 +58,8 @@ mixin _$ContractEmployeeForm {
   @JsonKey(name: 'photo')
   String? get photo => throw _privateConstructorUsedError;
 
-  /// Serializes this ContractEmployeeForm to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ContractEmployeeForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ContractEmployeeFormCopyWith<ContractEmployeeForm> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -107,8 +103,6 @@ class _$ContractEmployeeFormCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ContractEmployeeForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -251,8 +245,6 @@ class __$$ContractEmployeeFormImplCopyWithImpl<$Res>
       $Res Function(_$ContractEmployeeFormImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ContractEmployeeForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -481,7 +473,7 @@ class _$ContractEmployeeFormImpl implements _ContractEmployeeForm {
             (identical(other.photo, photo) || other.photo == photo));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -506,9 +498,7 @@ class _$ContractEmployeeFormImpl implements _ContractEmployeeForm {
         photo
       ]);
 
-  /// Create a copy of ContractEmployeeForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ContractEmployeeFormImplCopyWith<_$ContractEmployeeFormImpl>
@@ -606,11 +596,8 @@ abstract class _ContractEmployeeForm implements ContractEmployeeForm {
   @override
   @JsonKey(name: 'photo')
   String? get photo;
-
-  /// Create a copy of ContractEmployeeForm
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ContractEmployeeFormImplCopyWith<_$ContractEmployeeFormImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

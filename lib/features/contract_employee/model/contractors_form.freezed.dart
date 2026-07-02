@@ -30,12 +30,8 @@ mixin _$ContractorsForm {
   @JsonKey(name: 'custom_is_contractor')
   int? get isContractor => throw _privateConstructorUsedError;
 
-  /// Serializes this ContractorsForm to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ContractorsForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ContractorsFormCopyWith<ContractorsForm> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -64,8 +60,6 @@ class _$ContractorsFormCopyWithImpl<$Res, $Val extends ContractorsForm>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ContractorsForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -124,8 +118,6 @@ class __$$ContractorsFormImplCopyWithImpl<$Res>
       _$ContractorsFormImpl _value, $Res Function(_$ContractorsFormImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ContractorsForm
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -208,14 +200,12 @@ class _$ContractorsFormImpl implements _ContractorsForm {
                 other.isContractor == isContractor));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, status, name, supplierGroup, supplierType, isContractor);
 
-  /// Create a copy of ContractorsForm
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ContractorsFormImplCopyWith<_$ContractorsFormImpl> get copyWith =>
@@ -256,11 +246,8 @@ abstract class _ContractorsForm implements ContractorsForm {
   @override
   @JsonKey(name: 'custom_is_contractor')
   int? get isContractor;
-
-  /// Create a copy of ContractorsForm
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ContractorsFormImplCopyWith<_$ContractorsFormImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

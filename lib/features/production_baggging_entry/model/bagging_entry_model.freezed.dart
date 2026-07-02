@@ -60,12 +60,8 @@ mixin _$BaggingEntryModel {
   @JsonKey(name: 'production_entry')
   String? get productionEntry => throw _privateConstructorUsedError;
 
-  /// Serializes this BaggingEntryModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of BaggingEntryModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $BaggingEntryModelCopyWith<BaggingEntryModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -109,8 +105,6 @@ class _$BaggingEntryModelCopyWithImpl<$Res, $Val extends BaggingEntryModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of BaggingEntryModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -259,8 +253,6 @@ class __$$BaggingEntryModelImplCopyWithImpl<$Res>
       $Res Function(_$BaggingEntryModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of BaggingEntryModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -501,7 +493,7 @@ class _$BaggingEntryModelImpl implements _BaggingEntryModel {
                 other.productionEntry == productionEntry));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -527,9 +519,7 @@ class _$BaggingEntryModelImpl implements _BaggingEntryModel {
         productionEntry
       ]);
 
-  /// Create a copy of BaggingEntryModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$BaggingEntryModelImplCopyWith<_$BaggingEntryModelImpl> get copyWith =>
@@ -630,11 +620,8 @@ abstract class _BaggingEntryModel implements BaggingEntryModel {
   @override
   @JsonKey(name: 'production_entry')
   String? get productionEntry;
-
-  /// Create a copy of BaggingEntryModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$BaggingEntryModelImplCopyWith<_$BaggingEntryModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

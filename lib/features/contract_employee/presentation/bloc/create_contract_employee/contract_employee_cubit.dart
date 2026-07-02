@@ -188,13 +188,6 @@ class CreateContractEmployeeCubit
           ContractEmployeeView.completed =>
             ContractEmployeeView.completed,
         };
-
-        final status = switch (state.view) {
-          ContractEmployeeView.create => 'Draft',
-          ContractEmployeeView.edit ||
-          ContractEmployeeView.completed =>
-            'Submitted',
-        };
         if (state.view == ContractEmployeeView.create) {
           // final startTime = DateTime.now();
 

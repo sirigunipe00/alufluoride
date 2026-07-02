@@ -75,6 +75,7 @@ class BaggingEntryRepoImpl extends BaseApiRepository
             .map((item) => {
                   "bag_no": item.bagNo,
                   "qty": item.qty,
+                  "pallet_weight": item.palletWeight,
                   "weighing_scale": item.weighingScale,
                 })
             .toList(),
@@ -121,7 +122,8 @@ class BaggingEntryRepoImpl extends BaseApiRepository
         ],
         'parent': 'Production Bagging Entry',
         'doctype': 'Production Bagging Entry Lines',
-        'fields': ["*"]
+        'fields': ["*"],
+        'order_by': 'idx ASC',
       },
       headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     );
@@ -145,8 +147,12 @@ class BaggingEntryRepoImpl extends BaseApiRepository
         },
         headers: {HttpHeaders.contentTypeHeader: 'application/json'},
       );
+      $logger.devLog('reponse...$config');
 
       final response = await post(config);
+            $logger.devLog('reponse..........$response');
+
+      
       return response.process((r) => right(r.data!));
     });
   }
