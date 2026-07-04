@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:alufluoride/features/dispatch_bagging/data/dispatch_bagging_repo.dart';
+import 'package:alufluoride/features/dispatch_bagging/model/bag_tracking_items.dart';
 import 'package:alufluoride/features/dispatch_bagging/model/dispatch_bagging.dart';
 import 'package:alufluoride/features/dispatch_bagging/model/dispatch_items.dart';
 import 'package:dartz/dartz.dart';
@@ -75,7 +76,41 @@ class DispatchBaggingRepoImpl extends BaseApiRepository
     $logger.devLog(response);
     return response.process((r) => right(r.data!));
   }
+  @override
+  AsyncValueOf<BagTrackingItems> fetchBagTracking(String bagNo) async {
+    final requestConfig = RequestConfig(
+      url: Urls.getList,
+      parser: (json) {
+        final data = json['message'];
 
+        final listdata = data as List<dynamic>;
+        return listdata.map((e) => BagTrackingItems.fromJson(e)).toList();
+      },
+      reqParams: {
+        'filters': [
+          ["name", "=", bagNo],
+        ],
+        "doctype": "Bag Tracking",
+        'fields': ["*"]
+      },
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    );
+    $logger.devLog(requestConfig);
+    final response = await get(requestConfig);
+     return response.process((r) {
+    if (r.data == null || r.data!.isEmpty) {
+      return left(
+        const Failure(
+          title: 'Bag Not Found',
+          error: 'No bag found for the scanned QR code.',
+          status: 404,
+        ),
+      );
+    }
+
+    return right(r.data!.first);
+  });
+}
 @override
 AsyncValueOf<Pair<String, String>> createDispatch(
   List<DispatchItemsModel> items,

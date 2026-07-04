@@ -1,5 +1,7 @@
 import 'package:alufluoride/core/core.dart';
 import 'package:alufluoride/core/model/page_view_filters.dart';
+import 'package:alufluoride/features/Create%20Visit/presentation/bloc/bloc_provider.dart';
+import 'package:alufluoride/features/Create%20Visit/presentation/bloc/create_visit_filter_cubit.dart';
 import 'package:alufluoride/features/auth/presentation/bloc/auth/auth_cubit.dart';
 import 'package:alufluoride/features/auth/presentation/bloc/sign_in/sign_in_cubit.dart';
 import 'package:alufluoride/features/contract_employee/presentation/bloc/bloc_provider.dart';
@@ -11,10 +13,13 @@ import 'package:alufluoride/features/gate_exit/presentation/bloc/bloc_provider.d
 import 'package:alufluoride/features/gate_exit/presentation/bloc/gate_exit_filter.dart';
 import 'package:alufluoride/features/incident_register/presentation/bloc/bloc_provider.dart';
 import 'package:alufluoride/features/incident_register/presentation/bloc/incident_register_filter_cubit.dart';
+import 'package:alufluoride/features/invite_visitor/presentation/bloc/bloc_provider.dart';
+import 'package:alufluoride/features/invite_visitor/presentation/bloc/invite_visitor_filter_cubit.dart';
 import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/bagging_entry_filter.dart';
 import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/blocprovider.dart';
 import 'package:alufluoride/features/dispatch_bagging/presentation/bloc/dispatch_filter_cubit.dart';
-
+import 'package:alufluoride/features/visitor_in_out/presentation/bloc/bloc_provider.dart';
+import 'package:alufluoride/features/visitor_in_out/presentation/bloc/visitor_in_out_filter_cubit.dart';
 import 'package:alufluoride/styles/material_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,6 +40,9 @@ class AparnaApp extends StatelessWidget {
         BlocProvider(create: (_) => ContractEmployeeFilterCubit()),
         BlocProvider(create: (_) => IncidentRegisterFilterCubit()),
         BlocProvider(create: (_) => DispatchFilterCubit()),
+         BlocProvider(create: (_) => InviteVisitorFilterCubit()),
+        BlocProvider(create: (_) => VisitorInOutFilterCubit()),
+        BlocProvider(create: (_) => CreateVisitFilterCubit()),
         BlocProvider(
             create: (_) => GateEntryBlocProvider.get().materialNameList()),
         BlocProvider(
@@ -49,6 +57,12 @@ class AparnaApp extends StatelessWidget {
         BlocProvider(
             create: (_) =>
                 BaggingEntryBlocProvider.get().fetchBaggingEntries()),
+                BlocProvider(
+            create: (_) => InviteVisitorBlocProvider.get().inviteVisitorList()),
+        BlocProvider(
+            create: (_) => VisitorInOutBlocProvider.get().visitorInOutList()),
+        BlocProvider(
+            create: (_) => CreateVisitBlocProvider.get().createVisitList()),
         BlocProvider(create: (_) => BaggingEntryFilterCubit()),
          BlocProvider(
             create: (_) => DispatchBaggingBlocProvider.get().fetchDispatchEntries()),
@@ -69,7 +83,11 @@ class AparnaApp extends StatelessWidget {
                 ..cubit<ContractEmployeesCubit>().fetchInitial(filters)
                 ..cubit<GateExitsCubit>()
                     .fetchInitial(PageViewFilters.initial())
-              ..cubit<DispatchBaggingCubit>().fetchInitial(filters);
+              ..cubit<DispatchBaggingCubit>().fetchInitial(filters)
+              ..cubit<InviteVisitorListCubit>().fetchInitial(filters)
+                ..cubit<VisitorInOutListCubit>().fetchInitial(filters)
+                ..cubit<CreateVisitListCubit>().fetchInitial(const Pair('Draft', null));
+
 
               AppRoute.home.go(routerCtxt);
             },

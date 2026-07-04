@@ -8,7 +8,6 @@ class AppIcons {
   static const iconsPath = '$basePath/icons';
   static const info = AppIcon('$iconsPath/info.png');
   static const confirm = AppIcon('$iconsPath/confirm.png');
-
   static const aparnaimages = AppIcon('$basePath/images/alufloride_new.png');
   static const vechileEntry = AppIcon('$basePath/logo/vehicle_entry.png');
   static const vehcileExit = AppIcon('$basePath/logo/vehicle_exit.png');
@@ -18,13 +17,19 @@ class AppIcons {
   static const bgFrame3 = AppIcon('$basePath/logo/incident_curves.png');
   static const bgFrame4 = AppIcon('$basePath/logo/invite_visitor.png');
   static const bgFrame5 = AppIcon('$basePath/logo/in_out.png');
+  static const bgFrame6 = AppIcon('$basePath/logo/invite_background.png');
+  static const bgFrame7 = AppIcon('$basePath/logo/invite_visit.png');
+  static const bgFrame8 = AppIcon('$basePath/logo/visitor_inout.png');
+  static const bgFrame9 = AppIcon('$basePath/logo/create_visit.png');
   static const gateExitCurves = AppIcon('$basePath/logo/gate_exit_1.png');
   static const gateEntryCurves = AppIcon('$basePath/logo/gate_entry_1.png');
   static const settingsCuate = AppIcon('$basePath/logo/settings_cuate.svg');
   static const incidentRegistration = AppIcon('$basePath/logo/register.png');
-  static const inviteVisitor = AppIcon('$basePath/logo/invite.png');
-  static const visitorInOut = AppIcon('$basePath/logo/visitor_in_out.png');
+  static const inviteVisitor = AppIcon('$imagesPath/invite_visit.png');
+  static const visitorInOut = AppIcon('$imagesPath/visitor_in_out.png');
+  static const createVisit = AppIcon('$imagesPath/create_visit.png');
   static const baggingEntry = AppIcon('$imagesPath/bagging_entry.png');
+  static const baggingDispatch = AppIcon('$imagesPath/bagging_diaptch.png');
 }
 
 class AppIcon {

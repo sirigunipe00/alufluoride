@@ -4,6 +4,8 @@ import 'package:alufluoride/core/di/injector.dart';
 import 'package:alufluoride/core/model/page_view_filters.dart';
 import 'package:alufluoride/features/gate_exit/data/gate_exit_repo.dart';
 import 'package:alufluoride/features/gate_exit/model/gate_exit.dart';
+import 'package:alufluoride/features/incident_register/model/receiver_form.dart';
+import 'package:dartz/dartz.dart';
 
 import 'package:injectable/injectable.dart';
 
@@ -15,6 +17,8 @@ typedef GateExitDetailsState = NetworkRequestState<GateExit>;
 
 typedef GetVehicleNumber = NetworkRequestCubit<String?, String>;
 typedef GetVehicleNumberState = NetworkRequestState<String?>;
+typedef ReceiverNameList = NetworkRequestCubit<List<ReceiverNameForm>, None>;
+typedef ReceiverNameListState = NetworkRequestState<List<ReceiverNameForm>>;
 
 @lazySingleton
 class GateExitBlocProvider {
@@ -35,5 +39,9 @@ class GateExitBlocProvider {
 
   GetVehicleNumber getVehicleNumber() => GetVehicleNumber(
     onRequest: (params, _) => repo.getvehicleNumber(params!),
+  );
+
+  ReceiverNameList receiverNameList() => ReceiverNameList(
+    onRequest: (params, _) => repo.receiverName(),
   );
 }

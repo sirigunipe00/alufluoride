@@ -18,6 +18,12 @@ abstract class _AppRoutePaths {
   static const newBaggingEntry='/home/baggingEntry/newBaggingEntry';
   static const baggingDispatch = '/home/baggingDispatch';
   static const newBaggingDispatch = '/home/baggingDispatch/newBaggingDispatch';
+  static const inviteVisitor = '/home/inviteVisitor';
+  static const newInviteVisitor = '/home/inviteVisitor/newInviteVisitor';
+  static const visitorInOut = '/home/visitorInOut';
+  static const newVisitorInOut = '/home/visitorInOut/newVisitorInOut';
+  static const createVisit = '/home/createVisit';
+  static const newCreateVisit = '/home/createVisit/newCreateVisit';
 
   static const account = '/account';
 }
@@ -39,6 +45,12 @@ enum AppRoute {
   newBaggingEntry(_AppRoutePaths.newBaggingEntry),
   baggingDispatch(_AppRoutePaths.baggingDispatch),
   newBaggingDispatch(_AppRoutePaths.newBaggingDispatch),
+  inviteVisitor(_AppRoutePaths.inviteVisitor),
+  newInviteVisitor(_AppRoutePaths.newInviteVisitor),
+  visitorInOut(_AppRoutePaths.visitorInOut),
+  newVisitorInOut(_AppRoutePaths.newVisitorInOut),
+  createVisit(_AppRoutePaths.createVisit),
+  newCreateVisit(_AppRoutePaths.newCreateVisit),
 
   account(_AppRoutePaths.account);
 

@@ -68,11 +68,11 @@ class AppHomePage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              featureColor: AppColors.invite,
+              featureColor: AppColors.baggingEntry,
               onTap: () => AppRoute.baggingEntry.push(context),
             ),
             AppFeatureWidget(
-              icon: AppIcons.baggingEntry
+              icon: AppIcons.baggingDispatch
                   .toWidget(height: 100, width: 120, fit: BoxFit.fill),
               title: const Text(
                 'Bagging Dispatch',
@@ -86,6 +86,39 @@ class AppHomePage extends StatelessWidget {
               featureColor: AppColors.registration,
               onTap: () => AppRoute.baggingDispatch.push(context),
             ),
+            AppFeatureWidget(
+                icon: AppIcons.incidentRegistration
+                    .toWidget(height: 100, width: 120, fit: BoxFit.contain),
+                title: FittedBox(
+                  child: Text('Incident Register',
+                      style: AppTextStyles.featureLabelStyle(context)),
+                ),
+                featureColor: const Color(0xFFC0C0C0),
+                onTap: () => AppRoute.incidentRegister.push(context),
+              ),
+            AppFeatureWidget(
+                icon: AppIcons.inviteVisitor.toWidget(height: 100, width: 120,fit : BoxFit.contain),
+                title: Text('Invite Visitor',
+                    style: AppTextStyles.featureLabelStyle(context)),
+                featureColor: AppColors.invite,
+                onTap: () => AppRoute.inviteVisitor.push(context),
+              ),
+              AppFeatureWidget(
+                icon: AppIcons.visitorInOut
+                    .toWidget(height: 100, width: 120, fit: BoxFit.contain),
+                title: Text('Visitor In Out',
+                    style: AppTextStyles.featureLabelStyle(context)),
+                featureColor: AppColors.visitorINOUT,
+                onTap: () => AppRoute.visitorInOut.push(context),
+              ),
+              AppFeatureWidget(
+                icon: AppIcons.createVisit.toWidget(height: 100, width: 120, fit: BoxFit.contain),
+                title: Text('Create Visit',
+                    style: AppTextStyles.featureLabelStyle(context)),
+                featureColor: AppColors.createVisit,
+                // onTap: (){},
+                onTap: () => AppRoute.createVisit.push(context),
+              ),
           ],
         ),
       ),

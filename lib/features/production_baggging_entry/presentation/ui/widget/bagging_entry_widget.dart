@@ -27,7 +27,7 @@ class BaggingEntryWidget extends StatelessWidget {
           surfaceTintColor: AppColors.white,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
-              side: const BorderSide(color: AppColors.invite, width: 2)),
+              side: const BorderSide(color: AppColors.baggingEntry, width: 2)),
           child: SpacedColumn(
             defaultHeight: 4,
             margin: const EdgeInsets.all(12),

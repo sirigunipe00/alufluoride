@@ -70,6 +70,39 @@ class CreateDispatchCubit extends AppBaseCubit<CreateDispatchState> {
       );
     }
   }
+  Future<void> addScannedBag(String bagNo) async {
+  if (state.form.docstatus == 1) return;
+
+  emitSafeState(state.copyWith(isLoading: true));
+
+  final response = await repo.fetchBagTracking(bagNo);
+
+  response.fold(
+    (l) {
+      emitSafeState(
+        state.copyWith(
+          isLoading: false,
+          error: l,
+        ),
+      );
+    },
+    (bag) {
+      final newLine = DispatchItemsModel(
+        bagNo: bag.name,
+        batch: bag.batchNo,
+        bagWeight: bag.bagWeight,
+      );
+
+      emitSafeState(
+        state.copyWith(
+          isLoading: false,
+          lines: [...state.lines, newLine],
+          newlines: [...state.newlines, newLine],
+        ),
+      );
+    },
+  );
+}
 
   void addnewItem() {
     emitSafeState(state.copyWith(
@@ -122,7 +155,7 @@ void addLineItem({required DispatchItemsModel lineItem}) {
           (r) {
             shouldAskForConfirmation.value = false;
 
-            final shouldShowSubmit = state.lines.length >= 10;
+            // final shouldShowSubmit = state.lines.length >= 10;
 
             emitSafeState(
               state.copyWith(
@@ -132,12 +165,8 @@ void addLineItem({required DispatchItemsModel lineItem}) {
                 ),
                 isLoading: false,
                 isSuccess: true,
-                view: shouldShowSubmit
-                    ? DispatchView.completed
-                    : DispatchView.edit,
-                successMsg: shouldShowSubmit
-                    ? 'Ready for submission'
-                    : 'Bag updated successfully',
+                view: DispatchView.edit,
+                successMsg: 'Bag updated successfully',
               ),
             );
           },

@@ -5,6 +5,10 @@ import 'package:alufluoride/app/presentation/app_update_blocprovider.dart';
 import 'package:alufluoride/app/widgets/app_scaffold_widget.dart';
 import 'package:alufluoride/app/widgets/image_preview_scrn.dart';
 import 'package:alufluoride/core/core.dart';
+import 'package:alufluoride/features/Create%20Visit/model/create_visit_form.dart';
+import 'package:alufluoride/features/Create%20Visit/presentation/bloc/cubit/create_visit_cubit.dart';
+import 'package:alufluoride/features/Create%20Visit/presentation/ui/create/new_create_visit_widget.dart';
+import 'package:alufluoride/features/Create%20Visit/presentation/ui/widgets/create_visit_list.dart';
 import 'package:alufluoride/features/auth/presentation/authentication_scrn.dart';
 import 'package:alufluoride/features/contract_employee/model/contract_employee_form.dart';
 import 'package:alufluoride/features/contract_employee/presentation/bloc/bloc_provider.dart';
@@ -30,12 +34,20 @@ import 'package:alufluoride/features/incident_register/presentation/bloc/bloc_pr
 import 'package:alufluoride/features/incident_register/presentation/bloc/create_incident_register/incident_register_cubit.dart';
 import 'package:alufluoride/features/incident_register/presentation/ui/create/new_incident_register.dart';
 import 'package:alufluoride/features/incident_register/presentation/ui/widgets/incident_register_list.dart';
+import 'package:alufluoride/features/invite_visitor/presentation/bloc/bloc_provider.dart';
+import 'package:alufluoride/features/invite_visitor/presentation/bloc/cubit/create_invite_visitor_cubit.dart';
+import 'package:alufluoride/features/invite_visitor/presentation/ui/create/new_invite_visitor.dart';
+import 'package:alufluoride/features/invite_visitor/presentation/ui/widgets/invite_visitor_list.dart';
 import 'package:alufluoride/features/production_baggging_entry/model/bagging_entry_model.dart';
 import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/blocprovider.dart';
 import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/create_bagging_entry_cubit/create_bagging_entry_cubit.dart';
 import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/create_weightment_cubit/create_weightment_cubit.dart';
 import 'package:alufluoride/features/production_baggging_entry/presentation/ui/create/new_bagging_entry.dart';
 import 'package:alufluoride/features/production_baggging_entry/presentation/ui/widget/bagging_entry_list.dart';
+import 'package:alufluoride/features/visitor_in_out/presentation/bloc/bloc_provider.dart';
+import 'package:alufluoride/features/visitor_in_out/presentation/bloc/cubit/create_visitor_in_out_cubit.dart';
+import 'package:alufluoride/features/visitor_in_out/presentation/ui/create/new_visitor_in_out.dart';
+import 'package:alufluoride/features/visitor_in_out/presentation/ui/widgets/visitor_in_out_list.dart';
 import 'package:alufluoride/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -264,6 +276,117 @@ class AppRouterConfig {
                           ),
                         ],
                       ),
+                    ],
+                  ),
+                  GoRoute(
+                    path: _getPath(AppRoute.inviteVisitor),
+                    builder: (ctxt, state) => const InviteVisitorListScrn(),
+                    routes: [
+                      GoRoute(
+                        path: _getPath(AppRoute.newInviteVisitor),
+                        onExit: (context, state) async =>
+                            await _promptConf(context),
+                        builder: (_, state) {
+                          final blocprovider = InviteVisitorBlocProvider.get();
+                          final form = state.extra;
+                          return MultiBlocProvider(
+                            providers: [
+                              BlocProvider(
+                                create: (context) =>
+                                    IncidentRegisterBlocProvider.get()
+                                        .companyNameList()
+                                      ..request(),
+                              ),
+                              BlocProvider(
+                                  create: (_) =>
+                                      blocprovider.inviteVisitorss()),
+                              BlocProvider(
+                                  create: (_) =>
+                                      blocprovider.departmentList()..request()),
+                                      BlocProvider(
+                                  create: (_) => GateExitBlocProvider.get()
+                                      .receiverNameList()
+                                    ..request()),
+                              BlocProvider(
+                                create: (_) =>
+                                    $sl.get<CreateInviteVisitorCubit>()
+                                      ..init(form),
+                              ),
+                            ],
+                            child: const NewInviteVisitor(),
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                  GoRoute(
+                    path: _getPath(AppRoute.createVisit),
+                    builder: (ctxt, state) => const CreateVisitListScrn(),
+                    routes: [
+                      GoRoute(
+                        path: _getPath(AppRoute.newCreateVisit),
+                        onExit: (context, state) async =>
+                            await _promptConf(context),
+                        builder: (_, state) {
+                          final blocprovider = InviteVisitorBlocProvider.get();
+                          // final blocprovider2 = CreateVisitBlocProvider.get();
+
+                          final form = state.extra as CreateVisitForm?;
+                          return MultiBlocProvider(
+                            providers: [
+                              BlocProvider(
+                                  create: (_) =>
+                                      blocprovider.inviteVisitorss()),
+                              BlocProvider(
+                                  create: (_) =>
+                                      blocprovider.departmentList()..request()),
+                              BlocProvider(
+                                create: (context) =>
+                                    IncidentRegisterBlocProvider.get()
+                                        .companyNameList()
+                                      ..request(),
+                              ),
+                               BlocProvider(
+                                  create: (_) => GateExitBlocProvider.get()
+                                      .receiverNameList()
+                                    ..request()),
+                              BlocProvider(
+                                create: (_) =>
+                                    $sl.get<CreateVisitCubit>()..init(form),
+                              ),
+                            ],
+                            child: const NewCreateVisit(),
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                  GoRoute(
+                    path: _getPath(AppRoute.visitorInOut),
+                    builder: (ctxt, state) => const VisitorInOutListScrn(),
+                    routes: [
+                      GoRoute(
+                        path: _getPath(AppRoute.newVisitorInOut),
+                        onExit: (context, state) async =>
+                            await _promptConf(context),
+                        builder: (_, state) {
+                          final blocprovider = VisitorInOutBlocProvider.get();
+                          final form = state.extra;
+                          return MultiBlocProvider(
+                            providers: [
+                              BlocProvider(
+                                  create: (_) =>
+                                      blocprovider.visitorsFetching()),
+                              BlocProvider(
+                                create: (_) =>
+                                    $sl.get<CreateVisitorInOutCubit>()
+                                      ..init(form),
+                              ),
+                            ],
+                            child: const NewVisitorInOut(),
+                          );
+                        },
+                      )
                     ],
                   ),
                   GoRoute(

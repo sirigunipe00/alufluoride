@@ -22,5 +22,10 @@ abstract class AppColors {
   static const himlayaPeeks = Color(0xFFE2EAF0);
   static const logoColor = Color(0xFF255899);
   static const incident = Color(0xFF808080);
-  static const invite = Color(0xFF66CFCF);
+  static const baggingEntry = Color(0xFF66CFCF); 
+  static const createVisit = Color(0xFFFFA278);
+  static const visitorINOUT = Color(0xFFFF7C9D);
+  static const invite = Color(0xFFFFC46D);        
+          
+
 }

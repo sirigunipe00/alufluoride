@@ -6,6 +6,7 @@ import 'package:alufluoride/core/model/page_view_filters.dart';
 import 'package:alufluoride/features/gate_exit/data/gate_exit_repo.dart';
 import 'package:alufluoride/features/gate_exit/model/gate_exit.dart';
 import 'package:alufluoride/features/gate_exit/model/new_gate_exit_form.dart';
+import 'package:alufluoride/features/incident_register/model/receiver_form.dart';
 import 'package:dartz/dartz.dart';
 
 import 'package:injectable/injectable.dart';
@@ -41,6 +42,25 @@ class GateExitRepoImpl extends BaseApiRepository implements GateExitRepo {
         },
       );
       final response = await get(requestConfig);
+      return response.process((r) => right(r.data!));
+    });
+  }
+    @override
+  AsyncValueOf<List<ReceiverNameForm>> receiverName() async {
+    return await executeSafely(() async {
+      final config = RequestConfig(
+        url: Urls.customerName,
+        reqParams: {
+          'fields': ['name', 'customer_name', 'gstin'],
+          'limit_page_length': 'None'
+        },
+        parser: (p0) {
+          final data = p0['data'] as List<dynamic>;
+          return data.map((e) => ReceiverNameForm.fromJson(e)).toList();
+        },
+      );
+      final response = await get(config);
+
       return response.process((r) => right(r.data!));
     });
   }

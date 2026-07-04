@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:isolate';
-
 import 'package:alufluoride/core/consts/urls.dart';
 import 'package:alufluoride/core/di/injector.dart';
 import 'package:alufluoride/core/logger/app_logger.dart';

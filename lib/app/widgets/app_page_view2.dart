@@ -63,13 +63,13 @@ class AppPageView2<T extends PageViewFiltersCubit> extends StatelessWidget {
         PageMode2.gateexit => AppColors.shyMoment,
         PageMode2.incidentregister => const Color(0xFF808080),
         PageMode2.inviteVisitor => AppColors.invite,
-        PageMode2.visitorInOut => AppColors.registration,
-        PageMode2.createVisit => AppColors.invite,
+        PageMode2.visitorInOut => AppColors.visitorINOUT,
+        PageMode2.createVisit => AppColors.createVisit,
         PageMode2.outWardGatePass => AppColors.shyMoment,
         PageMode2.inWardGatePass => AppColors.marigoldDDust,
         PageMode2.emptyVehicle => AppColors.registration,
         PageMode2.contractEmployees => AppColors.green,
-        PageMode2.baggingEntry => AppColors.invite,
+        PageMode2.baggingEntry => AppColors.baggingEntry,
         PageMode2.baggingDispatch => AppColors.registration,
       };
 

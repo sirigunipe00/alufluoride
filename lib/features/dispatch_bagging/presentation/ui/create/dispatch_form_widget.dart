@@ -31,6 +31,14 @@ class _DispatchBaggingFormWidgetState extends State<DispatchBaggingFormWidget> {
 
     Future<void> onBagButtonPressed() async {
       if (isSubmitted) return;
+      if (state.lines.length >= 10) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Maximum 10 bags can be scanned."),
+          ),
+        );
+        return;
+      }
       bool hasScanned = false;
       final scannedBagNo = await Navigator.of(context).push<String>(
         MaterialPageRoute(
@@ -40,28 +48,27 @@ class _DispatchBaggingFormWidgetState extends State<DispatchBaggingFormWidget> {
               backgroundColor: primaryTeal,
               foregroundColor: Colors.white,
             ),
-            body: Stack(
-              children: [MobileScanner(
+            body: Stack(children: [
+              MobileScanner(
                 controller: MobileScannerController(
                   formats: const [BarcodeFormat.qrCode],
                 ),
                 onDetect: (capture) {
                   if (hasScanned) return;
-              
+
                   final value = capture.barcodes.first.rawValue;
                   if (value == null || value.trim().isEmpty) return;
-              
+
                   hasScanned = true;
                   Navigator.of(routeContext).pop(value.trim());
                 },
               ),
-                  QRScannerOverlay(
-      overlayColor: Colors.black54,
-      borderColor: Colors.green,
-      borderRadius: 16,
-    ),
-              ]
-            ),
+              QRScannerOverlay(
+                overlayColor: Colors.black54,
+                borderColor: Colors.green,
+                borderRadius: 16,
+              ),
+            ]),
           ),
         ),
       );
@@ -79,13 +86,9 @@ class _DispatchBaggingFormWidgetState extends State<DispatchBaggingFormWidget> {
           return;
         }
       }
-      if(context.mounted){
-
-      context.read<CreateDispatchCubit>().addLineItem(
-            lineItem: DispatchItemsModel(bagNo: scannedBagNo),
-          );
+      if (context.mounted) {
+        context.read<CreateDispatchCubit>().addScannedBag(scannedBagNo);
       }
-
     }
 
     return MultiBlocListener(
@@ -118,7 +121,7 @@ class _DispatchBaggingFormWidgetState extends State<DispatchBaggingFormWidget> {
                       )
                     : const Icon(Icons.camera_alt, color: Colors.white),
                 label: Text(
-                  state.isLoading ? "Extracting..." : "Bag",
+                  state.isLoading ? "Extracting..." : "Scan Bag",
                   style: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
@@ -239,7 +242,7 @@ class _DispatchBaggingFormWidgetState extends State<DispatchBaggingFormWidget> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                const Text("Bagging Entry Lines",
+                const Text("Scanned Bag Lines",
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
                 _buildTable(lines),

@@ -18,7 +18,7 @@ class DispatchBaggingList extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppPageView2<DispatchFilterCubit>(
       mode: PageMode2.baggingDispatch,
-      scaffoldBg: AppIcons.incidentRegistration.path,
+      scaffoldBg: AppIcons.bgFrame5.path,
       backgroundColor: AppColors.registration,
       onNew: () => AppRoute.newBaggingDispatch.push(context),
       child: BlocListener<DispatchFilterCubit, PageViewFilters>(

@@ -32,6 +32,13 @@ import '../../features/contract_employee/presentation/bloc/bloc_provider.dart'
     as _i46;
 import '../../features/contract_employee/presentation/bloc/create_contract_employee/contract_employee_cubit.dart'
     as _i400;
+import '../../features/Create%20Visit/data/create_visit_repo.dart' as _i148;
+import '../../features/Create%20Visit/data/create_visit_repo_impl.dart'
+    as _i219;
+import '../../features/Create%20Visit/presentation/bloc/bloc_provider.dart'
+    as _i1038;
+import '../../features/Create%20Visit/presentation/bloc/cubit/create_visit_cubit.dart'
+    as _i881;
 import '../../features/dispatch_bagging/data/dispatch_bagging_repo.dart'
     as _i920;
 import '../../features/dispatch_bagging/data/dispatch_bagging_repoimpl.dart'
@@ -59,6 +66,13 @@ import '../../features/incident_register/presentation/bloc/bloc_provider.dart'
     as _i840;
 import '../../features/incident_register/presentation/bloc/create_incident_register/incident_register_cubit.dart'
     as _i816;
+import '../../features/invite_visitor/data/invite_visitor_repo.dart' as _i870;
+import '../../features/invite_visitor/data/invite_visitor_repo_impl.dart'
+    as _i872;
+import '../../features/invite_visitor/presentation/bloc/bloc_provider.dart'
+    as _i881;
+import '../../features/invite_visitor/presentation/bloc/cubit/create_invite_visitor_cubit.dart'
+    as _i597;
 import '../../features/production_baggging_entry/data/bagging_entry_repo.dart'
     as _i876;
 import '../../features/production_baggging_entry/data/bagging_entry_repoimpl.dart'
@@ -69,6 +83,13 @@ import '../../features/production_baggging_entry/presentation/bloc/create_baggin
     as _i610;
 import '../../features/production_baggging_entry/presentation/bloc/create_weightment_cubit/create_weightment_cubit.dart'
     as _i571;
+import '../../features/visitor_in_out/data/visitor_in_out_repo.dart' as _i999;
+import '../../features/visitor_in_out/data/visitor_in_out_repo_impl.dart'
+    as _i103;
+import '../../features/visitor_in_out/presentation/bloc/bloc_provider.dart'
+    as _i743;
+import '../../features/visitor_in_out/presentation/bloc/cubit/create_visitor_in_out_cubit.dart'
+    as _i784;
 import '../core.dart' as _i351;
 import '../local_storage/key_vale_storage.dart' as _i1012;
 import '../network/api_client.dart' as _i557;
@@ -114,16 +135,26 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i346.AppVersion(gh<_i655.PackageInfo>()));
     gh.lazySingleton<_i908.ContractEmployeeRepo>(
         () => _i1017.ContractEmployeeRepoImpl(gh<_i351.ApiClient>()));
+    gh.lazySingleton<_i148.CreateVisitRepo>(
+        () => _i219.CreateVisitRepoImpl(gh<_i351.ApiClient>()));
+    gh.lazySingleton<_i870.InviteVisitorRepo>(
+        () => _i872.InviteVisitorRepoImpl(gh<_i351.ApiClient>()));
     gh.lazySingleton<_i310.IncidentRegistersRepo>(
         () => _i49.IncidentRegistersRepoImpl(gh<_i351.ApiClient>()));
     gh.lazySingleton<_i920.DispatchBaggingRepo>(
         () => _i779.DispatchBaggingRepoImpl(gh<_i351.ApiClient>()));
     gh.lazySingleton<_i876.BaggingEntryRepo>(
         () => _i457.BaggingEntryRepoImpl(gh<_i351.ApiClient>()));
+    gh.lazySingleton<_i999.VisitorInOutRepo>(
+        () => _i103.VisitorInOutRepoImpl(gh<_i351.ApiClient>()));
     gh.factory<_i82.CreateDispatchCubit>(
         () => _i82.CreateDispatchCubit(gh<_i920.DispatchBaggingRepo>()));
     gh.lazySingleton<_i583.DispatchBaggingBlocProvider>(() =>
         _i583.DispatchBaggingBlocProvider(gh<_i920.DispatchBaggingRepo>()));
+    gh.lazySingleton<_i1038.CreateVisitBlocProvider>(
+        () => _i1038.CreateVisitBlocProvider(gh<_i148.CreateVisitRepo>()));
+    gh.factory<_i881.CreateVisitCubit>(
+        () => _i881.CreateVisitCubit(gh<_i148.CreateVisitRepo>()));
     gh.lazySingleton<_i290.BaggingEntryBlocProvider>(
         () => _i290.BaggingEntryBlocProvider(gh<_i876.BaggingEntryRepo>()));
     gh.factory<_i571.WeightmentCubit>(
@@ -146,10 +177,18 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i565.GateExitBlocProvider(gh<_i495.GateExitRepo>()));
     gh.factory<_i161.CreateGateExitCubit>(
         () => _i161.CreateGateExitCubit(gh<_i495.GateExitRepo>()));
+    gh.factory<_i597.CreateInviteVisitorCubit>(
+        () => _i597.CreateInviteVisitorCubit(gh<_i870.InviteVisitorRepo>()));
+    gh.lazySingleton<_i881.InviteVisitorBlocProvider>(
+        () => _i881.InviteVisitorBlocProvider(gh<_i870.InviteVisitorRepo>()));
     gh.lazySingleton<_i691.AppRepository>(() => _i691.AppRepository(
           gh<_i351.ApiClient>(),
           gh<_i346.AppVersion>(),
         ));
+    gh.factory<_i784.CreateVisitorInOutCubit>(
+        () => _i784.CreateVisitorInOutCubit(gh<_i999.VisitorInOutRepo>()));
+    gh.lazySingleton<_i743.VisitorInOutBlocProvider>(
+        () => _i743.VisitorInOutBlocProvider(gh<_i999.VisitorInOutRepo>()));
     gh.lazySingleton<_i585.AuthRepo>(() => _i328.AuthRepoImpl(
           gh<_i351.ApiClient>(),
           gh<_i351.KeyValueStorage>(),
