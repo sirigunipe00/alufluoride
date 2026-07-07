@@ -28,7 +28,7 @@ mixin _$IncidentRegisterForm {
   String? get modifiedDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'docstatus')
   int? get docStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'incident_investigator_rsm_name_')
+  @JsonKey(name: 'incident_investigator__rsm_name_')
   String? get incidentInvestigator => throw _privateConstructorUsedError;
   @JsonKey(name: 'incident_plant_name', defaultValue: '')
   String? get incidentPlantName => throw _privateConstructorUsedError;
@@ -40,21 +40,23 @@ mixin _$IncidentRegisterForm {
   String? get assetsInvolve => throw _privateConstructorUsedError;
   @JsonKey(name: 'amount')
   int? get amount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'fir_complaint')
+  @JsonKey(name: 'fir__complaint')
   String? get complaint => throw _privateConstructorUsedError;
-  @JsonKey(name: 'notify_employee')
-  String? get employeeEmail => throw _privateConstructorUsedError;
   @JsonKey(name: 'remarks')
   String? get remarks => throw _privateConstructorUsedError;
+  @JsonKey(name: 'notify_employee_email')
+  String? get notifyEmployeeEmail => throw _privateConstructorUsedError;
   @JsonKey(name: 'details_of_other_party')
   String? get otherPartyDetails => throw _privateConstructorUsedError;
   @JsonKey(name: 'incident_description_1')
   String? get desc1 => throw _privateConstructorUsedError;
   @JsonKey(name: 'incident_description')
   String? get desc2 => throw _privateConstructorUsedError;
+  @JsonKey(name: 'amount_of_compensation_paid_by_ael')
+  int? get amountCompensation => throw _privateConstructorUsedError;
   @JsonKey(name: 'action_takenrecommendation')
   String? get desc3 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'photo')
+  @JsonKey(name: 'photographs_of_incident')
   String? get photo => throw _privateConstructorUsedError;
   @JsonKey(
       includeFromJson: true,
@@ -82,7 +84,7 @@ abstract class $IncidentRegisterFormCopyWith<$Res> {
       String? time,
       @JsonKey(name: 'modified') String? modifiedDate,
       @JsonKey(name: 'docstatus') int? docStatus,
-      @JsonKey(name: 'incident_investigator_rsm_name_')
+      @JsonKey(name: 'incident_investigator__rsm_name_')
       String? incidentInvestigator,
       @JsonKey(name: 'incident_plant_name', defaultValue: '')
       String? incidentPlantName,
@@ -90,14 +92,16 @@ abstract class $IncidentRegisterFormCopyWith<$Res> {
       @JsonKey(name: 'ael_associated_involved') String? associatedInvol,
       @JsonKey(name: 'ael_assets_involved') String? assetsInvolve,
       @JsonKey(name: 'amount') int? amount,
-      @JsonKey(name: 'fir_complaint') String? complaint,
-      @JsonKey(name: 'notify_employee') String? employeeEmail,
+      @JsonKey(name: 'fir__complaint') String? complaint,
       @JsonKey(name: 'remarks') String? remarks,
+      @JsonKey(name: 'notify_employee_email') String? notifyEmployeeEmail,
       @JsonKey(name: 'details_of_other_party') String? otherPartyDetails,
       @JsonKey(name: 'incident_description_1') String? desc1,
       @JsonKey(name: 'incident_description') String? desc2,
+      @JsonKey(name: 'amount_of_compensation_paid_by_ael')
+      int? amountCompensation,
       @JsonKey(name: 'action_takenrecommendation') String? desc3,
-      @JsonKey(name: 'photo') String? photo,
+      @JsonKey(name: 'photographs_of_incident') String? photo,
       @JsonKey(
           includeFromJson: true,
           includeToJson: false,
@@ -133,11 +137,12 @@ class _$IncidentRegisterFormCopyWithImpl<$Res,
     Object? assetsInvolve = freezed,
     Object? amount = freezed,
     Object? complaint = freezed,
-    Object? employeeEmail = freezed,
     Object? remarks = freezed,
+    Object? notifyEmployeeEmail = freezed,
     Object? otherPartyDetails = freezed,
     Object? desc1 = freezed,
     Object? desc2 = freezed,
+    Object? amountCompensation = freezed,
     Object? desc3 = freezed,
     Object? photo = freezed,
     Object? incPhotoImg = freezed,
@@ -195,13 +200,13 @@ class _$IncidentRegisterFormCopyWithImpl<$Res,
           ? _value.complaint
           : complaint // ignore: cast_nullable_to_non_nullable
               as String?,
-      employeeEmail: freezed == employeeEmail
-          ? _value.employeeEmail
-          : employeeEmail // ignore: cast_nullable_to_non_nullable
-              as String?,
       remarks: freezed == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
+              as String?,
+      notifyEmployeeEmail: freezed == notifyEmployeeEmail
+          ? _value.notifyEmployeeEmail
+          : notifyEmployeeEmail // ignore: cast_nullable_to_non_nullable
               as String?,
       otherPartyDetails: freezed == otherPartyDetails
           ? _value.otherPartyDetails
@@ -215,6 +220,10 @@ class _$IncidentRegisterFormCopyWithImpl<$Res,
           ? _value.desc2
           : desc2 // ignore: cast_nullable_to_non_nullable
               as String?,
+      amountCompensation: freezed == amountCompensation
+          ? _value.amountCompensation
+          : amountCompensation // ignore: cast_nullable_to_non_nullable
+              as int?,
       desc3: freezed == desc3
           ? _value.desc3
           : desc3 // ignore: cast_nullable_to_non_nullable
@@ -246,7 +255,7 @@ abstract class _$$IncidentRegisterFormImplCopyWith<$Res>
       String? time,
       @JsonKey(name: 'modified') String? modifiedDate,
       @JsonKey(name: 'docstatus') int? docStatus,
-      @JsonKey(name: 'incident_investigator_rsm_name_')
+      @JsonKey(name: 'incident_investigator__rsm_name_')
       String? incidentInvestigator,
       @JsonKey(name: 'incident_plant_name', defaultValue: '')
       String? incidentPlantName,
@@ -254,14 +263,16 @@ abstract class _$$IncidentRegisterFormImplCopyWith<$Res>
       @JsonKey(name: 'ael_associated_involved') String? associatedInvol,
       @JsonKey(name: 'ael_assets_involved') String? assetsInvolve,
       @JsonKey(name: 'amount') int? amount,
-      @JsonKey(name: 'fir_complaint') String? complaint,
-      @JsonKey(name: 'notify_employee') String? employeeEmail,
+      @JsonKey(name: 'fir__complaint') String? complaint,
       @JsonKey(name: 'remarks') String? remarks,
+      @JsonKey(name: 'notify_employee_email') String? notifyEmployeeEmail,
       @JsonKey(name: 'details_of_other_party') String? otherPartyDetails,
       @JsonKey(name: 'incident_description_1') String? desc1,
       @JsonKey(name: 'incident_description') String? desc2,
+      @JsonKey(name: 'amount_of_compensation_paid_by_ael')
+      int? amountCompensation,
       @JsonKey(name: 'action_takenrecommendation') String? desc3,
-      @JsonKey(name: 'photo') String? photo,
+      @JsonKey(name: 'photographs_of_incident') String? photo,
       @JsonKey(
           includeFromJson: true,
           includeToJson: false,
@@ -294,11 +305,12 @@ class __$$IncidentRegisterFormImplCopyWithImpl<$Res>
     Object? assetsInvolve = freezed,
     Object? amount = freezed,
     Object? complaint = freezed,
-    Object? employeeEmail = freezed,
     Object? remarks = freezed,
+    Object? notifyEmployeeEmail = freezed,
     Object? otherPartyDetails = freezed,
     Object? desc1 = freezed,
     Object? desc2 = freezed,
+    Object? amountCompensation = freezed,
     Object? desc3 = freezed,
     Object? photo = freezed,
     Object? incPhotoImg = freezed,
@@ -356,13 +368,13 @@ class __$$IncidentRegisterFormImplCopyWithImpl<$Res>
           ? _value.complaint
           : complaint // ignore: cast_nullable_to_non_nullable
               as String?,
-      employeeEmail: freezed == employeeEmail
-          ? _value.employeeEmail
-          : employeeEmail // ignore: cast_nullable_to_non_nullable
-              as String?,
       remarks: freezed == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
+              as String?,
+      notifyEmployeeEmail: freezed == notifyEmployeeEmail
+          ? _value.notifyEmployeeEmail
+          : notifyEmployeeEmail // ignore: cast_nullable_to_non_nullable
               as String?,
       otherPartyDetails: freezed == otherPartyDetails
           ? _value.otherPartyDetails
@@ -376,6 +388,10 @@ class __$$IncidentRegisterFormImplCopyWithImpl<$Res>
           ? _value.desc2
           : desc2 // ignore: cast_nullable_to_non_nullable
               as String?,
+      amountCompensation: freezed == amountCompensation
+          ? _value.amountCompensation
+          : amountCompensation // ignore: cast_nullable_to_non_nullable
+              as int?,
       desc3: freezed == desc3
           ? _value.desc3
           : desc3 // ignore: cast_nullable_to_non_nullable
@@ -402,7 +418,7 @@ class _$IncidentRegisterFormImpl implements _IncidentRegisterForm {
       this.time,
       @JsonKey(name: 'modified') this.modifiedDate,
       @JsonKey(name: 'docstatus') this.docStatus,
-      @JsonKey(name: 'incident_investigator_rsm_name_')
+      @JsonKey(name: 'incident_investigator__rsm_name_')
       this.incidentInvestigator,
       @JsonKey(name: 'incident_plant_name', defaultValue: '')
       this.incidentPlantName,
@@ -410,14 +426,16 @@ class _$IncidentRegisterFormImpl implements _IncidentRegisterForm {
       @JsonKey(name: 'ael_associated_involved') this.associatedInvol,
       @JsonKey(name: 'ael_assets_involved') this.assetsInvolve,
       @JsonKey(name: 'amount') this.amount,
-      @JsonKey(name: 'fir_complaint') this.complaint,
-      @JsonKey(name: 'notify_employee') this.employeeEmail,
+      @JsonKey(name: 'fir__complaint') this.complaint,
       @JsonKey(name: 'remarks') this.remarks,
+      @JsonKey(name: 'notify_employee_email') this.notifyEmployeeEmail,
       @JsonKey(name: 'details_of_other_party') this.otherPartyDetails,
       @JsonKey(name: 'incident_description_1') this.desc1,
       @JsonKey(name: 'incident_description') this.desc2,
+      @JsonKey(name: 'amount_of_compensation_paid_by_ael')
+      this.amountCompensation,
       @JsonKey(name: 'action_takenrecommendation') this.desc3,
-      @JsonKey(name: 'photo') this.photo,
+      @JsonKey(name: 'photographs_of_incident') this.photo,
       @JsonKey(
           includeFromJson: true,
           includeToJson: false,
@@ -443,7 +461,7 @@ class _$IncidentRegisterFormImpl implements _IncidentRegisterForm {
   @JsonKey(name: 'docstatus')
   final int? docStatus;
   @override
-  @JsonKey(name: 'incident_investigator_rsm_name_')
+  @JsonKey(name: 'incident_investigator__rsm_name_')
   final String? incidentInvestigator;
   @override
   @JsonKey(name: 'incident_plant_name', defaultValue: '')
@@ -461,14 +479,14 @@ class _$IncidentRegisterFormImpl implements _IncidentRegisterForm {
   @JsonKey(name: 'amount')
   final int? amount;
   @override
-  @JsonKey(name: 'fir_complaint')
+  @JsonKey(name: 'fir__complaint')
   final String? complaint;
-  @override
-  @JsonKey(name: 'notify_employee')
-  final String? employeeEmail;
   @override
   @JsonKey(name: 'remarks')
   final String? remarks;
+  @override
+  @JsonKey(name: 'notify_employee_email')
+  final String? notifyEmployeeEmail;
   @override
   @JsonKey(name: 'details_of_other_party')
   final String? otherPartyDetails;
@@ -479,10 +497,13 @@ class _$IncidentRegisterFormImpl implements _IncidentRegisterForm {
   @JsonKey(name: 'incident_description')
   final String? desc2;
   @override
+  @JsonKey(name: 'amount_of_compensation_paid_by_ael')
+  final int? amountCompensation;
+  @override
   @JsonKey(name: 'action_takenrecommendation')
   final String? desc3;
   @override
-  @JsonKey(name: 'photo')
+  @JsonKey(name: 'photographs_of_incident')
   final String? photo;
   @override
   @JsonKey(
@@ -494,7 +515,7 @@ class _$IncidentRegisterFormImpl implements _IncidentRegisterForm {
 
   @override
   String toString() {
-    return 'IncidentRegisterForm(name: $name, owner: $owner, date: $date, time: $time, modifiedDate: $modifiedDate, docStatus: $docStatus, incidentInvestigator: $incidentInvestigator, incidentPlantName: $incidentPlantName, incidentType: $incidentType, associatedInvol: $associatedInvol, assetsInvolve: $assetsInvolve, amount: $amount, complaint: $complaint, employeeEmail: $employeeEmail, remarks: $remarks, otherPartyDetails: $otherPartyDetails, desc1: $desc1, desc2: $desc2, desc3: $desc3, photo: $photo, incPhotoImg: $incPhotoImg)';
+    return 'IncidentRegisterForm(name: $name, owner: $owner, date: $date, time: $time, modifiedDate: $modifiedDate, docStatus: $docStatus, incidentInvestigator: $incidentInvestigator, incidentPlantName: $incidentPlantName, incidentType: $incidentType, associatedInvol: $associatedInvol, assetsInvolve: $assetsInvolve, amount: $amount, complaint: $complaint, remarks: $remarks, notifyEmployeeEmail: $notifyEmployeeEmail, otherPartyDetails: $otherPartyDetails, desc1: $desc1, desc2: $desc2, amountCompensation: $amountCompensation, desc3: $desc3, photo: $photo, incPhotoImg: $incPhotoImg)';
   }
 
   @override
@@ -523,13 +544,15 @@ class _$IncidentRegisterFormImpl implements _IncidentRegisterForm {
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.complaint, complaint) ||
                 other.complaint == complaint) &&
-            (identical(other.employeeEmail, employeeEmail) ||
-                other.employeeEmail == employeeEmail) &&
             (identical(other.remarks, remarks) || other.remarks == remarks) &&
+            (identical(other.notifyEmployeeEmail, notifyEmployeeEmail) ||
+                other.notifyEmployeeEmail == notifyEmployeeEmail) &&
             (identical(other.otherPartyDetails, otherPartyDetails) ||
                 other.otherPartyDetails == otherPartyDetails) &&
             (identical(other.desc1, desc1) || other.desc1 == desc1) &&
             (identical(other.desc2, desc2) || other.desc2 == desc2) &&
+            (identical(other.amountCompensation, amountCompensation) ||
+                other.amountCompensation == amountCompensation) &&
             (identical(other.desc3, desc3) || other.desc3 == desc3) &&
             (identical(other.photo, photo) || other.photo == photo) &&
             (identical(other.incPhotoImg, incPhotoImg) ||
@@ -553,11 +576,12 @@ class _$IncidentRegisterFormImpl implements _IncidentRegisterForm {
         assetsInvolve,
         amount,
         complaint,
-        employeeEmail,
         remarks,
+        notifyEmployeeEmail,
         otherPartyDetails,
         desc1,
         desc2,
+        amountCompensation,
         desc3,
         photo,
         incPhotoImg
@@ -587,7 +611,7 @@ abstract class _IncidentRegisterForm implements IncidentRegisterForm {
       final String? time,
       @JsonKey(name: 'modified') final String? modifiedDate,
       @JsonKey(name: 'docstatus') final int? docStatus,
-      @JsonKey(name: 'incident_investigator_rsm_name_')
+      @JsonKey(name: 'incident_investigator__rsm_name_')
       final String? incidentInvestigator,
       @JsonKey(name: 'incident_plant_name', defaultValue: '')
       final String? incidentPlantName,
@@ -595,14 +619,16 @@ abstract class _IncidentRegisterForm implements IncidentRegisterForm {
       @JsonKey(name: 'ael_associated_involved') final String? associatedInvol,
       @JsonKey(name: 'ael_assets_involved') final String? assetsInvolve,
       @JsonKey(name: 'amount') final int? amount,
-      @JsonKey(name: 'fir_complaint') final String? complaint,
-      @JsonKey(name: 'notify_employee') final String? employeeEmail,
+      @JsonKey(name: 'fir__complaint') final String? complaint,
       @JsonKey(name: 'remarks') final String? remarks,
+      @JsonKey(name: 'notify_employee_email') final String? notifyEmployeeEmail,
       @JsonKey(name: 'details_of_other_party') final String? otherPartyDetails,
       @JsonKey(name: 'incident_description_1') final String? desc1,
       @JsonKey(name: 'incident_description') final String? desc2,
+      @JsonKey(name: 'amount_of_compensation_paid_by_ael')
+      final int? amountCompensation,
       @JsonKey(name: 'action_takenrecommendation') final String? desc3,
-      @JsonKey(name: 'photo') final String? photo,
+      @JsonKey(name: 'photographs_of_incident') final String? photo,
       @JsonKey(
           includeFromJson: true,
           includeToJson: false,
@@ -628,7 +654,7 @@ abstract class _IncidentRegisterForm implements IncidentRegisterForm {
   @JsonKey(name: 'docstatus')
   int? get docStatus;
   @override
-  @JsonKey(name: 'incident_investigator_rsm_name_')
+  @JsonKey(name: 'incident_investigator__rsm_name_')
   String? get incidentInvestigator;
   @override
   @JsonKey(name: 'incident_plant_name', defaultValue: '')
@@ -646,14 +672,14 @@ abstract class _IncidentRegisterForm implements IncidentRegisterForm {
   @JsonKey(name: 'amount')
   int? get amount;
   @override
-  @JsonKey(name: 'fir_complaint')
+  @JsonKey(name: 'fir__complaint')
   String? get complaint;
-  @override
-  @JsonKey(name: 'notify_employee')
-  String? get employeeEmail;
   @override
   @JsonKey(name: 'remarks')
   String? get remarks;
+  @override
+  @JsonKey(name: 'notify_employee_email')
+  String? get notifyEmployeeEmail;
   @override
   @JsonKey(name: 'details_of_other_party')
   String? get otherPartyDetails;
@@ -664,10 +690,13 @@ abstract class _IncidentRegisterForm implements IncidentRegisterForm {
   @JsonKey(name: 'incident_description')
   String? get desc2;
   @override
+  @JsonKey(name: 'amount_of_compensation_paid_by_ael')
+  int? get amountCompensation;
+  @override
   @JsonKey(name: 'action_takenrecommendation')
   String? get desc3;
   @override
-  @JsonKey(name: 'photo')
+  @JsonKey(name: 'photographs_of_incident')
   String? get photo;
   @override
   @JsonKey(

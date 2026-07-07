@@ -87,15 +87,14 @@ class AppHomePage extends StatelessWidget {
               onTap: () => AppRoute.baggingDispatch.push(context),
             ),
             AppFeatureWidget(
-                icon: AppIcons.incidentRegistration
-                    .toWidget(height: 100, width: 120, fit: BoxFit.contain),
-                title: FittedBox(
-                  child: Text('Incident Register',
-                      style: AppTextStyles.featureLabelStyle(context)),
-                ),
-                featureColor: const Color(0xFFC0C0C0),
-                onTap: () => AppRoute.incidentRegister.push(context),
+                icon: AppIcons.createVisit.toWidget(height: 100, width: 120, fit: BoxFit.contain),
+                title: Text('Create Visit',
+                    style: AppTextStyles.featureLabelStyle(context)),
+                featureColor: AppColors.createVisit,
+                // onTap: (){},
+                onTap: () => AppRoute.createVisit.push(context),
               ),
+          
             AppFeatureWidget(
                 icon: AppIcons.inviteVisitor.toWidget(height: 100, width: 120,fit : BoxFit.contain),
                 title: Text('Invite Visitor',
@@ -111,14 +110,17 @@ class AppHomePage extends StatelessWidget {
                 featureColor: AppColors.visitorINOUT,
                 onTap: () => AppRoute.visitorInOut.push(context),
               ),
-              AppFeatureWidget(
-                icon: AppIcons.createVisit.toWidget(height: 100, width: 120, fit: BoxFit.contain),
-                title: Text('Create Visit',
-                    style: AppTextStyles.featureLabelStyle(context)),
-                featureColor: AppColors.createVisit,
-                // onTap: (){},
-                onTap: () => AppRoute.createVisit.push(context),
+                AppFeatureWidget(
+                icon: AppIcons.incidentRegistration
+                    .toWidget(height: 100, width: 120, fit: BoxFit.contain),
+                title: FittedBox(
+                  child: Text('Incident Register',
+                      style: AppTextStyles.featureLabelStyle(context)),
+                ),
+                featureColor: const Color(0xFFC0C0C0),
+                onTap: () => AppRoute.incidentRegister.push(context),
               ),
+              
           ],
         ),
       ),

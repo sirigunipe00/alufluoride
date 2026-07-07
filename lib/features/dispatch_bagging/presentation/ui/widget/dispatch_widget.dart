@@ -29,8 +29,8 @@ class DispatchWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
               side: const BorderSide(color: AppColors.registration, width: 2)),
           child: SpacedColumn(
-            defaultHeight: 4,
-            margin: const EdgeInsets.all(12),
+            defaultHeight: 2,
+            margin: const EdgeInsets.all(10),
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
@@ -52,7 +52,7 @@ class DispatchWidget extends StatelessWidget {
                 
                 ],
               ),
-              AppSpacer.p8(),
+              AppSpacer.p4(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

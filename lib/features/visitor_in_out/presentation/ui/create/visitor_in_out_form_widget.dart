@@ -103,7 +103,7 @@ class _VisitorInOutFormWidgetState extends State<VisitorInOutFormWidget> {
           ),
           InputField(
             title: 'Whom to Meet',
-            isRequired: false,
+            isRequired: true,
             readOnly: true,
             initialValue: form.whomToMeet,
             borderColor: AppColors.visitorINOUT,

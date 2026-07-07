@@ -40,8 +40,8 @@ class GateExitWidget extends StatelessWidget {
               ),
             ),
             SpacedColumn(
-              defaultHeight: 4,
-              margin: const EdgeInsets.all(12),
+              defaultHeight: 1,
+              margin: const EdgeInsets.all(10),
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
@@ -52,7 +52,7 @@ class GateExitWidget extends StatelessWidget {
                   ],
                 ),
                 Text(gateExit.salesInvNo, style: AppTextStyles.titleLarge(context).copyWith(color: AppColors.black)),
-                AppSpacer.p8(),
+                AppSpacer.p4(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

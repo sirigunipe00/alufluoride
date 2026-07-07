@@ -77,7 +77,7 @@ class _TimeSelectionFieldState extends State<TimeSelectionField> {
                 BoxShadow(
                   color: widget.borderColor ?? AppColors.white,
                   blurRadius: 0.8,
-                  offset: const Offset(4, 4),
+                  offset: const Offset(2, 2),
                 ),
               ],
               borderRadius: BorderRadius.circular(16.0),

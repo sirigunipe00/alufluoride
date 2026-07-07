@@ -23,9 +23,7 @@ abstract class AppColors {
   static const logoColor = Color(0xFF255899);
   static const incident = Color(0xFF808080);
   static const baggingEntry = Color(0xFF66CFCF); 
-  static const createVisit = Color(0xFFFFA278);
-  static const visitorINOUT = Color(0xFFFF7C9D);
-  static const invite = Color(0xFFFFC46D);        
-          
-
+  static const createVisit = Color.fromARGB(255, 242, 170, 136);
+  static const visitorINOUT = Color.fromARGB(255, 247, 152, 176);
+  static const invite = Color.fromARGB(255, 250, 206, 140);        
 }

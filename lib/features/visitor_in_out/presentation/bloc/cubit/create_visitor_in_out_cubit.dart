@@ -120,7 +120,7 @@ class CreateVisitorInOutCubit extends AppBaseCubit<CreateVisitorInOutState> {
     return res.fold(
       (l) {
         emitSafeState(state.copyWith(isLoading: false, error: l,));
-        return optionOf(l.error); // or l.toString()
+        return optionOf(l.error); 
       },
       (r) {
         shouldAskForConfirmation.value = false;

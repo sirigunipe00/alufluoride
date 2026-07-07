@@ -125,7 +125,8 @@ class AppPageView2<T extends PageViewFiltersCubit> extends StatelessWidget {
                     flex: 1,
                     child: StatusMenuWidget(
                       defaultSel: context.read<T>().state.status,
-                      items: const ['Draft', 'Submitted', 'All'],
+                      items: mode == PageMode2.createVisit ?  ['Draft','Submitted','Pending', 'Approved', 'Rejected'] :
+                      const  ['Draft','Submitted','All'],
                       onChange: context.cubit<T>().onChangeStatus,
                     ),
                   )

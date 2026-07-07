@@ -191,12 +191,12 @@ class _IncidentRegisterFrmWidgetState extends State<IncidentRegisterFrmWidget> {
             InputField(
               readOnly: isCompleted,
               isRequired: true,
-              initialValue: NumUtils.toDoubleStr(newform.amount),
+              initialValue: newform.amountCompensation?.toString(),
               inputType: TextInputType.number,
               onChanged: (p0) {
                 context
                     .cubit<CreateIncidentRegisterCubit>()
-                    .onValueChanged(amount: int.tryParse(p0));
+                    .onValueChanged(amountCompensation: int.tryParse(p0));
               },
               title: 'Amount of Compensation Paid by AEL',
               focusNode: focusNodes.elementAt(7),
@@ -220,7 +220,7 @@ class _IncidentRegisterFrmWidgetState extends State<IncidentRegisterFrmWidget> {
             InputField(
               isRequired: true,
               readOnly: isCompleted,
-              initialValue: newform.employeeEmail,
+              initialValue: newform.notifyEmployeeEmail,
               inputType: TextInputType.emailAddress,
               onChanged: (p0) {
                 context

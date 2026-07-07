@@ -29,8 +29,8 @@ class InviteVisitorWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
               side: const BorderSide(color: AppColors.invite, width: 2)),
           child: SpacedColumn(
-            defaultHeight: 4,
-            margin: const EdgeInsets.all(12),
+            defaultHeight: 1,
+            margin: const EdgeInsets.all(10),
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
@@ -45,7 +45,7 @@ class InviteVisitorWidget extends StatelessWidget {
                 ],
               ),
                       
-              AppSpacer.p8(),
+              AppSpacer.p4(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

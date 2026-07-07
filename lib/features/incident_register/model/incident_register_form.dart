@@ -14,7 +14,7 @@ class IncidentRegisterForm with _$IncidentRegisterForm {
     String? time,
     @JsonKey(name: 'modified') String? modifiedDate,
     @JsonKey(name: 'docstatus') int? docStatus,
-    @JsonKey(name: 'incident_investigator_rsm_name_')
+    @JsonKey(name: 'incident_investigator__rsm_name_')
     String? incidentInvestigator,
     @JsonKey(name: 'incident_plant_name', defaultValue: '')
     String? incidentPlantName,
@@ -22,14 +22,15 @@ class IncidentRegisterForm with _$IncidentRegisterForm {
     @JsonKey(name: 'ael_associated_involved') String? associatedInvol,
     @JsonKey(name: 'ael_assets_involved') String? assetsInvolve,
     @JsonKey(name: 'amount') int? amount,
-    @JsonKey(name: 'fir_complaint') String? complaint,
-    @JsonKey(name: 'notify_employee') String? employeeEmail,
+    @JsonKey(name: 'fir__complaint') String? complaint,
     @JsonKey(name: 'remarks') String? remarks,
+    @JsonKey(name: 'notify_employee_email') String? notifyEmployeeEmail,
     @JsonKey(name: 'details_of_other_party') String? otherPartyDetails,
     @JsonKey(name: 'incident_description_1') String? desc1,
     @JsonKey(name: 'incident_description') String? desc2,
+    @JsonKey(name: 'amount_of_compensation_paid_by_ael') int? amountCompensation,
     @JsonKey(name: 'action_takenrecommendation') String? desc3,
-    @JsonKey(name: 'photo') String? photo,
+    @JsonKey(name: 'photographs_of_incident') String? photo,
     @JsonKey(
       includeFromJson: true,
       includeToJson: false,

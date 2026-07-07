@@ -43,7 +43,6 @@ class InviteVisitorRepoImpl extends BaseApiRepository
     );
     final response = await get(requestConfig);
     $logger.devLog('Fetching Invite Visitor List: $requestConfig');
-    $logger.devLog('Response: ${response}');
     return response.process((r) => right(r.data!));
   }
 

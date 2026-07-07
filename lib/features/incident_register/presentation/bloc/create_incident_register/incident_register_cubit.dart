@@ -45,6 +45,7 @@ class CreateIncidentRegisterCubit
     String? descr3,
     File? incPhoto,
     String? remarks,
+    int? amountCompensation,
   }) {
     shouldAskForConfirmation.value = true;
     final form = state.form;
@@ -63,11 +64,12 @@ class CreateIncidentRegisterCubit
       incPhotoImg: incidentPhoto,
       time: time ?? form.time,
       remarks: remarks ?? form.remarks,
-      employeeEmail: employeeEmail ?? form.employeeEmail,
+      notifyEmployeeEmail: employeeEmail ?? form.notifyEmployeeEmail,
       incidentInvestigator: incIvestigator ?? form.incidentInvestigator,
       incidentPlantName: incPlantName ?? form.incidentPlantName,
       incidentType: incidentType ?? form.incidentType,
       otherPartyDetails: partyDetails ?? form.otherPartyDetails,
+      amountCompensation: amountCompensation ?? form.amountCompensation,
     );
     emitSafeState(state.copyWith(form: newForm));
   }
@@ -79,6 +81,29 @@ class CreateIncidentRegisterCubit
       final formattedStr = DFU.friendlyFormat(parsedDate);
 
       final status = entry.docStatus;
+       final form = state.form;
+      final updatedForm = form.copyWith(
+        name: entry.name,
+        date: formattedStr,
+        time: entry.time,
+        incidentInvestigator: entry.incidentInvestigator,
+        incidentPlantName: entry.incidentPlantName,
+        incidentType: entry.incidentType,
+        associatedInvol: entry.associatedInvol,
+        assetsInvolve: entry.assetsInvolve,
+        amount: entry.amount,
+        complaint: entry.complaint,
+        notifyEmployeeEmail: entry.notifyEmployeeEmail,
+        remarks: entry.remarks,
+        otherPartyDetails: entry.otherPartyDetails,
+        desc1: entry.desc1,
+        desc2: entry.desc2,
+        desc3: entry.desc3,
+        incPhotoImg: entry.incPhotoImg,
+        photo: entry.photo,
+        amountCompensation: entry.amountCompensation,
+
+      );
 
       final isSubmitted = StringUtils.equalsIgnoreCase(
           StringUtils.docStatus(status!), 'Submitted');
@@ -88,7 +113,7 @@ class CreateIncidentRegisterCubit
           ? IncidentRegisterView.completed
           : IncidentRegisterView.edit;
       emitSafeState(state.copyWith(
-        form: entry.copyWith(date: formattedStr),
+        form:  updatedForm,
         view: mode,
       ));
     }
@@ -171,11 +196,11 @@ class CreateIncidentRegisterCubit
       return optionOf(const Pair('Select AEL Associated Involved', 5));
     } else if (form.assetsInvolve.isNull) {
       return optionOf(const Pair('Select AEL Assets Involved', 6));
-    } else if (form.amount.isNull) {
+    } else if (form.amountCompensation.isNull) {
       return optionOf(const Pair('Enter Amount.', 7));
     } else if (form.complaint.isNull) {
       return optionOf(const Pair('Select FIR - Complaint', 8));
-    } else if (form.employeeEmail.isNull) {
+    } else if (form.notifyEmployeeEmail.isNull) {
       return optionOf(const Pair('Enter Notify Employee Email', 9));
     } else if (form.incPhotoImg == null && form.photo == null) {
       return optionOf(const Pair('Attach Photographs of Incident', 10));

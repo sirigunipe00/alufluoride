@@ -45,13 +45,14 @@ class IncidentRegistersRepoImpl extends BaseApiRepository
       headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     );
     final response = await get(requestConfig);
+    $logger.devLog('response $response');
     return response.process((r) => right(r.data!));
   }
 
   @override
   AsyncValueOf<Pair<String, String>> createIncentRegister(IncidentRegisterForm form) async {
     return await executeSafely(() async {
-         final files = {'photo': form.incPhotoImg};
+         final files = {'photographs_of_incident': form.incPhotoImg};
     files.removeWhere((key, value) => value == null);
     final responseurlMap = <String, dynamic>{};
     final fileUrlRes = await _uploadfiles(files.values.nonNulls.toList());
@@ -77,6 +78,7 @@ class IncidentRegistersRepoImpl extends BaseApiRepository
 
 
     final response = await post(requestConfig);
+    $logger.devLog('response $requestConfig');
     return response.process((r) => right(Pair(r.data!.first, r.data!.second)));
     });
   }
@@ -95,9 +97,7 @@ class IncidentRegistersRepoImpl extends BaseApiRepository
       final response = await post(config);
       return response.process((r) {
         return right(r.data!);
-
-    }
-    );
+        });
     });
   }
 

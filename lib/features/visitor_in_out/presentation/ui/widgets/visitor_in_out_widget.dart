@@ -29,8 +29,8 @@ class VisitorInOutWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
               side: const BorderSide(color: AppColors.visitorINOUT, width: 2)),
           child: SpacedColumn(
-            defaultHeight: 4,
-            margin: const EdgeInsets.all(12),
+            defaultHeight: 1,
+            margin: const EdgeInsets.all(10),
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row( 
@@ -47,7 +47,7 @@ class VisitorInOutWidget extends StatelessWidget {
               ),
               Text(visitorInOut.visitorName.valueOrEmpty,style: AppTextStyles.titleLarge(context)
                           .copyWith(color: AppColors.black)),
-              AppSpacer.p8(),
+              AppSpacer.p4(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

@@ -102,12 +102,14 @@ class _BaggingEntryFormWidgetState extends State<BaggingEntryFormWidget> {
       palletWeight = double.tryParse(scannedWeight);
 
       if (palletWeight == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Invalid Pallet QR"),
-          ),
-        );
-        return;
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Invalid Pallet QR"),
+            ),
+          );
+          return;
+        }
       }
       final proceed = await showDialog<bool>(
         context: context,
@@ -146,7 +148,7 @@ class _BaggingEntryFormWidgetState extends State<BaggingEntryFormWidget> {
         imageQuality: 80,
       );
 
-      if (photo != null && mounted) {
+      if (photo != null && context.mounted) {
         context.read<WeightmentCubit>().extractWeight(
               File(photo.path),
             );

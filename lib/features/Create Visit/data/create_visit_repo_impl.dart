@@ -115,6 +115,7 @@ class CreateVisitRepoImpl extends BaseApiRepository implements CreateVisitRepo {
         reqParams: {'file': files},
       );
       final response = await multiPart(config);
+      $logger.devLog('config: $config');
       return response.process((r) => right(r.data!));
     });
   }
@@ -171,7 +172,7 @@ class CreateVisitRepoImpl extends BaseApiRepository implements CreateVisitRepo {
       return right(const None());
     });
   }
-    @override
+  @override
   AsyncValueOf<bool> userPermission(String name) async {
     final requestConfig = RequestConfig(
       url: Urls.userPermission,
