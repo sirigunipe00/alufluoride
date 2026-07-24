@@ -22,6 +22,10 @@ WeightmentResult _$WeightmentResultFromJson(Map<String, dynamic> json) {
 mixin _$WeightmentResult {
   @JsonKey(name: 'weight')
   String? get weight => throw _privateConstructorUsedError;
+  @JsonKey(name: 'rejection_reason')
+  String? get rejectReason => throw _privateConstructorUsedError;
+  @JsonKey(name: 'message')
+  String? get message => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +39,10 @@ abstract class $WeightmentResultCopyWith<$Res> {
           WeightmentResult value, $Res Function(WeightmentResult) then) =
       _$WeightmentResultCopyWithImpl<$Res, WeightmentResult>;
   @useResult
-  $Res call({@JsonKey(name: 'weight') String? weight});
+  $Res call(
+      {@JsonKey(name: 'weight') String? weight,
+      @JsonKey(name: 'rejection_reason') String? rejectReason,
+      @JsonKey(name: 'message') String? message});
 }
 
 /// @nodoc
@@ -52,11 +59,21 @@ class _$WeightmentResultCopyWithImpl<$Res, $Val extends WeightmentResult>
   @override
   $Res call({
     Object? weight = freezed,
+    Object? rejectReason = freezed,
+    Object? message = freezed,
   }) {
     return _then(_value.copyWith(
       weight: freezed == weight
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
+              as String?,
+      rejectReason: freezed == rejectReason
+          ? _value.rejectReason
+          : rejectReason // ignore: cast_nullable_to_non_nullable
+              as String?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -70,7 +87,10 @@ abstract class _$$WeightmentResultImplCopyWith<$Res>
       __$$WeightmentResultImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'weight') String? weight});
+  $Res call(
+      {@JsonKey(name: 'weight') String? weight,
+      @JsonKey(name: 'rejection_reason') String? rejectReason,
+      @JsonKey(name: 'message') String? message});
 }
 
 /// @nodoc
@@ -85,11 +105,21 @@ class __$$WeightmentResultImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? weight = freezed,
+    Object? rejectReason = freezed,
+    Object? message = freezed,
   }) {
     return _then(_$WeightmentResultImpl(
       weight: freezed == weight
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
+              as String?,
+      rejectReason: freezed == rejectReason
+          ? _value.rejectReason
+          : rejectReason // ignore: cast_nullable_to_non_nullable
+              as String?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -98,7 +128,10 @@ class __$$WeightmentResultImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$WeightmentResultImpl implements _WeightmentResult {
-  const _$WeightmentResultImpl({@JsonKey(name: 'weight') this.weight});
+  const _$WeightmentResultImpl(
+      {@JsonKey(name: 'weight') this.weight,
+      @JsonKey(name: 'rejection_reason') this.rejectReason,
+      @JsonKey(name: 'message') this.message});
 
   factory _$WeightmentResultImpl.fromJson(Map<String, dynamic> json) =>
       _$$WeightmentResultImplFromJson(json);
@@ -106,10 +139,16 @@ class _$WeightmentResultImpl implements _WeightmentResult {
   @override
   @JsonKey(name: 'weight')
   final String? weight;
+  @override
+  @JsonKey(name: 'rejection_reason')
+  final String? rejectReason;
+  @override
+  @JsonKey(name: 'message')
+  final String? message;
 
   @override
   String toString() {
-    return 'WeightmentResult(weight: $weight)';
+    return 'WeightmentResult(weight: $weight, rejectReason: $rejectReason, message: $message)';
   }
 
   @override
@@ -117,12 +156,15 @@ class _$WeightmentResultImpl implements _WeightmentResult {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WeightmentResultImpl &&
-            (identical(other.weight, weight) || other.weight == weight));
+            (identical(other.weight, weight) || other.weight == weight) &&
+            (identical(other.rejectReason, rejectReason) ||
+                other.rejectReason == rejectReason) &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, weight);
+  int get hashCode => Object.hash(runtimeType, weight, rejectReason, message);
 
   @JsonKey(ignore: true)
   @override
@@ -141,7 +183,10 @@ class _$WeightmentResultImpl implements _WeightmentResult {
 
 abstract class _WeightmentResult implements WeightmentResult {
   const factory _WeightmentResult(
-      {@JsonKey(name: 'weight') final String? weight}) = _$WeightmentResultImpl;
+          {@JsonKey(name: 'weight') final String? weight,
+          @JsonKey(name: 'rejection_reason') final String? rejectReason,
+          @JsonKey(name: 'message') final String? message}) =
+      _$WeightmentResultImpl;
 
   factory _WeightmentResult.fromJson(Map<String, dynamic> json) =
       _$WeightmentResultImpl.fromJson;
@@ -149,6 +194,12 @@ abstract class _WeightmentResult implements WeightmentResult {
   @override
   @JsonKey(name: 'weight')
   String? get weight;
+  @override
+  @JsonKey(name: 'rejection_reason')
+  String? get rejectReason;
+  @override
+  @JsonKey(name: 'message')
+  String? get message;
   @override
   @JsonKey(ignore: true)
   _$$WeightmentResultImplCopyWith<_$WeightmentResultImpl> get copyWith =>

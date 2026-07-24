@@ -13,5 +13,6 @@ abstract interface class BaggingEntryRepo {
   AsyncValueOf<Pair<String, String>> createBaggingEntry(List<ItemModel> form, String name);
   AsyncValueOf<String> submitBaggingEntry(String id);
   AsyncValueOf<List<ItemModel>> fetchItems(String parent);
-  AsyncValueOf<WeightmentResult> getweightmentResult(String imagePath);
+  AsyncValueOf<WeightmentResult> getweightmentResult(
+    String base64Image,);
 }

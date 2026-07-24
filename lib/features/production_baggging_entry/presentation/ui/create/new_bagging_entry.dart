@@ -3,6 +3,7 @@ import 'package:alufluoride/features/gate_entry/presentation/bloc/bloc_provider.
 import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/bagging_entry_filter.dart';
 import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/blocprovider.dart';
 import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/create_bagging_entry_cubit/create_bagging_entry_cubit.dart';
+import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/create_weightment_cubit/create_weightment_cubit.dart';
 import 'package:alufluoride/features/production_baggging_entry/presentation/ui/create/bagging_entry_form_widget.dart';
 import 'package:alufluoride/styles/app_colors.dart';
 
@@ -24,11 +25,13 @@ class _NewBaggingEntryState extends State<NewBaggingEntry> {
   @override
   Widget build(BuildContext context) {
     final gateEntryState = context.read<CreateBaggingEntryCubit>().state;
+    final weightState = context.read<WeightmentCubit>().state;
     final newform = gateEntryState.form;
     final status = newform.docstatus;
     final name = newform.name;
 
     final isNew = gateEntryState.view == BaggingEntryView.create;
+    final isBusy = gateEntryState.isLoading || weightState.isExtracting;
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -39,6 +42,7 @@ class _NewBaggingEntryState extends State<NewBaggingEntry> {
               docNo: name.valueOrEmpty,
               status: StringUtils.docStatus(status ?? 0),
               textColor: AppColors.invite,
+              busy: isBusy,
             ) as PreferredSizeWidget,
       body: BlocListener<CreateBaggingEntryCubit, CreateBaggingEntryState>(
         listener: (_, state) async {

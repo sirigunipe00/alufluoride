@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:alufluoride/features/gate_entry/model/gate_entry_form.dart';
@@ -22,8 +23,18 @@ class ItemModel with _$ItemModel {
     @JsonKey(name: 'bag_no') String? bagNo,
     @JsonKey(name: 'pallet_weight') double? palletWeight,
     @JsonKey(name: 'qty') double? qty,
+    @JsonKey(name: 'actual_bag_weight') double? actualBagWeight,
     @JsonKey(name: 'serial_no') String? serialNo,
     @JsonKey(name: 'sticker_printed') int? stickerPrinted,
+    @JsonKey(name: 'weight_of_pallet_and_bag') double? weightOfPalletandBag,
+    @JsonKey(name: 'empty_pallet_and_bag_photo') String? emptyPalletImage,
+    @JsonKey(
+      includeFromJson: true,
+      includeToJson: false,
+      toJson: toNull,
+      fromJson: toNull,
+    )
+    File? emptyWeightFile,
     @JsonKey(name: 'weighing_scale') String? weighingScale,
     @JsonKey(
       includeFromJson: true,

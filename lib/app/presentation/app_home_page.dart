@@ -110,16 +110,16 @@ class AppHomePage extends StatelessWidget {
                 featureColor: AppColors.visitorINOUT,
                 onTap: () => AppRoute.visitorInOut.push(context),
               ),
-                AppFeatureWidget(
-                icon: AppIcons.incidentRegistration
-                    .toWidget(height: 100, width: 120, fit: BoxFit.contain),
-                title: FittedBox(
-                  child: Text('Incident Register',
-                      style: AppTextStyles.featureLabelStyle(context)),
-                ),
-                featureColor: const Color(0xFFC0C0C0),
-                onTap: () => AppRoute.incidentRegister.push(context),
-              ),
+              //   AppFeatureWidget(
+              //   icon: AppIcons.incidentRegistration
+              //       .toWidget(height: 100, width: 120, fit: BoxFit.contain),
+              //   title: FittedBox(
+              //     child: Text('Incident Register',
+              //         style: AppTextStyles.featureLabelStyle(context)),
+              //   ),
+              //   featureColor: const Color(0xFFC0C0C0),
+              //   onTap: () => AppRoute.incidentRegister.push(context),
+              // ),
               
           ],
         ),

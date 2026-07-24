@@ -16,12 +16,14 @@ class TitleStatusAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.status,
     required this.textColor,
     this.alignment = DocNoAlignment.horizontal,
+    this.busy = false,
   });
 
   final String title;
   final String docNo;
   final String status;
   final Color textColor;
+  final bool busy;   
   final DocNoAlignment alignment;
 
   @override
@@ -58,7 +60,7 @@ class TitleStatusAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       automaticallyImplyLeading: false,
       leading: IconButton(
-        onPressed: context.close,
+        onPressed: busy? null : context.close,
         icon: const CircleAvatar(
           radius: 14,
           backgroundColor: AppColors.chimneySweep,

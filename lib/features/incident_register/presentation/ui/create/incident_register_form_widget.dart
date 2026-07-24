@@ -164,7 +164,7 @@ class _IncidentRegisterFrmWidgetState extends State<IncidentRegisterFrmWidget> {
               isMandatory: true,
               defaultSelection: newform.associatedInvol,
               readOnly: isCompleted,
-              title: 'AEL Associated Involved',
+              title: 'ALF Associated Involved',
               items: const ['Yes', 'No'],
               onSelected: (item) {
                 context
@@ -177,7 +177,7 @@ class _IncidentRegisterFrmWidgetState extends State<IncidentRegisterFrmWidget> {
             AppDropDownWidget(
               isMandatory: true,
               defaultSelection: newform.assetsInvolve,
-              title: 'AEL Assets Involved',
+              title: 'ALF Assets Involved',
               readOnly: isCompleted,
               items: const ['Yes', 'No'],
               onSelected: (item) {
@@ -198,7 +198,7 @@ class _IncidentRegisterFrmWidgetState extends State<IncidentRegisterFrmWidget> {
                     .cubit<CreateIncidentRegisterCubit>()
                     .onValueChanged(amountCompensation: int.tryParse(p0));
               },
-              title: 'Amount of Compensation Paid by AEL',
+              title: 'Amount of Compensation Paid by ALF',
               focusNode: focusNodes.elementAt(7),
               borderColor: AppColors.incident,
             ),

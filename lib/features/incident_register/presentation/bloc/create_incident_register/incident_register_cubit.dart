@@ -193,9 +193,9 @@ class CreateIncidentRegisterCubit
     } else if (form.incidentType.isNull) {
       return optionOf(const Pair('Select Type of Incident', 4));
     } else if (form.associatedInvol.isNull) {
-      return optionOf(const Pair('Select AEL Associated Involved', 5));
+      return optionOf(const Pair('Select ALF Associated Involved', 5));
     } else if (form.assetsInvolve.isNull) {
-      return optionOf(const Pair('Select AEL Assets Involved', 6));
+      return optionOf(const Pair('Select ALF Assets Involved', 6));
     } else if (form.amountCompensation.isNull) {
       return optionOf(const Pair('Enter Amount.', 7));
     } else if (form.complaint.isNull) {

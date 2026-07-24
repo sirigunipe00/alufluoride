@@ -37,6 +37,7 @@ _$CreateVisitFormImpl _$$CreateVisitFormImplFromJson(
       otherDetails: json['other_devices_details'] as String?,
       workflowState: json['workflow_state'] as String?,
       customer: json['customer'] as String?,
+      purposeVisit: json['purpose_of_visit'] as String?,
       facePhoto: json['face_photo'] as String?,
       idPhoto: json['photo_id_proof'] as String?,
     );
@@ -72,6 +73,7 @@ Map<String, dynamic> _$$CreateVisitFormImplToJson(
       'other_devices_details': instance.otherDetails,
       'workflow_state': instance.workflowState,
       'customer': instance.customer,
+      'purpose_of_visit': instance.purposeVisit,
       'face_photo': instance.facePhoto,
       'photo_id_proof': instance.idPhoto,
     };

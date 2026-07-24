@@ -46,10 +46,22 @@ mixin _$ItemModel {
   double? get palletWeight => throw _privateConstructorUsedError;
   @JsonKey(name: 'qty')
   double? get qty => throw _privateConstructorUsedError;
+  @JsonKey(name: 'actual_bag_weight')
+  double? get actualBagWeight => throw _privateConstructorUsedError;
   @JsonKey(name: 'serial_no')
   String? get serialNo => throw _privateConstructorUsedError;
   @JsonKey(name: 'sticker_printed')
   int? get stickerPrinted => throw _privateConstructorUsedError;
+  @JsonKey(name: 'weight_of_pallet_and_bag')
+  double? get weightOfPalletandBag => throw _privateConstructorUsedError;
+  @JsonKey(name: 'empty_pallet_and_bag_photo')
+  String? get emptyPalletImage => throw _privateConstructorUsedError;
+  @JsonKey(
+      includeFromJson: true,
+      includeToJson: false,
+      toJson: toNull,
+      fromJson: toNull)
+  File? get emptyWeightFile => throw _privateConstructorUsedError;
   @JsonKey(name: 'weighing_scale')
   String? get weighingScale => throw _privateConstructorUsedError;
   @JsonKey(
@@ -84,8 +96,17 @@ abstract class $ItemModelCopyWith<$Res> {
       @JsonKey(name: 'bag_no') String? bagNo,
       @JsonKey(name: 'pallet_weight') double? palletWeight,
       @JsonKey(name: 'qty') double? qty,
+      @JsonKey(name: 'actual_bag_weight') double? actualBagWeight,
       @JsonKey(name: 'serial_no') String? serialNo,
       @JsonKey(name: 'sticker_printed') int? stickerPrinted,
+      @JsonKey(name: 'weight_of_pallet_and_bag') double? weightOfPalletandBag,
+      @JsonKey(name: 'empty_pallet_and_bag_photo') String? emptyPalletImage,
+      @JsonKey(
+          includeFromJson: true,
+          includeToJson: false,
+          toJson: toNull,
+          fromJson: toNull)
+      File? emptyWeightFile,
       @JsonKey(name: 'weighing_scale') String? weighingScale,
       @JsonKey(
           includeFromJson: true,
@@ -121,8 +142,12 @@ class _$ItemModelCopyWithImpl<$Res, $Val extends ItemModel>
     Object? bagNo = freezed,
     Object? palletWeight = freezed,
     Object? qty = freezed,
+    Object? actualBagWeight = freezed,
     Object? serialNo = freezed,
     Object? stickerPrinted = freezed,
+    Object? weightOfPalletandBag = freezed,
+    Object? emptyPalletImage = freezed,
+    Object? emptyWeightFile = freezed,
     Object? weighingScale = freezed,
     Object? imageFile = freezed,
   }) {
@@ -179,6 +204,10 @@ class _$ItemModelCopyWithImpl<$Res, $Val extends ItemModel>
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as double?,
+      actualBagWeight: freezed == actualBagWeight
+          ? _value.actualBagWeight
+          : actualBagWeight // ignore: cast_nullable_to_non_nullable
+              as double?,
       serialNo: freezed == serialNo
           ? _value.serialNo
           : serialNo // ignore: cast_nullable_to_non_nullable
@@ -187,6 +216,18 @@ class _$ItemModelCopyWithImpl<$Res, $Val extends ItemModel>
           ? _value.stickerPrinted
           : stickerPrinted // ignore: cast_nullable_to_non_nullable
               as int?,
+      weightOfPalletandBag: freezed == weightOfPalletandBag
+          ? _value.weightOfPalletandBag
+          : weightOfPalletandBag // ignore: cast_nullable_to_non_nullable
+              as double?,
+      emptyPalletImage: freezed == emptyPalletImage
+          ? _value.emptyPalletImage
+          : emptyPalletImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emptyWeightFile: freezed == emptyWeightFile
+          ? _value.emptyWeightFile
+          : emptyWeightFile // ignore: cast_nullable_to_non_nullable
+              as File?,
       weighingScale: freezed == weighingScale
           ? _value.weighingScale
           : weighingScale // ignore: cast_nullable_to_non_nullable
@@ -221,8 +262,17 @@ abstract class _$$ItemModelImplCopyWith<$Res>
       @JsonKey(name: 'bag_no') String? bagNo,
       @JsonKey(name: 'pallet_weight') double? palletWeight,
       @JsonKey(name: 'qty') double? qty,
+      @JsonKey(name: 'actual_bag_weight') double? actualBagWeight,
       @JsonKey(name: 'serial_no') String? serialNo,
       @JsonKey(name: 'sticker_printed') int? stickerPrinted,
+      @JsonKey(name: 'weight_of_pallet_and_bag') double? weightOfPalletandBag,
+      @JsonKey(name: 'empty_pallet_and_bag_photo') String? emptyPalletImage,
+      @JsonKey(
+          includeFromJson: true,
+          includeToJson: false,
+          toJson: toNull,
+          fromJson: toNull)
+      File? emptyWeightFile,
       @JsonKey(name: 'weighing_scale') String? weighingScale,
       @JsonKey(
           includeFromJson: true,
@@ -256,8 +306,12 @@ class __$$ItemModelImplCopyWithImpl<$Res>
     Object? bagNo = freezed,
     Object? palletWeight = freezed,
     Object? qty = freezed,
+    Object? actualBagWeight = freezed,
     Object? serialNo = freezed,
     Object? stickerPrinted = freezed,
+    Object? weightOfPalletandBag = freezed,
+    Object? emptyPalletImage = freezed,
+    Object? emptyWeightFile = freezed,
     Object? weighingScale = freezed,
     Object? imageFile = freezed,
   }) {
@@ -314,6 +368,10 @@ class __$$ItemModelImplCopyWithImpl<$Res>
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as double?,
+      actualBagWeight: freezed == actualBagWeight
+          ? _value.actualBagWeight
+          : actualBagWeight // ignore: cast_nullable_to_non_nullable
+              as double?,
       serialNo: freezed == serialNo
           ? _value.serialNo
           : serialNo // ignore: cast_nullable_to_non_nullable
@@ -322,6 +380,18 @@ class __$$ItemModelImplCopyWithImpl<$Res>
           ? _value.stickerPrinted
           : stickerPrinted // ignore: cast_nullable_to_non_nullable
               as int?,
+      weightOfPalletandBag: freezed == weightOfPalletandBag
+          ? _value.weightOfPalletandBag
+          : weightOfPalletandBag // ignore: cast_nullable_to_non_nullable
+              as double?,
+      emptyPalletImage: freezed == emptyPalletImage
+          ? _value.emptyPalletImage
+          : emptyPalletImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emptyWeightFile: freezed == emptyWeightFile
+          ? _value.emptyWeightFile
+          : emptyWeightFile // ignore: cast_nullable_to_non_nullable
+              as File?,
       weighingScale: freezed == weighingScale
           ? _value.weighingScale
           : weighingScale // ignore: cast_nullable_to_non_nullable
@@ -351,8 +421,17 @@ class _$ItemModelImpl implements _ItemModel {
       @JsonKey(name: 'bag_no') this.bagNo,
       @JsonKey(name: 'pallet_weight') this.palletWeight,
       @JsonKey(name: 'qty') this.qty,
+      @JsonKey(name: 'actual_bag_weight') this.actualBagWeight,
       @JsonKey(name: 'serial_no') this.serialNo,
       @JsonKey(name: 'sticker_printed') this.stickerPrinted,
+      @JsonKey(name: 'weight_of_pallet_and_bag') this.weightOfPalletandBag,
+      @JsonKey(name: 'empty_pallet_and_bag_photo') this.emptyPalletImage,
+      @JsonKey(
+          includeFromJson: true,
+          includeToJson: false,
+          toJson: toNull,
+          fromJson: toNull)
+      this.emptyWeightFile,
       @JsonKey(name: 'weighing_scale') this.weighingScale,
       @JsonKey(
           includeFromJson: true,
@@ -404,11 +483,27 @@ class _$ItemModelImpl implements _ItemModel {
   @JsonKey(name: 'qty')
   final double? qty;
   @override
+  @JsonKey(name: 'actual_bag_weight')
+  final double? actualBagWeight;
+  @override
   @JsonKey(name: 'serial_no')
   final String? serialNo;
   @override
   @JsonKey(name: 'sticker_printed')
   final int? stickerPrinted;
+  @override
+  @JsonKey(name: 'weight_of_pallet_and_bag')
+  final double? weightOfPalletandBag;
+  @override
+  @JsonKey(name: 'empty_pallet_and_bag_photo')
+  final String? emptyPalletImage;
+  @override
+  @JsonKey(
+      includeFromJson: true,
+      includeToJson: false,
+      toJson: toNull,
+      fromJson: toNull)
+  final File? emptyWeightFile;
   @override
   @JsonKey(name: 'weighing_scale')
   final String? weighingScale;
@@ -422,7 +517,7 @@ class _$ItemModelImpl implements _ItemModel {
 
   @override
   String toString() {
-    return 'ItemModel(name: $name, owner: $owner, creation: $creation, modified: $modified, modifiedBy: $modifiedBy, docstatus: $docstatus, idx: $idx, parent: $parent, parentfield: $parentfield, parenttype: $parenttype, bagNo: $bagNo, palletWeight: $palletWeight, qty: $qty, serialNo: $serialNo, stickerPrinted: $stickerPrinted, weighingScale: $weighingScale, imageFile: $imageFile)';
+    return 'ItemModel(name: $name, owner: $owner, creation: $creation, modified: $modified, modifiedBy: $modifiedBy, docstatus: $docstatus, idx: $idx, parent: $parent, parentfield: $parentfield, parenttype: $parenttype, bagNo: $bagNo, palletWeight: $palletWeight, qty: $qty, actualBagWeight: $actualBagWeight, serialNo: $serialNo, stickerPrinted: $stickerPrinted, weightOfPalletandBag: $weightOfPalletandBag, emptyPalletImage: $emptyPalletImage, emptyWeightFile: $emptyWeightFile, weighingScale: $weighingScale, imageFile: $imageFile)';
   }
 
   @override
@@ -450,10 +545,18 @@ class _$ItemModelImpl implements _ItemModel {
             (identical(other.palletWeight, palletWeight) ||
                 other.palletWeight == palletWeight) &&
             (identical(other.qty, qty) || other.qty == qty) &&
+            (identical(other.actualBagWeight, actualBagWeight) ||
+                other.actualBagWeight == actualBagWeight) &&
             (identical(other.serialNo, serialNo) ||
                 other.serialNo == serialNo) &&
             (identical(other.stickerPrinted, stickerPrinted) ||
                 other.stickerPrinted == stickerPrinted) &&
+            (identical(other.weightOfPalletandBag, weightOfPalletandBag) ||
+                other.weightOfPalletandBag == weightOfPalletandBag) &&
+            (identical(other.emptyPalletImage, emptyPalletImage) ||
+                other.emptyPalletImage == emptyPalletImage) &&
+            (identical(other.emptyWeightFile, emptyWeightFile) ||
+                other.emptyWeightFile == emptyWeightFile) &&
             (identical(other.weighingScale, weighingScale) ||
                 other.weighingScale == weighingScale) &&
             (identical(other.imageFile, imageFile) ||
@@ -462,25 +565,30 @@ class _$ItemModelImpl implements _ItemModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      name,
-      owner,
-      creation,
-      modified,
-      modifiedBy,
-      docstatus,
-      idx,
-      parent,
-      parentfield,
-      parenttype,
-      bagNo,
-      palletWeight,
-      qty,
-      serialNo,
-      stickerPrinted,
-      weighingScale,
-      imageFile);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        name,
+        owner,
+        creation,
+        modified,
+        modifiedBy,
+        docstatus,
+        idx,
+        parent,
+        parentfield,
+        parenttype,
+        bagNo,
+        palletWeight,
+        qty,
+        actualBagWeight,
+        serialNo,
+        stickerPrinted,
+        weightOfPalletandBag,
+        emptyPalletImage,
+        emptyWeightFile,
+        weighingScale,
+        imageFile
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -511,8 +619,19 @@ abstract class _ItemModel implements ItemModel {
       @JsonKey(name: 'bag_no') final String? bagNo,
       @JsonKey(name: 'pallet_weight') final double? palletWeight,
       @JsonKey(name: 'qty') final double? qty,
+      @JsonKey(name: 'actual_bag_weight') final double? actualBagWeight,
       @JsonKey(name: 'serial_no') final String? serialNo,
       @JsonKey(name: 'sticker_printed') final int? stickerPrinted,
+      @JsonKey(name: 'weight_of_pallet_and_bag')
+      final double? weightOfPalletandBag,
+      @JsonKey(name: 'empty_pallet_and_bag_photo')
+      final String? emptyPalletImage,
+      @JsonKey(
+          includeFromJson: true,
+          includeToJson: false,
+          toJson: toNull,
+          fromJson: toNull)
+      final File? emptyWeightFile,
       @JsonKey(name: 'weighing_scale') final String? weighingScale,
       @JsonKey(
           includeFromJson: true,
@@ -564,11 +683,27 @@ abstract class _ItemModel implements ItemModel {
   @JsonKey(name: 'qty')
   double? get qty;
   @override
+  @JsonKey(name: 'actual_bag_weight')
+  double? get actualBagWeight;
+  @override
   @JsonKey(name: 'serial_no')
   String? get serialNo;
   @override
   @JsonKey(name: 'sticker_printed')
   int? get stickerPrinted;
+  @override
+  @JsonKey(name: 'weight_of_pallet_and_bag')
+  double? get weightOfPalletandBag;
+  @override
+  @JsonKey(name: 'empty_pallet_and_bag_photo')
+  String? get emptyPalletImage;
+  @override
+  @JsonKey(
+      includeFromJson: true,
+      includeToJson: false,
+      toJson: toNull,
+      fromJson: toNull)
+  File? get emptyWeightFile;
   @override
   @JsonKey(name: 'weighing_scale')
   String? get weighingScale;

@@ -75,8 +75,12 @@ class BaggingEntryRepoImpl extends BaseApiRepository
             .map((item) => {
                   "bag_no": item.bagNo,
                   "qty": item.qty,
-                  "pallet_weight": item.palletWeight,
+                  'weight_of_pallet_and_bag': item.weightOfPalletandBag,
+                  // 'empty_pallet_and_bag_photo': item.emptyPalletImage,
                   "weighing_scale": item.weighingScale,
+                  "actual_bag_weight": item.actualBagWeight,
+                  if (item.qty == null && item.qty.isNull)
+                    "empty_pallet_and_bag_photo": item.emptyPalletImage,
                 })
             .toList(),
       }),
@@ -84,6 +88,7 @@ class BaggingEntryRepoImpl extends BaseApiRepository
     );
 
     final response = await post(requestConfig);
+    $logger.devLog('create.......$requestConfig');
     return response.process((r) => right(r.data!));
   }
 
@@ -150,9 +155,8 @@ class BaggingEntryRepoImpl extends BaseApiRepository
       $logger.devLog('reponse...$config');
 
       final response = await post(config);
-            $logger.devLog('reponse..........$response');
+      $logger.devLog('reponse..........$response');
 
-      
       return response.process((r) => right(r.data!));
     });
   }

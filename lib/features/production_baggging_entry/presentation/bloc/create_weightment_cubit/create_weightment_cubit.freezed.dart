@@ -17,9 +17,12 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$WeightmentState {
   bool get isExtracting => throw _privateConstructorUsedError;
-  String? get extractedWeight => throw _privateConstructorUsedError;
+  double? get emptyWeight => throw _privateConstructorUsedError;
+  File? get emptyImage => throw _privateConstructorUsedError;
+  double? get finalWeight => throw _privateConstructorUsedError;
+  File? get filledImage => throw _privateConstructorUsedError;
+  int? get activeLineIndex => throw _privateConstructorUsedError;
   Failure? get error => throw _privateConstructorUsedError;
-  File? get watermarkedImage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $WeightmentStateCopyWith<WeightmentState> get copyWith =>
@@ -34,9 +37,12 @@ abstract class $WeightmentStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isExtracting,
-      String? extractedWeight,
-      Failure? error,
-      File? watermarkedImage});
+      double? emptyWeight,
+      File? emptyImage,
+      double? finalWeight,
+      File? filledImage,
+      int? activeLineIndex,
+      Failure? error});
 
   $FailureCopyWith<$Res>? get error;
 }
@@ -55,27 +61,42 @@ class _$WeightmentStateCopyWithImpl<$Res, $Val extends WeightmentState>
   @override
   $Res call({
     Object? isExtracting = null,
-    Object? extractedWeight = freezed,
+    Object? emptyWeight = freezed,
+    Object? emptyImage = freezed,
+    Object? finalWeight = freezed,
+    Object? filledImage = freezed,
+    Object? activeLineIndex = freezed,
     Object? error = freezed,
-    Object? watermarkedImage = freezed,
   }) {
     return _then(_value.copyWith(
       isExtracting: null == isExtracting
           ? _value.isExtracting
           : isExtracting // ignore: cast_nullable_to_non_nullable
               as bool,
-      extractedWeight: freezed == extractedWeight
-          ? _value.extractedWeight
-          : extractedWeight // ignore: cast_nullable_to_non_nullable
-              as String?,
+      emptyWeight: freezed == emptyWeight
+          ? _value.emptyWeight
+          : emptyWeight // ignore: cast_nullable_to_non_nullable
+              as double?,
+      emptyImage: freezed == emptyImage
+          ? _value.emptyImage
+          : emptyImage // ignore: cast_nullable_to_non_nullable
+              as File?,
+      finalWeight: freezed == finalWeight
+          ? _value.finalWeight
+          : finalWeight // ignore: cast_nullable_to_non_nullable
+              as double?,
+      filledImage: freezed == filledImage
+          ? _value.filledImage
+          : filledImage // ignore: cast_nullable_to_non_nullable
+              as File?,
+      activeLineIndex: freezed == activeLineIndex
+          ? _value.activeLineIndex
+          : activeLineIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Failure?,
-      watermarkedImage: freezed == watermarkedImage
-          ? _value.watermarkedImage
-          : watermarkedImage // ignore: cast_nullable_to_non_nullable
-              as File?,
     ) as $Val);
   }
 
@@ -102,9 +123,12 @@ abstract class _$$WeightmentStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool isExtracting,
-      String? extractedWeight,
-      Failure? error,
-      File? watermarkedImage});
+      double? emptyWeight,
+      File? emptyImage,
+      double? finalWeight,
+      File? filledImage,
+      int? activeLineIndex,
+      Failure? error});
 
   @override
   $FailureCopyWith<$Res>? get error;
@@ -122,27 +146,42 @@ class __$$WeightmentStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isExtracting = null,
-    Object? extractedWeight = freezed,
+    Object? emptyWeight = freezed,
+    Object? emptyImage = freezed,
+    Object? finalWeight = freezed,
+    Object? filledImage = freezed,
+    Object? activeLineIndex = freezed,
     Object? error = freezed,
-    Object? watermarkedImage = freezed,
   }) {
     return _then(_$WeightmentStateImpl(
       isExtracting: null == isExtracting
           ? _value.isExtracting
           : isExtracting // ignore: cast_nullable_to_non_nullable
               as bool,
-      extractedWeight: freezed == extractedWeight
-          ? _value.extractedWeight
-          : extractedWeight // ignore: cast_nullable_to_non_nullable
-              as String?,
+      emptyWeight: freezed == emptyWeight
+          ? _value.emptyWeight
+          : emptyWeight // ignore: cast_nullable_to_non_nullable
+              as double?,
+      emptyImage: freezed == emptyImage
+          ? _value.emptyImage
+          : emptyImage // ignore: cast_nullable_to_non_nullable
+              as File?,
+      finalWeight: freezed == finalWeight
+          ? _value.finalWeight
+          : finalWeight // ignore: cast_nullable_to_non_nullable
+              as double?,
+      filledImage: freezed == filledImage
+          ? _value.filledImage
+          : filledImage // ignore: cast_nullable_to_non_nullable
+              as File?,
+      activeLineIndex: freezed == activeLineIndex
+          ? _value.activeLineIndex
+          : activeLineIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Failure?,
-      watermarkedImage: freezed == watermarkedImage
-          ? _value.watermarkedImage
-          : watermarkedImage // ignore: cast_nullable_to_non_nullable
-              as File?,
     ));
   }
 }
@@ -154,22 +193,31 @@ class _$WeightmentStateImpl
     implements _WeightmentState {
   const _$WeightmentStateImpl(
       {required this.isExtracting,
-      this.extractedWeight,
-      this.error,
-      this.watermarkedImage});
+      this.emptyWeight,
+      this.emptyImage,
+      this.finalWeight,
+      this.filledImage,
+      this.activeLineIndex,
+      this.error});
 
   @override
   final bool isExtracting;
   @override
-  final String? extractedWeight;
+  final double? emptyWeight;
+  @override
+  final File? emptyImage;
+  @override
+  final double? finalWeight;
+  @override
+  final File? filledImage;
+  @override
+  final int? activeLineIndex;
   @override
   final Failure? error;
-  @override
-  final File? watermarkedImage;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'WeightmentState(isExtracting: $isExtracting, extractedWeight: $extractedWeight, error: $error, watermarkedImage: $watermarkedImage)';
+    return 'WeightmentState(isExtracting: $isExtracting, emptyWeight: $emptyWeight, emptyImage: $emptyImage, finalWeight: $finalWeight, filledImage: $filledImage, activeLineIndex: $activeLineIndex, error: $error)';
   }
 
   @override
@@ -178,9 +226,12 @@ class _$WeightmentStateImpl
     properties
       ..add(DiagnosticsProperty('type', 'WeightmentState'))
       ..add(DiagnosticsProperty('isExtracting', isExtracting))
-      ..add(DiagnosticsProperty('extractedWeight', extractedWeight))
-      ..add(DiagnosticsProperty('error', error))
-      ..add(DiagnosticsProperty('watermarkedImage', watermarkedImage));
+      ..add(DiagnosticsProperty('emptyWeight', emptyWeight))
+      ..add(DiagnosticsProperty('emptyImage', emptyImage))
+      ..add(DiagnosticsProperty('finalWeight', finalWeight))
+      ..add(DiagnosticsProperty('filledImage', filledImage))
+      ..add(DiagnosticsProperty('activeLineIndex', activeLineIndex))
+      ..add(DiagnosticsProperty('error', error));
   }
 
   @override
@@ -190,16 +241,22 @@ class _$WeightmentStateImpl
             other is _$WeightmentStateImpl &&
             (identical(other.isExtracting, isExtracting) ||
                 other.isExtracting == isExtracting) &&
-            (identical(other.extractedWeight, extractedWeight) ||
-                other.extractedWeight == extractedWeight) &&
-            (identical(other.error, error) || other.error == error) &&
-            (identical(other.watermarkedImage, watermarkedImage) ||
-                other.watermarkedImage == watermarkedImage));
+            (identical(other.emptyWeight, emptyWeight) ||
+                other.emptyWeight == emptyWeight) &&
+            (identical(other.emptyImage, emptyImage) ||
+                other.emptyImage == emptyImage) &&
+            (identical(other.finalWeight, finalWeight) ||
+                other.finalWeight == finalWeight) &&
+            (identical(other.filledImage, filledImage) ||
+                other.filledImage == filledImage) &&
+            (identical(other.activeLineIndex, activeLineIndex) ||
+                other.activeLineIndex == activeLineIndex) &&
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isExtracting, extractedWeight, error, watermarkedImage);
+  int get hashCode => Object.hash(runtimeType, isExtracting, emptyWeight,
+      emptyImage, finalWeight, filledImage, activeLineIndex, error);
 
   @JsonKey(ignore: true)
   @override
@@ -212,18 +269,27 @@ class _$WeightmentStateImpl
 abstract class _WeightmentState implements WeightmentState {
   const factory _WeightmentState(
       {required final bool isExtracting,
-      final String? extractedWeight,
-      final Failure? error,
-      final File? watermarkedImage}) = _$WeightmentStateImpl;
+      final double? emptyWeight,
+      final File? emptyImage,
+      final double? finalWeight,
+      final File? filledImage,
+      final int? activeLineIndex,
+      final Failure? error}) = _$WeightmentStateImpl;
 
   @override
   bool get isExtracting;
   @override
-  String? get extractedWeight;
+  double? get emptyWeight;
+  @override
+  File? get emptyImage;
+  @override
+  double? get finalWeight;
+  @override
+  File? get filledImage;
+  @override
+  int? get activeLineIndex;
   @override
   Failure? get error;
-  @override
-  File? get watermarkedImage;
   @override
   @JsonKey(ignore: true)
   _$$WeightmentStateImplCopyWith<_$WeightmentStateImpl> get copyWith =>

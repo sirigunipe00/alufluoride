@@ -75,6 +75,8 @@ mixin _$CreateVisitForm {
   String? get workflowState => throw _privateConstructorUsedError;
   @JsonKey(name: 'customer')
   String? get customer => throw _privateConstructorUsedError;
+  @JsonKey(name: 'purpose_of_visit')
+  String? get purposeVisit => throw _privateConstructorUsedError;
   @JsonKey(
       includeToJson: false,
       includeFromJson: false,
@@ -129,6 +131,7 @@ abstract class $CreateVisitFormCopyWith<$Res> {
       @JsonKey(name: 'other_devices_details') String? otherDetails,
       @JsonKey(name: 'workflow_state') String? workflowState,
       @JsonKey(name: 'customer') String? customer,
+      @JsonKey(name: 'purpose_of_visit') String? purposeVisit,
       @JsonKey(
           includeToJson: false,
           includeFromJson: false,
@@ -181,6 +184,7 @@ class _$CreateVisitFormCopyWithImpl<$Res, $Val extends CreateVisitForm>
     Object? otherDetails = freezed,
     Object? workflowState = freezed,
     Object? customer = freezed,
+    Object? purposeVisit = freezed,
     Object? facePhotoImg = freezed,
     Object? facePhoto = freezed,
     Object? idPhotoImg = freezed,
@@ -299,6 +303,10 @@ class _$CreateVisitFormCopyWithImpl<$Res, $Val extends CreateVisitForm>
           ? _value.customer
           : customer // ignore: cast_nullable_to_non_nullable
               as String?,
+      purposeVisit: freezed == purposeVisit
+          ? _value.purposeVisit
+          : purposeVisit // ignore: cast_nullable_to_non_nullable
+              as String?,
       facePhotoImg: freezed == facePhotoImg
           ? _value.facePhotoImg
           : facePhotoImg // ignore: cast_nullable_to_non_nullable
@@ -356,6 +364,7 @@ abstract class _$$CreateVisitFormImplCopyWith<$Res>
       @JsonKey(name: 'other_devices_details') String? otherDetails,
       @JsonKey(name: 'workflow_state') String? workflowState,
       @JsonKey(name: 'customer') String? customer,
+      @JsonKey(name: 'purpose_of_visit') String? purposeVisit,
       @JsonKey(
           includeToJson: false,
           includeFromJson: false,
@@ -406,6 +415,7 @@ class __$$CreateVisitFormImplCopyWithImpl<$Res>
     Object? otherDetails = freezed,
     Object? workflowState = freezed,
     Object? customer = freezed,
+    Object? purposeVisit = freezed,
     Object? facePhotoImg = freezed,
     Object? facePhoto = freezed,
     Object? idPhotoImg = freezed,
@@ -524,6 +534,10 @@ class __$$CreateVisitFormImplCopyWithImpl<$Res>
           ? _value.customer
           : customer // ignore: cast_nullable_to_non_nullable
               as String?,
+      purposeVisit: freezed == purposeVisit
+          ? _value.purposeVisit
+          : purposeVisit // ignore: cast_nullable_to_non_nullable
+              as String?,
       facePhotoImg: freezed == facePhotoImg
           ? _value.facePhotoImg
           : facePhotoImg // ignore: cast_nullable_to_non_nullable
@@ -576,6 +590,7 @@ class _$CreateVisitFormImpl implements _CreateVisitForm {
       @JsonKey(name: 'other_devices_details') this.otherDetails,
       @JsonKey(name: 'workflow_state') this.workflowState,
       @JsonKey(name: 'customer') this.customer,
+      @JsonKey(name: 'purpose_of_visit') this.purposeVisit,
       @JsonKey(
           includeToJson: false,
           includeFromJson: false,
@@ -673,6 +688,9 @@ class _$CreateVisitFormImpl implements _CreateVisitForm {
   @JsonKey(name: 'customer')
   final String? customer;
   @override
+  @JsonKey(name: 'purpose_of_visit')
+  final String? purposeVisit;
+  @override
   @JsonKey(
       includeToJson: false,
       includeFromJson: false,
@@ -691,7 +709,7 @@ class _$CreateVisitFormImpl implements _CreateVisitForm {
 
   @override
   String toString() {
-    return 'CreateVisitForm(status: $status, name: $name, owner: $owner, creationDate: $creationDate, modifiedDate: $modifiedDate, modifiedBy: $modifiedBy, docstatus: $docstatus, plantName: $plantName, scheduledDate: $scheduledDate, duration: $duration, scheduledTime: $scheduledTime, multiVisit: $multiVisit, passType: $passType, visiteeMobileNo: $visiteeMobileNo, whomToMeet: $whomToMeet, visiteeEmail: $visiteeEmail, visitorName: $visitorName, visitorEmail: $visitorEmail, visitorMobile: $visitorMobile, visitorCompanyName: $visitorCompanyName, buildingName: $buildingName, department: $department, amendedFrom: $amendedFrom, idNumber: $idNumber, laptopDetails: $laptopDetails, otherDetails: $otherDetails, workflowState: $workflowState, customer: $customer, facePhotoImg: $facePhotoImg, facePhoto: $facePhoto, idPhotoImg: $idPhotoImg, idPhoto: $idPhoto)';
+    return 'CreateVisitForm(status: $status, name: $name, owner: $owner, creationDate: $creationDate, modifiedDate: $modifiedDate, modifiedBy: $modifiedBy, docstatus: $docstatus, plantName: $plantName, scheduledDate: $scheduledDate, duration: $duration, scheduledTime: $scheduledTime, multiVisit: $multiVisit, passType: $passType, visiteeMobileNo: $visiteeMobileNo, whomToMeet: $whomToMeet, visiteeEmail: $visiteeEmail, visitorName: $visitorName, visitorEmail: $visitorEmail, visitorMobile: $visitorMobile, visitorCompanyName: $visitorCompanyName, buildingName: $buildingName, department: $department, amendedFrom: $amendedFrom, idNumber: $idNumber, laptopDetails: $laptopDetails, otherDetails: $otherDetails, workflowState: $workflowState, customer: $customer, purposeVisit: $purposeVisit, facePhotoImg: $facePhotoImg, facePhoto: $facePhoto, idPhotoImg: $idPhotoImg, idPhoto: $idPhoto)';
   }
 
   @override
@@ -752,6 +770,8 @@ class _$CreateVisitFormImpl implements _CreateVisitForm {
                 other.workflowState == workflowState) &&
             (identical(other.customer, customer) ||
                 other.customer == customer) &&
+            (identical(other.purposeVisit, purposeVisit) ||
+                other.purposeVisit == purposeVisit) &&
             (identical(other.facePhotoImg, facePhotoImg) ||
                 other.facePhotoImg == facePhotoImg) &&
             (identical(other.facePhoto, facePhoto) ||
@@ -793,6 +813,7 @@ class _$CreateVisitFormImpl implements _CreateVisitForm {
         otherDetails,
         workflowState,
         customer,
+        purposeVisit,
         facePhotoImg,
         facePhoto,
         idPhotoImg,
@@ -844,6 +865,7 @@ abstract class _CreateVisitForm implements CreateVisitForm {
       @JsonKey(name: 'other_devices_details') final String? otherDetails,
       @JsonKey(name: 'workflow_state') final String? workflowState,
       @JsonKey(name: 'customer') final String? customer,
+      @JsonKey(name: 'purpose_of_visit') final String? purposeVisit,
       @JsonKey(
           includeToJson: false,
           includeFromJson: false,
@@ -942,6 +964,9 @@ abstract class _CreateVisitForm implements CreateVisitForm {
   @override
   @JsonKey(name: 'customer')
   String? get customer;
+  @override
+  @JsonKey(name: 'purpose_of_visit')
+  String? get purposeVisit;
   @override
   @JsonKey(
       includeToJson: false,

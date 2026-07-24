@@ -6,7 +6,7 @@ class Urls {
   // factory Urls.alufluorideUAT() => const Urls('http://157.180.120.125:8000/api');
   factory Urls.alufluorideUAT() =>
       const Urls('https://alufluorideuat.easycloud.co.in/api');
-  factory Urls.local() => const Urls('192.168.0.147:8000/api');
+  factory Urls.local() => const Urls('http://192.168.1.179:8000/api');
   factory Urls.alufluorideLive() =>
       const Urls('https://alufluoridelive.easycloud.co.in/api');
 

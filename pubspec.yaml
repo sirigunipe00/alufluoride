@@ -1,7 +1,7 @@
 name: alufluoride
 description: "A new Flutter project."
 
-version: 1.0.8+14
+version: 1.1.1+18
 
 environment:
   sdk: ^3.5.4

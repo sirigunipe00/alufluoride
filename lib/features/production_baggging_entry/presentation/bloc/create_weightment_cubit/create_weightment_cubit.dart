@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:alufluoride/core/model/failure.dart';
 import 'package:alufluoride/features/production_baggging_entry/data/bagging_entry_repo.dart';
 import 'package:flutter/foundation.dart';
@@ -58,57 +57,126 @@ class WeightmentCubit extends Cubit<WeightmentState> {
 
     return file;
   }
-  Future<void> extractWeight(File file) async {
+  Future<void> captureEmptyWeight(File file) async {
     try {
       emit(state.copyWith(isExtracting: true, error: null));
-      final watermarkedFile = await addWatermarkOptimized(file);
 
+      final watermarkedFile = await addWatermarkOptimized(file);
       final bytes = await watermarkedFile.readAsBytes();
       final base64Image = base64Encode(bytes);
-
       final extension = p.extension(watermarkedFile.path).toLowerCase();
+      final mimeType = extension == '.png'
+          ? 'png'
+          : extension == '.webp'
+              ? 'webp'
+              : 'jpeg';
 
-      String mimeType;
-      if (extension == '.png') {
-        mimeType = 'png';
-      } else if (extension == '.webp') {
-        mimeType = 'webp';
-      } else {
-        mimeType = 'jpeg';
-      }
+      final response = await repo.getweightmentResult(
+        "data:image/$mimeType;base64,$base64Image",
+      );
 
-      final dataUri = "data:image/$mimeType;base64,$base64Image";
-
-      final response = await repo.getweightmentResult(dataUri);
       response.fold(
         (l) => emit(state.copyWith(
           isExtracting: false,
-          watermarkedImage: watermarkedFile,
-          error: Failure(error: l.error, title: 'Extraction Failed'),
+          error: Failure(title: 'Extraction Failed', error: l.error),
         )),
         (r) {
-          if (r.weight == null || r.weight!.trim().isEmpty) {
+          final parsedWeight = double.tryParse(r.weight ?? '');
+          if (parsedWeight == null) {
             emit(state.copyWith(
               isExtracting: false,
-              extractedWeight: null,
-              watermarkedImage: watermarkedFile,
-              error: const Failure(
-                  error: "Could not detect weight.",
-                  title: 'Extraction Failed'),
+              error: Failure(
+                title: 'Extraction Failed',
+                error:  r.message ?? 'Please make sure the weighing scale display is clearly visible and try again.',
+              ),
             ));
-          } else {
-            emit(state.copyWith(
-              isExtracting: false,
-              extractedWeight: r.weight,
-              watermarkedImage: watermarkedFile,
-              error: null,
-            ));
+            return;
           }
+
+          emit(state.copyWith(
+            isExtracting: false,
+            emptyWeight: parsedWeight,
+            emptyImage: watermarkedFile,
+            error: null,
+          ));
         },
       );
-    } catch (e) {
-      emit(state.copyWith(isExtracting: false));
+    } catch (e, st) {
+      debugPrint('captureEmptyWeight error: $e\n$st');
+      emit(state.copyWith(
+        isExtracting: false,
+        error: Failure(title: 'Error', error: e.toString()),
+      ));
     }
+  }
+
+
+  Future<void> captureFilledWeightForLine(int lineIndex, File file) async {
+    try {
+      emit(state.copyWith(
+        isExtracting: true,
+        error: null,
+        activeLineIndex: lineIndex,
+      ));
+
+      final watermarkedFile = await addWatermarkOptimized(file);
+      final bytes = await watermarkedFile.readAsBytes();
+      final base64Image = base64Encode(bytes);
+      final extension = p.extension(watermarkedFile.path).toLowerCase();
+      final mimeType = extension == '.png'
+          ? 'png'
+          : extension == '.webp'
+              ? 'webp'
+              : 'jpeg';
+
+      final response = await repo.getweightmentResult(
+        "data:image/$mimeType;base64,$base64Image",
+      );
+
+      response.fold(
+        (l) => emit(state.copyWith(
+          isExtracting: false,
+          error: Failure(title: 'Extraction Failed', error: l.error),
+        )),
+        (r) {
+          final parsedWeight = double.tryParse(r.weight ?? '');
+          if (parsedWeight == null) {
+            emit(state.copyWith(
+              isExtracting: false,
+              error:  Failure(
+                title: 'Extraction Failed',
+                error: r.message ?? 'Please make sure the weighing scale display is clearly visible and try again.',
+              ),
+            ));
+            return;
+          }
+
+          emit(state.copyWith(
+            isExtracting: false,
+            finalWeight: parsedWeight,
+            filledImage: watermarkedFile,
+            error: null,
+          ));
+        },
+      );
+    } catch (e, st) {
+      debugPrint('captureFilledWeightForLine error: $e\n$st');
+      emit(state.copyWith(
+        isExtracting: false,
+        error: Failure(title: 'Error', error: e.toString()),
+      ));
+    }
+  }
+
+  void clearCurrentBag() {
+    emit(state.copyWith(
+      emptyWeight: null,
+      emptyImage: null,
+      finalWeight: null,
+      filledImage: null,
+      activeLineIndex: null,
+      error: null,
+    ));
   }
 
   void reset() => emit(WeightmentState.initial());
@@ -118,12 +186,13 @@ class WeightmentCubit extends Cubit<WeightmentState> {
 class WeightmentState with _$WeightmentState {
   const factory WeightmentState({
     required bool isExtracting,
-    String? extractedWeight,
+    double? emptyWeight,
+    File? emptyImage,
+    double? finalWeight,
+    File? filledImage,
+    int? activeLineIndex,
     Failure? error,
-    File? watermarkedImage,
   }) = _WeightmentState;
 
-  factory WeightmentState.initial() => const WeightmentState(
-        isExtracting: false,
-      );
+  factory WeightmentState.initial() => const WeightmentState(isExtracting: false);
 }

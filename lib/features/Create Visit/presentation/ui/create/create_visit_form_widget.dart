@@ -248,6 +248,19 @@ class _CreateVisitFormWidgetState extends State<CreateVisitFormWidget> {
                 .onFieldValueChanged(visiteeEmail: p0);
           },
         ),
+        InputField(
+          title: 'Purpose of Visit',
+          borderColor: AppColors.createVisit,
+          initialValue: form.purposeVisit,
+          readOnly: isSubmitted,
+          isRequired: false,
+          inputType: TextInputType.text,
+          onChanged: (p0) {
+            context
+                .cubit<CreateVisitCubit>()
+                .onFieldValueChanged(purposeVisit: p0);
+          },
+        ),
         const Divider(height: 1),
         const SectoinHead(title: 'Visitor Details'),
         InputField(

@@ -38,6 +38,7 @@ class CreateVisitForm with _$CreateVisitForm {
     @JsonKey(name: 'other_devices_details') String? otherDetails,
     @JsonKey(name: 'workflow_state') String? workflowState,
     @JsonKey(name: 'customer') String? customer,
+    @JsonKey(name: 'purpose_of_visit') String? purposeVisit,
     @JsonKey(includeToJson: false, includeFromJson: false,toJson: toNull,fromJson: toNull)
     File? facePhotoImg,
     @JsonKey(name: 'face_photo')  String? facePhoto,

@@ -8,6 +8,8 @@ part 'weightment_result.g.dart';
 class WeightmentResult with _$WeightmentResult {
   const factory WeightmentResult({
     @JsonKey(name: 'weight') String? weight,
+    @JsonKey(name: 'rejection_reason') String? rejectReason,
+    @JsonKey(name: 'message') String? message, 
   }) = _WeightmentResult;
 factory WeightmentResult.fromJson(Map<String, dynamic> json) => _$WeightmentResultFromJson(json);
 }
