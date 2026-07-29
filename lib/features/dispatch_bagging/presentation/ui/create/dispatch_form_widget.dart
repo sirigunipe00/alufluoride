@@ -31,10 +31,10 @@ class _DispatchBaggingFormWidgetState extends State<DispatchBaggingFormWidget> {
 
     Future<void> onBagButtonPressed() async {
       if (isSubmitted) return;
-      if (state.lines.length >= 10) {
+      if (state.lines.length >= 40) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text("Maximum 10 bags can be scanned."),
+            content: Text("Maximum 40 bags can be scanned."),
           ),
         );
         return;
