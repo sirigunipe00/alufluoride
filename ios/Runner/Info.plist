@@ -45,5 +45,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access is required to capture live weighment photos from the weighing machine display.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo library access may be used to attach supporting documents.</string>
 </dict>
 </plist>

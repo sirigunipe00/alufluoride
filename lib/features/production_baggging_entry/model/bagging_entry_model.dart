@@ -21,6 +21,7 @@ class BaggingEntryModel with _$BaggingEntryModel {
     @JsonKey(name: 'batch') String? batch,
     @JsonKey(name: 'amended_from') String? amendedFrom,
     @JsonKey(name: 'uom') String? uom,
+    @JsonKey(name: 'production_type') String? productionType,
     @JsonKey(name: 'fg_item') String? fgItem,
     @JsonKey(name: 'quality_inspection') String? qualityInspection,
     @JsonKey(name: 'total_batch_qty') double? totalBatchQty,

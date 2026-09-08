@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:alufluoride/core/utils/date_format_util.dart';
 import 'package:alufluoride/features/production_baggging_entry/model/item_model.dart';
 import 'package:alufluoride/features/production_baggging_entry/presentation/bloc/create_bagging_entry_cubit/create_bagging_entry_cubit.dart';
@@ -21,12 +22,11 @@ class _BaggingEntryFormWidgetState extends State<BaggingEntryFormWidget> {
   final Color primaryTeal = const Color(0xFF26A69A);
   final Color lightBg = const Color(0xFFF1F8F9);
 
-
   OverlayEntry? _blockingOverlay;
 
   void _setBlockingOverlay(bool show) {
     if (show) {
-      if (_blockingOverlay != null) return; // already showing
+      if (_blockingOverlay != null) return; 
       _blockingOverlay = OverlayEntry(
         builder: (_) => const Positioned.fill(
           child: AbsorbPointer(
@@ -91,14 +91,24 @@ class _BaggingEntryFormWidgetState extends State<BaggingEntryFormWidget> {
     final hasPendingLine =
         lines.any((line) => line.qty == null || line.qty! <= 0);
 
-    final blockNewBag = state.lines.length >= 40 ||
+    final blockNewBag = state.lines.length >= 10 ||
         hasPendingLine ||
         state.newlines.isNotEmpty ||
         state.isLoading ||
         weightState.isExtracting;
 
     Future<void> onCaptureEmptyPressed() async {
-      final picker = ImagePicker();
+    //   // Live in-app camera only — gallery / old desktop photos blocked.
+    //   final photo = await WeighmentLiveCameraPage.open(
+    //     context,
+    //     title: 'Capture Empty Weight',
+    //   );
+
+    //   if (photo == null || !context.mounted) return;
+
+    //   context.read<WeightmentCubit>().captureEmptyWeight(photo);
+    // }
+     final picker = ImagePicker();
       final photo = await picker.pickImage(
         source: ImageSource.camera,
         imageQuality: 80,
@@ -109,8 +119,20 @@ class _BaggingEntryFormWidgetState extends State<BaggingEntryFormWidget> {
       context.read<WeightmentCubit>().captureEmptyWeight(File(photo.path));
     }
 
+
     Future<void> onCaptureFilledPressed(int lineIndex) async {
-      final picker = ImagePicker();
+    //   final photo = await WeighmentLiveCameraPage.open(
+    //     context,
+    //     title: 'Capture Filled Weight',
+    //   );
+
+    //   if (photo == null || !context.mounted) return;
+
+    //   context
+    //       .read<WeightmentCubit>()
+    //       .captureFilledWeightForLine(lineIndex, photo);
+    // }
+    final picker = ImagePicker();
       final photo = await picker.pickImage(
         source: ImageSource.camera,
         imageQuality: 80,
@@ -125,9 +147,6 @@ class _BaggingEntryFormWidgetState extends State<BaggingEntryFormWidget> {
 
     return MultiBlocListener(
       listeners: [
-        // Re-evaluate the blocking overlay whenever isLoading changes.
-        // Reads WeightmentCubit fresh at fire-time instead of capturing
-        // the outer `weightState`, which would otherwise be stale.
         BlocListener<CreateBaggingEntryCubit, CreateBaggingEntryState>(
           listenWhen: (previous, current) =>
               previous.isLoading != current.isLoading ||
@@ -143,6 +162,9 @@ class _BaggingEntryFormWidgetState extends State<BaggingEntryFormWidget> {
             }
           },
         ),
+        // Re-evaluate the blocking overlay whenever isExtracting changes.
+        // Reads CreateBaggingEntryCubit fresh at fire-time for the same
+        // reason as above.
         BlocListener<WeightmentCubit, WeightmentState>(
           listenWhen: (previous, current) =>
               previous.isExtracting != current.isExtracting ||

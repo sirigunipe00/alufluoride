@@ -47,6 +47,8 @@ mixin _$BaggingEntryModel {
   String? get amendedFrom => throw _privateConstructorUsedError;
   @JsonKey(name: 'uom')
   String? get uom => throw _privateConstructorUsedError;
+  @JsonKey(name: 'production_type')
+  String? get productionType => throw _privateConstructorUsedError;
   @JsonKey(name: 'fg_item')
   String? get fgItem => throw _privateConstructorUsedError;
   @JsonKey(name: 'quality_inspection')
@@ -87,6 +89,7 @@ abstract class $BaggingEntryModelCopyWith<$Res> {
       @JsonKey(name: 'batch') String? batch,
       @JsonKey(name: 'amended_from') String? amendedFrom,
       @JsonKey(name: 'uom') String? uom,
+      @JsonKey(name: 'production_type') String? productionType,
       @JsonKey(name: 'fg_item') String? fgItem,
       @JsonKey(name: 'quality_inspection') String? qualityInspection,
       @JsonKey(name: 'total_batch_qty') double? totalBatchQty,
@@ -122,6 +125,7 @@ class _$BaggingEntryModelCopyWithImpl<$Res, $Val extends BaggingEntryModel>
     Object? batch = freezed,
     Object? amendedFrom = freezed,
     Object? uom = freezed,
+    Object? productionType = freezed,
     Object? fgItem = freezed,
     Object? qualityInspection = freezed,
     Object? totalBatchQty = freezed,
@@ -186,6 +190,10 @@ class _$BaggingEntryModelCopyWithImpl<$Res, $Val extends BaggingEntryModel>
           ? _value.uom
           : uom // ignore: cast_nullable_to_non_nullable
               as String?,
+      productionType: freezed == productionType
+          ? _value.productionType
+          : productionType // ignore: cast_nullable_to_non_nullable
+              as String?,
       fgItem: freezed == fgItem
           ? _value.fgItem
           : fgItem // ignore: cast_nullable_to_non_nullable
@@ -237,6 +245,7 @@ abstract class _$$BaggingEntryModelImplCopyWith<$Res>
       @JsonKey(name: 'batch') String? batch,
       @JsonKey(name: 'amended_from') String? amendedFrom,
       @JsonKey(name: 'uom') String? uom,
+      @JsonKey(name: 'production_type') String? productionType,
       @JsonKey(name: 'fg_item') String? fgItem,
       @JsonKey(name: 'quality_inspection') String? qualityInspection,
       @JsonKey(name: 'total_batch_qty') double? totalBatchQty,
@@ -270,6 +279,7 @@ class __$$BaggingEntryModelImplCopyWithImpl<$Res>
     Object? batch = freezed,
     Object? amendedFrom = freezed,
     Object? uom = freezed,
+    Object? productionType = freezed,
     Object? fgItem = freezed,
     Object? qualityInspection = freezed,
     Object? totalBatchQty = freezed,
@@ -334,6 +344,10 @@ class __$$BaggingEntryModelImplCopyWithImpl<$Res>
           ? _value.uom
           : uom // ignore: cast_nullable_to_non_nullable
               as String?,
+      productionType: freezed == productionType
+          ? _value.productionType
+          : productionType // ignore: cast_nullable_to_non_nullable
+              as String?,
       fgItem: freezed == fgItem
           ? _value.fgItem
           : fgItem // ignore: cast_nullable_to_non_nullable
@@ -380,6 +394,7 @@ class _$BaggingEntryModelImpl implements _BaggingEntryModel {
       @JsonKey(name: 'batch') this.batch,
       @JsonKey(name: 'amended_from') this.amendedFrom,
       @JsonKey(name: 'uom') this.uom,
+      @JsonKey(name: 'production_type') this.productionType,
       @JsonKey(name: 'fg_item') this.fgItem,
       @JsonKey(name: 'quality_inspection') this.qualityInspection,
       @JsonKey(name: 'total_batch_qty') this.totalBatchQty,
@@ -432,6 +447,9 @@ class _$BaggingEntryModelImpl implements _BaggingEntryModel {
   @JsonKey(name: 'uom')
   final String? uom;
   @override
+  @JsonKey(name: 'production_type')
+  final String? productionType;
+  @override
   @JsonKey(name: 'fg_item')
   final String? fgItem;
   @override
@@ -452,7 +470,7 @@ class _$BaggingEntryModelImpl implements _BaggingEntryModel {
 
   @override
   String toString() {
-    return 'BaggingEntryModel(status: $status, name: $name, owner: $owner, creation: $creation, modified: $modified, modifiedBy: $modifiedBy, docstatus: $docstatus, idx: $idx, company: $company, shift: $shift, productionDate: $productionDate, batch: $batch, amendedFrom: $amendedFrom, uom: $uom, fgItem: $fgItem, qualityInspection: $qualityInspection, totalBatchQty: $totalBatchQty, isConsumptionCreated: $isConsumptionCreated, isFgCreated: $isFgCreated, productionEntry: $productionEntry)';
+    return 'BaggingEntryModel(status: $status, name: $name, owner: $owner, creation: $creation, modified: $modified, modifiedBy: $modifiedBy, docstatus: $docstatus, idx: $idx, company: $company, shift: $shift, productionDate: $productionDate, batch: $batch, amendedFrom: $amendedFrom, uom: $uom, productionType: $productionType, fgItem: $fgItem, qualityInspection: $qualityInspection, totalBatchQty: $totalBatchQty, isConsumptionCreated: $isConsumptionCreated, isFgCreated: $isFgCreated, productionEntry: $productionEntry)';
   }
 
   @override
@@ -480,6 +498,8 @@ class _$BaggingEntryModelImpl implements _BaggingEntryModel {
             (identical(other.amendedFrom, amendedFrom) ||
                 other.amendedFrom == amendedFrom) &&
             (identical(other.uom, uom) || other.uom == uom) &&
+            (identical(other.productionType, productionType) ||
+                other.productionType == productionType) &&
             (identical(other.fgItem, fgItem) || other.fgItem == fgItem) &&
             (identical(other.qualityInspection, qualityInspection) ||
                 other.qualityInspection == qualityInspection) &&
@@ -511,6 +531,7 @@ class _$BaggingEntryModelImpl implements _BaggingEntryModel {
         batch,
         amendedFrom,
         uom,
+        productionType,
         fgItem,
         qualityInspection,
         totalBatchQty,
@@ -550,6 +571,7 @@ abstract class _BaggingEntryModel implements BaggingEntryModel {
       @JsonKey(name: 'batch') final String? batch,
       @JsonKey(name: 'amended_from') final String? amendedFrom,
       @JsonKey(name: 'uom') final String? uom,
+      @JsonKey(name: 'production_type') final String? productionType,
       @JsonKey(name: 'fg_item') final String? fgItem,
       @JsonKey(name: 'quality_inspection') final String? qualityInspection,
       @JsonKey(name: 'total_batch_qty') final double? totalBatchQty,
@@ -602,6 +624,9 @@ abstract class _BaggingEntryModel implements BaggingEntryModel {
   @override
   @JsonKey(name: 'uom')
   String? get uom;
+  @override
+  @JsonKey(name: 'production_type')
+  String? get productionType;
   @override
   @JsonKey(name: 'fg_item')
   String? get fgItem;
